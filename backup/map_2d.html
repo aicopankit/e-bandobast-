@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2D Tactical Bandobast Reference Map — Sant Nirankari Samalkha</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0a0e17; color: #fff; }
+    #map { width: 100vw; height: 100vh; }
+    .top-bar {
+      position: absolute; top: 12px; left: 60px; right: 12px; z-index: 1000;
+      background: rgba(13, 20, 36, 0.92); border: 1px solid rgba(0, 210, 255, 0.4);
+      border-radius: 8px; padding: 10px 18px; display: flex; align-items: center; justify-content: space-between;
+      backdrop-filter: blur(8px);
+    }
+    .top-bar h1 { font-size: 15px; margin: 0; color: #00d2ff; }
+    .top-bar p { font-size: 11px; margin: 2px 0 0; color: #94a3b8; }
+    .legend {
+      position: absolute; bottom: 20px; right: 20px; z-index: 1000;
+      background: rgba(13, 20, 36, 0.92); border: 1px solid rgba(0, 210, 255, 0.4);
+      border-radius: 8px; padding: 12px 16px; font-size: 11px; backdrop-filter: blur(8px);
+    }
+    .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .legend-box { width: 14px; height: 14px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div>
+      <h1>e-Bandobast 2D Tactical GIS Plan — Sant Nirankari Samagam Ground, Samalkha</h1>
+      <p>EPSG:4326 / UTM Zone 43N | Verified via Esri Ortho, OpenStreetMap &amp; Primary SNM Records</p>
+    </div>
+    <div>
+      <a href="index.html" style="color: #00ff88; text-decoration: none; font-weight: 700; margin-right: 15px;">🌐 Launch 3D Digital Twin</a>
+      <a href="samalkha_bandobast_3d.kml" download style="color: #00d2ff; text-decoration: none; font-weight: 700;">🌍 Download 3D KML</a>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div style="font-weight: 700; margin-bottom: 8px; color: #00d2ff;">TACTICAL SECTORS</div>
+    <div class="legend-item"><div class="legend-box" style="background: rgba(255, 51, 68, 0.6); border: 1px solid #ff3344;"></div> Ground A (Red Zone - Pandal &amp; VIP)</div>
+    <div class="legend-item"><div class="legend-box" style="background: rgba(255, 183, 0, 0.6); border: 1px solid #ffb700;"></div> Ground B (Yellow Zone - Mega Langar)</div>
+    <div class="legend-item"><div class="legend-box" style="background: rgba(0, 255, 136, 0.6); border: 1px solid #00ff88;"></div> Ground C (Green Zone - North Expo)</div>
+    <div class="legend-item"><div class="legend-box" style="background: rgba(0, 210, 255, 0.6); border: 1px solid #00d2ff;"></div> Ground D (Blue Zone - Railway Reception)</div>
+    <div class="legend-item"><div class="legend-box" style="background: #3d5a80; border: 1px solid #90e0ef;"></div> Main Pandal (367m × 255m)</div>
+    <div class="legend-item"><div class="legend-box" style="background: #2a6f97; border: 1px solid #61a5c2;"></div> SNAS Permanent Campus</div>
+  </div>
+
+  <div id="map"></div>
+
+  <script>
+    const map = L.map('map').setView([29.1815, 29.1815 ? 77.0210 : 77.0210], 15);
+
+    // Base satellite layer (Esri)
+    const esriSat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      maxZoom: 19,
+      attribution: 'Tiles &copy; Esri, Maxar, Earthstar'
+    }).addTo(map);
+
+    // OpenStreetMap alternative
+    const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    });
+
+    const baseMaps = {
+      "Esri Satellite Imagery": esriSat,
+      "OpenStreetMap Vector": osm
+    };
+    L.control.layers(baseMaps).addTo(map);
+
+    // Load GeoJSON
+    fetch('nirankari_samalkha_ebandobast.geojson')
+      .then(res => res.json())
+      .then(data => {
+        L.geoJSON(data, {
+          style: function(feature) {
+            const id = feature.id;
+            if (id === 'FEAT-PANDAL-01') return { color: '#00d2ff', weight: 3, fillColor: '#3d5a80', fillOpacity: 0.7 };
+            if (id === 'FEAT-CAMPUS-01') return { color: '#ffb700', weight: 2, fillColor: '#2a6f97', fillOpacity: 0.7 };
+            if (id === 'FEAT-ZONE-GROUND-A') return { color: '#ff3344', weight: 3, fillColor: '#ff3344', fillOpacity: 0.2 };
+            if (id === 'FEAT-ZONE-GROUND-B') return { color: '#ffb700', weight: 3, fillColor: '#ffb700', fillOpacity: 0.2 };
+            if (id === 'FEAT-ZONE-GROUND-C') return { color: '#00ff88', weight: 3, fillColor: '#00ff88', fillOpacity: 0.2 };
+            if (id === 'FEAT-ZONE-GROUND-D') return { color: '#00d2ff', weight: 3, fillColor: '#00d2ff', fillOpacity: 0.2 };
+            if (id === 'FEAT-ROAD-NH44') return { color: '#f59e0b', weight: 6, opacity: 0.9 };
+            if (id === 'FEAT-ROAD-AXIS-EW') return { color: '#3b82f6', weight: 4, dashArray: '6, 6' };
+            return { color: '#3388ff', weight: 2 };
+          },
+          pointToLayer: function(feature, latlng) {
+            const props = feature.properties;
+            const cat = props.category;
+            let markerColor = '#3b82f6';
+            if (props.tactical_type === 'VANTAGE_WATCHTOWER') markerColor = '#06b6d4';
+            if (props.tactical_type === 'MEDICAL_FACILITY') markerColor = '#ef4444';
+            if (props.tactical_type === 'COMMAND_POST') markerColor = '#8b5cf6';
+            if (props.tactical_type === 'VIP_INNER_CORDON') markerColor = '#dc2626';
+
+            return L.circleMarker(latlng, {
+              radius: 7,
+              fillColor: markerColor,
+              color: '#ffffff',
+              weight: 2,
+              opacity: 1,
+              fillOpacity: 0.9
+            });
+          },
+          onEachFeature: function(feature, layer) {
+            const p = feature.properties;
+            let popupContent = `<b>${p.name}</b><br/>`;
+            if (p.dimensions) popupContent += `<b>Dimensions:</b> ${p.dimensions}<br/>`;
+            if (p.area_acres) popupContent += `<b>Area:</b> ${p.area_acres} Acres<br/>`;
+            if (p.force_strength) popupContent += `<b>Force Deployed:</b> ${p.force_strength}<br/>`;
+            if (p.notes) popupContent += `<p style="margin:4px 0 0; font-size:11px;">${p.notes}</p>`;
+            layer.bindPopup(popupContent);
+          }
+        }).addTo(map);
+      });
+  </script>
+</body>
+</html>

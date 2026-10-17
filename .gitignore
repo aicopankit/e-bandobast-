@@ -1,0 +1,13 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Temporary Chrome Debug Data Directories
+scratch/chrome_dbg_user*
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini

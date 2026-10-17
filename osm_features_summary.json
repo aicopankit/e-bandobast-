@@ -1,0 +1,339 @@
+{
+  "total_nodes": 1252,
+  "total_ways": 85,
+  "highways_count": 66,
+  "railways_count": 9,
+  "named_ways": [
+    {
+      "id": "228423351",
+      "tags": {
+        "bridge": "yes",
+        "highway": "trunk",
+        "int_ref": "AH1;AH2",
+        "lanes": "3",
+        "layer": "1",
+        "motorroad": "no",
+        "name": "Grand Trunk Road",
+        "oneway": "yes",
+        "ref": "NH44",
+        "ref:old": "NH1",
+        "sidewalk": "no"
+      }
+    },
+    {
+      "id": "228605085",
+      "tags": {
+        "electrified": "contact_line",
+        "frequency": "50",
+        "gauge": "1676",
+        "name": "Delhi - Kalka Line",
+        "name:ur": "دہلی - کالکا لائن",
+        "passenger_lines": "2",
+        "railway": "rail",
+        "usage": "main",
+        "voltage": "25000"
+      }
+    },
+    {
+      "id": "268290225",
+      "tags": {
+        "electrified": "contact_line",
+        "frequency": "50",
+        "gauge": "1676",
+        "name": "Delhi - Kalka Line",
+        "name:ur": "دہلی - کالکا لائن",
+        "passenger_lines": "2",
+        "railway": "rail",
+        "usage": "main",
+        "voltage": "25000"
+      }
+    },
+    {
+      "id": "1099986102",
+      "tags": {
+        "bridge": "yes",
+        "highway": "trunk",
+        "int_ref": "AH1;AH2",
+        "lanes": "3",
+        "layer": "1",
+        "motorroad": "no",
+        "name": "Grand Trunk Road",
+        "name:hi": "ग्रैंड ट्रंक रोड",
+        "oneway": "yes",
+        "ref": "NH44",
+        "ref:old": "NH1",
+        "sidewalk": "no"
+      }
+    },
+    {
+      "id": "1099986103",
+      "tags": {
+        "highway": "trunk",
+        "int_ref": "AH1;AH2",
+        "lanes": "3",
+        "motorroad": "no",
+        "name": "Grand Trunk Road",
+        "name:hi": "ग्रैंड ट्रंक रोड",
+        "oneway": "yes",
+        "ref": "NH44",
+        "ref:old": "NH1",
+        "sidewalk": "no"
+      }
+    },
+    {
+      "id": "1099986104",
+      "tags": {
+        "highway": "trunk",
+        "int_ref": "AH1;AH2",
+        "lanes": "3",
+        "motorroad": "no",
+        "name": "Grand Trunk Road",
+        "oneway": "yes",
+        "ref": "NH44",
+        "ref:old": "NH1",
+        "sidewalk": "no"
+      }
+    },
+    {
+      "id": "1099986105",
+      "tags": {
+        "bridge": "yes",
+        "highway": "trunk",
+        "int_ref": "AH1;AH2",
+        "lanes": "3",
+        "layer": "1",
+        "motorroad": "no",
+        "name": "Grand Trunk Road",
+        "oneway": "yes",
+        "ref": "NH44",
+        "ref:old": "NH1",
+        "sidewalk": "no"
+      }
+    },
+    {
+      "id": "1285619441",
+      "tags": {
+        "highway": "trunk",
+        "int_ref": "AH1;AH2",
+        "lanes": "3",
+        "motorroad": "no",
+        "name": "Grand Trunk Road",
+        "oneway": "yes",
+        "ref": "NH44",
+        "ref:old": "NH1",
+        "sidewalk": "no"
+      }
+    },
+    {
+      "id": "1285619442",
+      "tags": {
+        "highway": "trunk",
+        "int_ref": "AH1;AH2",
+        "lanes": "3",
+        "motorroad": "no",
+        "name": "Grand Trunk Road",
+        "name:hi": "ग्रैंड ट्रंक रोड",
+        "oneway": "yes",
+        "ref": "NH44",
+        "ref:old": "NH1",
+        "sidewalk": "no"
+      }
+    },
+    {
+      "id": "1285625802",
+      "tags": {
+        "bridge": "yes",
+        "highway": "trunk",
+        "int_ref": "AH1;AH2",
+        "lanes": "3",
+        "layer": "1",
+        "motorroad": "no",
+        "name": "Grand Trunk Road",
+        "oneway": "yes",
+        "ref": "NH44",
+        "ref:old": "NH1",
+        "sidewalk": "no"
+      }
+    },
+    {
+      "id": "1285625803",
+      "tags": {
+        "bridge": "yes",
+        "highway": "trunk",
+        "int_ref": "AH1;AH2",
+        "lanes": "3",
+        "layer": "1",
+        "motorroad": "no",
+        "name": "Grand Trunk Road",
+        "name:hi": "ग्रैंड ट्रंक रोड",
+        "oneway": "yes",
+        "ref": "NH44",
+        "ref:old": "NH1",
+        "sidewalk": "no"
+      }
+    },
+    {
+      "id": "1285625804",
+      "tags": {
+        "bridge": "yes",
+        "highway": "trunk",
+        "int_ref": "AH1;AH2",
+        "lanes": "3",
+        "layer": "1",
+        "motorroad": "no",
+        "name": "Grand Trunk Road",
+        "oneway": "yes",
+        "ref": "NH44",
+        "ref:old": "NH1",
+        "sidewalk": "no"
+      }
+    },
+    {
+      "id": "1285625805",
+      "tags": {
+        "bridge": "yes",
+        "highway": "trunk",
+        "int_ref": "AH1;AH2",
+        "lanes": "3",
+        "layer": "1",
+        "motorroad": "no",
+        "name": "Grand Trunk Road",
+        "name:hi": "ग्रैंड ट्रंक रोड",
+        "oneway": "yes",
+        "ref": "NH44",
+        "ref:old": "NH1",
+        "sidewalk": "no"
+      }
+    }
+  ],
+  "named_nodes": [
+    {
+      "tags": {
+        "internet_access": "no",
+        "name": "Bhodwal Majri",
+        "network": "IR",
+        "operator": "NR",
+        "public_transport": "station",
+        "railway": "station",
+        "ref": "BDMJ",
+        "train": "yes",
+        "wikidata": "Q25549367"
+      },
+      "lat": 29.1852264,
+      "lon": 77.0084189
+    },
+    {
+      "tags": {
+        "amenity": "fuel",
+        "brand": "Indian Oil",
+        "brand:wikidata": "Q1289348",
+        "name": "Indian Oil"
+      },
+      "lat": 29.1825914,
+      "lon": 77.0276943
+    },
+    {
+      "tags": {
+        "name": "Woodland",
+        "shop": "shoes"
+      },
+      "lat": 29.1830828,
+      "lon": 77.0286743
+    },
+    {
+      "tags": {
+        "amenity": "restaurant",
+        "name": "Mannat Dhaba"
+      },
+      "lat": 29.1886963,
+      "lon": 77.0276516
+    }
+  ],
+  "railways": [
+    {
+      "id": "228605085",
+      "tags": {
+        "electrified": "contact_line",
+        "frequency": "50",
+        "gauge": "1676",
+        "name": "Delhi - Kalka Line",
+        "name:ur": "دہلی - کالکا لائن",
+        "passenger_lines": "2",
+        "railway": "rail",
+        "usage": "main",
+        "voltage": "25000"
+      }
+    },
+    {
+      "id": "260851298",
+      "tags": {
+        "electrified": "contact_line",
+        "frequency": "50",
+        "gauge": "1676",
+        "railway": "rail",
+        "service": "siding",
+        "voltage": "25000"
+      }
+    },
+    {
+      "id": "260851299",
+      "tags": {
+        "electrified": "contact_line",
+        "frequency": "50",
+        "gauge": "1676",
+        "railway": "rail",
+        "service": "siding",
+        "voltage": "25000"
+      }
+    },
+    {
+      "id": "268290225",
+      "tags": {
+        "electrified": "contact_line",
+        "frequency": "50",
+        "gauge": "1676",
+        "name": "Delhi - Kalka Line",
+        "name:ur": "دہلی - کالکا لائن",
+        "passenger_lines": "2",
+        "railway": "rail",
+        "usage": "main",
+        "voltage": "25000"
+      }
+    },
+    {
+      "id": "677480491",
+      "tags": {
+        "railway": "rail",
+        "service": "siding"
+      }
+    },
+    {
+      "id": "677480492",
+      "tags": {
+        "railway": "rail",
+        "service": "spur"
+      }
+    },
+    {
+      "id": "677480493",
+      "tags": {
+        "railway": "rail",
+        "service": "spur"
+      }
+    },
+    {
+      "id": "677480494",
+      "tags": {
+        "railway": "rail",
+        "service": "spur"
+      }
+    },
+    {
+      "id": "677480495",
+      "tags": {
+        "railway": "rail",
+        "service": "spur"
+      }
+    }
+  ]
+}

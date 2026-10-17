@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>e-Bandobast 3D Digital Twin — Sant Nirankari Samagam Ground, Samalkha</title>
+  <style>
+    :root {
+      --bg-dark: #0a0e17;
+      --panel-bg: rgba(13, 20, 36, 0.92);
+      --panel-border: rgba(30, 60, 100, 0.6);
+      --accent-cyan: #00d2ff;
+      --accent-green: #00ff88;
+      --accent-gold: #ffb700;
+      --accent-red: #ff3344;
+      --text-main: #e2e8f0;
+      --text-dim: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-main);
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #webgl-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    /* TOP HEADER */
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      background: linear-gradient(180deg, rgba(10, 14, 23, 0.95) 0%, rgba(10, 14, 23, 0.6) 80%, transparent 100%);
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      border-bottom: 1px solid rgba(0, 210, 255, 0.2);
+      backdrop-filter: blur(8px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge-live {
+      background: rgba(0, 255, 136, 0.15);
+      border: 1px solid var(--accent-green);
+      color: var(--accent-green);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .badge-live::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-green);
+    }
+
+    .title-box h1 {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #fff;
+    }
+    .title-box p {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      background: rgba(30, 50, 80, 0.6);
+      border: 1px solid var(--panel-border);
+      color: var(--text-main);
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+    .btn:hover {
+      background: rgba(0, 210, 255, 0.2);
+      border-color: var(--accent-cyan);
+      color: #fff;
+      box-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #0077b6 0%, #0096c7 100%);
+      border-color: var(--accent-cyan);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #0096c7 0%, #00b4d8 100%);
+    }
+
+    /* LEFT SIDEBAR CONTROLS */
+    .sidebar {
+      position: absolute;
+      top: 76px;
+      left: 20px;
+      bottom: 40px;
+      width: 320px;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 12px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+
+    .sidebar-header {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--panel-border);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sidebar-body {
+      padding: 14px 18px;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .sidebar-body::-webkit-scrollbar {
+      width: 5px;
+    }
+    .sidebar-body::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 3px;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    /* VIEW PRESET BUTTONS */
+    .view-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .view-btn {
+      background: rgba(20, 30, 50, 0.6);
+      border: 1px solid rgba(50, 80, 130, 0.4);
+      color: var(--text-main);
+      padding: 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .view-btn:hover, .view-btn.active {
+      background: rgba(0, 210, 255, 0.25);
+      border-color: var(--accent-cyan);
+      color: #fff;
+    }
+
+    /* LAYER TOGGLE CHECKBOXES */
+    .layer-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .layer-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(20, 30, 50, 0.4);
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(40, 70, 110, 0.3);
+      cursor: pointer;
+    }
+    .layer-item:hover {
+      background: rgba(30, 50, 80, 0.5);
+    }
+    .layer-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .color-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    /* METRIC STATS */
+    .stat-card {
+      background: rgba(15, 25, 45, 0.7);
+      border: 1px solid rgba(40, 70, 120, 0.4);
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .stat-val {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+    }
+    .stat-lbl {
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    /* FLOATING INTEL CARD */
+    #intel-card {
+      position: absolute;
+      bottom: 50px;
+      right: 20px;
+      width: 340px;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 12px;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      animation: fadeIn 0.25s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .intel-header {
+      padding: 12px 16px;
+      background: rgba(20, 35, 60, 0.7);
+      border-bottom: 1px solid var(--panel-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .intel-header h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+    }
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .close-btn:hover { color: #fff; }
+    .intel-body {
+      padding: 14px 16px;
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      line-height: 1.5;
+    }
+    .intel-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dashed rgba(255,255,255,0.08);
+      padding-bottom: 4px;
+    }
+    .intel-row .key { color: var(--text-dim); }
+    .intel-row .val { font-weight: 600; text-align: right; }
+
+    /* FOOTER STATUS */
+    footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 28px;
+      background: rgba(10, 14, 23, 0.95);
+      border-top: 1px solid rgba(0, 210, 255, 0.15);
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--accent-green);
+      border-radius: 50%;
+    }
+
+    /* COMPASS WIDGET */
+    #compass-widget {
+      position: absolute;
+      top: 80px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 50%;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      cursor: pointer;
+    }
+    #compass-arrow {
+      position: absolute;
+      top: 6px;
+      width: 0; 
+      height: 0; 
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 12px solid var(--accent-red);
+    }
+  </style>
+  <script src="three.min.js"></script>
+  <script src="OrbitControls.js"></script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <div class="badge-live">e-Bandobast 3D</div>
+      <div class="title-box">
+        <h1>Sant Nirankari Sant Samagam Ground — Samalkha (Haryana)</h1>
+        <p>Lat: 29.1805° N, Lon: 77.0230° E | Plus Code: 52HG+VF2 | Elevation: ~228m AMSL</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button class="btn" id="btn-toggle-time">☀️ Day Lighting</button>
+      <a class="btn btn-primary" href="samalkha_bandobast_3d.kml" download="samalkha_bandobast_3d.kml">
+        🌍 Download 3D KML (Google Earth)
+      </a>
+      <a class="btn" href="nirankari_samalkha_ebandobast.geojson" download="nirankari_samalkha_ebandobast.geojson">
+        📁 GeoJSON Dataset
+      </a>
+    </div>
+  </header>
+
+  <!-- SIDEBAR CONTROLS -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <span>Bandobast Control</span>
+      <span style="font-size: 10px; color: var(--accent-green);">● WGS84 / UTM 43N</span>
+    </div>
+    <div class="sidebar-body">
+
+      <!-- QUICK VIEWPOINTS -->
+      <div>
+        <div class="section-title">Tactical Camera Presets</div>
+        <div class="view-grid">
+          <button class="view-btn active" onclick="setCameraView('overview')">🌐 Full Ground Overview</button>
+          <button class="view-btn" onclick="setCameraView('pandal')">🎤 Main Satsang Pandal</button>
+          <button class="view-btn" onclick="setCameraView('gate1')">⛩️ Gate 1 &amp; GT Road</button>
+          <button class="view-btn" onclick="setCameraView('campus')">🏢 Permanent Campus</button>
+          <button class="view-btn" onclick="setCameraView('station')">🚂 Bhodwal Majri Station</button>
+          <button class="view-btn" onclick="setCameraView('langar')">🍲 Ground B Mega Langar</button>
+        </div>
+      </div>
+
+      <!-- LAYER TOGGLES -->
+      <div>
+        <div class="section-title">Deployment Layers</div>
+        <div class="layer-list">
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #ff3344;"></span>
+              Ground A (Red Zone - VIP &amp; Pandal)
+            </span>
+            <input type="checkbox" id="layer-groundA" checked onchange="toggleLayer('groundA', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #ffb700;"></span>
+              Ground B (Yellow Zone - Langar &amp; South)
+            </span>
+            <input type="checkbox" id="layer-groundB" checked onchange="toggleLayer('groundB', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #00ff88;"></span>
+              Ground C (Green Zone - North Expo)
+            </span>
+            <input type="checkbox" id="layer-groundC" checked onchange="toggleLayer('groundC', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #00d2ff;"></span>
+              Ground D (Blue Zone - Railway Transit)
+            </span>
+            <input type="checkbox" id="layer-groundD" checked onchange="toggleLayer('groundD', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #a855f7;"></span>
+              3D Pandal Structure &amp; Dais
+            </span>
+            <input type="checkbox" id="layer-pandal" checked onchange="toggleLayer('pandal', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #38bdf8;"></span>
+              Police Watch Towers &amp; Pickets
+            </span>
+            <input type="checkbox" id="layer-towers" checked onchange="toggleLayer('towers', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #00ff88;"></span>
+              Primary VIP Convoy Route
+            </span>
+            <input type="checkbox" id="layer-vipRoute" checked onchange="toggleLayer('vipRoute', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #ef4444;"></span>
+              Emergency Evacuation Corridor
+            </span>
+            <input type="checkbox" id="layer-evacRoute" checked onchange="toggleLayer('evacRoute', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #94a3b8;"></span>
+              High-Res Satellite Orthomosaic
+            </span>
+            <input type="checkbox" id="layer-sat" checked onchange="toggleLayer('sat', this.checked)">
+          </label>
+        </div>
+      </div>
+
+      <!-- METRICS -->
+      <div>
+        <div class="section-title">Verified Spatial Dimensions</div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div class="stat-card">
+            <div class="stat-val">367.2m × 255.5m</div>
+            <div class="stat-lbl">Main Satsang Pandal Footprint (23.2 Acres / 93,810 m²)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">1,732 meters</div>
+            <div class="stat-lbl">Distance from Pandal to Bhodwal Majri Railway Station</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">650+ Acres</div>
+            <div class="stat-lbl">Total Venue Scope (Scales up to ~1,400 Acres for Samagam)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">100-Bed + 10 ICU</div>
+            <div class="stat-lbl">Ground A Allopathic Field Emergency Hospital</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COMPASS -->
+  <div id="compass-widget" onclick="resetNorth()">
+    <div id="compass-arrow"></div>
+    <span style="margin-top: 14px;">N</span>
+  </div>
+
+  <!-- INTEL CARD -->
+  <div id="intel-card">
+    <div class="intel-header">
+      <h3 id="intel-title">Feature Detail</h3>
+      <button class="close-btn" onclick="closeIntelCard()">&times;</button>
+    </div>
+    <div class="intel-body" id="intel-content">
+      <!-- Injected via JavaScript -->
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="status-indicator">
+      <span class="status-dot"></span>
+      <span>Spatial Reference: WGS84 (EPSG:4326) / UTM Zone 43N (EPSG:32643) | Source: Esri Ortho, OpenStreetMap, SNM Records</span>
+    </div>
+    <div id="cursor-coords">Camera Alt: ~800m | Pitch: 45°</div>
+  </footer>
+
+  <!-- CANVAS CONTAINER -->
+  <div id="webgl-canvas"></div>
+
+  <!-- THREE.JS TACTICAL APPLICATION LOGIC -->
+  <script>
+    // --- SCENE, CAMERA, RENDERER ---
+    const container = document.getElementById('webgl-canvas');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0a0f1d);
+    scene.fog = new THREE.FogExp2(0x0a0f1d, 0.00045);
+
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 5, 10000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    container.appendChild(renderer.domElement);
+
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.maxPolarAngle = Math.PI / 2.05; // Prevent dipping beneath ground
+    controls.minDistance = 30;
+    controls.maxDistance = 4500;
+
+    // --- LIGHTING ---
+    const ambientLight = new THREE.AmbientLight(0xdde8f8, 0.7);
+    scene.add(ambientLight);
+
+    const dirLight = new THREE.DirectionalLight(0xfff6e5, 1.4);
+    dirLight.position.set(600, 1200, 500);
+    dirLight.castShadow = true;
+    dirLight.shadow.mapSize.width = 2048;
+    dirLight.shadow.mapSize.height = 2048;
+    dirLight.shadow.camera.near = 100;
+    dirLight.shadow.camera.far = 3500;
+    dirLight.shadow.camera.left = -1200;
+    dirLight.shadow.camera.right = 1200;
+    dirLight.shadow.camera.top = 1200;
+    dirLight.shadow.camera.bottom = -1200;
+    scene.add(dirLight);
+
+    // --- SPATIAL COORDINATE MAPPING ---
+    // Ground origin: Pandal Center (lat: 29.17931, lon: 77.02491) -> (0, 0, 0)
+    // Scale: 1 unit = 1 meter
+    // X axis: East (+) / West (-)
+    // Z axis: North (-) / South (+)
+    // Y axis: Up (+)
+    const REF_LAT = 29.17931;
+    const REF_LON = 77.02491;
+    const M_PER_DEG_LAT = 110852.0;
+    const M_PER_DEG_LON = 97192.0; // at 29.18 deg N
+
+    function geoToWorld(lat, lon) {
+      const x = (lon - REF_LON) * M_PER_DEG_LON;
+      const z = -(lat - REF_LAT) * M_PER_DEG_LAT;
+      return { x, z };
+    }
+
+    // --- LAYER GROUPS ---
+    const layerGroups = {
+      groundA: new THREE.Group(),
+      groundB: new THREE.Group(),
+      groundC: new THREE.Group(),
+      groundD: new THREE.Group(),
+      pandal: new THREE.Group(),
+      campus: new THREE.Group(),
+      towers: new THREE.Group(),
+      vipRoute: new THREE.Group(),
+      evacRoute: new THREE.Group(),
+      sat: new THREE.Group(),
+      roads: new THREE.Group()
+    };
+    Object.values(layerGroups).forEach(g => scene.add(g));
+
+    const interactiveObjects = [];
+
+    // --- SATELLITE TERRAIN PLANE ---
+    // Bounding Box of esri_satellite_detail_z16.jpg:
+    // North: 29.190533, South: 29.171349 (Height: 2126m)
+    // West:  77.008667, East:  77.030640 (Width:  2135m)
+    const satWidth = (77.030640 - 77.008667) * M_PER_DEG_LON; // ~2135m
+    const satHeight = (29.190533 - 29.171349) * M_PER_DEG_LAT; // ~2126m
+    const satCenter = geoToWorld((29.190533 + 29.171349)/2, (77.008667 + 77.030640)/2);
+
+    const textureLoader = new THREE.TextureLoader();
+    textureLoader.load('esri_satellite_detail_z16.jpg', function(satTex) {
+      satTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      const satPlaneGeo = new THREE.PlaneGeometry(satWidth, satHeight);
+      const satMat = new THREE.MeshStandardMaterial({
+        map: satTex,
+        roughness: 0.9,
+        metalness: 0.1
+      });
+      const satMesh = new THREE.Mesh(satPlaneGeo, satMat);
+      satMesh.rotation.x = -Math.PI / 2;
+      satMesh.position.set(satCenter.x, 0, satCenter.z);
+      satMesh.receiveShadow = true;
+      layerGroups.sat.add(satMesh);
+    }, undefined, function() {
+      // Fallback grid if image is not loaded
+      const gridMat = new THREE.MeshStandardMaterial({ color: 0x1a2638, roughness: 0.9 });
+      const gridMesh = new THREE.Mesh(new THREE.PlaneGeometry(3000, 3000), gridMat);
+      gridMesh.rotation.x = -Math.PI / 2;
+      scene.add(gridMesh);
+    });
+
+    // Helper Ground Grid
+    const gridHelper = new THREE.GridHelper(3000, 60, 0x00d2ff, 0x1e3a5f);
+    gridHelper.position.y = 0.5;
+    scene.add(gridHelper);
+
+    // --- BUILD SECTORS (GROUND A, B, C, D) BOUNDARIES ---
+    function createSectorPolygon(coords, color, name, desc) {
+      const shape = new THREE.Shape();
+      coords.forEach((pt, idx) => {
+        const w = geoToWorld(pt[1], pt[0]);
+        if (idx === 0) shape.moveTo(w.x, -w.z);
+        else shape.lineTo(w.x, -w.z);
+      });
+
+      const polyGeo = new THREE.ShapeGeometry(shape);
+      const polyMat = new THREE.MeshBasicMaterial({
+        color: color,
+        transparent: true,
+        opacity: 0.18,
+        side: THREE.DoubleSide,
+        depthWrite: false
+      });
+      const mesh = new THREE.Mesh(polyGeo, polyMat);
+      mesh.rotation.x = Math.PI / 2;
+      mesh.position.y = 2.0;
+
+      // Outer glow line
+      const linePoints = coords.map(pt => {
+        const w = geoToWorld(pt[1], pt[0]);
+        return new THREE.Vector3(w.x, 2.5, w.z);
+      });
+      const lineGeo = new THREE.BufferGeometry().setFromPoints(linePoints);
+      const lineMat = new THREE.LineBasicMaterial({ color: color, linewidth: 2 });
+      const lineMesh = new THREE.Line(lineGeo, lineMat);
+
+      mesh.userData = {
+        name: name,
+        type: 'Sector Zone',
+        desc: desc,
+        color: color
+      };
+      interactiveObjects.push(mesh);
+
+      const group = new THREE.Group();
+      group.add(mesh);
+      group.add(lineMesh);
+      return group;
+    }
+
+    // Ground A
+    layerGroups.groundA.add(createSectorPolygon([
+      [77.0225, 29.1830], [77.0298, 29.1830], [77.0291, 29.1760], [77.0225, 29.1760], [77.0225, 29.1830]
+    ], 0xff3344, "Ground A (Red Zone - VIP & Pandal)", "High-security sector directly adjacent to GT Road (NH-44). Contains Ceremonial Gate 1, Main Satsang Pandal, VIP Inner Cordon, Central Accounts Office, and 100-Bed Field Hospital. Area: ~68.5 Acres."));
+
+    // Ground B
+    layerGroups.groundB.add(createSectorPolygon([
+      [77.0145, 29.1760], [77.0291, 29.1760], [77.0275, 29.1690], [77.0170, 29.1710], [77.0145, 29.1760]
+    ], 0xffb700, "Ground B (Yellow Zone - Mega Langar & South Residential)", "Sprawling southern encampment sector. Houses massive 24/7 community Langar kitchens, canteens, residential tent colonies, Brahm Gyan Kaksh No. 1, and mobile ATM vans. Area: ~145 Acres."));
+
+    // Ground C
+    layerGroups.groundC.add(createSectorPolygon([
+      [77.0150, 29.1895], [77.0285, 29.1895], [77.0298, 29.1830], [77.0150, 29.1830], [77.0150, 29.1895]
+    ], 0x00ff88, "Ground C (Green Zone - North Expo & Residential)", "Northern sector flanking the permanent campus. Features the Nirankari Spiritual Exhibition pavilions, Brahm Gyan Kaksh Nos. 2 & 3, publication stalls, and devotee tent sectors. Area: ~130 Acres."));
+
+    // Ground D
+    layerGroups.groundD.add(createSectorPolygon([
+      [77.0080, 29.1890], [77.0150, 29.1890], [77.0150, 29.1760], [77.0095, 29.1780], [77.0080, 29.1852], [77.0080, 29.1890]
+    ], 0x00d2ff, "Ground D (Blue Zone - Railway Reception & Transit)", "Western perimeter sector directly adjoining Bhodwal Majri Railway Station (BDMJ). Contains Railway passenger reception center, Brahm Gyan Kaksh No. 4, and shuttle transit points. Area: ~160 Acres."));
+
+
+    // --- BUILD 3D MAIN SATSANG PANDAL (CURVED BARREL VAULT ARCH) ---
+    // Dimensions: 367.2m (East-West) x 255.5m (North-South)
+    // Height: 18m curved arch
+    function create3DPandal() {
+      const pandalGroup = new THREE.Group();
+      const pW = 367.2; // X
+      const pL = 255.5; // Z
+      const pH = 18.0;  // Y
+
+      // Arch Roof Geometry
+      const archCurve = new THREE.CubicBezierCurve3(
+        new THREE.Vector3(-pW/2, 0, 0),
+        new THREE.Vector3(-pW/4, pH * 1.35, 0),
+        new THREE.Vector3(pW/4, pH * 1.35, 0),
+        new THREE.Vector3(pW/2, 0, 0)
+      );
+      const points = archCurve.getPoints(24);
+      
+      const roofShape = new THREE.Shape();
+      roofShape.moveTo(points[0].x, points[0].y);
+      for (let i = 1; i < points.length; i++) {
+        roofShape.lineTo(points[i].x, points[i].y);
+      }
+      roofShape.lineTo(points[points.length-1].x, points[points.length-1].y - 1.5);
+      for (let i = points.length - 2; i >= 0; i--) {
+        roofShape.lineTo(points[i].x, points[i].y - 1.5);
+      }
+      roofShape.closePath();
+
+      const extrudeSettings = {
+        steps: 1,
+        depth: pL,
+        bevelEnabled: false
+      };
+
+      const roofGeo = new THREE.ExtrudeGeometry(roofShape, extrudeSettings);
+      roofGeo.center();
+      const roofMat = new THREE.MeshStandardMaterial({
+        color: 0x3d5a80,
+        metalness: 0.6,
+        roughness: 0.35,
+        wireframe: false,
+        side: THREE.DoubleSide
+      });
+      const roofMesh = new THREE.Mesh(roofGeo, roofMat);
+      roofMesh.position.y = pH / 2 + 5;
+      roofMesh.castShadow = true;
+      pandalGroup.add(roofMesh);
+
+      // Steel Support Columns around perimeter
+      const colGeo = new THREE.CylinderGeometry(0.8, 0.8, pH, 8);
+      const colMat = new THREE.MeshStandardMaterial({ color: 0x90e0ef, metalness: 0.8 });
+      for (let x = -pW/2 + 5; x <= pW/2 - 5; x += 30) {
+        [-pL/2 + 2, pL/2 - 2].forEach(z => {
+          const col = new THREE.Mesh(colGeo, colMat);
+          col.position.set(x, pH/2, z);
+          col.castShadow = true;
+          pandalGroup.add(col);
+        });
+      }
+
+      // Interior Dais / Stage at West End (-X)
+      const stageGeo = new THREE.BoxGeometry(45, 3.5, 30);
+      const stageMat = new THREE.MeshStandardMaterial({ color: 0xe63946, roughness: 0.4 });
+      const stageMesh = new THREE.Mesh(stageGeo, stageMat);
+      stageMesh.position.set(-pW/2 + 35, 1.75, 0);
+      stageMesh.castShadow = true;
+      pandalGroup.add(stageMesh);
+
+      // VIP Stage Backdrop & Canopy
+      const backdropGeo = new THREE.BoxGeometry(3, 12, 28);
+      const backdropMat = new THREE.MeshStandardMaterial({ color: 0xffd166, metalness: 0.3 });
+      const backdrop = new THREE.Mesh(backdropGeo, backdropMat);
+      backdrop.position.set(-pW/2 + 18, 6, 0);
+      pandalGroup.add(backdrop);
+
+      // Central Processional Carpet Aisle (Red/Green carpet extending to East)
+      const carpetGeo = new THREE.PlaneGeometry(pW - 70, 8);
+      const carpetMat = new THREE.MeshStandardMaterial({ color: 0xc1121f, roughness: 0.8 });
+      const carpet = new THREE.Mesh(carpetGeo, carpetMat);
+      carpet.rotation.x = -Math.PI / 2;
+      carpet.position.set(20, 0.3, 0);
+      pandalGroup.add(carpet);
+
+      // Position Pandal at (0, 0) since REF_LAT/LON is at Pandal center
+      pandalGroup.position.set(0, 0, 0);
+
+      roofMesh.userData = {
+        name: "Main Satsang Pandal",
+        type: "Monumental Covered Hangar Structure",
+        dimensions: "367.2m (W) × 255.5m (L) × 18m (H)",
+        area: "93,810 m² (23.2 Acres / 1,009,765 sq ft)",
+        capacity: "Lakhs of devotees (Seated Sangat)",
+        desc: "Monumental curved arched steel truss roof structure sheltering the main spiritual discourses. Features an elevated western Dais (Manch) and central processional aisle."
+      };
+      interactiveObjects.push(roofMesh);
+
+      stageMesh.userData = {
+        name: "VIP Dais / Manch (Main Stage)",
+        type: "Sterile Security Zone",
+        force: "ASP Security, 2 DSP, Close Protection Team, Anti-Sabotage Checkers",
+        desc: "Elevated stage for Satguru Mata Ji and speakers. Strict sterile cordon with DFMD screening and dedicated VIP egress."
+      };
+      interactiveObjects.push(stageMesh);
+
+      return pandalGroup;
+    }
+    layerGroups.pandal.add(create3DPandal());
+
+
+    // --- BUILD CEREMONIAL ENTRANCE GATE 1 (MONUMENTAL TRI-ARCH) ---
+    function createGate1() {
+      const gateGroup = new THREE.Group();
+      const gW = 42;
+      const gH = 14;
+      const gD = 6;
+
+      // Base Structure with 3 Arch Openings
+      const baseGeo = new THREE.BoxGeometry(gW, gH, gD);
+      const baseMat = new THREE.MeshStandardMaterial({ color: 0x0096c7, roughness: 0.5 });
+      const gateMesh = new THREE.Mesh(baseGeo, baseMat);
+      gateMesh.position.y = gH / 2;
+      gateMesh.castShadow = true;
+      gateGroup.add(gateMesh);
+
+      // Ornamental Cornice / Crown
+      const crownGeo = new THREE.BoxGeometry(gW + 4, 3, gD + 2);
+      const crownMat = new THREE.MeshStandardMaterial({ color: 0xffb703 });
+      const crown = new THREE.Mesh(crownGeo, crownMat);
+      crown.position.y = gH + 1.5;
+      gateGroup.add(crown);
+
+      // Dual Flanking Flagpoles
+      const poleGeo = new THREE.CylinderGeometry(0.2, 0.2, 22);
+      const poleMat = new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.9 });
+      [-gW/2 - 2, gW/2 + 2].forEach(x => {
+        const pole = new THREE.Mesh(poleGeo, poleMat);
+        pole.position.set(x, 11, 0);
+        gateGroup.add(pole);
+
+        // Triangular Flag
+        const flagGeo = new THREE.ConeGeometry(2.5, 4, 3);
+        const flagMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        const flag = new THREE.Mesh(flagGeo, flagMat);
+        flag.rotation.z = Math.PI / 2;
+        flag.position.set(x + (x > 0 ? 2 : -2), 19, 0);
+        gateGroup.add(flag);
+      });
+
+      // Frisking Booths / DFMD row in front of Gate 1
+      const dfmdGeo = new THREE.BoxGeometry(1.2, 2.5, 0.4);
+      const dfmdMat = new THREE.MeshStandardMaterial({ color: 0x222222 });
+      for (let x = -15; x <= 15; x += 3) {
+        const dfmd = new THREE.Mesh(dfmdGeo, dfmdMat);
+        dfmd.position.set(x, 1.25, 8);
+        gateGroup.add(dfmd);
+      }
+
+      const wPos = geoToWorld(29.18025, 77.02865);
+      gateGroup.position.set(wPos.x, 0, wPos.z);
+
+      gateMesh.userData = {
+        name: "Ceremonial Gate No. 1 (Main GT Road Portal)",
+        type: "Primary Access Control & Frisking Plaza",
+        dimensions: "42m (W) × 14m (H)",
+        equipment: "16 Door Frame Metal Detectors (DFMD), HHMD booths, baggage X-ray scanners",
+        force: "1 Police Inspector, 4 Sub-Inspectors, 30 Constables (12 Female Officers)",
+        desc: "Grand ceremonial entrance gateway welcoming dignitaries and devotees arriving from Grand Trunk Road (NH-44). Equipped with sterile VIP lanes and public frisking corridors."
+      };
+      interactiveObjects.push(gateMesh);
+
+      return gateGroup;
+    }
+    layerGroups.pandal.add(createGate1());
+
+
+    // --- BUILD PERMANENT INSTITUTIONAL CAMPUS (SNAS) ---
+    function createPermanentCampus() {
+      const campusGroup = new THREE.Group();
+      // NW: 29.186411 N, 77.021005 E | SE: 29.183695 N, 77.023688 E
+      const nw = geoToWorld(29.186411, 77.021005);
+      const se = geoToWorld(29.183695, 77.023688);
+      const cW = Math.abs(se.x - nw.x); // ~260m
+      const cL = Math.abs(se.z - nw.z); // ~300m
+
+      // Main Admin Building
+      const bldg1Geo = new THREE.BoxGeometry(80, 14, 50);
+      const bldgMat = new THREE.MeshStandardMaterial({ color: 0x2a6f97, roughness: 0.5 });
+      const bldg1 = new THREE.Mesh(bldg1Geo, bldgMat);
+      bldg1.position.set((nw.x + se.x)/2 - 40, 7, (nw.z + se.z)/2);
+      bldg1.castShadow = true;
+      campusGroup.add(bldg1);
+
+      // Secondary Bhavans & Accommodations
+      const bldg2Geo = new THREE.BoxGeometry(110, 10, 40);
+      const bldg2 = new THREE.Mesh(bldg2Geo, bldgMat);
+      bldg2.position.set((nw.x + se.x)/2 + 50, 5, (nw.z + se.z)/2 - 50);
+      bldg2.castShadow = true;
+      campusGroup.add(bldg2);
+
+      const bldg3Geo = new THREE.BoxGeometry(90, 10, 45);
+      const bldg3 = new THREE.Mesh(bldg3Geo, bldgMat);
+      bldg3.position.set((nw.x + se.x)/2 + 40, 5, (nw.z + se.z)/2 + 60);
+      bldg3.castShadow = true;
+      campusGroup.add(bldg3);
+
+      bldg1.userData = {
+        name: "SNAS Permanent Administrative Complex",
+        type: "Permanent Institutional Headquarters",
+        area: "19.4 Acres (78,500 m²)",
+        height: "14 meters (Multi-story RCC Structure)",
+        desc: "Permanent year-round administrative offices, guest residences, conference halls, and central logistic facilities of Sant Nirankari Adhyatmik Sthal."
+      };
+      interactiveObjects.push(bldg1);
+
+      return campusGroup;
+    }
+    layerGroups.campus.add(createPermanentCampus());
+
+
+    // --- BUILD POLICE WATCHTOWERS (4 UNITS) ---
+    function createWatchTower(lat, lon, id, name, force) {
+      const towerGroup = new THREE.Group();
+      const tH = 15;
+      const legGeo = new THREE.CylinderGeometry(0.25, 0.35, tH, 6);
+      const legMat = new THREE.MeshStandardMaterial({ color: 0x64748b, metalness: 0.8 });
+
+      // 4 splayed lattice legs
+      [[-2, -2], [2, -2], [-2, 2], [2, 2]].forEach(pt => {
+        const leg = new THREE.Mesh(legGeo, legMat);
+        leg.position.set(pt[0], tH/2, pt[1]);
+        towerGroup.add(leg);
+      });
+
+      // Guard Cabin Platform
+      const cabGeo = new THREE.BoxGeometry(5.5, 3.2, 5.5);
+      const cabMat = new THREE.MeshStandardMaterial({ color: 0x0284c7 });
+      const cabin = new THREE.Mesh(cabGeo, cabMat);
+      cabin.position.y = tH + 1.6;
+      cabin.castShadow = true;
+      towerGroup.add(cabin);
+
+      // Searchlight
+      const lightGeo = new THREE.CylinderGeometry(0.6, 0.4, 1.2, 12);
+      const lightMat = new THREE.MeshBasicMaterial({ color: 0xffee88 });
+      const light = new THREE.Mesh(lightGeo, lightMat);
+      light.rotation.x = Math.PI / 2;
+      light.position.set(0, tH + 3.5, 2.5);
+      towerGroup.add(light);
+
+      // Light beam cone
+      const coneGeo = new THREE.ConeGeometry(12, 35, 16, 1, true);
+      const coneMat = new THREE.MeshBasicMaterial({
+        color: 0xffee88,
+        transparent: true,
+        opacity: 0.15,
+        side: THREE.DoubleSide
+      });
+      const cone = new THREE.Mesh(coneGeo, coneMat);
+      cone.rotation.x = Math.PI / 3;
+      cone.position.set(0, tH/2, 18);
+      towerGroup.add(cone);
+
+      const wPos = geoToWorld(lat, lon);
+      towerGroup.position.set(wPos.x, 0, wPos.z);
+
+      cabin.userData = {
+        name: name,
+        type: "Tactical Vantage Observation Post",
+        height: "15 meters AMSL",
+        force: force,
+        desc: "Elevated steel lattice sniper and observation morcha providing 360-degree surveillance over crowds and perimeter approaches."
+      };
+      interactiveObjects.push(cabin);
+
+      return towerGroup;
+    }
+
+    layerGroups.towers.add(createWatchTower(29.18180, 77.02880, "WT-01", "Watch Tower 1 — Highway Vantage (Ground A)", "Sniper Team (1 SI, 2 Constables with Telescope/Night Vision), High-Intensity Searchlight"));
+    layerGroups.towers.add(createWatchTower(29.18080, 77.02320, "WT-02", "Watch Tower 2 — North Pandal Vantage", "Armed Police Morcha (3 Constables with Automatic Rifles)"));
+    layerGroups.towers.add(createWatchTower(29.17790, 77.02310, "WT-03", "Watch Tower 3 — South Pandal Vantage", "Armed Police Morcha (3 Constables with Automatic Rifles)"));
+    layerGroups.towers.add(createWatchTower(29.18600, 77.00900, "WT-04", "Watch Tower 4 — Railway Station Perimeter", "Joint RPF & Haryana Police Observation Post"));
+
+
+    // --- BUILD EMERGENCY POSTS (HOSPITAL, JPCR, FIRE) ---
+    function createEmergencyPost(lat, lon, color, name, type, details) {
+      const g = new THREE.Group();
+      const bldg = new THREE.Mesh(
+        new THREE.BoxGeometry(22, 7, 16),
+        new THREE.MeshStandardMaterial({ color: color, roughness: 0.4 })
+      );
+      bldg.position.y = 3.5;
+      bldg.castShadow = true;
+      g.add(bldg);
+
+      // Red Cross or Symbol on roof
+      const crossH = new THREE.Mesh(new THREE.BoxGeometry(8, 0.3, 2.5), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+      crossH.position.y = 7.2;
+      g.add(crossH);
+      const crossV = new THREE.Mesh(new THREE.BoxGeometry(2.5, 0.3, 8), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+      crossV.position.y = 7.2;
+      g.add(crossV);
+
+      const wPos = geoToWorld(lat, lon);
+      g.position.set(wPos.x, 0, wPos.z);
+
+      bldg.userData = {
+        name: name,
+        type: type,
+        ...details
+      };
+      interactiveObjects.push(bldg);
+      return g;
+    }
+
+    layerGroups.towers.add(createEmergencyPost(29.18200, 77.02700, 0xd90429, "100-Bed Field Hospital & ICU Base", "Medical Emergency Center", {
+      capacity: "100 Indoor Beds, 10 ICU Beds, Minor OT, Pathology Lab",
+      fleet: "5 Advanced Life Support (ALS) Ambulances",
+      staff: "12 Medical Officers, 24 Nursing Officers, Red Cross Volunteers",
+      desc: "Comprehensive on-site emergency hospital established during Samagam to handle medical triage and acute trauma."
+    }));
+
+    layerGroups.towers.add(createEmergencyPost(29.18250, 77.02750, 0x1d3557, "Joint Police Control Room (JPCR)", "Tactical Command Headquarters", {
+      callsign: "CONTROL-SAMALKHA",
+      commander: "Superintendent of Police (SP)",
+      equipment: "64-Channel CCTV Matrix, Drone Live Feed Receiver, VHF/UHF Base",
+      force: "1 SP, 2 DSP, 4 Inspectors, 20 Operators",
+      desc: "Central tactical command node coordinating district police, paramilitary, traffic wing, and Sewadal leadership."
+    }));
+
+    layerGroups.towers.add(createEmergencyPost(29.17900, 77.02780, 0xe63946, "Fire Service Staging Post (Ground A)", "Fire & Disaster Response", {
+      fleet: "4 Heavy Water Bowsers (10,000L), 2 Foam Crash Tenders, 2 Mist Bikes",
+      force: "1 Fire Station Officer (FSO), 16 Firemen",
+      desc: "Immediate initial attack response for high-density pandal and kitchen areas."
+    }));
+
+
+    // --- BUILD CONVOY & EVACUATION CORRIDORS (ANIMATED TUBES) ---
+    function createRouteTube(pointsCoords, color, isDashed) {
+      const pts = pointsCoords.map(pt => {
+        const w = geoToWorld(pt[1], pt[0]);
+        return new THREE.Vector3(w.x, 2.0, w.z);
+      });
+      const curve = new THREE.CatmullRomCurve3(pts);
+      const tubeGeo = new THREE.TubeGeometry(curve, 64, 2.5, 8, false);
+      const tubeMat = new THREE.MeshBasicMaterial({
+        color: color,
+        wireframe: isDashed,
+        transparent: true,
+        opacity: 0.85
+      });
+      return new THREE.Mesh(tubeGeo, tubeMat);
+    }
+
+    const vipRouteMesh = createRouteTube([
+      [77.02960, 29.18120],
+      [77.02680, 29.18115],
+      [77.02320, 29.18110],
+      [77.02315, 29.17930]
+    ], 0x00ff88, false);
+    layerGroups.vipRoute.add(vipRouteMesh);
+
+    const evacRouteMesh = createRouteTube([
+      [77.02315, 29.17930],
+      [77.02100, 29.17930],
+      [77.01850, 29.18120],
+      [77.01450, 29.18130],
+      [77.00842, 29.18523]
+    ], 0xff3344, true);
+    layerGroups.evacRoute.add(evacRouteMesh);
+
+
+    // --- CAMERA VIEWPOINTS ---
+    const cameraPresets = {
+      overview: { pos: [0, 850, 1100], target: [0, 0, 0] },
+      pandal:   { pos: [120, 120, 280], target: [0, 10, 0] },
+      gate1:    { pos: [450, 70, 180],  target: [360, 10, 100] },
+      campus:   { pos: [-150, 180, -380], target: [-150, 10, -500] },
+      station:  { pos: [-1350, 140, -450], target: [-1600, 10, -650] },
+      langar:   { pos: [150, 180, 550], target: [0, 0, 450] }
+    };
+
+    function setCameraView(presetKey) {
+      document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+
+      const preset = cameraPresets[presetKey];
+      if (!preset) return;
+
+      const targetPos = new THREE.Vector3(...preset.pos);
+      const targetLook = new THREE.Vector3(...preset.target);
+
+      // Smooth Tween Transition
+      const startPos = camera.position.clone();
+      const startLook = controls.target.clone();
+      let t = 0;
+      const duration = 1000;
+      const startTime = performance.now();
+
+      function animateCamera(now) {
+        t = Math.min((now - startTime) / duration, 1.0);
+        // Smooth ease-out cubic
+        const ease = 1 - Math.pow(1 - t, 3);
+        camera.position.lerpVectors(startPos, targetPos, ease);
+        controls.target.lerpVectors(startLook, targetLook, ease);
+        controls.update();
+
+        if (t < 1.0) requestAnimationFrame(animateCamera);
+      }
+      requestAnimationFrame(animateCamera);
+    }
+
+    // Set initial overview
+    camera.position.set(0, 850, 1100);
+    controls.target.set(0, 0, 0);
+    controls.update();
+
+    // Reset North function
+    function resetNorth() {
+      camera.position.set(0, camera.position.y, Math.abs(camera.position.z));
+      controls.target.set(0, 0, 0);
+      controls.update();
+    }
+
+    // Layer Toggle function
+    function toggleLayer(layerKey, isVisible) {
+      if (layerGroups[layerKey]) {
+        layerGroups[layerKey].visible = isVisible;
+      }
+    }
+
+    // Day / Night Toggle
+    let isDay = true;
+    document.getElementById('btn-toggle-time').addEventListener('click', function() {
+      isDay = !isDay;
+      if (isDay) {
+        this.innerHTML = "☀️ Day Lighting";
+        ambientLight.color.setHex(0xdde8f8);
+        ambientLight.intensity = 0.7;
+        dirLight.intensity = 1.4;
+        scene.background.setHex(0x0a0f1d);
+        scene.fog.color.setHex(0x0a0f1d);
+      } else {
+        this.innerHTML = "🌙 Night Lighting";
+        ambientLight.color.setHex(0x1a2638);
+        ambientLight.intensity = 0.25;
+        dirLight.intensity = 0.3;
+        scene.background.setHex(0x03060c);
+        scene.fog.color.setHex(0x03060c);
+      }
+    });
+
+    // --- RAYCASTER / CLICK DETECTION ---
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    window.addEventListener('click', function(e) {
+      if (e.target.closest('.sidebar') || e.target.closest('header') || e.target.closest('#intel-card')) return;
+
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      raycaster.setFromCamera(mouse, camera);
+
+      const intersects = raycaster.intersectObjects(interactiveObjects, true);
+      if (intersects.length > 0) {
+        // Find topmost object with userData
+        let obj = intersects[0].object;
+        while (obj && (!obj.userData || !obj.userData.name)) {
+          obj = obj.parent;
+        }
+        if (obj && obj.userData && obj.userData.name) {
+          showIntelCard(obj.userData);
+        }
+      }
+    });
+
+    function showIntelCard(data) {
+      const card = document.getElementById('intel-card');
+      const title = document.getElementById('intel-title');
+      const content = document.getElementById('intel-content');
+
+      title.innerText = data.name || "Feature Info";
+
+      let html = '';
+      if (data.type) html += `<div class="intel-row"><span class="key">Category</span><span class="val">${data.type}</span></div>`;
+      if (data.dimensions) html += `<div class="intel-row"><span class="key">Dimensions</span><span class="val">${data.dimensions}</span></div>`;
+      if (data.area) html += `<div class="intel-row"><span class="key">Footprint</span><span class="val">${data.area}</span></div>`;
+      if (data.capacity) html += `<div class="intel-row"><span class="key">Capacity</span><span class="val">${data.capacity}</span></div>`;
+      if (data.force) html += `<div class="intel-row"><span class="key">Security Force</span><span class="val" style="color:var(--accent-cyan);">${data.force}</span></div>`;
+      if (data.fleet) html += `<div class="intel-row"><span class="key">Emergency Fleet</span><span class="val">${data.fleet}</span></div>`;
+      if (data.equipment) html += `<div class="intel-row"><span class="key">Equipment</span><span class="val">${data.equipment}</span></div>`;
+      if (data.desc) html += `<p style="margin-top:6px; color:#cbd5e1;">${data.desc}</p>`;
+
+      content.innerHTML = html;
+      card.style.display = 'flex';
+    }
+
+    function closeIntelCard() {
+      document.getElementById('intel-card').style.display = 'none';
+    }
+
+    // --- ANIMATION LOOP ---
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+
+      // Update compass needle rotation based on camera azimuth
+      const compassArrow = document.getElementById('compass-arrow');
+      if (compassArrow) {
+        const angle = controls.getAzimuthalAngle();
+        compassArrow.style.transform = `rotate(${angle}rad)`;
+      }
+
+      // Update coordinate readout
+      const camAlt = Math.round(camera.position.y);
+      const pitch = Math.round(controls.getPolarAngle() * (180 / Math.PI));
+      document.getElementById('cursor-coords').innerText = `Camera Alt: ~${camAlt}m | Pitch: ${pitch}° | Azimuth: ${Math.round(controls.getAzimuthalAngle() * (180/Math.PI))}°`;
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // Window Resize
+    window.addEventListener('resize', function() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>

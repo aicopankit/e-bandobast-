@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>e-Bandobast 3D Tactical Plan — Sant Nirankari Samalkha</name>
+  <open>1</open>
+  <description>
+    <![CDATA[
+      <h2>e-Bandobast 3D Tactical Deployment Plan</h2>
+      <p><b>Venue:</b> Sant Nirankari Sant Samagam Ground (Sant Nirankari Adhyatmik Sthal)</p>
+      <p><b>Location:</b> Bhodwal Majri, Samalkha, Panipat, Haryana, India</p>
+      <p><b>Coordinates:</b> 29.1805° N, 77.0230° E (Plus Code: 52HG+VF2)</p>
+      <p><b>Geographical Scope:</b> 650+ Acres (Grounds A, B, C, D)</p>
+      <hr/>
+      <p><i>Derived from verified high-resolution satellite imagery (Esri/Maxar), OpenStreetMap vector data, and official Sant Nirankari Mission documentation.</i></p>
+    ]]>
+  </description>
+
+  <!-- STYLES -->
+  <Style id="stylePandal3D">
+    <LineStyle><color>ff00aaff</color><width>3</width></LineStyle>
+    <PolyStyle><color>cc442211</color><fill>1</fill><outline>1</outline></PolyStyle>
+  </Style>
+
+  <Style id="styleCampus3D">
+    <LineStyle><color>ffffaa00</color><width>2</width></LineStyle>
+    <PolyStyle><color>aa884422</color><fill>1</fill><outline>1</outline></PolyStyle>
+  </Style>
+
+  <Style id="styleGroundA">
+    <LineStyle><color>ff0000ff</color><width>3</width></LineStyle>
+    <PolyStyle><color>330000ff</color><fill>1</fill><outline>1</outline></PolyStyle>
+  </Style>
+
+  <Style id="styleGroundB">
+    <LineStyle><color>ff00ffff</color><width>3</width></LineStyle>
+    <PolyStyle><color>3300ffff</color><fill>1</fill><outline>1</outline></PolyStyle>
+  </Style>
+
+  <Style id="styleGroundC">
+    <LineStyle><color>ff00ff00</color><width>3</width></LineStyle>
+    <PolyStyle><color>3300ff00</color><fill>1</fill><outline>1</outline></PolyStyle>
+  </Style>
+
+  <Style id="styleGroundD">
+    <LineStyle><color>ffffaa00</color><width>3</width></LineStyle>
+    <PolyStyle><color>33ffaa00</color><fill>1</fill><outline>1</outline></PolyStyle>
+  </Style>
+
+  <Style id="styleVIPRoute">
+    <LineStyle><color>ff00ff00</color><width>6</width></LineStyle>
+  </Style>
+
+  <Style id="styleEvacRoute">
+    <LineStyle><color>ff0000ff</color><width>5</width></LineStyle>
+  </Style>
+
+  <!-- FOLDER: SECTORS & ZONING -->
+  <Folder>
+    <name>1. Security Sectors (Grounds A, B, C, D)</name>
+    <open>1</open>
+
+    <Placemark>
+      <name>Ground A — Red Zone (VIP &amp; Main Satsang Pandal)</name>
+      <styleUrl>#styleGroundA</styleUrl>
+      <description><![CDATA[
+        <h3>Ground A (Sector Red)</h3>
+        <p><b>Function:</b> Main Congregation, Ceremonial Entrance Gate 1, VIP Dais, Central Accounts.</p>
+        <p><b>Boundary:</b> GT Road (NH-44) on East, Pandal on West.</p>
+        <p><b>Key Assets:</b> 100-Bed Field Hospital, 10-Bed ICU, Media Center, DFMD Corridors.</p>
+        <p><b>Area:</b> ~68.5 Acres</p>
+      ]]></description>
+      <Polygon>
+        <extrude>1</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>
+              77.0225,29.1830,5
+              77.0298,29.1830,5
+              77.0291,29.1760,5
+              77.0225,29.1760,5
+              77.0225,29.1830,5
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark>
+      <name>Ground B — Yellow Zone (South Residential &amp; Mega Langar)</name>
+      <styleUrl>#styleGroundB</styleUrl>
+      <description><![CDATA[
+        <h3>Ground B (Sector Yellow)</h3>
+        <p><b>Function:</b> Devotee Tent Residential City, Mega Langar Kitchens &amp; Canteens.</p>
+        <p><b>Location:</b> South of Central Axis behind Ground A.</p>
+        <p><b>Key Assets:</b> Brahm Gyan Kaksh No. 1, Mobile ATM Vans, Dispensary.</p>
+        <p><b>Area:</b> ~145 Acres</p>
+      ]]></description>
+      <Polygon>
+        <extrude>1</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>
+              77.0145,29.1760,4
+              77.0291,29.1760,4
+              77.0275,29.1690,4
+              77.0170,29.1710,4
+              77.0145,29.1760,4
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark>
+      <name>Ground C — Green Zone (North Residential &amp; Spiritual Expo)</name>
+      <styleUrl>#styleGroundC</styleUrl>
+      <description><![CDATA[
+        <h3>Ground C (Sector Green)</h3>
+        <p><b>Function:</b> North Devotee Residential Tent City &amp; Spiritual Exhibition Pavilions.</p>
+        <p><b>Location:</b> North of Central Axis behind Ground A.</p>
+        <p><b>Key Assets:</b> Brahm Gyan Kaksh Nos. 2 &amp; 3, Publications Stalls, Permanent Campus.</p>
+        <p><b>Area:</b> ~130 Acres</p>
+      ]]></description>
+      <Polygon>
+        <extrude>1</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>
+              77.0150,29.1895,4
+              77.0285,29.1895,4
+              77.0298,29.1830,4
+              77.0150,29.1830,4
+              77.0150,29.1895,4
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark>
+      <name>Ground D — Blue Zone (Railway Reception &amp; Transit Hub)</name>
+      <styleUrl>#styleGroundD</styleUrl>
+      <description><![CDATA[
+        <h3>Ground D (Sector Blue)</h3>
+        <p><b>Function:</b> Railway Passenger Reception, Transit Holding, Brahm Gyan Kaksh No. 4.</p>
+        <p><b>Location:</b> West Sector adjoining Bhodwal Majri Railway Station.</p>
+        <p><b>Key Assets:</b> Station Reception Desks, Shuttle Pickup Point, Baggage Cloakroom.</p>
+        <p><b>Area:</b> ~160 Acres</p>
+      ]]></description>
+      <Polygon>
+        <extrude>1</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>
+              77.0080,29.1890,4
+              77.0150,29.1890,4
+              77.0150,29.1760,4
+              77.0095,29.1780,4
+              77.0080,29.1852,4
+              77.0080,29.1890,4
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+  </Folder>
+
+  <!-- FOLDER: 3D EXTRUDED STRUCTURES -->
+  <Folder>
+    <name>2. 3D Key Structures</name>
+    <open>1</open>
+
+    <Placemark>
+      <name>Main Satsang Pandal (3D Extrusion)</name>
+      <styleUrl>#stylePandal3D</styleUrl>
+      <description><![CDATA[
+        <h3>Main Satsang Pandal</h3>
+        <p><b>Structure:</b> Monumental curved barrel-vault steel truss covered structure.</p>
+        <p><b>Dimensions:</b> 367.2 meters (East-West) x 255.5 meters (North-South)</p>
+        <p><b>Footprint Area:</b> 93,810 m² (23.2 Acres / 1,009,765 sq ft)</p>
+        <p><b>Clearance Height:</b> 18.0 meters peak</p>
+        <p><b>Capacity:</b> Lakhs of seated devotees; features elevated western Dais and multi-LED displays.</p>
+      ]]></description>
+      <Polygon>
+        <extrude>1</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>
+              77.023044,29.180510,18
+              77.026820,29.180416,18
+              77.026778,29.178112,18
+              77.023001,29.178206,18
+              77.023044,29.180510,18
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark>
+      <name>SNAS Permanent Institutional Complex</name>
+      <styleUrl>#styleCampus3D</styleUrl>
+      <description><![CDATA[
+        <h3>SNAS Core Administrative Complex</h3>
+        <p><b>Structure:</b> Permanent multi-story institutional blocks and courtyards.</p>
+        <p><b>Dimensions:</b> 260.7m x 301.1m (~19.4 Acres)</p>
+        <p><b>Height:</b> 12.0 meters</p>
+      ]]></description>
+      <Polygon>
+        <extrude>1</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>
+              77.021005,29.186411,12
+              77.023688,29.186411,12
+              77.023688,29.183695,12
+              77.021005,29.183695,12
+              77.021005,29.186411,12
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+  </Folder>
+
+  <!-- FOLDER: TACTICAL BANDOBAST PLACEMARKS -->
+  <Folder>
+    <name>3. Police Deployment &amp; Tactical Assets</name>
+    <open>1</open>
+
+    <Placemark>
+      <name>Joint Police Control Room (JPCR)</name>
+      <Point><coordinates>77.02750,29.18250,0</coordinates></Point>
+      <description><![CDATA[
+        <b>Callsign:</b> CONTROL-SAMALKHA<br/>
+        <b>Strength:</b> 1 SP, 2 DSP, 4 Inspectors, 20 Operators<br/>
+        <b>Equipment:</b> CCTV Matrix, Drone Surveillance Console, Wireless Base.
+      ]]></description>
+    </Placemark>
+
+    <Placemark>
+      <name>VIP Dais Inner Cordon (Manch Morcha)</name>
+      <Point><coordinates>77.02330,29.17930,0</coordinates></Point>
+      <description><![CDATA[
+        <b>In-Charge:</b> ASP Security / CPT Incharge<br/>
+        <b>Strength:</b> 1 ASP, 2 DSP, 15 Armed Commandos, AS Checkers<br/>
+        <b>Access:</b> Sterile Red Zone. Valid VIP Stage Pass Mandatory.
+      ]]></description>
+    </Placemark>
+
+    <Placemark>
+      <name>Gate No. 1 (Main Ceremonial Portal &amp; DFMDs)</name>
+      <Point><coordinates>77.02865,29.18025,0</coordinates></Point>
+      <description><![CDATA[
+        <b>Access:</b> GT Road Primary Public &amp; VIP Entry<br/>
+        <b>Equipment:</b> 16 DFMDs, HHMD Frisking Booths, Baggage Scanners<br/>
+        <b>Force:</b> 1 Inspector, 4 SI, 30 Constables (incl. 12 Female Staff).
+      ]]></description>
+    </Placemark>
+
+    <Placemark>
+      <name>Watch Tower 1 — Highway Vantage (Ground A)</name>
+      <Point><coordinates>77.02880,29.18180,0</coordinates></Point>
+      <description>Sniper post + High-intensity searchlight overlooking GT Road entry.</description>
+    </Placemark>
+
+    <Placemark>
+      <name>Watch Tower 2 — North Pandal Vantage</name>
+      <Point><coordinates>77.02320,29.18080,0</coordinates></Point>
+      <description>Armed morcha guarding stage perimeter and northern flank.</description>
+    </Placemark>
+
+    <Placemark>
+      <name>Watch Tower 3 — South Pandal Vantage</name>
+      <Point><coordinates>77.02310,29.17790,0</coordinates></Point>
+      <description>Armed morcha guarding stage perimeter and southern flank.</description>
+    </Placemark>
+
+    <Placemark>
+      <name>Watch Tower 4 — Railway Station Perimeter (Ground D)</name>
+      <Point><coordinates>77.00900,29.18600,0</coordinates></Point>
+      <description>Joint RPF/GRP and Haryana Police perimeter observation post.</description>
+    </Placemark>
+
+    <Placemark>
+      <name>100-Bed Field Hospital &amp; ICU Base</name>
+      <Point><coordinates>77.02700,29.18200,0</coordinates></Point>
+      <description>Allopathic field hospital with 10-bed ICU, 5 Advanced Life Support (ALS) Ambulances.</description>
+    </Placemark>
+
+    <Placemark>
+      <name>Fire Service Staging Post (Ground A)</name>
+      <Point><coordinates>77.02780,29.17900,0</coordinates></Point>
+      <description>4 Water Bowsers, 2 Foam Tenders, 2 Quick Response Mist Bikes.</description>
+    </Placemark>
+
+    <Placemark>
+      <name>Quick Reaction Team (QRT) Post</name>
+      <Point><coordinates>77.02500,29.18150,0</coordinates></Point>
+      <description>Armoured tactical intervention unit on continuous 24/7 standby.</description>
+    </Placemark>
+
+    <Placemark>
+      <name>Bhodwal Majri Railway Station (BDMJ)</name>
+      <Point><coordinates>77.00842,29.18523,0</coordinates></Point>
+      <description>Northern Railway trunk station; dedicated 2-minute special train stoppages for attendees.</description>
+    </Placemark>
+  </Folder>
+
+  <!-- FOLDER: CONVOY & EVACUATION CORRIDORS -->
+  <Folder>
+    <name>4. Convoy Routes &amp; Emergency Corridors</name>
+    <open>1</open>
+
+    <Placemark>
+      <name>Primary VIP Convoy Route (GT Road to Dais)</name>
+      <styleUrl>#styleVIPRoute</styleUrl>
+      <description>Sterile arterial route from GT Road Gate 1 through North flank to Dais backstage.</description>
+      <LineString>
+        <extrude>0</extrude>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <coordinates>
+          77.02960,29.18120,0
+          77.02680,29.18115,0
+          77.02320,29.18110,0
+          77.02315,29.17930,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+    <Placemark>
+      <name>Emergency VIP Evacuation Corridor</name>
+      <styleUrl>#styleEvacRoute</styleUrl>
+      <description>Dedicated emergency exit corridor from Dais westwards directly to safe dispersal / helipad holding.</description>
+      <LineString>
+        <extrude>0</extrude>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <coordinates>
+          77.02315,29.17930,0
+          77.02100,29.17930,0
+          77.01850,29.18120,0
+          77.01450,29.18130,0
+          77.00842,29.18523,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+  </Folder>
+
+</Document>
+</kml>

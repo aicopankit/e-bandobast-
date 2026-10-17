@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>79th Nirankari Sant Samagam — Official 2D Traffic Route Plan &amp; Bandobast GIS</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    :root {
+      --bg-dark: #0a0e17;
+      --panel-bg: rgba(13, 20, 36, 0.95);
+      --panel-border: rgba(0, 210, 255, 0.4);
+      --accent-cyan: #00d2ff;
+      --accent-green: #00ff88;
+      --accent-gold: #ffb700;
+      --accent-pink: #ec4899;
+      --text-main: #e2e8f0;
+      --text-dim: #94a3b8;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg-dark); color: var(--text-main); overflow: hidden; }
+    #map { width: 100vw; height: 100vh; }
+
+    /* TOP HEADER */
+    .top-bar {
+      position: absolute; top: 12px; left: 60px; right: 12px; z-index: 1000;
+      background: var(--panel-bg); border: 1px solid var(--panel-border);
+      border-radius: 8px; padding: 10px 18px; display: flex; align-items: center; justify-content: space-between;
+      backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    }
+    .top-bar h1 { font-size: 15px; margin: 0; color: var(--accent-cyan); letter-spacing: 0.5px; }
+    .top-bar p { font-size: 11px; margin: 2px 0 0; color: var(--text-dim); }
+    .nav-links a {
+      margin-left: 12px; text-decoration: none; font-size: 11px; font-weight: 700;
+      padding: 6px 12px; border-radius: 6px; border: 1px solid transparent; transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .btn-3d { background: rgba(0, 255, 136, 0.15); color: #00ff88; border-color: #00ff88; }
+    .btn-3d:hover { background: #00ff88; color: #0a0e17; }
+    .btn-kml { background: rgba(0, 210, 255, 0.15); color: #00d2ff; border-color: #00d2ff; }
+    .btn-kml:hover { background: #00d2ff; color: #0a0e17; }
+
+    /* OFFICIAL REFERENCES PANEL (REPLICATING BLUEPRINT TABLE) */
+    .ref-panel {
+      position: absolute; bottom: 20px; right: 20px; z-index: 1000;
+      background: var(--panel-bg); border: 1px solid var(--panel-border);
+      border-radius: 8px; width: 380px; max-height: 480px; font-size: 11px;
+      backdrop-filter: blur(10px); box-shadow: 0 6px 24px rgba(0,0,0,0.7);
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+    .ref-header {
+      padding: 10px 14px; background: rgba(0, 210, 255, 0.12);
+      border-bottom: 1px solid var(--panel-border);
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer; user-select: none;
+    }
+    .ref-title { font-weight: 800; color: var(--accent-cyan); text-transform: uppercase; font-size: 11px; letter-spacing: 0.6px; display: flex; align-items: center; gap: 6px; }
+    .ref-body { overflow-y: auto; padding: 10px 14px; display: flex; flex-direction: column; gap: 7px; }
+    
+    .ref-row {
+      display: flex; align-items: center; gap: 10px; padding: 6px 8px;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 5px; font-size: 10.5px;
+    }
+    .ref-arrow {
+      width: 28px; height: 16px; border-radius: 3px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 10px;
+    }
+    .ref-desc { flex-grow: 1; line-height: 1.3; color: #cbd5e1; }
+    .ref-tag {
+      font-weight: 800; font-size: 10px; padding: 2px 6px; border-radius: 4px;
+      background: rgba(0, 210, 255, 0.15); border: 1px solid var(--accent-cyan); color: #fff;
+      flex-shrink: 0;
+    }
+
+    /* POPUP STYLING */
+    .leaflet-popup-content-wrapper {
+      background: rgba(13, 20, 36, 0.98); color: var(--text-main);
+      border: 1px solid var(--panel-border); border-radius: 8px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.7);
+    }
+    .leaflet-popup-tip { background: rgba(13, 20, 36, 0.98); }
+    .popup-title { font-size: 13px; font-weight: 800; color: var(--accent-cyan); margin-bottom: 6px; border-bottom: 1px solid rgba(0,210,255,0.25); padding-bottom: 4px; }
+    .popup-row { font-size: 11px; margin-bottom: 3px; display: flex; justify-content: space-between; gap: 10px; }
+    .popup-key { color: var(--text-dim); }
+    .popup-val { font-weight: 600; text-align: right; }
+    .popup-notes { font-size: 11px; color: #cbd5e1; margin-top: 6px; line-height: 1.4; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 4px; }
+
+    /* Custom Leaflet Controls */
+    .leaflet-control-layers {
+      background: var(--panel-bg) !important;
+      border: 1px solid var(--panel-border) !important;
+      border-radius: 8px !important;
+      color: #cbd5e1 !important;
+      font-size: 11px !important;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.5) !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div>
+      <h1>79th Nirankari Sant Samagam — Official Traffic Route Plan &amp; GIS Digital Twin</h1>
+      <p>Sant Nirankari Mandal (Regd.) Blueprint (14-10-2026) &amp; Panipat Police Deployment Order | 159 Features Aligned</p>
+    </div>
+    <div class="nav-links">
+      <a class="btn-3d" href="index.html">🌐 3D Digital Twin</a>
+      <a class="btn-kml" href="samalkha_bandobast_3d.kml" download="samalkha_bandobast_3d.kml">🌍 Download 3D KML</a>
+    </div>
+  </div>
+
+  <!-- OFFICIAL 11-ROW REFERENCES PANEL -->
+  <div class="ref-panel" id="refPanel">
+    <div class="ref-header" onclick="toggleRefPanel()">
+      <div class="ref-title">📋 Official Blueprint References &amp; Routing</div>
+      <span id="refToggleIcon" style="color: var(--accent-cyan); font-weight: bold;">▼</span>
+    </div>
+    <div class="ref-body" id="refBody">
+      <div class="ref-row">
+        <div class="ref-arrow" style="background: #ec4899; color: #fff;">➔</div>
+        <div class="ref-desc">Outstation vehicles from Delhi side</div>
+        <div class="ref-tag">P1</div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-arrow" style="background: #00d2ff; color: #000;">➔</div>
+        <div class="ref-desc">Vehicles from Delhi side: Sewadars on duty in daily commuters (charted buses)</div>
+        <div class="ref-tag">P2</div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-arrow" style="background: #f59e0b; color: #000;">P1</div>
+        <div class="ref-desc">Parking-P1 (Light &amp; Heavy Vehicles)</div>
+        <div class="ref-tag">P1</div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-arrow" style="background: #00d2ff; color: #000;">P2</div>
+        <div class="ref-desc">Vehicles from Delhi side: Sewadars on duty in daily commuters Parking-P2</div>
+        <div class="ref-tag">P2</div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-arrow" style="background: #3b82f6; color: #fff;">➔</div>
+        <div class="ref-desc">Outstation vehicles from Ambala side</div>
+        <div class="ref-tag">P3</div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-arrow" style="background: #3b82f6; color: #fff;">P3</div>
+        <div class="ref-desc">Vehicles from Ambala side: Sewadars on duty in daily commuters</div>
+        <div class="ref-tag">P3</div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-arrow" style="background: #3b82f6; color: #fff;">P3</div>
+        <div class="ref-desc">Outstation vehicles from Ambala side Parking-P3 (Railway Station)</div>
+        <div class="ref-tag">P3</div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-arrow" style="background: #60a5fa; color: #000;">➔</div>
+        <div class="ref-desc">Vehicles from Ambala side: Sewadars on duty in daily up &amp; down Parking-P4</div>
+        <div class="ref-tag">P4</div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-arrow" style="background: #f472b6; color: #000;">➔</div>
+        <div class="ref-desc">Vehicles for Saints from Abroad Parking-P4</div>
+        <div class="ref-tag">P4</div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-arrow" style="background: #10b981; color: #000;">➔</div>
+        <div class="ref-desc">Vehicles for S.C. Parking (Special Committee)</div>
+        <div class="ref-tag" style="border-color: #10b981;">S.C.</div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-arrow" style="background: #f59e0b; color: #000;">➔</div>
+        <div class="ref-desc">For Invited Guests / V.I.P. Parking (Gate 2 to Dais)</div>
+        <div class="ref-tag" style="border-color: #f59e0b;">VIP</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="map"></div>
+
+  <script>
+    function toggleRefPanel() {
+      const b = document.getElementById('refBody');
+      const icon = document.getElementById('refToggleIcon');
+      if (b.style.display === 'none') {
+        b.style.display = 'flex';
+        icon.textContent = '▼';
+      } else {
+        b.style.display = 'none';
+        icon.textContent = '▲';
+      }
+    }
+
+    // Initialize Leaflet map
+    const map = L.map('map', {
+      center: [29.1815, 77.0210],
+      zoom: 15,
+      minZoom: 13,
+      maxZoom: 19
+    });
+
+    // Base Maps
+    const esriSatellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      maxZoom: 19,
+      attribution: 'Tiles &copy; Esri, Maxar, Earthstar Geographics'
+    }).addTo(map);
+
+    const osmStandard = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    });
+
+    // Layer Groups matching official blueprint structure
+    const layers = {
+      boundaries: L.layerGroup().addTo(map),
+      parking: L.layerGroup().addTo(map),
+      gates: L.layerGroup().addTo(map),
+      routes: L.layerGroup().addTo(map),
+      structures: L.layerGroup().addTo(map),
+      internalRoads: L.layerGroup().addTo(map),
+      externalRoads: L.layerGroup().addTo(map),
+      transport: L.layerGroup().addTo(map),
+      civil: L.layerGroup().addTo(map),
+      railway: L.layerGroup().addTo(map),
+      tactical: L.layerGroup().addTo(map)
+    };
+
+    const baseLayers = {
+      "Esri High-Res Satellite": esriSatellite,
+      "OpenStreetMap Vector": osmStandard
+    };
+
+    const overlayLayers = {
+      "Official Parking (P1-P5, S.C. & VIP)": layers.parking,
+      "Official Gates (Gate 1, 2, 3 & Station)": layers.gates,
+      "Official Traffic Routes (1 to 8)": layers.routes,
+      "Pandal, Exhibition & Offices": layers.structures,
+      "Alighting Points & Local Bus Stop": layers.transport,
+      "Internal Road Grid (Road R-2 90, Road 4)": layers.internalRoads,
+      "External Roads (NH-44 & Links)": layers.externalRoads,
+      "Grade Separators & Villages (Panchi, Patti)": layers.civil,
+      "Sectors & Perimeter (Ground A-D)": layers.boundaries,
+      "Railway Line & BDMJ Station": layers.railway,
+      "Police Deployments (QRT, Drones, Posts)": layers.tactical
+    };
+
+    L.control.layers(baseLayers, overlayLayers, { collapsed: false, position: 'topleft' }).addTo(map);
+
+    // Load Master GeoJSON
+    fetch('nirankari_samalkha_ebandobast.geojson')
+      .then(res => res.json())
+      .then(data => {
+        data.features.forEach(feat => {
+          const p = feat.properties;
+          const geom = feat.geometry;
+          const cat = p.category;
+          const fid = feat.id;
+
+          function makePopup() {
+            let html = `<div class="popup-title">${p.name || fid}</div>`;
+            html += `<div class="popup-row"><span class="popup-key">Feature ID</span><span class="popup-val">${fid}</span></div>`;
+            html += `<div class="popup-row"><span class="popup-key">Category</span><span class="popup-val">${cat}</span></div>`;
+            html += `<div class="popup-row"><span class="popup-key">Evidence Status</span><span class="popup-val" style="color:#00ff88;">${p.evidence_status || 'VERIFIED'}</span></div>`;
+            if (p.sector) html += `<div class="popup-row"><span class="popup-key">Sector</span><span class="popup-val" style="color:#f59e0b;">${p.sector}</span></div>`;
+            if (p.supervising_officer) html += `<div class="popup-row"><span class="popup-key">Supervising Officer</span><span class="popup-val" style="color:#38bdf8; font-weight:bold;">${p.supervising_officer}</span></div>`;
+            if (p.shift_timings) html += `<div class="popup-row"><span class="popup-key">Shift Hours</span><span class="popup-val">${p.shift_timings}</span></div>`;
+            if (p.allocated_force) html += `<div class="popup-row"><span class="popup-key">Force Allocated</span><span class="popup-val" style="color:#00ff88;">${p.allocated_force}</span></div>`;
+            if (p.capacity) html += `<div class="popup-row"><span class="popup-key">PCG Capacity</span><span class="popup-val" style="color:#00d2ff; font-weight:bold;">${p.capacity}</span></div>`;
+            if (p.dimensions) html += `<div class="popup-row"><span class="popup-key">Dimensions</span><span class="popup-val">${p.dimensions}</span></div>`;
+            if (p.area_sqm) html += `<div class="popup-row"><span class="popup-key">Footprint</span><span class="popup-val">${p.area_sqm.toLocaleString()} m² (${p.area_acres || (p.area_sqm/4046.86).toFixed(1)} Acres)</span></div>`;
+            if (p.ref_label) html += `<div class="popup-row"><span class="popup-key">Blueprint Ref</span><span class="popup-val" style="color:#f472b6;">${p.ref_label}</span></div>`;
+            if (p.notes) html += `<div class="popup-notes">${p.notes}</div>`;
+            return html;
+          }
+
+          // 1. BOUNDARIES & SECTORS
+          if (cat === 'VENUE_BOUNDARY' || cat === 'SECURITY_SECTOR') {
+            let color = '#ffffff';
+            let fill = 0.08;
+            if (fid.includes('GROUND-A')) { color = '#ff3344'; fill = 0.18; }
+            else if (fid.includes('GROUND-B')) { color = '#ffb700'; fill = 0.16; }
+            else if (fid.includes('GROUND-C')) { color = '#00ff88'; fill = 0.16; }
+            else if (fid.includes('GROUND-D')) { color = '#00d2ff'; fill = 0.16; }
+
+            const poly = L.geoJSON(feat, {
+              style: { color: color, weight: 2.5, fillColor: color, fillOpacity: fill }
+            }).bindPopup(makePopup());
+            layers.boundaries.addLayer(poly);
+          }
+
+          // 2. OFFICIAL PARKING (P1 TO P5, S.C. & VIP)
+          else if (cat === 'PARKING_FACILITY') {
+            let pColor = '#f59e0b';
+            let fillOp = 0.35;
+            if (fid.includes('VIP')) { pColor = '#ef4444'; fillOp = 0.5; }
+            else if (fid.includes('SC')) { pColor = '#10b981'; fillOp = 0.5; }
+            else if (fid.includes('P1')) { pColor = '#ec4899'; }
+            else if (fid.includes('02')) { pColor = '#00d2ff'; }
+            else if (fid.includes('03')) { pColor = '#3b82f6'; }
+            else if (fid.includes('04')) { pColor = '#60a5fa'; }
+            else if (fid.includes('05')) { pColor = '#a855f7'; }
+
+            const poly = L.geoJSON(feat, {
+              style: { color: pColor, weight: 2.5, fillColor: pColor, fillOpacity: fillOp }
+            }).bindPopup(makePopup());
+            layers.parking.addLayer(poly);
+          }
+
+          // 3. OFFICIAL GATES
+          else if (cat === 'ACCESS_CONTROL' || fid.includes('GATE')) {
+            const isMain = fid === 'FEAT-GATE-01' || fid === 'FEAT-GATE-02' || fid === 'FEAT-GATE-03';
+            const marker = L.circleMarker([geom.coordinates[1], geom.coordinates[0]], {
+              radius: isMain ? 11 : 9,
+              fillColor: fid === 'FEAT-GATE-02' ? '#ffb700' : '#00d2ff',
+              color: '#ffffff',
+              weight: 3,
+              fillOpacity: 1
+            }).bindPopup(makePopup());
+
+            const labelIcon = L.divIcon({
+              className: 'gate-label',
+              html: `<span style="background: rgba(13,20,36,0.9); color: #00d2ff; padding: 2px 6px; border: 1px solid #00d2ff; border-radius: 4px; font-size: 10px; font-weight: bold; white-space: nowrap;">${p.name.split('(')[0].trim()}</span>`,
+              iconAnchor: [30, -10]
+            });
+            const textMarker = L.marker([geom.coordinates[1], geom.coordinates[0]], { icon: labelIcon });
+
+            layers.gates.addLayer(marker);
+            layers.gates.addLayer(textMarker);
+          }
+
+          // 4. OFFICIAL TRAFFIC ROUTES
+          else if (cat === 'OPERATIONAL_ROUTE') {
+            const rColor = p.color || (fid.includes('VIP') ? '#00ff88' : '#ef4444');
+            const isDashed = fid.includes('PED') || fid.includes('EVAC');
+            const line = L.geoJSON(feat, {
+              style: {
+                color: rColor,
+                weight: 5,
+                dashArray: isDashed ? '8, 8' : null,
+                opacity: 0.95
+              }
+            }).bindPopup(makePopup());
+            layers.routes.addLayer(line);
+          }
+
+          // 5. EVENT STRUCTURES & CAMPUS BUILDINGS
+          else if (cat === 'EVENT_STRUCTURE' || cat === 'PERMANENT_BUILDING') {
+            if (geom.type === 'Polygon') {
+              const isPandal = fid === 'FEAT-PANDAL-01';
+              const isExhibition = fid === 'FEAT-EXHIBITION';
+              const isOffice = fid.includes('OFFICE');
+              let col = '#2a6f97';
+              let borderCol = '#61a5c2';
+              if (isPandal) { col = '#3d5a80'; borderCol = '#00d2ff'; }
+              else if (isExhibition) { col = '#1e3a8a'; borderCol = '#60a5fa'; }
+              else if (isOffice) { col = '#065f46'; borderCol = '#34d399'; }
+
+              const poly = L.geoJSON(feat, {
+                style: { color: borderCol, weight: 2, fillColor: col, fillOpacity: 0.8 }
+              }).bindPopup(makePopup());
+              layers.structures.addLayer(poly);
+            } else if (geom.type === 'Point') {
+              const marker = L.circleMarker([geom.coordinates[1], geom.coordinates[0]], {
+                radius: 7,
+                fillColor: '#10b981',
+                color: '#ffffff',
+                weight: 2,
+                fillOpacity: 1
+              }).bindPopup(makePopup());
+              layers.structures.addLayer(marker);
+            }
+          }
+
+          // 6. TRANSPORT HUBS & ALIGHTING POINTS
+          else if (cat === 'TRANSPORT_HUB') {
+            const marker = L.circleMarker([geom.coordinates[1], geom.coordinates[0]], {
+              radius: 8,
+              fillColor: '#f97316',
+              color: '#ffffff',
+              weight: 2,
+              fillOpacity: 1
+            }).bindPopup(makePopup());
+            layers.transport.addLayer(marker);
+          }
+
+          // 7. INTERNAL ROADS (ROAD R-2 90, ROAD 4, AVENUES)
+          else if (cat === 'INTERNAL_ROAD') {
+            const isNamed = fid.includes('ROAD-R2') || fid.includes('ROAD-04');
+            const line = L.geoJSON(feat, {
+              style: {
+                color: isNamed ? '#fef08a' : '#ffffff',
+                weight: isNamed ? 5 : 3.5,
+                opacity: 0.95
+              }
+            }).bindPopup(makePopup());
+            layers.internalRoads.addLayer(line);
+          }
+
+          // 8. EXTERNAL HIGHWAYS & ROADS
+          else if (cat === 'EXTERNAL_ROAD') {
+            const isTrunk = p.highway_type === 'trunk' || fid.includes('NH44');
+            const line = L.geoJSON(feat, {
+              style: {
+                color: isTrunk ? '#f59e0b' : '#38bdf8',
+                weight: isTrunk ? 6 : 2.5,
+                opacity: 0.9
+              }
+            }).bindPopup(makePopup());
+            layers.externalRoads.addLayer(line);
+          }
+
+          // 9. CIVIL INFRASTRUCTURE (FLYOVER, UNDERPASSES, VILLAGES, INDUSTRY)
+          else if (cat === 'CIVIL_INFRASTRUCTURE') {
+            if (geom.type === 'Polygon') {
+              const poly = L.geoJSON(feat, {
+                style: { color: '#e0e7ff', weight: 2, fillColor: '#374151', fillOpacity: 0.6 }
+              }).bindPopup(makePopup());
+              layers.civil.addLayer(poly);
+            } else if (geom.type === 'LineString') {
+              const line = L.geoJSON(feat, {
+                style: { color: '#ec4899', weight: 7, opacity: 0.95 }
+              }).bindPopup(makePopup());
+              layers.civil.addLayer(line);
+            } else if (geom.type === 'Point') {
+              const isVillage = fid.includes('VILLAGE');
+              const marker = L.circleMarker([geom.coordinates[1], geom.coordinates[0]], {
+                radius: isVillage ? 9 : 7,
+                fillColor: isVillage ? '#a855f7' : '#e11d48',
+                color: '#ffffff',
+                weight: 2,
+                fillOpacity: 1
+              }).bindPopup(makePopup());
+              layers.civil.addLayer(marker);
+            }
+          }
+
+          // 10. PEDESTRIAN OVERBRIDGE OVER NH-44
+          else if (cat === 'PEDESTRIAN_INFRASTRUCTURE') {
+            const line = L.geoJSON(feat, {
+              style: { color: '#00ffff', weight: 7, opacity: 1.0 }
+            }).bindPopup(makePopup());
+            layers.civil.addLayer(line);
+          }
+
+          // 11. RAILWAY & BDMJ STATION
+          else if (cat === 'RAILWAY_INFRASTRUCTURE' || fid.includes('BDMJ')) {
+            if (geom.type === 'LineString') {
+              const line = L.geoJSON(feat, {
+                style: { color: '#ffffff', weight: 3.5, dashArray: '8, 8' }
+              }).bindPopup(makePopup());
+              layers.railway.addLayer(line);
+            } else if (geom.type === 'Point') {
+              const marker = L.circleMarker([geom.coordinates[1], geom.coordinates[0]], {
+                radius: 9, fillColor: '#0284c7', color: '#ffffff', weight: 2, fillOpacity: 1
+              }).bindPopup(makePopup());
+              layers.railway.addLayer(marker);
+            }
+          }
+
+          // 12. POLICE TACTICAL & EMERGENCY
+          else if (cat === 'BANDOBAST_TACTICAL' || cat === 'POLICE_FACILITY') {
+            const isMed = p.tactical_type === 'MEDICAL_FACILITY' || p.tactical_type === 'FIRE_STATION';
+            const isPost = cat === 'POLICE_FACILITY';
+            const marker = L.circleMarker([geom.coordinates[1], geom.coordinates[0]], {
+              radius: isPost ? 10 : (isMed ? 9 : 7),
+              fillColor: isPost ? '#1d4ed8' : (isMed ? '#ef4444' : '#06b6d4'),
+              color: '#ffffff',
+              weight: 2,
+              fillOpacity: 1
+            }).bindPopup(makePopup());
+            layers.tactical.addLayer(marker);
+          }
+        });
+      });
+  </script>
+</body>
+</html>

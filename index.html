@@ -1,0 +1,2358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>e-Bandobast 3D Complete Site Reconstruction — Sant Nirankari Samalkha</title>
+  <style>
+    :root {
+      --bg-dark: #080c14;
+      --panel-bg: rgba(11, 18, 32, 0.94);
+      --panel-border: rgba(30, 60, 100, 0.6);
+      --accent-cyan: #00d2ff;
+      --accent-green: #00ff88;
+      --accent-gold: #ffb700;
+      --accent-red: #ff3344;
+      --text-main: #e2e8f0;
+      --text-dim: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-main);
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #webgl-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    /* TOP HEADER */
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      background: linear-gradient(180deg, rgba(8, 12, 20, 0.98) 0%, rgba(8, 12, 20, 0.7) 80%, transparent 100%);
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      border-bottom: 1px solid rgba(0, 210, 255, 0.25);
+      backdrop-filter: blur(10px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge-live {
+      background: rgba(0, 255, 136, 0.15);
+      border: 1px solid var(--accent-green);
+      color: var(--accent-green);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .badge-live::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-green);
+    }
+
+    .title-box {
+      max-width: 620px;
+      overflow: hidden;
+    }
+    .title-box h1 {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .title-box p {
+      font-size: 11px;
+      color: var(--text-dim);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      background: rgba(25, 45, 75, 0.7);
+      border: 1px solid var(--panel-border);
+      color: var(--text-main);
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+    .btn:hover {
+      background: rgba(0, 210, 255, 0.25);
+      border-color: var(--accent-cyan);
+      color: #fff;
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.35);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #0077b6 0%, #0096c7 100%);
+      border-color: var(--accent-cyan);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #0096c7 0%, #00b4d8 100%);
+    }
+
+    /* LEFT SIDEBAR CONTROLS */
+    .sidebar {
+      position: absolute;
+      top: 76px;
+      left: 20px;
+      bottom: 40px;
+      width: 330px;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 12px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sidebar.minimized {
+      bottom: auto;
+      height: 44px;
+      width: 250px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    .sidebar.minimized .sidebar-body {
+      display: none !important;
+    }
+
+    .sidebar-header {
+      padding: 11px 16px;
+      border-bottom: 1px solid var(--panel-border);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s;
+    }
+
+    .sidebar-header:hover {
+      background: rgba(0, 210, 255, 0.1);
+    }
+
+    .sidebar.minimized .sidebar-header {
+      border-bottom: none;
+    }
+
+    .sidebar-body {
+      padding: 14px 18px;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .sidebar-body::-webkit-scrollbar {
+      width: 5px;
+    }
+    .sidebar-body::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 3px;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 8px;
+    }
+
+    /* VIEW PRESET BUTTONS */
+    .view-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+    .view-btn {
+      background: rgba(20, 32, 54, 0.6);
+      border: 1px solid rgba(50, 80, 130, 0.4);
+      color: var(--text-main);
+      padding: 7px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .view-btn:hover, .view-btn.active {
+      background: rgba(0, 210, 255, 0.25);
+      border-color: var(--accent-cyan);
+      color: #fff;
+    }
+
+    /* LAYER TOGGLE CHECKBOXES */
+    .layer-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .layer-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(20, 32, 54, 0.45);
+      padding: 7px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(40, 70, 110, 0.3);
+      cursor: pointer;
+      font-size: 11.5px;
+    }
+    .layer-item:hover {
+      background: rgba(30, 50, 80, 0.55);
+    }
+    .layer-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+    }
+    .color-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* METRIC STATS */
+    .stat-card {
+      background: rgba(15, 25, 45, 0.7);
+      border: 1px solid rgba(40, 70, 120, 0.4);
+      border-radius: 6px;
+      padding: 8px 12px;
+    }
+    .stat-val {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+    }
+    .stat-lbl {
+      font-size: 10.5px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    /* FLOATING INTEL CARD */
+    #intel-card {
+      position: absolute;
+      bottom: 50px;
+      right: 20px;
+      width: 350px;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 12px;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      animation: fadeIn 0.2s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .intel-header {
+      padding: 12px 16px;
+      background: rgba(20, 35, 60, 0.8);
+      border-bottom: 1px solid var(--panel-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .intel-header h3 {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+    }
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .close-btn:hover { color: #fff; }
+    .intel-body {
+      padding: 14px 16px;
+      font-size: 11.5px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      line-height: 1.45;
+    }
+    .intel-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dashed rgba(255,255,255,0.08);
+      padding-bottom: 4px;
+    }
+    .intel-row .key { color: var(--text-dim); }
+    .intel-row .val { font-weight: 600; text-align: right; }
+
+    /* FOOTER STATUS */
+    footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 28px;
+      background: rgba(8, 12, 20, 0.98);
+      border-top: 1px solid rgba(0, 210, 255, 0.2);
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--accent-green);
+      border-radius: 50%;
+    }
+
+    /* COMPASS WIDGET */
+    #compass-widget {
+      position: absolute;
+      top: 80px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 50%;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      cursor: pointer;
+    }
+    #compass-arrow {
+      position: absolute;
+      top: 6px;
+      width: 0; 
+      height: 0; 
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 12px solid var(--accent-red);
+    }
+
+    /* SCALE BAR */
+    #scale-bar-widget {
+      position: absolute;
+      bottom: 40px;
+      left: 370px;
+      background: rgba(11, 18, 32, 0.85);
+      border: 1px solid var(--panel-border);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 10.5px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    #scale-bar-line {
+      width: 100px;
+      height: 4px;
+      background: #00d2ff;
+      border-left: 2px solid #fff;
+      border-right: 2px solid #fff;
+    }
+  </style>
+  <script src="three.min.js"></script>
+  <script src="OrbitControls.js"></script>
+  <script src="geojson_data.js"></script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <div class="badge-live">e-Bandobast 3D</div>
+      <div class="title-box">
+        <h1>Sant Nirankari Sant Samagam Ground — Samalkha (Panipat, Haryana)</h1>
+        <p>Lat: 29.1805° N, Lon: 77.0249° E | Plus Code: 52HG+VF2 | WGS84 / UTM Zone 43N | 159 Verified Features (Official Blueprint &amp; Panipat Police Aligned)</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button class="btn" id="btn-toggle-time">☀️ Day Lighting</button>
+      <a class="btn" href="map_2d.html">🗺️ 2D Tactical Plan</a>
+      <a class="btn btn-primary" href="samalkha_bandobast_3d.kml" download="samalkha_bandobast_3d.kml">
+        🌍 Download 3D KML (Google Earth)
+      </a>
+      <a class="btn" href="nirankari_samalkha_ebandobast.geojson" download="nirankari_samalkha_ebandobast.geojson">
+        📁 Master GeoJSON
+      </a>
+    </div>
+  </header>
+
+  <!-- SIDEBAR CONTROLS (MINIMIZED BY DEFAULT - CLICK TO EXPAND) -->
+  <div class="sidebar minimized" id="tactical-sidebar">
+    <div class="sidebar-header" onclick="toggleSidebar()" title="Click to Expand / Minimize">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span id="sidebar-toggle-icon" style="font-size: 13px; color: var(--accent-cyan); display: inline-block; transition: transform 0.2s;">➕</span>
+        <span>Tactical Controls</span>
+      </div>
+      <span id="sidebar-badge" style="font-size: 10px; color: var(--accent-green);">● Click to Open</span>
+    </div>
+    <div class="sidebar-body">
+
+      <!-- 3D VERTICAL ELEVATION EXAGGERATION (OPTION 4) -->
+      <div style="background: rgba(15, 23, 42, 0.65); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; padding: 12px 14px; margin-bottom: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span class="section-title" style="margin-bottom: 0; color: #38bdf8; font-size: 11px;">Vertical Height Scale</span>
+          <span id="vertical-scale-badge" style="font-size: 11px; font-weight: 700; color: #00ff88; background: rgba(0, 255, 136, 0.15); padding: 2px 7px; border-radius: 4px; border: 1px solid rgba(0, 255, 136, 0.35);">1.8× Tactical</span>
+        </div>
+        <div style="display: flex; gap: 5px; margin-bottom: 8px;">
+          <button class="view-btn" id="btn-scale-1x" onclick="setVerticalScale(1.0)" style="flex: 1; text-align: center; padding: 5px 2px; font-size: 10.5px;">1.0× True</button>
+          <button class="view-btn active" id="btn-scale-18x" onclick="setVerticalScale(1.8)" style="flex: 1; text-align: center; padding: 5px 2px; font-size: 10.5px;">1.8× Tactical</button>
+          <button class="view-btn" id="btn-scale-25x" onclick="setVerticalScale(2.5)" style="flex: 1; text-align: center; padding: 5px 2px; font-size: 10.5px;">2.5× High</button>
+        </div>
+        <input type="range" id="vertical-scale-slider" min="1.0" max="3.0" step="0.1" value="1.8" oninput="setVerticalScale(parseFloat(this.value))" style="width: 100%; accent-color: var(--accent-cyan); cursor: pointer;">
+        <div style="display: flex; justify-content: space-between; font-size: 9.5px; color: var(--text-dim); margin-top: 3px;">
+          <span>1.0× (1:1 Metric)</span>
+          <span>1.8× (Optimal)</span>
+          <span>3.0× (Prominent)</span>
+        </div>
+      </div>
+
+      <!-- QUICK VIEWPOINTS (8 REQUIRED PRESETS) -->
+      <div>
+        <div class="section-title">Tactical Camera Presets (15)</div>
+        <div class="view-grid">
+          <button class="view-btn active" onclick="setCameraView('overview')">🌐 1. Full Site Overview</button>
+          <button class="view-btn" onclick="setCameraView('topdown')">🧭 2. North-Up Top-Down</button>
+          <button class="view-btn" onclick="setCameraView('pandal')">🎤 3. Main Pandal (367m)</button>
+          <button class="view-btn" onclick="setCameraView('campus')">🏢 4. Permanent Campus</button>
+          <button class="view-btn" onclick="setCameraView('externalRoads')">🛣️ 5. External Roads (NH-44)</button>
+          <button class="view-btn" onclick="setCameraView('internalRoads')">🛤️ 6. Internal Avenues</button>
+          <button class="view-btn" onclick="setCameraView('sectors')">🗺️ 7. Ground A–D Sectors</button>
+          <button class="view-btn" onclick="setCameraView('station')">🚂 8. Railway &amp; BDMJ</button>
+          <button class="view-btn" onclick="setCameraView('footbridge')">🌉 9. NH-44 Footbridge</button>
+          <button class="view-btn" onclick="setCameraView('parking')">🅿️ 10. Parking 5 &amp; East Hub</button>
+          <button class="view-btn" onclick="setCameraView('tents')">⛺ 11. 550 Residential Tents</button>
+          <button class="view-btn" onclick="setCameraView('gate1')">🚪 12. Gate 1 &amp; Parking P2</button>
+          <button class="view-btn" onclick="setCameraView('gate2')">👑 13. Gate 2 &amp; VIP / S.C.</button>
+          <button class="view-btn" onclick="setCameraView('gate3')">🚪 14. Gate 3 &amp; Parking P4</button>
+          <button class="view-btn" onclick="setCameraView('exhibition')">🎨 15. Exhibition Pavilion</button>
+        </div>
+      </div>
+
+      <!-- LAYER TOGGLES -->
+      <div>
+        <div class="section-title">Deployment Layer Toggles</div>
+        <div class="layer-list">
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #ffffff; border: 1px solid #aaa;"></span>
+              Overall Perimeter (638.5 Acres)
+            </span>
+            <input type="checkbox" id="layer-boundary" checked onchange="toggleLayer('boundary', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #ff3344;"></span>
+              Ground A (Red Zone - Pandal)
+            </span>
+            <input type="checkbox" id="layer-groundA" checked onchange="toggleLayer('groundA', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #ffb700;"></span>
+              Ground B (Yellow Zone - Langar)
+            </span>
+            <input type="checkbox" id="layer-groundB" checked onchange="toggleLayer('groundB', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #00ff88;"></span>
+              Ground C (Green Zone - Expo)
+            </span>
+            <input type="checkbox" id="layer-groundC" checked onchange="toggleLayer('groundC', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #00d2ff;"></span>
+              Ground D (Blue Zone - Railway)
+            </span>
+            <input type="checkbox" id="layer-groundD" checked onchange="toggleLayer('groundD', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #3d5a80;"></span>
+              3D Pandal Structure &amp; Dais
+            </span>
+            <input type="checkbox" id="layer-pandal" checked onchange="toggleLayer('pandal', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #2a6f97;"></span>
+              Permanent Campus (7 Buildings)
+            </span>
+            <input type="checkbox" id="layer-campus" checked onchange="toggleLayer('campus', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #ffffff;"></span>
+              Internal Arterial Avenues (6 Corridors)
+            </span>
+            <input type="checkbox" id="layer-internalRoads" checked onchange="toggleLayer('internalRoads', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #f59e0b;"></span>
+              External Roads &amp; NH-44 (66 OSM Links)
+            </span>
+            <input type="checkbox" id="layer-externalRoads" checked onchange="toggleLayer('externalRoads', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #888888;"></span>
+              Railway Tracks &amp; BDMJ Station
+            </span>
+            <input type="checkbox" id="layer-railway" checked onchange="toggleLayer('railway', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #06b6d4;"></span>
+              Police Watchtowers &amp; Pickets
+            </span>
+            <input type="checkbox" id="layer-tactical" checked onchange="toggleLayer('tactical', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #00ff88;"></span>
+              VIP Convoy &amp; Evacuation Routes
+            </span>
+            <input type="checkbox" id="layer-routes" checked onchange="toggleLayer('routes', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #f59e0b;"></span>
+              Dedicated Parking 1–5 (PCG Grids)
+            </span>
+            <input type="checkbox" id="layer-parking" checked onchange="toggleLayer('parking', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #00ffff;"></span>
+              NH-44 Pedestrian Overbridge
+            </span>
+            <input type="checkbox" id="layer-footbridge" checked onchange="toggleLayer('footbridge', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #e2e8f0; border: 1px solid #94a3b8;"></span>
+              ⛺ 550 Residential Tents (PCG)
+            </span>
+            <input type="checkbox" id="layer-tents" checked onchange="toggleLayer('tents', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #94a3b8;"></span>
+              High-Res Satellite Orthomosaic
+            </span>
+            <input type="checkbox" id="layer-sat" checked onchange="toggleLayer('sat', this.checked)">
+          </label>
+
+          <label class="layer-item">
+            <span class="layer-label">
+              <span class="color-dot" style="background: #38bdf8;"></span>
+              🏷️ 3D Site Landmark Badges
+            </span>
+            <input type="checkbox" id="layer-labels" checked onchange="toggleLayer('labels', this.checked)">
+          </label>
+        </div>
+      </div>
+
+      <!-- SPATIAL METRICS -->
+      <div>
+        <div class="section-title">Verified Spatial Parameters</div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <div class="stat-card">
+            <div class="stat-val">550 Community Marquees</div>
+            <div class="stat-lbl">PCG Residential Tents across Grounds B, C, D (Police Order Ground Truth)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">367.1m × 255.4m</div>
+            <div class="stat-lbl">Main Satsang Pandal Footprint (23.17 Acres / 93,783 m²)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">41,827 m² Built-Up</div>
+            <div class="stat-lbl">7 Permanent Campus Buildings (19.4 Acre Complex)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">1,732 meters (1.73 km)</div>
+            <div class="stat-lbl">Distance from GT Road Gate 1 to BDMJ Station</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">638.5 Acres (2.58 km²)</div>
+            <div class="stat-lbl">Overall Core Venue Scope (Expands to 1,400+ Acres)</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COMPASS -->
+  <div id="compass-widget" onclick="resetNorth()">
+    <div id="compass-arrow"></div>
+    <span style="margin-top: 14px;">N</span>
+  </div>
+
+  <!-- SCALE BAR WIDGET -->
+  <div id="scale-bar-widget">
+    <div id="scale-bar-line"></div>
+    <span id="scale-bar-text">100 meters</span>
+  </div>
+
+  <!-- FLOATING INTEL CARD -->
+  <div id="intel-card">
+    <div class="intel-header">
+      <h3 id="intel-title">Feature Detail</h3>
+      <button class="close-btn" onclick="closeIntelCard()">&times;</button>
+    </div>
+    <div class="intel-body" id="intel-content">
+      <!-- Injected via JavaScript -->
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="status-indicator">
+      <span class="status-dot"></span>
+      <span>Spatial Reference: WGS84 (EPSG:4326) / UTM Zone 43N (EPSG:32643)</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 18px;">
+      <span style="color: var(--accent-cyan); font-weight: 600; font-size: 11px;">🎯 Cursor-Directed WASD: Move towards mouse point | Q/E: Elevate | Shift: Sprint</span>
+      <div id="cursor-coords">Camera Alt: ~1600m | Pitch: 45°</div>
+    </div>
+  </footer>
+
+  <!-- CANVAS CONTAINER -->
+  <div id="webgl-canvas"></div>
+
+  <!-- THREE.JS TACTICAL APPLICATION LOGIC -->
+  <script>
+    // --- SCENE, CAMERA, RENDERER ---
+    const container = document.getElementById('webgl-canvas');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x080c14);
+    scene.fog = new THREE.FogExp2(0x080c14, 0.0003);
+
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 5, 12000);
+    function showWebGLErrorBanner(err) {
+      const box = document.createElement('div');
+      box.id = 'webgl-error-banner';
+      box.style.position = 'fixed';
+      box.style.top = '80px';
+      box.style.left = '50%';
+      box.style.transform = 'translateX(-50%)';
+      box.style.width = '90%';
+      box.style.maxWidth = '680px';
+      box.style.background = 'rgba(15, 23, 42, 0.96)';
+      box.style.border = '2px solid #ff3344';
+      box.style.borderRadius = '12px';
+      box.style.padding = '24px';
+      box.style.color = '#e2e8f0';
+      box.style.zIndex = '99999';
+      box.style.boxShadow = '0 12px 48px rgba(0,0,0,0.85)';
+      box.style.fontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+      box.innerHTML = `
+        <h2 style="color: #ff4d5a; margin-bottom: 12px; font-size: 18px; display: flex; align-items: center; gap: 8px;">
+          ⚠️ WebGL 3D Acceleration Required
+        </h2>
+        <p style="margin-bottom: 14px; font-size: 13px; line-height: 1.6; color: #cbd5e1;">
+          Your web browser could not initialize hardware-accelerated WebGL 3D graphics. This usually occurs if Hardware Acceleration is disabled in browser settings or if GPU drivers are restricted.
+        </p>
+        <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 14px; font-size: 12.5px; margin-bottom: 18px; line-height: 1.6;">
+          <b style="color: #38bdf8;">Quick Fix in Chrome / Edge:</b><br>
+          1. Go to <b>Settings &rarr; System and performance</b>.<br>
+          2. Toggle <b>ON</b> &rarr; <i>"Use graphics acceleration when available"</i>.<br>
+          3. Click <b>Relaunch</b>.<br>
+          4. Alternatively, check status at <code>chrome://gpu</code> or <code>edge://gpu</code>.
+        </div>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="map_2d.html" style="background: #00d2ff; color: #050d1a; padding: 10px 18px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 12.5px; display: inline-flex; align-items: center; gap: 6px;">
+            🗺️ Switch to 2D Tactical Plan (Always Works)
+          </a>
+          <button onclick="location.reload()" style="background: #1e293b; color: #fff; border: 1px solid #475569; padding: 10px 18px; border-radius: 6px; cursor: pointer; font-size: 12.5px;">
+            🔄 Retry 3D Map
+          </button>
+        </div>
+      `;
+      document.body.appendChild(box);
+    }
+
+    let renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'default' });
+    } catch (e1) {
+      console.warn("Retrying WebGLRenderer with fallback settings:", e1);
+      try {
+        renderer = new THREE.WebGLRenderer({ antialias: false, alpha: false, failIfMajorPerformanceCaveat: false });
+      } catch (e2) {
+        console.error("Critical: WebGL context creation failed:", e2);
+        showWebGLErrorBanner(e2);
+        throw e2;
+      }
+    }
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    container.appendChild(renderer.domElement);
+
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.maxPolarAngle = Math.PI / 2.02;
+    controls.minDistance = 30;
+    controls.maxDistance = 6000;
+
+    // --- INITIAL CAMERA: WHOLE-SITE OVERVIEW (GT ROAD TO RAILWAY STATION) ---
+    camera.position.set(-200, 1500, 1800);
+    controls.target.set(-450, 0, 0);
+    controls.update();
+
+    // --- LIGHTING ---
+    const ambientLight = new THREE.AmbientLight(0xdde8f8, 0.85);
+    scene.add(ambientLight);
+
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0x334466, 0.65);
+    scene.add(hemiLight);
+
+    const dirLight = new THREE.DirectionalLight(0xfff6e5, 1.4);
+    dirLight.position.set(600, 1400, 500);
+    dirLight.castShadow = true;
+    dirLight.shadow.mapSize.width = 2048;
+    dirLight.shadow.mapSize.height = 2048;
+    dirLight.shadow.camera.near = 100;
+    dirLight.shadow.camera.far = 4500;
+    dirLight.shadow.camera.left = -2500;
+    dirLight.shadow.camera.right = 2500;
+    dirLight.shadow.camera.top = 2500;
+    dirLight.shadow.camera.bottom = -2500;
+    scene.add(dirLight);
+
+    // --- SPATIAL COORDINATE TRANSFORMATIONS ---
+    // Scene Origin: Pandal Center (lat: 29.17931, lon: 77.02491) -> (0, 0, 0)
+    // X: East (+) / West (-)
+    // Z: South (+) / North (-)
+    // 1 Unit = 1.0 Meter (EPSG:32643 UTM Metric Projection)
+    const REF_LAT = 29.17931;
+    const REF_LON = 77.02491;
+    const M_PER_DEG_LAT = 110852.0;
+    const M_PER_DEG_LON = 97192.0;
+
+    function geoToWorld(lat, lon) {
+      const x = (lon - REF_LON) * M_PER_DEG_LON;
+      const z = -(lat - REF_LAT) * M_PER_DEG_LAT;
+      return { x, z };
+    }
+
+    function worldToGeo(x, z) {
+      const lon = REF_LON + (x / M_PER_DEG_LON);
+      const lat = REF_LAT - (z / M_PER_DEG_LAT);
+      return { lat, lon };
+    }
+
+    // --- 3D HIGH-DPI CANVAS TEXT SPRITE GENERATOR ---
+    function makeTextSprite(message, opts = {}) {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const fontSize = opts.fontSize || 26;
+      const padding = opts.padding || 10;
+      const fontFace = opts.fontFace || 'Segoe UI, -apple-system, sans-serif';
+      const fontWeight = opts.fontWeight || '700';
+
+      ctx.font = `${fontWeight} ${fontSize}px ${fontFace}`;
+      const textWidth = ctx.measureText(message).width;
+      canvas.width = Math.max(128, Math.ceil(textWidth + padding * 2));
+      canvas.height = Math.ceil(fontSize + padding * 2);
+
+      // Re-apply styles after canvas resize
+      ctx.font = `${fontWeight} ${fontSize}px ${fontFace}`;
+      ctx.fillStyle = opts.backgroundColor || 'rgba(11, 20, 36, 0.90)';
+      ctx.strokeStyle = opts.borderColor || '#00d2ff';
+      ctx.lineWidth = opts.borderWidth || 3;
+
+      if (ctx.roundRect) {
+        ctx.beginPath();
+        ctx.roundRect(2, 2, canvas.width - 4, canvas.height - 4, 8);
+        ctx.fill();
+        ctx.stroke();
+      } else {
+        ctx.beginPath();
+        ctx.rect(2, 2, canvas.width - 4, canvas.height - 4);
+        ctx.fill();
+        ctx.stroke();
+      }
+
+      ctx.fillStyle = opts.textColor || '#ffffff';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(message, canvas.width / 2, canvas.height / 2);
+
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.minFilter = THREE.LinearFilter;
+      const spriteMat = new THREE.SpriteMaterial({
+        map: texture,
+        transparent: true,
+        depthTest: false
+      });
+      const sprite = new THREE.Sprite(spriteMat);
+      const scaleFactor = opts.scaleFactor || 0.16;
+      sprite.scale.set(canvas.width * scaleFactor, canvas.height * scaleFactor, 1.0);
+      return sprite;
+    }
+
+    // --- LAYER GROUPS ---
+    const layerGroups = {
+      boundary: new THREE.Group(),
+      groundA: new THREE.Group(),
+      groundB: new THREE.Group(),
+      groundC: new THREE.Group(),
+      groundD: new THREE.Group(),
+      pandal: new THREE.Group(),
+      campus: new THREE.Group(),
+      internalRoads: new THREE.Group(),
+      externalRoads: new THREE.Group(),
+      railway: new THREE.Group(),
+      tactical: new THREE.Group(),
+      parking: new THREE.Group(),
+      footbridge: new THREE.Group(),
+      tents: new THREE.Group(),
+      routes: new THREE.Group(),
+      sat: new THREE.Group(),
+      labels: new THREE.Group()
+    };
+    Object.values(layerGroups).forEach(g => scene.add(g));
+
+    const interactiveObjects = [];
+
+    // --- SATELLITE TERRAIN PLANE (HIGH-RES ORTHOMOSAIC) ---
+    // esri_satellite_detail_z16.jpg covers:
+    // North: 29.190533, South: 29.171349 (Height: 2126m)
+    // West:  77.008667, East:  77.030640 (Width:  2135m)
+    const satW = (77.030640 - 77.008667) * M_PER_DEG_LON;
+    const satH = (29.190533 - 29.171349) * M_PER_DEG_LAT;
+    const satCenter = geoToWorld((29.190533 + 29.171349)/2, (77.008667 + 77.030640)/2);
+
+    const textureLoader = new THREE.TextureLoader();
+    textureLoader.load('esri_satellite_detail_z16.jpg', function(tex) {
+      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      const planeGeo = new THREE.PlaneGeometry(satW, satH);
+      const planeMat = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.95 });
+      const planeMesh = new THREE.Mesh(planeGeo, planeMat);
+      planeMesh.rotation.x = -Math.PI / 2;
+      planeMesh.position.set(satCenter.x, 0, satCenter.z);
+      planeMesh.receiveShadow = true;
+      layerGroups.sat.add(planeMesh);
+    }, undefined, function(err) {
+      console.warn("Satellite imagery offline; applying tactical terrain surface.", err);
+      const fallbackMat = new THREE.MeshStandardMaterial({ color: 0x162438, roughness: 0.9 });
+      const fallbackMesh = new THREE.Mesh(new THREE.PlaneGeometry(satW, satH), fallbackMat);
+      fallbackMesh.rotation.x = -Math.PI / 2;
+      fallbackMesh.position.set(satCenter.x, 0, satCenter.z);
+      fallbackMesh.receiveShadow = true;
+      layerGroups.sat.add(fallbackMesh);
+    });
+
+    // Ground Tactical Grid
+    const tacticalGrid = new THREE.GridHelper(3600, 72, 0x00d2ff, 0x1e3650);
+    tacticalGrid.position.y = 0.6;
+    scene.add(tacticalGrid);
+
+    // --- REAL-WORLD SPATIAL CONSTRAINTS & PCG GEOMETRY STORES ---
+    const pcgRoadSegments = [];
+    const pcgExclusionPolygons = [];
+    const pcgSectorPolygons = {};
+
+    // --- DYNAMIC DATA-DRIVEN RECONSTRUCTION FROM SINGLE MASTER GEOJSON ---
+    function loadMasterGeoJSON() {
+      if (typeof window !== 'undefined' && window.NIRANKARI_GEOJSON) {
+        return Promise.resolve(window.NIRANKARI_GEOJSON);
+      }
+      return fetch('nirankari_samalkha_ebandobast.geojson')
+        .then(res => {
+          if (!res.ok) throw new Error("HTTP error " + res.status);
+          return res.json();
+        })
+        .catch(err => {
+          if (typeof window !== 'undefined' && window.NIRANKARI_GEOJSON) {
+            return window.NIRANKARI_GEOJSON;
+          }
+          throw err;
+        });
+    }
+
+    loadMasterGeoJSON()
+      .then(data => {
+        data.features.forEach(feat => {
+          const p = feat.properties;
+          const geom = feat.geometry;
+          const cat = p.category;
+          const fid = feat.id;
+
+          // Spatial collection for 100% road and structure clearance
+          if (geom.type === 'LineString') {
+            const clr = (cat === 'INTERNAL_ROAD') ? 24.0 : ((cat === 'RAILWAY_INFRASTRUCTURE') ? 32.0 : 20.0);
+            for (let i = 0; i < geom.coordinates.length - 1; i++) {
+              pcgRoadSegments.push({
+                p1: geoToWorld(geom.coordinates[i][1], geom.coordinates[i][0]),
+                p2: geoToWorld(geom.coordinates[i+1][1], geom.coordinates[i+1][0]),
+                clr: clr
+              });
+            }
+          } else if (geom.type === 'Polygon') {
+            const polyWorld = geom.coordinates[0].map(pt => geoToWorld(pt[1], pt[0]));
+            if (['FEAT-ZONE-GROUND-B', 'FEAT-ZONE-GROUND-C', 'FEAT-ZONE-GROUND-D'].includes(fid)) {
+              pcgSectorPolygons[fid] = polyWorld;
+            } else if (['EVENT_STRUCTURE', 'PERMANENT_BUILDING', 'PARKING_FACILITY', 'CIVIL_INFRASTRUCTURE'].includes(cat)) {
+              pcgExclusionPolygons.push(polyWorld);
+            }
+          }
+
+          // 1. OVERALL VENUE & SECTOR BOUNDARIES
+          if (cat === 'VENUE_BOUNDARY' || cat === 'SECURITY_SECTOR') {
+            const coords = geom.coordinates[0];
+            const shape = new THREE.Shape();
+            coords.forEach((pt, idx) => {
+              const w = geoToWorld(pt[1], pt[0]);
+              if (idx === 0) shape.moveTo(w.x, -w.z);
+              else shape.lineTo(w.x, -w.z);
+            });
+
+            let color = 0xffffff;
+            let targetGroup = layerGroups.boundary;
+            let opacity = 0.10;
+
+            if (fid.includes('GROUND-A')) { color = 0xff3344; targetGroup = layerGroups.groundA; opacity = 0.18; }
+            else if (fid.includes('GROUND-B')) { color = 0xffb700; targetGroup = layerGroups.groundB; opacity = 0.16; }
+            else if (fid.includes('GROUND-C')) { color = 0x00ff88; targetGroup = layerGroups.groundC; opacity = 0.16; }
+            else if (fid.includes('GROUND-D')) { color = 0x00d2ff; targetGroup = layerGroups.groundD; opacity = 0.16; }
+
+            const polyGeo = new THREE.ShapeGeometry(shape);
+            const polyMat = new THREE.MeshBasicMaterial({
+              color: color,
+              transparent: true,
+              opacity: opacity,
+              side: THREE.DoubleSide,
+              depthWrite: false
+            });
+            const polyMesh = new THREE.Mesh(polyGeo, polyMat);
+            polyMesh.rotation.x = -Math.PI / 2;
+            polyMesh.position.y = 0.45;
+
+            // Border line
+            const borderPts = coords.map(pt => {
+              const w = geoToWorld(pt[1], pt[0]);
+              return new THREE.Vector3(w.x, 0.9, w.z);
+            });
+            const borderGeo = new THREE.BufferGeometry().setFromPoints(borderPts);
+            const borderMat = new THREE.LineBasicMaterial({ color: color, linewidth: 3 });
+            const borderLine = new THREE.Line(borderGeo, borderMat);
+
+            polyMesh.userData = { ...p, feature_id: fid };
+            interactiveObjects.push(polyMesh);
+
+            targetGroup.add(polyMesh);
+            targetGroup.add(borderLine);
+
+            // 3D Sector Floating Landmark Badge
+            if (fid.includes('GROUND-A') || fid.includes('GROUND-B') || fid.includes('GROUND-C') || fid.includes('GROUND-D')) {
+              let secText = "SECTOR";
+              let secCol = "#ffffff";
+              let badgeY = 24.0;
+              if (fid.includes('GROUND-A')) { secText = "🔴 GROUND A (PANDAL ZONE)"; secCol = "#ff4d5a"; badgeY = 28.0; }
+              else if (fid.includes('GROUND-B')) { secText = "🟡 GROUND B (LANGAR & RESIDENTIAL)"; secCol = "#facc15"; badgeY = 22.0; }
+              else if (fid.includes('GROUND-C')) { secText = "🟢 GROUND C (EXPO & RESIDENTIAL)"; secCol = "#4ade80"; badgeY = 22.0; }
+              else if (fid.includes('GROUND-D')) { secText = "🔵 GROUND D (STATION & HOLDING CAMP)"; secCol = "#38bdf8"; badgeY = 22.0; }
+
+              let cX = 0, cZ = 0;
+              coords.forEach(pt => { const w = geoToWorld(pt[1], pt[0]); cX += w.x; cZ += w.z; });
+              cX /= coords.length; cZ /= coords.length;
+
+              const secBadge = makeTextSprite(secText, {
+                borderColor: secCol,
+                backgroundColor: 'rgba(10, 15, 28, 0.92)',
+                textColor: secCol,
+                fontSize: 26,
+                scaleFactor: 0.16
+              });
+              secBadge.position.set(cX, badgeY, cZ);
+              layerGroups.labels.add(secBadge);
+            }
+          }
+
+          // 2. MAIN SATSANG PANDAL, EXHIBITION & CENTRAL OFFICES
+          else if (cat === 'EVENT_STRUCTURE') {
+            if (fid === 'FEAT-PANDAL-01') {
+              // Build true-to-scale curved arched barrel-vault structure
+              const pW = 367.1; // X
+              const pL = 255.4; // Z
+              const pH = 18.0;  // Height peak
+
+              const archCurve = new THREE.CubicBezierCurve3(
+                new THREE.Vector3(-pW/2, 0, 0),
+                new THREE.Vector3(-pW/4, pH * 1.35, 0),
+                new THREE.Vector3(pW/4, pH * 1.35, 0),
+                new THREE.Vector3(pW/2, 0, 0)
+              );
+              const pts = archCurve.getPoints(24);
+              const roofShape = new THREE.Shape();
+              roofShape.moveTo(pts[0].x, pts[0].y);
+              for (let i = 1; i < pts.length; i++) roofShape.lineTo(pts[i].x, pts[i].y);
+              roofShape.lineTo(pts[pts.length-1].x, pts[pts.length-1].y - 1.5);
+              for (let i = pts.length - 2; i >= 0; i--) roofShape.lineTo(pts[i].x, pts[i].y - 1.5);
+              roofShape.closePath();
+
+              const roofGeo = new THREE.ExtrudeGeometry(roofShape, { depth: pL, bevelEnabled: false });
+              roofGeo.center();
+              const roofMat = new THREE.MeshStandardMaterial({
+                color: 0x3d5a80, metalness: 0.65, roughness: 0.35, side: THREE.DoubleSide
+              });
+              const pandalMesh = new THREE.Mesh(roofGeo, roofMat);
+              pandalMesh.position.set(-34.15, pH/2 + 4, -26.27);
+              pandalMesh.castShadow = true;
+              pandalMesh.userData = { ...p, feature_id: fid };
+              interactiveObjects.push(pandalMesh);
+              layerGroups.pandal.add(pandalMesh);
+
+              // Columns
+              const colGeo = new THREE.CylinderGeometry(0.8, 0.8, pH, 8);
+              const colMat = new THREE.MeshStandardMaterial({ color: 0x90e0ef, metalness: 0.8 });
+              for (let x = -pW/2 + 8; x <= pW/2 - 8; x += 32) {
+                [-pL/2 + 2, pL/2 - 2].forEach(z => {
+                  const col = new THREE.Mesh(colGeo, colMat);
+                  col.position.set(-34.15 + x, pH/2, -26.27 + z);
+                  layerGroups.pandal.add(col);
+                });
+              }
+
+              // Central processional carpet
+              const carpetGeo = new THREE.PlaneGeometry(pW - 60, 8);
+              const carpetMat = new THREE.MeshStandardMaterial({ color: 0xc1121f, roughness: 0.8 });
+              const carpet = new THREE.Mesh(carpetGeo, carpetMat);
+              carpet.rotation.x = -Math.PI / 2;
+              carpet.position.set(-34.15 + 20, 0.45, -26.27);
+              layerGroups.pandal.add(carpet);
+
+              // Pandal Floating Landmark Badge
+              const pandalLabel = makeTextSprite("🎪 79th SANT SAMAGAM MAIN PANDAL (367m)", {
+                borderColor: '#eab308',
+                backgroundColor: 'rgba(55, 48, 163, 0.94)',
+                textColor: '#fef08a',
+                fontSize: 26,
+                scaleFactor: 0.20
+              });
+              pandalLabel.position.set(-34.15, pH + 12, -26.27);
+              layerGroups.labels.add(pandalLabel);
+            }
+            else if (fid === 'FEAT-STAGE-DAIS') {
+              const stageGeo = new THREE.BoxGeometry(45, 3.5, 30);
+              const stageMat = new THREE.MeshStandardMaterial({ color: 0xe63946, roughness: 0.4 });
+              const stageMesh = new THREE.Mesh(stageGeo, stageMat);
+              stageMesh.position.set(-34.15 - 145, 1.75, -26.27);
+              stageMesh.castShadow = true;
+              stageMesh.userData = { ...p, feature_id: fid };
+              interactiveObjects.push(stageMesh);
+              layerGroups.pandal.add(stageMesh);
+
+              // Backdrop
+              const backdrop = new THREE.Mesh(
+                new THREE.BoxGeometry(3, 12, 28),
+                new THREE.MeshStandardMaterial({ color: 0xffd166, metalness: 0.3 })
+              );
+              backdrop.position.set(-34.15 - 162, 6, -26.27);
+              layerGroups.pandal.add(backdrop);
+            }
+            else if (fid === 'FEAT-EXHIBITION') {
+              // Nirankari Spiritual Exhibition Pavilion (Road R-2 90)
+              const coords = geom.coordinates[0];
+              const shape = new THREE.Shape();
+              coords.forEach((pt, idx) => {
+                const w = geoToWorld(pt[1], pt[0]);
+                if (idx === 0) shape.moveTo(w.x, -w.z);
+                else shape.lineTo(w.x, -w.z);
+              });
+              const exhGeo = new THREE.ExtrudeGeometry(shape, { depth: 9.0, bevelEnabled: false });
+              const exhMat = new THREE.MeshStandardMaterial({ color: 0x1e3a8a, metalness: 0.5, roughness: 0.4 });
+              const exhMesh = new THREE.Mesh(exhGeo, exhMat);
+              exhMesh.rotation.x = -Math.PI / 2;
+              exhMesh.position.y = 0;
+              exhMesh.castShadow = true;
+              exhMesh.userData = { ...p, feature_id: fid };
+              interactiveObjects.push(exhMesh);
+              layerGroups.pandal.add(exhMesh);
+
+              // 3D Exhibition Badge
+              const exhLabel = makeTextSprite("🖼️ SPIRITUAL EXHIBITION PAVILION (R-2)", {
+                borderColor: '#38bdf8',
+                backgroundColor: 'rgba(30, 58, 138, 0.94)',
+                textColor: '#ffffff'
+              });
+              exhLabel.position.set(0, 16, -240);
+              layerGroups.labels.add(exhLabel);
+            }
+            else if (fid === 'FEAT-OFFICES-CENTRAL') {
+              // Central Mission Administration Offices (Fronting Gate 2)
+              const coords = geom.coordinates[0];
+              const shape = new THREE.Shape();
+              coords.forEach((pt, idx) => {
+                const w = geoToWorld(pt[1], pt[0]);
+                if (idx === 0) shape.moveTo(w.x, -w.z);
+                else shape.lineTo(w.x, -w.z);
+              });
+              const offGeo = new THREE.ExtrudeGeometry(shape, { depth: 8.0, bevelEnabled: false });
+              const offMat = new THREE.MeshStandardMaterial({ color: 0x065f46, roughness: 0.4 });
+              const offMesh = new THREE.Mesh(offGeo, offMat);
+              offMesh.rotation.x = -Math.PI / 2;
+              offMesh.position.y = 0;
+              offMesh.castShadow = true;
+              offMesh.userData = { ...p, feature_id: fid };
+              interactiveObjects.push(offMesh);
+              layerGroups.campus.add(offMesh);
+
+              // 3D Mission HQ Badge
+              const offLabel = makeTextSprite("🏛️ MISSION CENTRAL OFFICES (GATE 2)", {
+                borderColor: '#34d399',
+                backgroundColor: 'rgba(6, 95, 70, 0.94)',
+                textColor: '#ffffff'
+              });
+              offLabel.position.set(220, 16, -20);
+              layerGroups.labels.add(offLabel);
+            }
+            else if (geom.type === 'Point') {
+              const w = geoToWorld(geom.coordinates[1], geom.coordinates[0]);
+              const blockGeo = new THREE.BoxGeometry(16, 5, 12);
+              const blockMat = new THREE.MeshStandardMaterial({ color: fid.includes('TOILETS') ? 0x0284c7 : 0x0f766e });
+              const blockMesh = new THREE.Mesh(blockGeo, blockMat);
+              blockMesh.position.set(w.x, 2.5, w.z);
+              blockMesh.castShadow = true;
+              blockMesh.userData = { ...p, feature_id: fid };
+              interactiveObjects.push(blockMesh);
+              layerGroups.campus.add(blockMesh);
+            }
+          }
+
+          // 3. INDIVIDUAL PERMANENT BUILDINGS (SNAS CAMPUS)
+          else if (cat === 'PERMANENT_BUILDING') {
+            const coords = geom.coordinates[0];
+            const shape = new THREE.Shape();
+            coords.forEach((pt, idx) => {
+              const w = geoToWorld(pt[1], pt[0]);
+              if (idx === 0) shape.moveTo(w.x, -w.z);
+              else shape.lineTo(w.x, -w.z);
+            });
+
+            const h = p.estimated_height_m || 10.0;
+            const bldgGeo = new THREE.ExtrudeGeometry(shape, { depth: h, bevelEnabled: false });
+            const bldgMat = new THREE.MeshStandardMaterial({
+              color: 0x2a6f97, roughness: 0.5, metalness: 0.2
+            });
+            const bldgMesh = new THREE.Mesh(bldgGeo, bldgMat);
+            bldgMesh.rotation.x = -Math.PI / 2;
+            bldgMesh.position.y = 0;
+            bldgMesh.castShadow = true;
+            bldgMesh.receiveShadow = true;
+
+            bldgMesh.userData = { ...p, feature_id: fid };
+            interactiveObjects.push(bldgMesh);
+            layerGroups.campus.add(bldgMesh);
+          }
+
+          // 4. INTERNAL ROAD NETWORK
+          else if (cat === 'INTERNAL_ROAD') {
+            const coords = geom.coordinates;
+            const pts = coords.map(c => {
+              const w = geoToWorld(c[1], c[0]);
+              return new THREE.Vector3(w.x, 1.2, w.z);
+            });
+
+            // Create flat ribbon road mesh
+            const w = p.width_m || 18.0;
+            for (let i = 0; i < pts.length - 1; i++) {
+              const p1 = pts[i];
+              const p2 = pts[i+1];
+              const dir = new THREE.Vector3().subVectors(p2, p1).normalize();
+              const normal = new THREE.Vector3(-dir.z, 0, dir.x).multiplyScalar(w / 2);
+
+              const segGeo = new THREE.BufferGeometry();
+              const vertices = new Float32Array([
+                p1.x + normal.x, 1.0, p1.z + normal.z,
+                p1.x - normal.x, 1.0, p1.z - normal.z,
+                p2.x + normal.x, 1.0, p2.z + normal.z,
+
+                p2.x + normal.x, 1.0, p2.z + normal.z,
+                p1.x - normal.x, 1.0, p1.z - normal.z,
+                p2.x - normal.x, 1.0, p2.z - normal.z,
+              ]);
+              segGeo.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+              const segMat = new THREE.MeshBasicMaterial({ color: 0x2b384e, side: THREE.DoubleSide });
+              const segMesh = new THREE.Mesh(segGeo, segMat);
+              layerGroups.internalRoads.add(segMesh);
+            }
+
+            // Road centerline
+            const lineGeo = new THREE.BufferGeometry().setFromPoints(pts);
+            const lineMat = new THREE.LineDashedMaterial({ color: 0xffffff, dashSize: 6, gapSize: 4, linewidth: 2 });
+            const line = new THREE.Line(lineGeo, lineMat);
+            line.computeLineDistances();
+            layerGroups.internalRoads.add(line);
+          }
+
+          // 5. EXTERNAL ROADS & HIGHWAYS (NH-44)
+          else if (cat === 'EXTERNAL_ROAD') {
+            const coords = geom.coordinates;
+            const pts = coords.map(c => {
+              const w = geoToWorld(c[1], c[0]);
+              return new THREE.Vector3(w.x, 1.1, w.z);
+            });
+            const isTrunk = p.highway_type === 'trunk';
+
+            const lineGeo = new THREE.BufferGeometry().setFromPoints(pts);
+            const lineMat = new THREE.LineBasicMaterial({
+              color: isTrunk ? 0xf59e0b : 0x38bdf8,
+              linewidth: isTrunk ? 4 : 2
+            });
+            const line = new THREE.Line(lineGeo, lineMat);
+            layerGroups.externalRoads.add(line);
+          }
+
+          // 6. RAILWAY TRACKS & BDMJ STATION
+          else if (cat === 'RAILWAY_INFRASTRUCTURE' || fid.includes('BDMJ')) {
+            if (geom.type === 'LineString') {
+              const pts = geom.coordinates.map(c => {
+                const w = geoToWorld(c[1], c[0]);
+                return new THREE.Vector3(w.x, 1.4, w.z);
+              });
+              const lineGeo = new THREE.BufferGeometry().setFromPoints(pts);
+              const lineMat = new THREE.LineBasicMaterial({ color: 0xcccccc, linewidth: 3 });
+              const line = new THREE.Line(lineGeo, lineMat);
+              layerGroups.railway.add(line);
+            }
+            else if (geom.type === 'Point') {
+              const w = geoToWorld(geom.coordinates[1], geom.coordinates[0]);
+              // BDMJ Station Building & Platform
+              const platMesh = new THREE.Mesh(
+                new THREE.BoxGeometry(22, 5, 120),
+                new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.6 })
+              );
+              platMesh.position.set(w.x, 2.5, w.z);
+              platMesh.castShadow = true;
+              platMesh.userData = { ...p, feature_id: fid };
+              interactiveObjects.push(platMesh);
+              layerGroups.railway.add(platMesh);
+
+              // 3D Station Badge
+              const stnBadge = makeTextSprite("🚉 BHODWAL MAJRI RAILWAY STATION (BDMJ)", {
+                borderColor: '#cbd5e1',
+                backgroundColor: 'rgba(30, 41, 59, 0.94)',
+                textColor: '#f8fafc',
+                fontSize: 24,
+                scaleFactor: 0.16
+              });
+              stnBadge.position.set(w.x, 14, w.z);
+              layerGroups.labels.add(stnBadge);
+            }
+          }
+
+          // 7. POLICE WATCHTOWERS & CHECKPOSTS
+          else if (cat === 'BANDOBAST_TACTICAL' || cat === 'ACCESS_CONTROL') {
+            const coords = geom.coordinates;
+            const w = geoToWorld(coords[1], coords[0]);
+
+            if (p.tactical_type === 'VANTAGE_WATCHTOWER') {
+              const towerG = new THREE.Group();
+              const tH = 15;
+              const legGeo = new THREE.CylinderGeometry(0.2, 0.3, tH, 6);
+              const legMat = new THREE.MeshStandardMaterial({ color: 0x64748b, metalness: 0.8 });
+              [[-2, -2], [2, -2], [-2, 2], [2, 2]].forEach(pt => {
+                const leg = new THREE.Mesh(legGeo, legMat);
+                leg.position.set(pt[0], tH/2, pt[1]);
+                towerG.add(leg);
+              });
+              const cabin = new THREE.Mesh(
+                new THREE.BoxGeometry(5.5, 3.2, 5.5),
+                new THREE.MeshStandardMaterial({ color: 0x0284c7 })
+              );
+              cabin.position.y = tH + 1.6;
+              cabin.castShadow = true;
+              towerG.add(cabin);
+
+              // Searchlight cone
+              const cone = new THREE.Mesh(
+                new THREE.ConeGeometry(10, 30, 16, 1, true),
+                new THREE.MeshBasicMaterial({ color: 0xffee88, transparent: true, opacity: 0.15, side: THREE.DoubleSide })
+              );
+              cone.rotation.x = Math.PI / 3;
+              cone.position.set(0, tH/2, 16);
+              towerG.add(cone);
+
+              towerG.position.set(w.x, 0, w.z);
+              cabin.userData = { ...p, feature_id: fid };
+              interactiveObjects.push(cabin);
+              layerGroups.tactical.add(towerG);
+            }
+            else if (cat === 'ACCESS_CONTROL' || fid.includes('GATE')) {
+              // Ceremonial Gate Portals (Gates 1, 2, 3 & Station Gate)
+              const isGate2 = fid === 'FEAT-GATE-02';
+              const gateG = new THREE.Group();
+              const gateW = isGate2 ? 45 : 38;
+              const gateH = isGate2 ? 15 : 12;
+              const frameGeo = new THREE.BoxGeometry(gateW, 3, 5);
+              const frameMat = new THREE.MeshStandardMaterial({
+                color: isGate2 ? 0xffb700 : 0x0096c7,
+                metalness: isGate2 ? 0.8 : 0.4,
+                roughness: 0.3
+              });
+              const lintel = new THREE.Mesh(frameGeo, frameMat);
+              lintel.position.y = gateH;
+              gateG.add(lintel);
+
+              // Pillars
+              [-gateW/2 + 2, gateW/2 - 2].forEach(px => {
+                const pillar = new THREE.Mesh(
+                  new THREE.BoxGeometry(4, gateH, 5),
+                  frameMat
+                );
+                pillar.position.set(px, gateH/2, 0);
+                gateG.add(pillar);
+              });
+
+              gateG.position.set(w.x, 0, w.z);
+              lintel.userData = { ...p, feature_id: fid };
+              interactiveObjects.push(lintel);
+              layerGroups.tactical.add(gateG);
+
+              // 3D Gate Floating Badge
+              let gateName = "GATE";
+              if (fid === 'FEAT-GATE-01') gateName = "🚪 GATE 1 (SOUTH / DELHI COMMUTERS)";
+              else if (fid === 'FEAT-GATE-02') gateName = "⭐ GATE 2 (CENTRAL VIP / CEREMONIAL)";
+              else if (fid === 'FEAT-GATE-03') gateName = "🚪 GATE 3 (NORTH / AMBALA & ABROAD)";
+              else if (fid.includes('STATION')) gateName = "🚆 STATION GATE (BDMJ PLATFORM)";
+
+              const gateLabel = makeTextSprite(gateName, {
+                borderColor: fid === 'FEAT-GATE-02' ? '#ffd700' : '#38bdf8',
+                backgroundColor: fid === 'FEAT-GATE-02' ? 'rgba(120, 53, 15, 0.94)' : 'rgba(15, 23, 42, 0.92)',
+                textColor: fid === 'FEAT-GATE-02' ? '#fef08a' : '#ffffff',
+                fontSize: 26,
+                scaleFactor: 0.16
+              });
+              gateLabel.position.set(w.x, gateH + 8, w.z);
+              layerGroups.labels.add(gateLabel);
+            }
+            else if (p.tactical_type === 'AERIAL_SURVEILLANCE') {
+              // CID Drone 3D Quadcopter with live surveillance cone
+              const droneG = new THREE.Group();
+              const body = new THREE.Mesh(
+                new THREE.BoxGeometry(3.5, 0.8, 3.5),
+                new THREE.MeshStandardMaterial({ color: 0x00f0ff, metalness: 0.9 })
+              );
+              droneG.add(body);
+              [[-2.2, -2.2], [2.2, -2.2], [-2.2, 2.2], [2.2, 2.2]].forEach(pt => {
+                const arm = new THREE.Mesh(
+                  new THREE.CylinderGeometry(0.1, 0.1, 1.8, 6),
+                  new THREE.MeshStandardMaterial({ color: 0x334155 })
+                );
+                arm.rotation.z = Math.PI / 4;
+                arm.position.set(pt[0]/2, 0.2, pt[1]/2);
+                droneG.add(arm);
+                const rotor = new THREE.Mesh(
+                  new THREE.CircleGeometry(1.2, 12),
+                  new THREE.MeshBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.6, side: THREE.DoubleSide })
+                );
+                rotor.rotation.x = Math.PI / 2;
+                rotor.position.set(pt[0], 0.4, pt[1]);
+                droneG.add(rotor);
+              });
+              // Camera Frustum
+              const fCone = new THREE.Mesh(
+                new THREE.ConeGeometry(22, 45, 16, 1, true),
+                new THREE.MeshBasicMaterial({ color: 0x00ff88, transparent: true, opacity: 0.12, side: THREE.DoubleSide })
+              );
+              fCone.position.y = -22.5;
+              droneG.add(fCone);
+
+              droneG.position.set(w.x, 45, w.z);
+              body.userData = { ...p, feature_id: fid };
+              interactiveObjects.push(body);
+              layerGroups.tactical.add(droneG);
+            }
+            else if (p.tactical_type === 'TACTICAL_RESPONSE') {
+              // Armed QRT Strike Morcha & Tactical Interceptor
+              const qrtG = new THREE.Group();
+              const qrtVeh = new THREE.Mesh(
+                new THREE.BoxGeometry(8, 4.2, 4.5),
+                new THREE.MeshStandardMaterial({ color: 0x1e293b, metalness: 0.5, roughness: 0.4 })
+              );
+              qrtVeh.position.y = 2.1;
+              qrtG.add(qrtVeh);
+              const strobe = new THREE.Mesh(
+                new THREE.BoxGeometry(1.2, 0.6, 2.4),
+                new THREE.MeshStandardMaterial({ color: 0x00d2ff, emissive: 0x00d2ff, emissiveIntensity: 0.9 })
+              );
+              strobe.position.y = 4.5;
+              qrtG.add(strobe);
+
+              qrtG.position.set(w.x, 0, w.z);
+              qrtVeh.userData = { ...p, feature_id: fid };
+              interactiveObjects.push(qrtVeh);
+              layerGroups.tactical.add(qrtG);
+            }
+            else {
+              // Medical / Fire / Command Posts
+              const isMed = p.tactical_type === 'MEDICAL_FACILITY' || p.tactical_type === 'FIRE_STATION';
+              const bldg = new THREE.Mesh(
+                new THREE.BoxGeometry(24, 7, 16),
+                new THREE.MeshStandardMaterial({ color: isMed ? 0xd90429 : 0x1d3557, roughness: 0.4 })
+              );
+              bldg.position.set(w.x, 3.5, w.z);
+              bldg.castShadow = true;
+              bldg.userData = { ...p, feature_id: fid };
+              interactiveObjects.push(bldg);
+              layerGroups.tactical.add(bldg);
+            }
+          }
+
+          // 8. POLICE RESERVE BASE (HALDANA POST)
+          else if (cat === 'POLICE_FACILITY') {
+            const coords = geom.coordinates;
+            const w = geoToWorld(coords[1], coords[0]);
+            const postG = new THREE.Group();
+            const postBldg = new THREE.Mesh(
+              new THREE.BoxGeometry(32, 8, 20),
+              new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.4 })
+            );
+            postBldg.position.y = 4.0;
+            postBldg.castShadow = true;
+            postG.add(postBldg);
+
+            const beacon = new THREE.Mesh(
+              new THREE.CylinderGeometry(0.8, 0.8, 1.2, 12),
+              new THREE.MeshStandardMaterial({ color: 0xef4444, emissive: 0xef4444, emissiveIntensity: 1.0 })
+            );
+            beacon.position.set(0, 8.6, 0);
+            postG.add(beacon);
+
+            postG.position.set(w.x, 0, w.z);
+            postBldg.userData = { ...p, feature_id: fid };
+            interactiveObjects.push(postBldg);
+            layerGroups.tactical.add(postG);
+          }
+
+          // 9. DEDICATED EVENT PARKING LOTS (PARKING 1 TO 5 - PCG STRIPING)
+          else if (cat === 'PARKING_FACILITY') {
+            const coords = geom.coordinates[0];
+            const shape = new THREE.Shape();
+            coords.forEach((pt, idx) => {
+              const w = geoToWorld(pt[1], pt[0]);
+              if (idx === 0) shape.moveTo(w.x, -w.z);
+              else shape.lineTo(w.x, -w.z);
+            });
+            const polyGeo = new THREE.ShapeGeometry(shape);
+            const polyMat = new THREE.MeshStandardMaterial({
+              color: 0x182232,
+              roughness: 0.95,
+              side: THREE.DoubleSide
+            });
+            const parkMesh = new THREE.Mesh(polyGeo, polyMat);
+            parkMesh.rotation.x = -Math.PI / 2;
+            parkMesh.position.y = 0.6;
+            parkMesh.userData = { ...p, feature_id: fid };
+            interactiveObjects.push(parkMesh);
+            layerGroups.parking.add(parkMesh);
+
+            // Amber hazard border line
+            const borderPts = coords.map(pt => {
+              const w = geoToWorld(pt[1], pt[0]);
+              return new THREE.Vector3(w.x, 0.9, w.z);
+            });
+            const borderGeo = new THREE.BufferGeometry().setFromPoints(borderPts);
+            const borderMat = new THREE.LineBasicMaterial({ color: 0xf59e0b, linewidth: 3 });
+            const borderLine = new THREE.Line(borderGeo, borderMat);
+            layerGroups.parking.add(borderLine);
+
+            // Procedural PCG Parking Striping
+            let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
+            coords.forEach(pt => {
+              const w = geoToWorld(pt[1], pt[0]);
+              if (w.x < minX) minX = w.x;
+              if (w.x > maxX) maxX = w.x;
+              if (w.z < minZ) minZ = w.z;
+              if (w.z > maxZ) maxZ = w.z;
+            });
+            const pLines = [];
+            const spacing = 18.0;
+            for (let z = minZ + 15; z < maxZ - 15; z += spacing) {
+              pLines.push(new THREE.Vector3(minX + 10, 1.05, z));
+              pLines.push(new THREE.Vector3(maxX - 10, 1.05, z));
+            }
+            if (pLines.length > 0) {
+              const gridGeo = new THREE.BufferGeometry().setFromPoints(pLines);
+              const gridMat = new THREE.LineDashedMaterial({ color: 0xfbbf24, dashSize: 4, gapSize: 3, transparent: true, opacity: 0.65 });
+              const gridLine = new THREE.LineSegments(gridGeo, gridMat);
+              gridLine.computeLineDistances();
+              layerGroups.parking.add(gridLine);
+            }
+
+            // 3D Parking Totem Marker & Floating Badge
+            const centerX = (minX + maxX) / 2;
+            const centerZ = (minZ + maxZ) / 2;
+            const totemPillar = new THREE.Mesh(
+              new THREE.CylinderGeometry(0.8, 0.8, 14, 8),
+              new THREE.MeshStandardMaterial({ color: 0x475569, metalness: 0.8 })
+            );
+            totemPillar.position.set(centerX, 7, centerZ);
+            layerGroups.parking.add(totemPillar);
+
+            let parkLabelText = p.name || fid;
+            if (fid === 'FEAT-PARKING-01') parkLabelText = "🅿️ PARKING P1 (SOUTH / DELHI HEAVY BUSES)";
+            else if (fid === 'FEAT-PARKING-02') parkLabelText = "🅿️ PARKING P2 (GROUND B / COMMUTERS)";
+            else if (fid === 'FEAT-PARKING-03') parkLabelText = "🅿️ PARKING P3 (STATION / NORTH-WEST)";
+            else if (fid === 'FEAT-PARKING-04') parkLabelText = "🅿️ PARKING P4 (AMBALA & ABROAD SAINTS)";
+            else if (fid === 'FEAT-PARKING-05') parkLabelText = "🅿️ PARKING P5 (EAST OF NH-44)";
+            else if (fid.includes('VIP')) parkLabelText = "⭐ VIP & S.C. PARKING (GATE 2)";
+
+            const parkBadge = makeTextSprite(parkLabelText, {
+              borderColor: fid.includes('VIP') ? '#ffd700' : '#38bdf8',
+              backgroundColor: fid.includes('VIP') ? 'rgba(120, 53, 15, 0.94)' : 'rgba(15, 23, 42, 0.92)',
+              textColor: fid.includes('VIP') ? '#fef08a' : '#e0f2fe',
+              fontSize: 24,
+              scaleFactor: 0.16
+            });
+            parkBadge.position.set(centerX, 18, centerZ);
+            layerGroups.labels.add(parkBadge);
+          }
+
+          // 10. PEDESTRIAN FOOTBRIDGE OVER NH-44
+          else if (cat === 'PEDESTRIAN_INFRASTRUCTURE') {
+            const pts = geom.coordinates.map(c => {
+              const w = geoToWorld(c[1], c[0]);
+              return new THREE.Vector3(w.x, 6.5, w.z);
+            });
+            const p1 = pts[0];
+            const p2 = pts[pts.length - 1];
+            const bridgeLen = p1.distanceTo(p2);
+            const bridgeMid = new THREE.Vector3().addVectors(p1, p2).multiplyScalar(0.5);
+
+            const deck = new THREE.Mesh(
+              new THREE.BoxGeometry(bridgeLen, 0.8, 4.5),
+              new THREE.MeshStandardMaterial({ color: 0x0ea5e9, metalness: 0.8, roughness: 0.2 })
+            );
+            deck.position.set(bridgeMid.x, 6.5, bridgeMid.z);
+            deck.userData = { ...p, feature_id: fid };
+            interactiveObjects.push(deck);
+            layerGroups.footbridge.add(deck);
+
+            // Safety Railings with glowing cyan edge
+            const railGeo = new THREE.BoxGeometry(bridgeLen, 1.2, 0.2);
+            const railMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, emissive: 0x0284c7, emissiveIntensity: 0.4 });
+            const railN = new THREE.Mesh(railGeo, railMat);
+            railN.position.set(bridgeMid.x, 7.3, bridgeMid.z - 2.15);
+            const railS = new THREE.Mesh(railGeo, railMat);
+            railS.position.set(bridgeMid.x, 7.3, bridgeMid.z + 2.15);
+            layerGroups.footbridge.add(railN);
+            layerGroups.footbridge.add(railS);
+
+            // Support Piers (East end, Highway median, West end)
+            [p1.x, bridgeMid.x, p2.x].forEach(px => {
+              const pier = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.9, 0.9, 6.5, 12),
+                new THREE.MeshStandardMaterial({ color: 0x64748b, metalness: 0.7 })
+              );
+              pier.position.set(px, 3.25, bridgeMid.z);
+              layerGroups.footbridge.add(pier);
+            });
+
+            // Ramp / Stair towers at both ends
+            [p1, p2].forEach(pt => {
+              const tower = new THREE.Mesh(
+                new THREE.BoxGeometry(8, 7.5, 8),
+                new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.5 })
+              );
+              tower.position.set(pt.x, 3.75, pt.z);
+              tower.userData = { ...p, feature_id: fid };
+              interactiveObjects.push(tower);
+              layerGroups.footbridge.add(tower);
+            });
+
+            // 3D Footbridge Badge
+            const bridgeBadge = makeTextSprite("🚶 PEDESTRIAN OVERPASS FOOTBRIDGE (NH-44)", {
+              borderColor: '#00ff88',
+              backgroundColor: 'rgba(6, 78, 59, 0.94)',
+              textColor: '#ffffff',
+              fontSize: 24,
+              scaleFactor: 0.16
+            });
+            bridgeBadge.position.set(bridgeMid.x, 14, bridgeMid.z);
+            layerGroups.labels.add(bridgeBadge);
+          }
+
+          // 11. CIVIL INFRASTRUCTURE (FLYOVER, UNDERPASSES & SURROUNDINGS)
+          else if (cat === 'CIVIL_INFRASTRUCTURE') {
+            if (geom.type === 'Polygon') {
+              const coords = geom.coordinates[0];
+              const shape = new THREE.Shape();
+              coords.forEach((pt, idx) => {
+                const w = geoToWorld(pt[1], pt[0]);
+                if (idx === 0) shape.moveTo(w.x, -w.z);
+                else shape.lineTo(w.x, -w.z);
+              });
+              const polyGeo = new THREE.ExtrudeGeometry(shape, { depth: 7.0, bevelEnabled: false });
+              const polyMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.6 });
+              const polyMesh = new THREE.Mesh(polyGeo, polyMat);
+              polyMesh.rotation.x = -Math.PI / 2;
+              polyMesh.position.y = 0;
+              polyMesh.castShadow = true;
+              polyMesh.userData = { ...p, feature_id: fid };
+              interactiveObjects.push(polyMesh);
+              layerGroups.campus.add(polyMesh);
+            } else if (geom.type === 'LineString') {
+              const pts = geom.coordinates.map(c => {
+                const w = geoToWorld(c[1], c[0]);
+                return new THREE.Vector3(w.x, 6.0, w.z);
+              });
+              const lineGeo = new THREE.BufferGeometry().setFromPoints(pts);
+              const lineMat = new THREE.LineBasicMaterial({ color: 0xec4899, linewidth: 5 });
+              const line = new THREE.Line(lineGeo, lineMat);
+              layerGroups.externalRoads.add(line);
+            } else if (geom.type === 'Point') {
+              const w = geoToWorld(geom.coordinates[1], geom.coordinates[0]);
+              const marker = new THREE.Mesh(
+                new THREE.CylinderGeometry(4, 4, 2, 12),
+                new THREE.MeshStandardMaterial({ color: 0xa855f7, roughness: 0.5 })
+              );
+              marker.position.set(w.x, 1, w.z);
+              marker.userData = { ...p, feature_id: fid };
+              interactiveObjects.push(marker);
+              layerGroups.tactical.add(marker);
+            }
+          }
+
+          // 12. OPERATIONAL TRAFFIC CORRIDORS & EVACUATION PATHS
+          else if (cat === 'OPERATIONAL_ROUTE') {
+            const isDashed = fid.includes('PED') || fid.includes('EVAC');
+            const routeHex = p.color ? parseInt(p.color.replace('#', '0x'), 16) : (fid.includes('VIP') ? 0x00ff88 : 0xff3344);
+            const pts = geom.coordinates.map(c => {
+              const w = geoToWorld(c[1], c[0]);
+              return new THREE.Vector3(w.x, 2.2, w.z);
+            });
+            const curve = new THREE.CatmullRomCurve3(pts);
+            const tubeGeo = new THREE.TubeGeometry(curve, 64, 2.5, 8, false);
+            const tubeMat = new THREE.MeshBasicMaterial({
+              color: routeHex,
+              wireframe: isDashed,
+              transparent: true,
+              opacity: 0.85
+            });
+            const tubeMesh = new THREE.Mesh(tubeGeo, tubeMat);
+            tubeMesh.userData = { ...p, feature_id: fid };
+            interactiveObjects.push(tubeMesh);
+            layerGroups.routes.add(tubeMesh);
+          }
+        });
+        // Generate 550 PCG Residential Tents City (Police Deployment Order Ground Truth)
+        try {
+          generateProceduralTentCity();
+        } catch (tentErr) {
+          console.error("Warning in generateProceduralTentCity:", tentErr);
+        }
+
+        // Apply initial vertical height scale (Option 4)
+        if (typeof setVerticalScale === 'function') {
+          setVerticalScale(1.8);
+        }
+      })
+      .catch(loadErr => {
+        console.error("Critical failure loading master GeoJSON data:", loadErr);
+      });
+
+    // --- 15 TACTICAL CAMERA PRESETS ---
+    const cameraPresets = {
+      overview:      { pos: [-200, 1500, 1800], target: [-450, 0, 0] },     // 1. Full site overview
+      topdown:       { pos: [-450, 2400, 10],   target: [-450, 0, 0] },     // 2. North-up top-down view
+      pandal:        { pos: [140, 120, 260],    target: [0, 10, 0] },       // 3. Main pandal close-up
+      campus:        { pos: [-240, 160, -320],  target: [-270, 10, -560] }, // 4. Permanent campus close-up
+      externalRoads: { pos: [650, 450, 400],    target: [400, 0, 0] },      // 5. External roads (NH-44)
+      internalRoads: { pos: [-300, 400, 500],   target: [-400, 0, 0] },     // 6. Internal roads and lanes
+      sectors:       { pos: [-450, 1200, 1100], target: [-450, 0, 0] },    // 7. Ground A–D overview
+      station:       { pos: [-1350, 200, -300], target: [-1600, 10, -650] },// 8. Railway-side overview
+      footbridge:    { pos: [750, 80, -30],     target: [590, 7, -104] },   // 9. NH-44 Footbridge
+      parking:       { pos: [1200, 350, 100],   target: [870, 0, -50] },    // 10. Parking 5 & East Hub
+      tents:         { pos: [-350, 480, 820],   target: [-400, 10, 450] },  // 11. 550 Residential Tents City
+      gate1:         { pos: [520, 140, 420],    target: [407, 7, 311] },    // 12. Gate 1 & Parking P2
+      gate2:         { pos: [560, 120, 20],     target: [460, 7, -21] },    // 13. Gate 2 & VIP / S.C.
+      gate3:         { pos: [540, 140, -480],   target: [436, 7, -576] },   // 14. Gate 3 & Parking P4
+      exhibition:    { pos: [140, 160, -280],   target: [0, 8, -240] }      // 15. Exhibition Pavilion
+    };
+
+    // --- PROCEDURAL CONTENT GENERATION (PCG): 550 RESIDENTIAL COMMUNITY MARQUEES ---
+    // REAL-WORLD RULES: ZERO overlap with internal arterial avenues, external highways,
+    // permanent campus buildings, pandal, parking, or railway lines.
+    // Ground Truth from Panipat Police Deployment Order: "लगभग 550 टैंट" across Grounds B, C, D
+    function generateProceduralTentCity() {
+      const tentW = 22.0; // Width across ridge
+      const tentD = 14.0; // Length
+      const wallH = 3.0;  // Eaves height
+      const peakH = 4.6;  // Ridge peak height
+
+      // Gable-roof tent cross-section shape
+      const shape = new THREE.Shape();
+      shape.moveTo(-tentW / 2, 0);
+      shape.lineTo(-tentW / 2, wallH);
+      shape.lineTo(0, peakH);
+      shape.lineTo(tentW / 2, wallH);
+      shape.lineTo(tentW / 2, 0);
+      shape.closePath();
+
+      const tentGeo = new THREE.ExtrudeGeometry(shape, {
+        depth: tentD,
+        bevelEnabled: false
+      });
+      tentGeo.center();
+
+      const tentMat = new THREE.MeshStandardMaterial({
+        color: 0xf1f5f9,
+        roughness: 0.85,
+        metalness: 0.05,
+        side: THREE.DoubleSide
+      });
+
+      const TOTAL_TENTS = 550;
+      const instancedTents = new THREE.InstancedMesh(tentGeo, tentMat, TOTAL_TENTS);
+      instancedTents.castShadow = true;
+      instancedTents.receiveShadow = true;
+
+      // Spatial collision helpers
+      function pointInPolygon(px, pz, poly) {
+        let inside = false;
+        const n = poly.length;
+        let j = n - 1;
+        for (let i = 0; i < n; i++) {
+          const xi = poly[i].x, zi = poly[i].z;
+          const xj = poly[j].x, zj = poly[j].z;
+          if (((zi > pz) !== (zj > pz)) && (px < (xj - xi) * (pz - zi) / (zj - zi) + xi)) {
+            inside = !inside;
+          }
+          j = i;
+        }
+        return inside;
+      }
+
+      function distToSegment(px, pz, x1, z1, x2, z2) {
+        const dx = x2 - x1;
+        const dz = z2 - z1;
+        const l2 = dx * dx + dz * dz;
+        if (l2 === 0) return Math.hypot(px - x1, pz - z1);
+        const t = Math.max(0.0, Math.min(1.0, ((px - x1) * dx + (pz - z1) * dz) / l2));
+        return Math.hypot(px - (x1 + t * dx), pz - (z1 + t * dz));
+      }
+
+      function isLocationClearOfRoadsAndStructures(px, pz, secPoly) {
+        // 1. Must be strictly inside sector polygon boundary
+        if (!pointInPolygon(px, pz, secPoly)) return false;
+
+        // 2. Strict road clearance: 24m corridor for internal roads, 32m for railway, 20m for highways
+        for (let i = 0; i < pcgRoadSegments.length; i++) {
+          const seg = pcgRoadSegments[i];
+          if (distToSegment(px, pz, seg.p1.x, seg.p1.z, seg.p2.x, seg.p2.z) < seg.clr) {
+            return false;
+          }
+        }
+
+        // 3. Strict permanent building, pandal, and parking clearance
+        for (let i = 0; i < pcgExclusionPolygons.length; i++) {
+          const ep = pcgExclusionPolygons[i];
+          if (pointInPolygon(px, pz, ep)) return false;
+          for (let j = 0; j < ep.length - 1; j++) {
+            if (distToSegment(px, pz, ep[j].x, ep[j].z, ep[j+1].x, ep[j+1].z) < 20.0) {
+              return false;
+            }
+          }
+        }
+        return true;
+      }
+
+      // Sector configurations matching Ground B, C, D land parcels
+      const sectorConfigs = [
+        {
+          fid: "FEAT-ZONE-GROUND-B",
+          name: "Ground B Residential Mega-City (South & Langar)",
+          targetCount: 250,
+          color: new THREE.Color(0xfef08a), // Pale saffron-gold trim
+          stepX: 42, stepZ: 30
+        },
+        {
+          fid: "FEAT-ZONE-GROUND-C",
+          name: "Ground C Residential City (North & Expo)",
+          targetCount: 200,
+          color: new THREE.Color(0xbbf7d0), // Pale mint-green trim
+          stepX: 42, stepZ: 30
+        },
+        {
+          fid: "FEAT-ZONE-GROUND-D",
+          name: "Ground D Transit & Holding Camp (Railway Flank)",
+          targetCount: 100,
+          color: new THREE.Color(0xbae6fd), // Pale sky-blue trim
+          stepX: 42, stepZ: 30
+        }
+      ];
+
+      const dummy = new THREE.Object3D();
+      let tentIndex = 0;
+
+      sectorConfigs.forEach(cfg => {
+        const poly = pcgSectorPolygons[cfg.fid];
+        if (!poly || poly.length === 0) return;
+
+        let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
+        poly.forEach(pt => {
+          if (pt.x < minX) minX = pt.x;
+          if (pt.x > maxX) maxX = pt.x;
+          if (pt.z < minZ) minZ = pt.z;
+          if (pt.z > maxZ) maxZ = pt.z;
+        });
+
+        const validCandidates = [];
+        for (let z = minZ + 15; z < maxZ - 15; z += cfg.stepZ) {
+          for (let x = minX + 15; x < maxX - 15; x += cfg.stepX) {
+            if (isLocationClearOfRoadsAndStructures(x, z, poly)) {
+              validCandidates.push({ x, z });
+            }
+          }
+        }
+
+        const selected = validCandidates.slice(0, cfg.targetCount);
+        selected.forEach((pos, idx) => {
+          if (tentIndex >= TOTAL_TENTS) return;
+          dummy.position.set(pos.x, peakH / 2 + 1.2, pos.z);
+          dummy.rotation.y = (idx % 2 === 0) ? 0 : Math.PI; // Alternate orientation along aisles
+          dummy.updateMatrix();
+
+          instancedTents.setMatrixAt(tentIndex, dummy.matrix);
+          instancedTents.setColorAt(tentIndex, cfg.color);
+          tentIndex++;
+        });
+      });
+
+      instancedTents.instanceMatrix.needsUpdate = true;
+      if (instancedTents.instanceColor) instancedTents.instanceColor.needsUpdate = true;
+
+      instancedTents.userData = {
+        name: "550 Community Residential Marquees (Ground-Truth Camp)",
+        feature_id: "PCG-CAMP-550",
+        category: "TEMPORARY_ACCOMMODATION",
+        evidence_status: "GROUND_TRUTH_DOCUMENTED",
+        source_id: "SRC-POLICE-DUTY-2025",
+        sector: "Grounds B, C, D Residential Sectors",
+        supervising_officer: "DSP Sushil Parkash (Crime Kaithal | 9053052105) & DSP Sandeep Kumar (HQ Karnal | 9729990995)",
+        shift_timings: "Day: 08:00-20:00 | Night: 20:00-08:00 (Continuous Patrolling)",
+        allocated_force: "2 Insp, 1 Platoon ORs & 2 Sections L/ORs + 2 Sections ORs for QRT",
+        capacity: "550 Standardized Community Marquees (~180,000 Devotees Overnight Capacity)",
+        notes: "Real-world fire and safety rules enforced: ZERO overlap with internal arterial avenues, highways, or permanent structures. 12m-24m sterile road corridors maintained for emergency fire tenders and ambulances."
+      };
+
+      interactiveObjects.push(instancedTents);
+      layerGroups.tents.add(instancedTents);
+    }
+
+    function setCameraView(presetKey) {
+      document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.querySelector(`button[onclick*="'${presetKey}'"]`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const preset = cameraPresets[presetKey];
+      if (!preset) return;
+
+      const targetPos = new THREE.Vector3(...preset.pos);
+      const targetLook = new THREE.Vector3(...preset.target);
+
+      const startPos = camera.position.clone();
+      const startLook = controls.target.clone();
+      let t = 0;
+      const duration = 1000;
+      const startTime = performance.now();
+
+      function animateCamera(now) {
+        t = Math.min((now - startTime) / duration, 1.0);
+        const ease = 1 - Math.pow(1 - t, 3);
+        camera.position.lerpVectors(startPos, targetPos, ease);
+        controls.target.lerpVectors(startLook, targetLook, ease);
+        controls.update();
+
+        if (t < 1.0) requestAnimationFrame(animateCamera);
+      }
+      requestAnimationFrame(animateCamera);
+    }
+
+    // Reset North function
+    function resetNorth() {
+      camera.position.set(camera.position.x, camera.position.y, Math.abs(camera.position.z));
+      controls.update();
+    }
+
+    // Layer Toggle function
+    function toggleLayer(layerKey, isVisible) {
+      if (layerGroups[layerKey]) {
+        layerGroups[layerKey].visible = isVisible;
+      }
+    }
+
+    // --- VERTICAL HEIGHT SCALING (OPTION 4 - REAL-TIME 3D EXAGGERATION) ---
+    let currentVerticalScale = 1.8;
+    function setVerticalScale(val) {
+      val = Math.max(1.0, Math.min(3.0, parseFloat(val) || 1.8));
+      currentVerticalScale = val;
+
+      // 1. Sync UI badge & slider controls
+      const slider = document.getElementById('vertical-scale-slider');
+      if (slider) slider.value = val.toFixed(1);
+
+      const badge = document.getElementById('vertical-scale-badge');
+      if (badge) {
+        if (Math.abs(val - 1.0) < 0.05) {
+          badge.textContent = '1.0× True (1:1)';
+          badge.style.color = '#94a3b8';
+          badge.style.background = 'rgba(148, 163, 184, 0.15)';
+          badge.style.borderColor = 'rgba(148, 163, 184, 0.35)';
+        } else if (Math.abs(val - 1.8) < 0.05) {
+          badge.textContent = '1.8× Tactical';
+          badge.style.color = '#00ff88';
+          badge.style.background = 'rgba(0, 255, 136, 0.15)';
+          badge.style.borderColor = 'rgba(0, 255, 136, 0.35)';
+        } else if (Math.abs(val - 2.5) < 0.05) {
+          badge.textContent = '2.5× High';
+          badge.style.color = '#38bdf8';
+          badge.style.background = 'rgba(56, 189, 248, 0.15)';
+          badge.style.borderColor = 'rgba(56, 189, 248, 0.35)';
+        } else {
+          badge.textContent = `${val.toFixed(1)}× Custom`;
+          badge.style.color = '#f59e0b';
+          badge.style.background = 'rgba(245, 158, 11, 0.15)';
+          badge.style.borderColor = 'rgba(245, 158, 11, 0.35)';
+        }
+      }
+
+      // Update preset buttons active state
+      ['btn-scale-1x', 'btn-scale-18x', 'btn-scale-25x'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) btn.classList.remove('active');
+      });
+      if (Math.abs(val - 1.0) < 0.05) {
+        const btn = document.getElementById('btn-scale-1x');
+        if (btn) btn.classList.add('active');
+      } else if (Math.abs(val - 1.8) < 0.05) {
+        const btn = document.getElementById('btn-scale-18x');
+        if (btn) btn.classList.add('active');
+      } else if (Math.abs(val - 2.5) < 0.05) {
+        const btn = document.getElementById('btn-scale-25x');
+        if (btn) btn.classList.add('active');
+      }
+
+      // 2. Scale 3D vertical geometry groups along Y-axis from ground level (Y=0)
+      const targetGroups = ['campus', 'pandal', 'tents', 'tactical', 'footbridge'];
+      targetGroups.forEach(key => {
+        if (layerGroups && layerGroups[key]) {
+          layerGroups[key].scale.set(1.0, val, 1.0);
+        }
+      });
+
+      // 3. Elevate 3D Landmark Labels cleanly above scaled rooftops
+      if (layerGroups && layerGroups.labels) {
+        layerGroups.labels.children.forEach(sprite => {
+          if (sprite.userData.baseY === undefined) {
+            sprite.userData.baseY = sprite.position.y;
+          }
+          sprite.position.y = sprite.userData.baseY * (1.0 + (val - 1.0) * 0.7);
+        });
+      }
+    }
+    window.setVerticalScale = setVerticalScale;
+    setVerticalScale(1.8);
+
+    // Day / Night Toggle
+    let isDay = true;
+    document.getElementById('btn-toggle-time').addEventListener('click', function() {
+      isDay = !isDay;
+      if (isDay) {
+        this.innerHTML = "☀️ Day Lighting";
+        ambientLight.color.setHex(0xdde8f8);
+        ambientLight.intensity = 0.85;
+        if (typeof hemiLight !== 'undefined') hemiLight.intensity = 0.65;
+        dirLight.intensity = 1.4;
+        scene.background.setHex(0x141e2e);
+        scene.fog.color.setHex(0x141e2e);
+        scene.fog.density = 0.00022;
+      } else {
+        this.innerHTML = "🌙 Night Lighting";
+        ambientLight.color.setHex(0x1a2638);
+        ambientLight.intensity = 0.25;
+        if (typeof hemiLight !== 'undefined') hemiLight.intensity = 0.15;
+        dirLight.intensity = 0.35;
+        scene.background.setHex(0x040810);
+        scene.fog.color.setHex(0x040810);
+        scene.fog.density = 0.00035;
+      }
+    });
+
+    // --- TOGGLE SIDEBAR (MINIMIZE / EXPAND) ---
+    function toggleSidebar() {
+      const sb = document.getElementById('tactical-sidebar');
+      const icon = document.getElementById('sidebar-toggle-icon');
+      const badge = document.getElementById('sidebar-badge');
+      sb.classList.toggle('minimized');
+      const isMin = sb.classList.contains('minimized');
+      if (isMin) {
+        icon.innerText = '➕';
+        badge.innerText = '● Click to Open';
+        badge.style.color = 'var(--accent-green)';
+      } else {
+        icon.innerText = '➖';
+        badge.innerText = '● Click to Minimize';
+        badge.style.color = 'var(--text-dim)';
+      }
+    }
+
+    // --- RAYCASTER & MOUSE TRACKING ---
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2(0, 0);
+    let mouseInWindow = false;
+
+    // Tactical ground cursor reticle mesh
+    const reticleGroup = new THREE.Group();
+    const reticleRing = new THREE.Mesh(
+      new THREE.RingGeometry(6, 9, 32),
+      new THREE.MeshBasicMaterial({ color: 0x00f0ff, side: THREE.DoubleSide, transparent: true, opacity: 0.85, depthWrite: false })
+    );
+    reticleRing.rotation.x = -Math.PI / 2;
+    reticleGroup.add(reticleRing);
+
+    const reticleDot = new THREE.Mesh(
+      new THREE.CircleGeometry(2, 16),
+      new THREE.MeshBasicMaterial({ color: 0x00ff88, side: THREE.DoubleSide, transparent: true, opacity: 0.95, depthWrite: false })
+    );
+    reticleDot.rotation.x = -Math.PI / 2;
+    reticleGroup.add(reticleDot);
+
+    reticleGroup.position.set(0, 1.2, 0);
+    reticleGroup.visible = false;
+    scene.add(reticleGroup);
+
+    const groundPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+
+    window.addEventListener('mousemove', function(e) {
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      mouseInWindow = true;
+    });
+
+    window.addEventListener('mouseenter', function() {
+      mouseInWindow = true;
+    });
+
+    window.addEventListener('mouseleave', function() {
+      mouseInWindow = false;
+      reticleGroup.visible = false;
+    });
+
+    window.addEventListener('click', function(e) {
+      if (e.target.closest('.sidebar') || e.target.closest('header') || e.target.closest('#intel-card')) return;
+
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      raycaster.setFromCamera(mouse, camera);
+
+      const intersects = raycaster.intersectObjects(interactiveObjects, true);
+      if (intersects.length > 0) {
+        let obj = intersects[0].object;
+        while (obj && (!obj.userData || !obj.userData.name)) {
+          obj = obj.parent;
+        }
+        if (obj && obj.userData && obj.userData.name) {
+          showIntelCard(obj.userData);
+        }
+      }
+    });
+
+    function showIntelCard(data) {
+      const card = document.getElementById('intel-card');
+      const title = document.getElementById('intel-title');
+      const content = document.getElementById('intel-content');
+
+      title.innerText = data.name || "Feature Info";
+
+      let html = '';
+      if (data.feature_id) html += `<div class="intel-row"><span class="key">Feature ID</span><span class="val">${data.feature_id}</span></div>`;
+      if (data.category) html += `<div class="intel-row"><span class="key">Category</span><span class="val">${data.category}</span></div>`;
+      if (data.evidence_status) html += `<div class="intel-row"><span class="key">Evidence Status</span><span class="val" style="color:#00ff88;">${data.evidence_status}</span></div>`;
+      if (data.sector) html += `<div class="intel-row"><span class="key">Duty Sector</span><span class="val" style="color:var(--accent-gold); font-weight:600;">${data.sector}</span></div>`;
+      if (data.supervising_officer) html += `<div class="intel-row"><span class="key">Supervising Officer</span><span class="val" style="color:#38bdf8; font-weight:700;">${data.supervising_officer}</span></div>`;
+      if (data.shift_timings) html += `<div class="intel-row"><span class="key">Shift Hours</span><span class="val">${data.shift_timings}</span></div>`;
+      if (data.allocated_force) html += `<div class="intel-row"><span class="key">Allocated Force</span><span class="val" style="color:var(--accent-green); font-weight:600;">${data.allocated_force}</span></div>`;
+      if (data.capacity) html += `<div class="intel-row"><span class="key">PCG Capacity</span><span class="val" style="color:var(--accent-cyan); font-weight:700;">${data.capacity}</span></div>`;
+      if (data.dimensions) html += `<div class="intel-row"><span class="key">Dimensions</span><span class="val">${data.dimensions}</span></div>`;
+      if (data.area_sqm) html += `<div class="intel-row"><span class="key">Footprint</span><span class="val">${data.area_sqm} m² (${data.area_acres || (data.area_sqm/4046.86).toFixed(1)} Acres)</span></div>`;
+      if (data.estimated_height_m) html += `<div class="intel-row"><span class="key">Est. Height</span><span class="val">${data.estimated_height_m} meters</span></div>`;
+      if (data.force_strength) html += `<div class="intel-row"><span class="key">Security Force</span><span class="val" style="color:var(--accent-cyan);">${data.force_strength}</span></div>`;
+      if (data.source_id) html += `<div class="intel-row"><span class="key">Source</span><span class="val">${data.source_id}</span></div>`;
+      if (data.notes) html += `<p style="margin-top:6px; color:#cbd5e1; font-size:11px; line-height:1.4;">${data.notes}</p>`;
+
+      content.innerHTML = html;
+      card.style.display = 'flex';
+    }
+
+    function closeIntelCard() {
+      document.getElementById('intel-card').style.display = 'none';
+    }
+
+    // --- KEYBOARD WASD & ARROW NAVIGATION ---
+    const keys = {};
+    window.addEventListener('keydown', function(e) {
+      if (['KeyW', 'KeyA', 'KeyS', 'KeyD', 'KeyQ', 'KeyE', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ShiftLeft', 'ShiftRight'].includes(e.code)) {
+        keys[e.code] = true;
+      }
+    });
+
+    window.addEventListener('keyup', function(e) {
+      if (keys[e.code] !== undefined) {
+        keys[e.code] = false;
+      }
+    });
+
+    let lastFrameTime = performance.now();
+
+    // --- ANIMATION LOOP ---
+    function animate(now) {
+      requestAnimationFrame(animate);
+
+      const currentTime = now || performance.now();
+      const dt = Math.min((currentTime - lastFrameTime) / 1000, 0.1);
+      lastFrameTime = currentTime;
+
+      // Update ground intersection for mouse targeting
+      raycaster.setFromCamera(mouse, camera);
+      const groundHit = new THREE.Vector3();
+      const hasGroundHit = (raycaster.ray.direction.y < -0.0001) &&
+                           raycaster.ray.intersectPlane(groundPlane, groundHit);
+
+      if (hasGroundHit && mouseInWindow) {
+        reticleGroup.position.set(groundHit.x, 1.2, groundHit.z);
+        const pulse = 1.0 + 0.1 * Math.sin(currentTime * 0.007);
+        reticleGroup.scale.set(pulse, pulse, pulse);
+        reticleGroup.visible = true;
+      } else {
+        reticleGroup.visible = false;
+      }
+
+      // WASD / Arrow Movement processing directed by mouse cursor position
+      const hasMove = keys['KeyW'] || keys['ArrowUp'] ||
+                      keys['KeyS'] || keys['ArrowDown'] ||
+                      keys['KeyA'] || keys['ArrowLeft'] ||
+                      keys['KeyD'] || keys['ArrowRight'] ||
+                      keys['KeyE'] || keys['KeyQ'];
+
+      if (hasMove) {
+        // Base horizontal camera directions
+        const camForward = new THREE.Vector3();
+        camera.getWorldDirection(camForward);
+        camForward.y = 0;
+        camForward.normalize();
+
+        const camRight = new THREE.Vector3();
+        camRight.crossVectors(camForward, camera.up).normalize();
+
+        let forwardVec = camForward.clone();
+        let rightVec = camRight.clone();
+
+        if (hasGroundHit && mouseInWindow) {
+          // Vector from current center of view (controls.target) towards cursor ground hit
+          const toCursor = new THREE.Vector3(
+            groundHit.x - controls.target.x,
+            0,
+            groundHit.z - controls.target.z
+          );
+          if (toCursor.lengthSq() > 9) { // If cursor is > 3m away from view center
+            toCursor.normalize();
+            forwardVec.copy(toCursor);
+            rightVec.crossVectors(forwardVec, camera.up).normalize();
+          }
+        } else if (mouseInWindow && (Math.abs(mouse.x) > 0.05 || Math.abs(mouse.y) > 0.05)) {
+          // Fallback screen-space steering for looking near the horizon or sky
+          const screenSteer = new THREE.Vector3()
+            .addScaledVector(camForward, mouse.y >= 0 ? 1 : -1)
+            .addScaledVector(camRight, mouse.x)
+            .normalize();
+          if (screenSteer.lengthSq() > 0.01) {
+            forwardVec.copy(screenSteer);
+            rightVec.crossVectors(forwardVec, camera.up).normalize();
+          }
+        }
+
+        const moveVec = new THREE.Vector3();
+        if (keys['KeyW'] || keys['ArrowUp']) moveVec.add(forwardVec);
+        if (keys['KeyS'] || keys['ArrowDown']) moveVec.sub(forwardVec);
+        if (keys['KeyD'] || keys['ArrowRight']) moveVec.add(rightVec);
+        if (keys['KeyA'] || keys['ArrowLeft']) moveVec.sub(rightVec);
+        if (keys['KeyE']) moveVec.y += 0.8;
+        if (keys['KeyQ']) moveVec.y -= 0.8;
+
+        if (moveVec.lengthSq() > 0) {
+          moveVec.normalize();
+          // Scale speed with camera altitude: high altitude covers wide ground, low altitude gives fine precision
+          const baseSpeed = Math.max(70, camera.position.y * 0.75);
+          const sprint = (keys['ShiftLeft'] || keys['ShiftRight']) ? 2.5 : 1.0;
+          const speed = baseSpeed * sprint * dt;
+
+          const delta = moveVec.multiplyScalar(speed);
+          camera.position.add(delta);
+          controls.target.add(delta);
+        }
+      }
+
+      controls.update();
+
+      // Compass Needle
+      const compassArrow = document.getElementById('compass-arrow');
+      if (compassArrow) {
+        const angle = controls.getAzimuthalAngle();
+        compassArrow.style.transform = `rotate(${angle}rad)`;
+      }
+
+      // Coordinate Readout & Dynamic Scale Bar Calculation
+      const camAlt = Math.round(camera.position.y);
+      const pitch = Math.round(controls.getPolarAngle() * (180 / Math.PI));
+      const heading = Math.round(controls.getAzimuthalAngle() * (180 / Math.PI));
+
+      const coordsElem = document.getElementById('cursor-coords');
+      if (coordsElem) {
+        if (hasGroundHit && mouseInWindow) {
+          const geo = worldToGeo(groundHit.x, groundHit.z);
+          coordsElem.innerText = `Cursor: ${geo.lat.toFixed(5)}°N, ${geo.lon.toFixed(5)}°E | Cam Alt: ~${camAlt}m | Pitch: ${pitch}° | Heading: ${heading}°`;
+        } else {
+          coordsElem.innerText = `Camera Alt: ~${camAlt}m | Pitch: ${pitch}° | Heading: ${heading}°`;
+        }
+      }
+
+      // Dynamic scale bar update based on camera altitude
+      const scaleText = document.getElementById('scale-bar-text');
+      if (scaleText) {
+        const metersPer100px = Math.round(camAlt * 0.12);
+        scaleText.innerText = `${metersPer100px} meters`;
+      }
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', function() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>

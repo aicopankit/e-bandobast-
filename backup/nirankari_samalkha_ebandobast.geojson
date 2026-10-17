@@ -1,0 +1,599 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "FEAT-PANDAL-01",
+      "properties": {
+        "name": "Main Satsang Pandal (Covered Hangar & Stage)",
+        "category": "EVENT_STRUCTURE",
+        "evidence_status": "VERIFIED",
+        "permanence": "TEMPORARY_RECURRENT",
+        "dimensions": "367.2m (W) x 255.5m (L)",
+        "area_sqm": 93810,
+        "area_acres": 23.18,
+        "orientation_deg": 90,
+        "elevation_m": 228,
+        "height_m": 18,
+        "confidence": "HIGH",
+        "source_id": "SRC-ESRI-Z16",
+        "notes": "Monumental arched barrel-vault steel truss roof structure spanning ~367m E-W by ~255m N-S. Dais/Manch positioned at West end facing East. Houses central Sangat congregation."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.023044,
+              29.18051
+            ],
+            [
+              77.02682,
+              29.180416
+            ],
+            [
+              77.026778,
+              29.178112
+            ],
+            [
+              77.023001,
+              29.178206
+            ],
+            [
+              77.023044,
+              29.18051
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "FEAT-CAMPUS-01",
+      "properties": {
+        "name": "SNAS Permanent Institutional & Administrative Campus",
+        "category": "PERMANENT_FACILITY",
+        "evidence_status": "VERIFIED",
+        "permanence": "PERMANENT",
+        "dimensions": "260.7m (W) x 301.1m (L)",
+        "area_sqm": 78500,
+        "area_acres": 19.4,
+        "elevation_m": 228,
+        "height_m": 12,
+        "confidence": "HIGH",
+        "source_id": "SRC-ESRI-Z16",
+        "notes": "Permanent multi-story buildings, admin offices, residential bhavans, paved courtyards and central services located north of the Main Pandal."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.021005,
+              29.186411
+            ],
+            [
+              77.023688,
+              29.186411
+            ],
+            [
+              77.023688,
+              29.183695
+            ],
+            [
+              77.021005,
+              29.183695
+            ],
+            [
+              77.021005,
+              29.186411
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "FEAT-ZONE-GROUND-A",
+      "properties": {
+        "name": "Ground A (Main Congregation, VIP Entry & Frontage Sector)",
+        "category": "SECURITY_SECTOR",
+        "evidence_status": "VERIFIED",
+        "permanence": "PERMANENT_BOUNDARY",
+        "area_acres": 68.5,
+        "confidence": "HIGH",
+        "source_id": "SRC-OFFICIAL-FAQ-78",
+        "notes": "Directly adjacent to GT Road (NH-44). Contains Ceremonial Gate 1, VIP drop-off, Central Accounts Office, 100-bed Allopathic hospital with 10-bed ICU, and Main Pandal."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.0225,
+              29.183
+            ],
+            [
+              77.0298,
+              29.183
+            ],
+            [
+              77.0291,
+              29.176
+            ],
+            [
+              77.0225,
+              29.176
+            ],
+            [
+              77.0225,
+              29.183
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "FEAT-ZONE-GROUND-B",
+      "properties": {
+        "name": "Ground B (South Residential, Mega Langar & Canteen Sector)",
+        "category": "SECURITY_SECTOR",
+        "evidence_status": "VERIFIED",
+        "permanence": "TEMPORARY_RECURRENT",
+        "area_acres": 145.0,
+        "confidence": "HIGH",
+        "source_id": "SRC-OFFICIAL-FAQ-78",
+        "notes": "Left side behind Ground A. Contains Brahm Gyan Kaksh No. 1, massive residential tent colonies, mega Langar kitchens, and mobile ATM vans."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.0145,
+              29.176
+            ],
+            [
+              77.0291,
+              29.176
+            ],
+            [
+              77.0275,
+              29.169
+            ],
+            [
+              77.017,
+              29.171
+            ],
+            [
+              77.0145,
+              29.176
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "FEAT-ZONE-GROUND-C",
+      "properties": {
+        "name": "Ground C (North Residential & Spiritual Exhibition Sector)",
+        "category": "SECURITY_SECTOR",
+        "evidence_status": "VERIFIED",
+        "permanence": "TEMPORARY_RECURRENT",
+        "area_acres": 130.0,
+        "confidence": "HIGH",
+        "source_id": "SRC-OFFICIAL-FAQ-78",
+        "notes": "Right side behind Ground A. Contains Brahm Gyan Kaksh Nos. 2 & 3, Nirankari Exhibition pavilions, publications stalls, dispensary, and tent accommodations."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.015,
+              29.1895
+            ],
+            [
+              77.0285,
+              29.1895
+            ],
+            [
+              77.0298,
+              29.183
+            ],
+            [
+              77.015,
+              29.183
+            ],
+            [
+              77.015,
+              29.1895
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "FEAT-ZONE-GROUND-D",
+      "properties": {
+        "name": "Ground D (Railway Reception, Transit & Staging Sector)",
+        "category": "SECURITY_SECTOR",
+        "evidence_status": "VERIFIED",
+        "permanence": "TEMPORARY_RECURRENT",
+        "area_acres": 160.0,
+        "confidence": "HIGH",
+        "source_id": "SRC-OFFICIAL-FAQ-78",
+        "notes": "Behind Ground C, directly adjacent to Bhodwal Majri Railway Station (BDMJ). Contains Railway passenger reception center, Brahm Gyan Kaksh No. 4, and shuttle transit points."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.008,
+              29.189
+            ],
+            [
+              77.015,
+              29.189
+            ],
+            [
+              77.015,
+              29.176
+            ],
+            [
+              77.0095,
+              29.178
+            ],
+            [
+              77.008,
+              29.1852
+            ],
+            [
+              77.008,
+              29.189
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "FEAT-STATION-BDMJ",
+      "properties": {
+        "name": "Bhodwal Majri Railway Station (BDMJ)",
+        "category": "TRANSPORT_HUB",
+        "evidence_status": "VERIFIED",
+        "permanence": "PERMANENT",
+        "operator": "Northern Railway (Indian Railways)",
+        "elevation_m": 227,
+        "confidence": "HIGH",
+        "source_id": "SRC-OSM-NODE-Q25549367",
+        "notes": "Key suburban passenger station on the Delhi-Ambala main trunk route with dedicated event stoppages and Sangat reception centers."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.00842,
+          29.18523
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "FEAT-ROAD-NH44",
+      "properties": {
+        "name": "Grand Trunk Road (National Highway 44)",
+        "category": "LINEAR_INFRASTRUCTURE",
+        "evidence_status": "VERIFIED",
+        "permanence": "PERMANENT",
+        "lanes": 6,
+        "surface": "Asphalt",
+        "confidence": "HIGH",
+        "source_id": "SRC-OSM-WAY-228423351",
+        "notes": "Primary external transit artery flanking the entire eastern boundary of Ground A."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            77.0272,
+            29.17
+          ],
+          [
+            77.0286,
+            29.176
+          ],
+          [
+            77.0296,
+            29.182
+          ],
+          [
+            77.0305,
+            29.188
+          ],
+          [
+            77.0315,
+            29.193
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "FEAT-ROAD-AXIS-EW",
+      "properties": {
+        "name": "Central Arterial Avenue (GT Road to Railway Station Corridor)",
+        "category": "INTERNAL_ROAD",
+        "evidence_status": "VERIFIED",
+        "permanence": "PERMANENT_RIGHT_OF_WAY",
+        "width_m": 24,
+        "confidence": "HIGH",
+        "source_id": "SRC-ESRI-Z16",
+        "notes": "Primary 24-meter wide arterial avenue running from Gate 1 on GT Road, passing north of Main Pandal, through Ground C and D, directly to Bhodwal Majri station."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            77.0295,
+            29.1812
+          ],
+          [
+            77.0268,
+            29.18115
+          ],
+          [
+            77.023,
+            29.1811
+          ],
+          [
+            77.0185,
+            29.1812
+          ],
+          [
+            77.0145,
+            29.1813
+          ],
+          [
+            77.009,
+            29.183
+          ],
+          [
+            77.00842,
+            29.18523
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "FEAT-GATE-01",
+      "properties": {
+        "name": "Gate No. 1 (Main Ceremonial Portal & VIP Entry)",
+        "category": "ACCESS_CONTROL",
+        "evidence_status": "VERIFIED",
+        "permanence": "TEMPORARY_RECURRENT",
+        "height_m": 14,
+        "width_m": 42,
+        "confidence": "HIGH",
+        "source_id": "SRC-FLICKR-49144669308",
+        "notes": "Monumental tri-arch ceremonial entrance portal facing GT Road (NH-44). Equipped with DFMD frisking points, VIP security lane, and ceremonial flag plaza."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.02865,
+          29.18025
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TAC-HQ-01",
+      "properties": {
+        "name": "Bandobast Joint Police Control Room (JPCR)",
+        "category": "BANDOBAST_TACTICAL",
+        "tactical_type": "COMMAND_POST",
+        "force_strength": "1 SP, 2 DSP, 4 Inspectors, 20 Constables",
+        "evidence_status": "ESTIMATED_TACTICAL",
+        "permanence": "OPERATIONAL_DEPLOYMENT",
+        "confidence": "HIGH",
+        "source_id": "SRC-E-BANDOBAST-SOP",
+        "notes": "Standard operational bandobast placement for Bandobast Joint Police Control Room (JPCR)."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.0275,
+          29.1825
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TAC-STAGE-VIP",
+      "properties": {
+        "name": "VIP Dais / Manch Inner Cordone",
+        "category": "BANDOBAST_TACTICAL",
+        "tactical_type": "VIP_INNER_CORDON",
+        "force_strength": "1 ASP, 2 DSP, Close Protection Team, Anti-Sabotage Unit",
+        "evidence_status": "ESTIMATED_TACTICAL",
+        "permanence": "OPERATIONAL_DEPLOYMENT",
+        "confidence": "HIGH",
+        "source_id": "SRC-E-BANDOBAST-SOP",
+        "notes": "Standard operational bandobast placement for VIP Dais / Manch Inner Cordone."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.0233,
+          29.1793
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TAC-TOWER-01",
+      "properties": {
+        "name": "Watch Tower 1 (GT Road Sector A)",
+        "category": "BANDOBAST_TACTICAL",
+        "tactical_type": "VANTAGE_WATCHTOWER",
+        "force_strength": "Sniper Team + Searchlight",
+        "evidence_status": "ESTIMATED_TACTICAL",
+        "permanence": "OPERATIONAL_DEPLOYMENT",
+        "confidence": "HIGH",
+        "source_id": "SRC-E-BANDOBAST-SOP",
+        "notes": "Standard operational bandobast placement for Watch Tower 1 (GT Road Sector A)."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.0288,
+          29.1818
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TAC-TOWER-02",
+      "properties": {
+        "name": "Watch Tower 2 (Pandal North Flank)",
+        "category": "BANDOBAST_TACTICAL",
+        "tactical_type": "VANTAGE_WATCHTOWER",
+        "force_strength": "Armed Morcha",
+        "evidence_status": "ESTIMATED_TACTICAL",
+        "permanence": "OPERATIONAL_DEPLOYMENT",
+        "confidence": "HIGH",
+        "source_id": "SRC-E-BANDOBAST-SOP",
+        "notes": "Standard operational bandobast placement for Watch Tower 2 (Pandal North Flank)."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.0232,
+          29.1808
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TAC-TOWER-03",
+      "properties": {
+        "name": "Watch Tower 3 (Pandal South Flank)",
+        "category": "BANDOBAST_TACTICAL",
+        "tactical_type": "VANTAGE_WATCHTOWER",
+        "force_strength": "Armed Morcha",
+        "evidence_status": "ESTIMATED_TACTICAL",
+        "permanence": "OPERATIONAL_DEPLOYMENT",
+        "confidence": "HIGH",
+        "source_id": "SRC-E-BANDOBAST-SOP",
+        "notes": "Standard operational bandobast placement for Watch Tower 3 (Pandal South Flank)."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.0231,
+          29.1779
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TAC-TOWER-04",
+      "properties": {
+        "name": "Watch Tower 4 (Railway Station Perimeter)",
+        "category": "BANDOBAST_TACTICAL",
+        "tactical_type": "VANTAGE_WATCHTOWER",
+        "force_strength": "RPF / GRP Joint Morcha",
+        "evidence_status": "ESTIMATED_TACTICAL",
+        "permanence": "OPERATIONAL_DEPLOYMENT",
+        "confidence": "HIGH",
+        "source_id": "SRC-E-BANDOBAST-SOP",
+        "notes": "Standard operational bandobast placement for Watch Tower 4 (Railway Station Perimeter)."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.009,
+          29.186
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TAC-HOSP-01",
+      "properties": {
+        "name": "Main 100-Bed Field Hospital & ICU Base",
+        "category": "BANDOBAST_TACTICAL",
+        "tactical_type": "MEDICAL_FACILITY",
+        "force_strength": "5 ALS Ambulances, 12 Medical Officers",
+        "evidence_status": "ESTIMATED_TACTICAL",
+        "permanence": "OPERATIONAL_DEPLOYMENT",
+        "confidence": "HIGH",
+        "source_id": "SRC-E-BANDOBAST-SOP",
+        "notes": "Standard operational bandobast placement for Main 100-Bed Field Hospital & ICU Base."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.027,
+          29.182
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TAC-FIRE-01",
+      "properties": {
+        "name": "Fire Service Staging Post 1 (Ground A)",
+        "category": "BANDOBAST_TACTICAL",
+        "tactical_type": "FIRE_STATION",
+        "force_strength": "4 Water Bowsers, 2 Foam Tenders",
+        "evidence_status": "ESTIMATED_TACTICAL",
+        "permanence": "OPERATIONAL_DEPLOYMENT",
+        "confidence": "HIGH",
+        "source_id": "SRC-E-BANDOBAST-SOP",
+        "notes": "Standard operational bandobast placement for Fire Service Staging Post 1 (Ground A)."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.0278,
+          29.179
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TAC-QRT-01",
+      "properties": {
+        "name": "Quick Reaction Team (QRT) Standby Point",
+        "category": "BANDOBAST_TACTICAL",
+        "tactical_type": "TACTICAL_RESPONSE",
+        "force_strength": "1 SWAT Unit + Commando Vehicle",
+        "evidence_status": "ESTIMATED_TACTICAL",
+        "permanence": "OPERATIONAL_DEPLOYMENT",
+        "confidence": "HIGH",
+        "source_id": "SRC-E-BANDOBAST-SOP",
+        "notes": "Standard operational bandobast placement for Quick Reaction Team (QRT) Standby Point."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.025,
+          29.1815
+        ]
+      }
+    }
+  ]
+}
