@@ -1253,31 +1253,48 @@
             const coords = geom.coordinates[0];
             const shape = new THREE.Shape();
             let cX = 0, cZ = 0;
+            let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
             coords.forEach((pt, idx) => {
               const w = geoToWorld(pt[1], pt[0]);
               cX += w.x; cZ += w.z;
+              if (w.x < minX) minX = w.x;
+              if (w.x > maxX) maxX = w.x;
+              if (w.z < minZ) minZ = w.z;
+              if (w.z > maxZ) maxZ = w.z;
               if (idx === 0) shape.moveTo(w.x, -w.z);
               else shape.lineTo(w.x, -w.z);
             });
             cX /= coords.length; cZ /= coords.length;
+            const bWidth = Math.max(10, maxX - minX);
+            const bDepth = Math.max(10, maxZ - minZ);
 
             const h = p.estimated_height_m || 8.0;
-            const bldgGeo = new THREE.ExtrudeGeometry(shape, { depth: h, bevelEnabled: false });
 
-            // Contextual facility color
-            let bColor = 0x2a6f97;
-            if (fid.includes('LANGAR')) bColor = 0xc2410c; // Warm terracotta / amber for Langar kitchens
-            else if (fid.includes('DISPENSARY')) bColor = 0x0284c7; // Hospital cyan
+            // 1. Base / Foundation Plinth (0.8m)
+            const baseGeo = new THREE.ExtrudeGeometry(shape, { depth: 0.8, bevelEnabled: false });
+            const baseMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.9 });
+            const baseMesh = new THREE.Mesh(baseGeo, baseMat);
+            baseMesh.rotation.x = -Math.PI / 2;
+            baseMesh.position.y = 0;
+            layerGroups.campus.add(baseMesh);
+
+            // 2. Main Building Superstructure
+            const wallGeo = new THREE.ExtrudeGeometry(shape, { depth: Math.max(1.0, h - 0.8), bevelEnabled: false });
+            let bColor = 0x334155;
+            if (fid.includes('LANGAR')) bColor = 0xb45309; // Warm terracotta / amber for Langar kitchens
+            else if (fid.includes('DISPENSARY') || fid.includes('HOSP')) bColor = 0x0284c7; // Hospital cyan
+            else if (fid.includes('ADMIN')) bColor = 0x1e3a8a; // Navy executive
+            else if (fid.includes('RES')) bColor = 0x3b82f6; // Residential blue
             else if (fid.includes('SD-OFFICE')) bColor = 0x0f766e; // Executive green
             else if (fid.includes('TOILETS')) bColor = 0x475569; // Slate sanitary grey
-            else if (fid.includes('RESERVOIR')) bColor = 0x334155; // Industrial water reservoir
+            else if (fid.includes('RESERVOIR')) bColor = 0x1e293b;
 
-            const bldgMat = new THREE.MeshStandardMaterial({
+            const wallMat = new THREE.MeshStandardMaterial({
               color: bColor, roughness: 0.5, metalness: 0.2
             });
-            const bldgMesh = new THREE.Mesh(bldgGeo, bldgMat);
+            const bldgMesh = new THREE.Mesh(wallGeo, wallMat);
             bldgMesh.rotation.x = -Math.PI / 2;
-            bldgMesh.position.y = 0;
+            bldgMesh.position.y = 0.8;
             bldgMesh.castShadow = true;
             bldgMesh.receiveShadow = true;
 
@@ -1285,19 +1302,115 @@
             interactiveObjects.push(bldgMesh);
             layerGroups.campus.add(bldgMesh);
 
+            // 3. ARCHITECTURAL ROOF DETAIL
+            if (fid.includes('LANGAR')) {
+              // Dual-pitch / Gable industrial roof with ridge line
+              const isEW = (bWidth >= bDepth);
+              const roofMat = new THREE.MeshStandardMaterial({
+                color: 0xd97706, roughness: 0.4, metalness: 0.35, side: THREE.DoubleSide
+              });
+              const ridgeH = 4.5;
+              const gableShape = new THREE.Shape();
+              if (isEW) {
+                gableShape.moveTo(-bDepth/2 - 1.2, 0);
+                gableShape.lineTo(0, ridgeH);
+                gableShape.lineTo(bDepth/2 + 1.2, 0);
+                gableShape.closePath();
+                const gGeo = new THREE.ExtrudeGeometry(gableShape, { depth: bWidth + 2.4, bevelEnabled: false });
+                gGeo.center();
+                const gMesh = new THREE.Mesh(gGeo, roofMat);
+                gMesh.rotation.y = Math.PI / 2;
+                gMesh.position.set(cX, h + ridgeH / 2, cZ);
+                gMesh.castShadow = true;
+                layerGroups.campus.add(gMesh);
+              } else {
+                gableShape.moveTo(-bWidth/2 - 1.2, 0);
+                gableShape.lineTo(0, ridgeH);
+                gableShape.lineTo(bWidth/2 + 1.2, 0);
+                gableShape.closePath();
+                const gGeo = new THREE.ExtrudeGeometry(gableShape, { depth: bDepth + 2.4, bevelEnabled: false });
+                gGeo.center();
+                const gMesh = new THREE.Mesh(gGeo, roofMat);
+                gMesh.position.set(cX, h + ridgeH / 2, cZ);
+                gMesh.castShadow = true;
+                layerGroups.campus.add(gMesh);
+              }
+            } else if (fid.includes('RESERVOIR')) {
+              // Elevated water reservoir cistern on staging
+              const tankRadius = Math.min(bWidth, bDepth) * 0.35;
+              const tankHeight = 6.5;
+              const tankGeo = new THREE.CylinderGeometry(tankRadius, tankRadius, tankHeight, 20);
+              const tankMat = new THREE.MeshStandardMaterial({ color: 0x0284c7, metalness: 0.6, roughness: 0.3 });
+              const tank = new THREE.Mesh(tankGeo, tankMat);
+              tank.position.set(cX, h + tankHeight/2, cZ);
+              tank.castShadow = true;
+              layerGroups.campus.add(tank);
+
+              // 6 structural staging columns
+              const colGeo = new THREE.CylinderGeometry(0.7, 0.7, h, 8);
+              const colMat = new THREE.MeshStandardMaterial({ color: 0x64748b, roughness: 0.7 });
+              for (let a = 0; a < Math.PI * 2; a += Math.PI / 3) {
+                const col = new THREE.Mesh(colGeo, colMat);
+                col.position.set(cX + Math.cos(a) * (tankRadius * 0.8), h / 2, cZ + Math.sin(a) * (tankRadius * 0.8));
+                layerGroups.campus.add(col);
+              }
+            } else if (fid.startsWith('BLDG-SNAS-ADMIN') || fid.startsWith('BLDG-SNAS-RES') || fid.includes('HOSP') || fid.includes('DISPENSARY')) {
+              // Parapet wall on roof edge
+              const parapetGeo = new THREE.BoxGeometry(bWidth, 0.9, bDepth);
+              const parapetMat = new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.5 });
+              const parapet = new THREE.Mesh(parapetGeo, parapetMat);
+              parapet.position.set(cX, h + 0.45, cZ);
+              layerGroups.campus.add(parapet);
+
+              // Rooftop elevator penthouse / stairwell
+              const stairGeo = new THREE.BoxGeometry(Math.min(18, bWidth * 0.25), 3.0, Math.min(14, bDepth * 0.25));
+              const stairMat = new THREE.MeshStandardMaterial({ color: 0x475569, roughness: 0.6 });
+              const stair = new THREE.Mesh(stairGeo, stairMat);
+              stair.position.set(cX, h + 2.4, cZ);
+              stair.castShadow = true;
+              layerGroups.campus.add(stair);
+
+              // Entrance portico for Dispensary / Admin
+              if (fid.includes('DISPENSARY') || fid.includes('ADMIN')) {
+                const porticoGeo = new THREE.BoxGeometry(14, 0.6, 8);
+                const porticoMat = new THREE.MeshStandardMaterial({ color: 0x0284c7, roughness: 0.4 });
+                const portico = new THREE.Mesh(porticoGeo, porticoMat);
+                portico.position.set(cX, 4.0, cZ + bDepth/2 + 4);
+                layerGroups.campus.add(portico);
+              }
+            }
+
             // Add landmark badge for major facilities
             if (fid.includes('LANGAR-01')) {
               const lBadge = makeTextSprite("🍲 GROUND B MEGA LANGAR (35k/hr)", {
                 borderColor: '#f97316', backgroundColor: 'rgba(124, 45, 18, 0.94)', textColor: '#ffedd5', fontSize: 22
               });
-              lBadge.position.set(cX, h + 12, cZ);
+              lBadge.position.set(cX, h + 14, cZ);
               layerGroups.labels.add(lBadge);
+            } else if (fid.includes('LANGAR-02')) {
+              const l2Badge = makeTextSprite("🍲 GROUND C MEGA LANGAR (30k/hr)", {
+                borderColor: '#f97316', backgroundColor: 'rgba(124, 45, 18, 0.94)', textColor: '#ffedd5', fontSize: 22
+              });
+              l2Badge.position.set(cX, h + 14, cZ);
+              layerGroups.labels.add(l2Badge);
+            } else if (fid.includes('LANGAR-03')) {
+              const l3Badge = makeTextSprite("🍲 GROUND D TRANSIT LANGAR (18k/hr)", {
+                borderColor: '#f97316', backgroundColor: 'rgba(124, 45, 18, 0.94)', textColor: '#ffedd5', fontSize: 22
+              });
+              l3Badge.position.set(cX, h + 14, cZ);
+              layerGroups.labels.add(l3Badge);
             } else if (fid.includes('DISPENSARY')) {
               const dBadge = makeTextSprite("🏥 CENTRAL MEDICAL DISPENSARY & ICU", {
                 borderColor: '#38bdf8', backgroundColor: 'rgba(12, 74, 110, 0.94)', textColor: '#e0f2fe', fontSize: 22
               });
               dBadge.position.set(cX, h + 12, cZ);
               layerGroups.labels.add(dBadge);
+            } else if (fid.includes('ADMIN')) {
+              const aBadge = makeTextSprite("🏛️ SNAS CENTRAL ADMINISTRATIVE BHAVAN", {
+                borderColor: '#38bdf8', backgroundColor: 'rgba(30, 58, 138, 0.94)', textColor: '#ffffff', fontSize: 22
+              });
+              aBadge.position.set(cX, h + 14, cZ);
+              layerGroups.labels.add(aBadge);
             }
           }
 
@@ -1732,22 +1845,64 @@
           // 11. CIVIL INFRASTRUCTURE (FLYOVER, UNDERPASSES & SURROUNDINGS)
           else if (cat === 'CIVIL_INFRASTRUCTURE') {
             if (geom.type === 'Polygon') {
-              const coords = geom.coordinates[0];
-              const shape = new THREE.Shape();
-              coords.forEach((pt, idx) => {
-                const w = geoToWorld(pt[1], pt[0]);
-                if (idx === 0) shape.moveTo(w.x, -w.z);
-                else shape.lineTo(w.x, -w.z);
-              });
-              const polyGeo = new THREE.ExtrudeGeometry(shape, { depth: 7.0, bevelEnabled: false });
-              const polyMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.6 });
-              const polyMesh = new THREE.Mesh(polyGeo, polyMat);
-              polyMesh.rotation.x = -Math.PI / 2;
-              polyMesh.position.y = 0;
-              polyMesh.castShadow = true;
-              polyMesh.userData = { ...p, feature_id: fid };
-              interactiveObjects.push(polyMesh);
-              layerGroups.campus.add(polyMesh);
+              if (fid === 'FEAT-PETROL-PUMP') {
+                const coords = geom.coordinates[0];
+                let cX = 0, cZ = 0;
+                coords.forEach(pt => { const w = geoToWorld(pt[1], pt[0]); cX += w.x; cZ += w.z; });
+                cX /= coords.length; cZ /= coords.length;
+
+                // High-clearance illuminated commercial fuel canopy
+                const canopyGeo = new THREE.BoxGeometry(42, 1.2, 28);
+                const canopyMat = new THREE.MeshStandardMaterial({ color: 0x0284c7, metalness: 0.7, roughness: 0.2 });
+                const canopy = new THREE.Mesh(canopyGeo, canopyMat);
+                canopy.position.set(cX, 6.0, cZ);
+                canopy.castShadow = true;
+                layerGroups.campus.add(canopy);
+
+                // 6 structural support pillars
+                const pillarGeo = new THREE.CylinderGeometry(0.6, 0.6, 5.4, 8);
+                const pillarMat = new THREE.MeshStandardMaterial({ color: 0xf1f5f9, metalness: 0.4 });
+                [-14, 0, 14].forEach(px => {
+                  [-8, 8].forEach(pz => {
+                    const pil = new THREE.Mesh(pillarGeo, pillarMat);
+                    pil.position.set(cX + px, 2.7, cZ + pz);
+                    layerGroups.campus.add(pil);
+                  });
+                });
+
+                // Forecourt asphalt slab
+                const slabGeo = new THREE.BoxGeometry(50, 0.4, 36);
+                const slabMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.8 });
+                const slab = new THREE.Mesh(slabGeo, slabMat);
+                slab.position.set(cX, 0.2, cZ);
+                slab.userData = { ...p, feature_id: fid };
+                interactiveObjects.push(slab);
+                layerGroups.campus.add(slab);
+
+                // 3D Landmark Badge
+                const ppBadge = makeTextSprite("⛽ COMMERCIAL FUEL & SERVICE STATION (NH-44)", {
+                  borderColor: '#38bdf8', backgroundColor: 'rgba(2, 132, 199, 0.94)', textColor: '#ffffff', fontSize: 20
+                });
+                ppBadge.position.set(cX, 14, cZ);
+                layerGroups.labels.add(ppBadge);
+              } else {
+                const coords = geom.coordinates[0];
+                const shape = new THREE.Shape();
+                coords.forEach((pt, idx) => {
+                  const w = geoToWorld(pt[1], pt[0]);
+                  if (idx === 0) shape.moveTo(w.x, -w.z);
+                  else shape.lineTo(w.x, -w.z);
+                });
+                const polyGeo = new THREE.ExtrudeGeometry(shape, { depth: 7.0, bevelEnabled: false });
+                const polyMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.6 });
+                const polyMesh = new THREE.Mesh(polyGeo, polyMat);
+                polyMesh.rotation.x = -Math.PI / 2;
+                polyMesh.position.y = 0;
+                polyMesh.castShadow = true;
+                polyMesh.userData = { ...p, feature_id: fid };
+                interactiveObjects.push(polyMesh);
+                layerGroups.campus.add(polyMesh);
+              }
             } else if (geom.type === 'LineString') {
               const pts = geom.coordinates.map(c => {
                 const w = geoToWorld(c[1], c[0]);

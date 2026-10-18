@@ -9,7 +9,7 @@
       <p><b>Venue:</b> Sant Nirankari Sant Samagam Ground (Sant Nirankari Adhyatmik Sthal — SNAS)</p>
       <p><b>Location:</b> Bhodwal Majri, Samalkha, Panipat, Haryana, India</p>
       <p><b>Georeference:</b> Lat 29.1805° N, Lon 77.0249° E | Plus Code: 52HG+VF2</p>
-      <p><b>Scope:</b> Complete site reconstruction including 650+ acre grounds, 7 individual campus buildings, 367m Main Pandal, 66 external roads, internal avenues, and Delhi-Ambala railway line.</p>
+      <p><b>Scope:</b> Complete site reconstruction including 650+ acre grounds, permanent institutional campus, 367m Main Pandal, external highway network (NH-44), 8 internal paved avenues, and Delhi-Ambala railway line.</p>
     ]]>
   </description>
 
@@ -53,39 +53,40 @@
     <LineStyle><color>ffffffff</color><width>4</width></LineStyle>
   </Style>
 
-  <Style id="styleExternalRoad">
-    <LineStyle><color>ff00aaff</color><width>3</width></LineStyle>
+  <Style id="styleHighwayNH44">
+    <LineStyle><color>ff00aaff</color><width>5</width></LineStyle>
   </Style>
 
-  <Style id="styleHighwayNH44">
-    <LineStyle><color>ff0066ff</color><width>5</width></LineStyle>
+  <Style id="styleExternalRoad">
+    <LineStyle><color>ff77ccff</color><width>2</width></LineStyle>
   </Style>
 
   <Style id="styleRailway">
-    <LineStyle><color>ff222222</color><width>4</width></LineStyle>
+    <LineStyle><color>ffcccccc</color><width>4</width></LineStyle>
   </Style>
 
   <Style id="styleCanal">
-    <LineStyle><color>ffff6600</color><width>4</width></LineStyle>
+    <LineStyle><color>ffff9900</color><width>3</width></LineStyle>
+  </Style>
+
+  <Style id="styleParking">
+    <LineStyle><color>ff00e5ff</color><width>2</width></LineStyle>
+    <PolyStyle><color>2200e5ff</color><fill>1</fill><outline>1</outline></PolyStyle>
   </Style>
 
   <Style id="styleVIPRoute">
-    <LineStyle><color>ff00ff00</color><width>6</width></LineStyle>
+    <LineStyle><color>ff00cc44</color><width>4</width></LineStyle>
   </Style>
 
   <Style id="styleEvacRoute">
-    <LineStyle><color>ff0000ff</color><width>5</width></LineStyle>
-  </Style>
-  <Style id="styleParking">
-    <LineStyle><color>ffffaa00</color><width>3</width></LineStyle>
-    <PolyStyle><color>44ffaa00</color><fill>1</fill><outline>1</outline></PolyStyle>
+    <LineStyle><color>ff3344ff</color><width>3</width></LineStyle>
   </Style>
 
   <Style id="styleFootbridge">
-    <LineStyle><color>ff00ffff</color><width>6</width></LineStyle>
+    <LineStyle><color>ff00ffff</color><width>4</width></LineStyle>
   </Style>
 
-  <Style id="stylePolicePost">
+  <Style id="styleTacPoint">
     <IconStyle>
       <color>ff0000ff</color>
       <scale>1.2</scale>
@@ -93,7 +94,7 @@
   </Style>
 
   <Folder>
-    <name>Boundaries & Sectors (5)</name>
+    <name>Boundaries &amp; Sectors (5)</name>
     <open>1</open>
 
     <Placemark id="FEAT-VENUE-BOUNDARY">
@@ -122,7 +123,7 @@
     </Placemark>
 
     <Placemark id="FEAT-ZONE-GROUND-A">
-      <name>Ground A (Main Satsang Pandal & GT Road Frontage)</name>
+      <name>Ground A (Main Satsang Pandal &amp; GT Road Frontage)</name>
       <styleUrl>#styleGroundA</styleUrl>
       <description><![CDATA[<b>Ground A (Main Satsang Pandal & GT Road Frontage)</b><br/><b>ID:</b> FEAT-ZONE-GROUND-A<br/><b>Category:</b> SECURITY_SECTOR<br/><b>Status:</b> ESTIMATED<br/><b>Area:</b> 277200 m²<br/><p>Directly adjacent to GT Road (NH-44). Contains Main Satsang Pandal, Ceremonial Gate 1, VIP Dais, Central Accounts Office, securities room, and 100-bed field hospital. Designation verified by official FAQ; boundary estimated along road grid.</p>]]></description>
       <Polygon>
@@ -141,7 +142,7 @@
     </Placemark>
 
     <Placemark id="FEAT-ZONE-GROUND-B">
-      <name>Ground B (South Residential & Mega Langar Kitchens)</name>
+      <name>Ground B (South Residential &amp; Mega Langar Kitchens)</name>
       <styleUrl>#styleGroundB</styleUrl>
       <description><![CDATA[<b>Ground B (South Residential & Mega Langar Kitchens)</b><br/><b>ID:</b> FEAT-ZONE-GROUND-B<br/><b>Category:</b> SECURITY_SECTOR<br/><b>Status:</b> ESTIMATED<br/><b>Area:</b> 615100 m²<br/><p>Located on the left side behind Ground A (facing west from GT Road entrance = southern flank). Contains 24/7 Langar community kitchens, residential tent colonies, Brahm Gyan Kaksh No. 1, and mobile ATM vans.</p>]]></description>
       <Polygon>
@@ -160,7 +161,7 @@
     </Placemark>
 
     <Placemark id="FEAT-ZONE-GROUND-C">
-      <name>Ground C (North Residential & Spiritual Expo)</name>
+      <name>Ground C (North Residential &amp; Spiritual Expo)</name>
       <styleUrl>#styleGroundC</styleUrl>
       <description><![CDATA[<b>Ground C (North Residential & Spiritual Expo)</b><br/><b>ID:</b> FEAT-ZONE-GROUND-C<br/><b>Category:</b> SECURITY_SECTOR<br/><b>Status:</b> ESTIMATED<br/><b>Area:</b> 534200 m²<br/><p>Located on the right side behind Ground A (northern flank). Surrounds the permanent institutional campus. Features the Nirankari Spiritual Exhibition pavilions, Brahm Gyan Kaksh Nos. 2 & 3, and publication stalls.</p>]]></description>
       <Polygon>
@@ -179,7 +180,7 @@
     </Placemark>
 
     <Placemark id="FEAT-ZONE-GROUND-D">
-      <name>Ground D (Railway Reception, Holding & Logistics)</name>
+      <name>Ground D (Railway Reception, Holding &amp; Logistics)</name>
       <styleUrl>#styleGroundD</styleUrl>
       <description><![CDATA[<b>Ground D (Railway Reception, Holding & Logistics)</b><br/><b>ID:</b> FEAT-ZONE-GROUND-D<br/><b>Category:</b> SECURITY_SECTOR<br/><b>Status:</b> ESTIMATED<br/><b>Area:</b> 639400 m²<br/><p>Located behind Ground C, directly adjoining Bhodwal Majri Railway Station (BDMJ). Contains passenger reception center, Brahm Gyan Kaksh No. 4, and shuttle transit staging.</p>]]></description>
       <Polygon>
@@ -200,240 +201,7 @@
   </Folder>
 
   <Folder>
-    <name>Dedicated Event Parking (Parking 1-5 & VIP) (11)</name>
-    <open>1</open>
-
-    <Placemark id="FEAT-PARKING-01">
-      <name>Parking 1 — Overall South Hub (Village Panchi Gujran Flank)</name>
-      <styleUrl>#styleParking</styleUrl>
-      <description><![CDATA[<b>Parking 1 — Overall South Hub (Village Panchi Gujran Flank)</b><br/><b>ID:</b> FEAT-PARKING-01<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Area:</b> 474053 m²<br/><p>Outstation vehicles from Delhi side. Contains segregated Light Vehicle / Car and Heavy Vehicle / Bus parking sub-grounds adjoining Village Panchi Gujran. Connected via South Underpass and Road to Gannour.</p>]]></description>
-      <Polygon>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <outerBoundaryIs>
-          <LinearRing>
-            <coordinates>77.0145,29.1685,0
-77.0225,29.1685,0
-77.0225,29.174,0
-77.0145,29.174,0
-77.0145,29.1685,0</coordinates>
-          </LinearRing>
-        </outerBoundaryIs>
-      </Polygon>
-    </Placemark>
-
-    <Placemark id="FEAT-PARKING-P1-LIGHT">
-      <name>Parking P1 (Light Vehicles / Cars — Delhi Side)</name>
-      <styleUrl>#styleParking</styleUrl>
-      <description><![CDATA[<b>Parking P1 (Light Vehicles / Cars — Delhi Side)</b><br/><b>ID:</b> FEAT-PARKING-P1-LIGHT<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Area:</b> 177770 m²<br/><p>Designated inner sector of Parking P1 reserved exclusively for private cars, taxis, and light vehicles from Delhi side.</p>]]></description>
-      <Polygon>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <outerBoundaryIs>
-          <LinearRing>
-            <coordinates>77.017,29.171,0
-77.0225,29.171,0
-77.0225,29.174,0
-77.017,29.174,0
-77.017,29.171,0</coordinates>
-          </LinearRing>
-        </outerBoundaryIs>
-      </Polygon>
-    </Placemark>
-
-    <Placemark id="FEAT-PARKING-P1-HEAVY">
-      <name>Parking P1 (Heavy Vehicles & Buses — Delhi Side)</name>
-      <styleUrl>#styleParking</styleUrl>
-      <description><![CDATA[<b>Parking P1 (Heavy Vehicles & Buses — Delhi Side)</b><br/><b>ID:</b> FEAT-PARKING-P1-HEAVY<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Area:</b> 193931 m²<br/><p>Designated outer sector of Parking P1 reserved for chartered buses, trucks, and heavy transport vehicles from Delhi side along Road to Gannour.</p>]]></description>
-      <Polygon>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <outerBoundaryIs>
-          <LinearRing>
-            <coordinates>77.0145,29.1685,0
-77.0205,29.1685,0
-77.0205,29.1715,0
-77.0145,29.1715,0
-77.0145,29.1685,0</coordinates>
-          </LinearRing>
-        </outerBoundaryIs>
-      </Polygon>
-    </Placemark>
-
-    <Placemark id="FEAT-PARKING-02">
-      <name>Parking 2 — Daily Commuters, Buses & Cars (Ground B / Gate 1)</name>
-      <styleUrl>#styleParking</styleUrl>
-      <description><![CDATA[<b>Parking 2 — Daily Commuters, Buses & Cars (Ground B / Gate 1)</b><br/><b>ID:</b> FEAT-PARKING-02<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Area:</b> 249955 m²<br/><p>Major transit hub inside Gate No. 1 in Ground B. Accommodates daily commuters from Delhi side (charted buses & private cars), railway/ISBT shuttle alighting point, Sub-Divisional (S/D) Seva Dal office, and Road R-2 90 toilets.</p>]]></description>
-      <Polygon>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <outerBoundaryIs>
-          <LinearRing>
-            <coordinates>77.023,29.1738,0
-77.0288,29.1738,0
-77.0288,29.1778,0
-77.023,29.1778,0
-77.023,29.1738,0</coordinates>
-          </LinearRing>
-        </outerBoundaryIs>
-      </Polygon>
-    </Placemark>
-
-    <Placemark id="FEAT-PARKING-P2-2W">
-      <name>Parking P2 (2-Wheelers Dedicated Holding Bay)</name>
-      <styleUrl>#styleParking</styleUrl>
-      <description><![CDATA[<b>Parking P2 (2-Wheelers Dedicated Holding Bay)</b><br/><b>ID:</b> FEAT-PARKING-P2-2W<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Area:</b> 29090 m²<br/><p>Dedicated segregated enclosure inside Gate 1 for motorcycles, scooters, and 2-wheelers with anti-theft tagging and quick-exit lanes.</p>]]></description>
-      <Polygon>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <outerBoundaryIs>
-          <LinearRing>
-            <coordinates>77.027,29.174,0
-77.0288,29.174,0
-77.0288,29.1755,0
-77.027,29.1755,0
-77.027,29.174,0</coordinates>
-          </LinearRing>
-        </outerBoundaryIs>
-      </Polygon>
-    </Placemark>
-
-    <Placemark id="FEAT-PARKING-03">
-      <name>Parking 3 — Bhodwal Majri Railway Station & Ground D Holding</name>
-      <styleUrl>#styleParking</styleUrl>
-      <description><![CDATA[<b>Parking 3 — Bhodwal Majri Railway Station & Ground D Holding</b><br/><b>ID:</b> FEAT-PARKING-03<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Area:</b> 193931 m²<br/><p>Directly adjoining Bhodwal Majri Railway Station. Handles outstation vehicles from Ambala side (arriving via Gov. Road) and daily commuter shuttles. Contains Passenger Alighting Point.</p>]]></description>
-      <Polygon>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <outerBoundaryIs>
-          <LinearRing>
-            <coordinates>77.0085,29.184,0
-77.0125,29.184,0
-77.0125,29.1885,0
-77.0085,29.1885,0
-77.0085,29.184,0</coordinates>
-          </LinearRing>
-        </outerBoundaryIs>
-      </Polygon>
-    </Placemark>
-
-    <Placemark id="FEAT-PARKING-04">
-      <name>Parking 4 — Gate 3 / Karishna Polymer Flank (Ambala & Abroad)</name>
-      <styleUrl>#styleParking</styleUrl>
-      <description><![CDATA[<b>Parking 4 — Gate 3 / Karishna Polymer Flank (Ambala & Abroad)</b><br/><b>ID:</b> FEAT-PARKING-04<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Area:</b> 171413 m²<br/><p>Accessed via Gate No. 3 near Karishna Polymer and Patti Kalyana underpass. Primary parking for Sewadars on duty in daily up & down commuters from Ambala side, and dedicated sector for Saints from Abroad.</p>]]></description>
-      <Polygon>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <outerBoundaryIs>
-          <LinearRing>
-            <coordinates>77.0245,29.1835,0
-77.0288,29.1835,0
-77.0288,29.1872,0
-77.0245,29.1872,0
-77.0245,29.1835,0</coordinates>
-          </LinearRing>
-        </outerBoundaryIs>
-      </Polygon>
-    </Placemark>
-
-    <Placemark id="FEAT-PARKING-05">
-      <name>Parking 5 — East of NH-44 / Local Bus Stop & Pedestrian Hub</name>
-      <styleUrl>#styleParking</styleUrl>
-      <description><![CDATA[<b>Parking 5 — East of NH-44 / Local Bus Stop & Pedestrian Hub</b><br/><b>ID:</b> FEAT-PARKING-05<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Area:</b> 237026 m²<br/><p>Located east of NH-44 opposite the main complex. Houses the Local Bus Stop and holds excess pedestrians before sending them across the footbridge in pulsed batches.</p>]]></description>
-      <Polygon>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <outerBoundaryIs>
-          <LinearRing>
-            <coordinates>77.0315,29.177,0
-77.0355,29.177,0
-77.0355,29.1825,0
-77.0315,29.1825,0
-77.0315,29.177,0</coordinates>
-          </LinearRing>
-        </outerBoundaryIs>
-      </Polygon>
-    </Placemark>
-
-    <Placemark id="FEAT-PARKING-SC">
-      <name>S.C. Parking (Special Committee Member Vehicles — Gate 2)</name>
-      <styleUrl>#styleParking</styleUrl>
-      <description><![CDATA[<b>S.C. Parking (Special Committee Member Vehicles — Gate 2)</b><br/><b>ID:</b> FEAT-PARKING-SC<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Area:</b> 32968 m²<br/><p>Designated parking court inside Gate No. 2 directly adjoining Central Mission Offices for Special Committee (S.C.) vehicles on authorized pass list.</p>]]></description>
-      <Polygon>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <outerBoundaryIs>
-          <LinearRing>
-            <coordinates>77.027,29.1798,0
-77.0288,29.1798,0
-77.0288,29.1815,0
-77.027,29.1815,0
-77.027,29.1798,0</coordinates>
-          </LinearRing>
-        </outerBoundaryIs>
-      </Polygon>
-    </Placemark>
-
-    <Placemark id="FEAT-PARKING-VIP">
-      <name>V.I.P. & Invited Guests Parking (Stage Dais Flank — Gate 2)</name>
-      <styleUrl>#styleParking</styleUrl>
-      <description><![CDATA[<b>V.I.P. & Invited Guests Parking (Stage Dais Flank — Gate 2)</b><br/><b>ID:</b> FEAT-PARKING-VIP<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Area:</b> 25211 m²<br/><p>Sterile high-security parking enclosure for Invited Guests, State Dignitaries, and Z+ motorcade escorts for Satguru Mata Sudiksha Ji Maharaj.</p>]]></description>
-      <Polygon>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <outerBoundaryIs>
-          <LinearRing>
-            <coordinates>77.027,29.1785,0
-77.0288,29.1785,0
-77.0288,29.1798,0
-77.027,29.1798,0
-77.027,29.1785,0</coordinates>
-          </LinearRing>
-        </outerBoundaryIs>
-      </Polygon>
-    </Placemark>
-
-    <Placemark id="FEAT-PARKING-D">
-      <name>D-Parking (Dais Logistics & Service Fleet)</name>
-      <styleUrl>#styleParking</styleUrl>
-      <description><![CDATA[<b>D-Parking (Dais Logistics & Service Fleet)</b><br/><b>ID:</b> FEAT-PARKING-D<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Area:</b> 18316 m²<br/><p>Operations and logistics fleet staging zone for stage equipment, broadcasting OB vans, and sound engineering logistics.</p>]]></description>
-      <Polygon>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <outerBoundaryIs>
-          <LinearRing>
-            <coordinates>77.0268,29.1815,0
-77.0285,29.1815,0
-77.0285,29.1825,0
-77.0268,29.1825,0
-77.0268,29.1815,0</coordinates>
-          </LinearRing>
-        </outerBoundaryIs>
-      </Polygon>
-    </Placemark>
-  </Folder>
-
-  <Folder>
-    <name>Pedestrian Infrastructure & Footbridge (1)</name>
-    <open>1</open>
-
-    <Placemark id="FEAT-FOOTBRIDGE-01">
-      <name>NH-44 Pedestrian Overbridge (Parking 5 to Venue Frontage)</name>
-      <styleUrl>#styleFootbridge</styleUrl>
-      <description><![CDATA[<b>NH-44 Pedestrian Overbridge (Parking 5 to Venue Frontage)</b><br/><b>ID:</b> FEAT-FOOTBRIDGE-01<br/><b>Category:</b> PEDESTRIAN_INFRASTRUCTURE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Controls pedestrian crossing capacity from Parking 5 temporary bus stand across NH-44 to Ceremonial Gate 1 frontage plaza. Excess pedestrians held at Parking 5 and sent across in pulsed batches; standing/stopping on bridge strictly prohibited.</p>]]></description>
-      <LineString>
-        <extrude>1</extrude>
-        <tessellate>1</tessellate>
-        <altitudeMode>relativeToGround</altitudeMode>
-        <coordinates>77.0322,29.18025,6.5
-77.031,29.18025,6.5
-77.0298,29.18025,6.5</coordinates>
-      </LineString>
-    </Placemark>
-  </Folder>
-
-  <Folder>
-    <name>3D Event & Campus Buildings (22)</name>
+    <name>3D Event &amp; Campus Buildings (22)</name>
     <open>1</open>
 
     <Placemark id="FEAT-PANDAL-01">
@@ -464,18 +232,18 @@
         <altitudeMode>relativeToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.02315,29.17945,10.0
-77.0236,29.17945,10.0
-77.0236,29.17915,10.0
-77.02315,29.17915,10.0
-77.02315,29.17945,10.0</coordinates>
+            <coordinates>77.02315,29.17945,8.0
+77.0236,29.17945,8.0
+77.0236,29.17915,8.0
+77.02315,29.17915,8.0
+77.02315,29.17945,8.0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
     </Placemark>
 
     <Placemark id="BLDG-SNAS-ADMIN">
-      <name>SNAS Main Administrative & Central Bhavan</name>
+      <name>SNAS Main Administrative &amp; Central Bhavan</name>
       <styleUrl>#styleBuilding3D</styleUrl>
       <description><![CDATA[<b>SNAS Main Administrative & Central Bhavan</b><br/><b>ID:</b> BLDG-SNAS-ADMIN<br/><b>Category:</b> PERMANENT_BUILDING<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 125.1m x 62.3m<br/><b>Area:</b> 7793 m²<br/><p>Primary administrative headquarters, reception hall, and central offices. Traced from 1.04m/px orthoimagery.</p>]]></description>
       <Polygon>
@@ -494,7 +262,7 @@
     </Placemark>
 
     <Placemark id="BLDG-SNAS-RES-N">
-      <name>SNAS North Residential Bhavan & Guest Wing</name>
+      <name>SNAS North Residential Bhavan &amp; Guest Wing</name>
       <styleUrl>#styleBuilding3D</styleUrl>
       <description><![CDATA[<b>SNAS North Residential Bhavan & Guest Wing</b><br/><b>ID:</b> BLDG-SNAS-RES-N<br/><b>Category:</b> PERMANENT_BUILDING<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 125.2m x 41.5m<br/><b>Area:</b> 5190 m²<br/><p>North residential accommodations for senior delegates and visitors.</p>]]></description>
       <Polygon>
@@ -532,7 +300,7 @@
     </Placemark>
 
     <Placemark id="BLDG-SNAS-SVC-S">
-      <name>SNAS South Logistic & Maintenance Services Facility</name>
+      <name>SNAS South Logistic &amp; Maintenance Services Facility</name>
       <styleUrl>#styleBuilding3D</styleUrl>
       <description><![CDATA[<b>SNAS South Logistic & Maintenance Services Facility</b><br/><b>ID:</b> BLDG-SNAS-SVC-S<br/><b>Category:</b> PERMANENT_BUILDING<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 52.1m x 93.4m<br/><b>Area:</b> 4868 m²<br/><p>Central storehouse, maintenance depot, and logistics dispatch offices.</p>]]></description>
       <Polygon>
@@ -551,7 +319,7 @@
     </Placemark>
 
     <Placemark id="BLDG-SNAS-HOSP">
-      <name>SNAS Permanent Medical Dispensary & Health Center</name>
+      <name>SNAS Permanent Medical Dispensary &amp; Health Center</name>
       <styleUrl>#styleBuilding3D</styleUrl>
       <description><![CDATA[<b>SNAS Permanent Medical Dispensary & Health Center</b><br/><b>ID:</b> BLDG-SNAS-HOSP<br/><b>Category:</b> PERMANENT_BUILDING<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 57.3m x 57.1m<br/><b>Area:</b> 3274 m²<br/><p>Permanent dispensary building serving year-round visitors and regional rural welfare clinics.</p>]]></description>
       <Polygon>
@@ -570,7 +338,7 @@
     </Placemark>
 
     <Placemark id="BLDG-SNAS-UTIL">
-      <name>SNAS Water Treatment & Electric Substation Compound</name>
+      <name>SNAS Water Treatment &amp; Electric Substation Compound</name>
       <styleUrl>#styleBuilding3D</styleUrl>
       <description><![CDATA[<b>SNAS Water Treatment & Electric Substation Compound</b><br/><b>ID:</b> BLDG-SNAS-UTIL<br/><b>Category:</b> PERMANENT_BUILDING<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 36.5m x 62.3m<br/><b>Area:</b> 2277 m²<br/><p>Infrastructure compound housing main electrical transformers, backup generator bank, and water treatment.</p>]]></description>
       <Polygon>
@@ -589,7 +357,7 @@
     </Placemark>
 
     <Placemark id="BLDG-SNAS-DINING">
-      <name>SNAS Permanent Community Dining & Langar Hall</name>
+      <name>SNAS Permanent Community Dining &amp; Langar Hall</name>
       <styleUrl>#styleBuilding3D</styleUrl>
       <description><![CDATA[<b>SNAS Permanent Community Dining & Langar Hall</b><br/><b>ID:</b> BLDG-SNAS-DINING<br/><b>Category:</b> PERMANENT_BUILDING<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 125.1m x 51.9m<br/><b>Area:</b> 6489 m²<br/><p>Permanent dining pavilion and community kitchen facility for ashram residents and visitors.</p>]]></description>
       <Polygon>
@@ -608,9 +376,9 @@
     </Placemark>
 
     <Placemark id="FEAT-LANGAR-01">
-      <name>Ground B Mega Langar Hall & Community Kitchen (South)</name>
+      <name>Ground B Mega Langar Hall &amp; Community Kitchen (South)</name>
       <styleUrl>#styleBuilding3D</styleUrl>
-      <description><![CDATA[<b>Ground B Mega Langar Hall & Community Kitchen (South)</b><br/><b>ID:</b> FEAT-LANGAR-01<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 165m x 70m<br/><b>Area:</b> 11550 m²<br/><p>Major community dining and langar hall in Ground B, serving 24/7 free meals to devotees.</p>]]></description>
+      <description><![CDATA[<b>Ground B Mega Langar Hall & Community Kitchen (South)</b><br/><b>ID:</b> FEAT-LANGAR-01<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 165m x 70m<br/><b>Area:</b> 11550 m²<br/><b>Supervising Officer:</b> DSP Crime Panipat / Langar Committee Incharge<br/><b>Capacity:</b> 35,000 devotees/hr<br/><p>Major community dining and langar hall in Ground B, serving 24/7 free meals to devotees.</p>]]></description>
       <Polygon>
         <extrude>1</extrude>
         <altitudeMode>relativeToGround</altitudeMode>
@@ -627,9 +395,9 @@
     </Placemark>
 
     <Placemark id="FEAT-LANGAR-02">
-      <name>Ground C Mega Langar Hall & Community Kitchen (North)</name>
+      <name>Ground C Mega Langar Hall &amp; Community Kitchen (North)</name>
       <styleUrl>#styleBuilding3D</styleUrl>
-      <description><![CDATA[<b>Ground C Mega Langar Hall & Community Kitchen (North)</b><br/><b>ID:</b> FEAT-LANGAR-02<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 145m x 90m<br/><b>Area:</b> 13050 m²<br/><p>Major community dining and langar hall in Ground C, located north of Avenue R-2 90'.</p>]]></description>
+      <description><![CDATA[<b>Ground C Mega Langar Hall & Community Kitchen (North)</b><br/><b>ID:</b> FEAT-LANGAR-02<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 145m x 90m<br/><b>Area:</b> 13050 m²<br/><b>Supervising Officer:</b> DSP HQ Karnal / Langar Committee Incharge<br/><b>Capacity:</b> 30,000 devotees/hr<br/><p>Major community dining and langar hall in Ground C, located north of Avenue R-2 90'.</p>]]></description>
       <Polygon>
         <extrude>1</extrude>
         <altitudeMode>relativeToGround</altitudeMode>
@@ -648,26 +416,26 @@
     <Placemark id="FEAT-LANGAR-03">
       <name>Ground D Transit Langar Hall (Railway Flank)</name>
       <styleUrl>#styleBuilding3D</styleUrl>
-      <description><![CDATA[<b>Ground D Transit Langar Hall (Railway Flank)</b><br/><b>ID:</b> FEAT-LANGAR-03<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 145m x 90m<br/><b>Area:</b> 13050 m²<br/><p>Transit langar pavilion catering to pilgrims arriving via Bhodwal Majri railway station.</p>]]></description>
+      <description><![CDATA[<b>Ground D Transit Langar Hall (Railway Flank)</b><br/><b>ID:</b> FEAT-LANGAR-03<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 145m x 90m<br/><b>Area:</b> 13050 m²<br/><b>Supervising Officer:</b> Inspector Railway / Langar Sub-Incharge<br/><b>Capacity:</b> 18,000 devotees/hr<br/><p>Transit langar pavilion catering to pilgrims arriving via Bhodwal Majri railway station.</p>]]></description>
       <Polygon>
         <extrude>1</extrude>
         <altitudeMode>relativeToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.014,29.1853,6.5
-77.0155,29.1853,6.5
-77.0155,29.1845,6.5
-77.014,29.1845,6.5
-77.014,29.1853,6.5</coordinates>
+            <coordinates>77.014,29.1852,6.5
+77.0155,29.1852,6.5
+77.0155,29.1844,6.5
+77.014,29.1844,6.5
+77.014,29.1852,6.5</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
     </Placemark>
 
     <Placemark id="FEAT-DISPENSARY-01">
-      <name>Central Medical Dispensary & Emergency Health Post</name>
+      <name>Central Medical Dispensary &amp; Emergency Health Post</name>
       <styleUrl>#styleBuilding3D</styleUrl>
-      <description><![CDATA[<b>Central Medical Dispensary & Emergency Health Post</b><br/><b>ID:</b> FEAT-DISPENSARY-01<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 105m x 55m<br/><b>Area:</b> 5775 m²<br/><p>Central dispensary and emergency health post equipped with ambulances and ICU beds.</p>]]></description>
+      <description><![CDATA[<b>Central Medical Dispensary & Emergency Health Post</b><br/><b>ID:</b> FEAT-DISPENSARY-01<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 105m x 55m<br/><b>Area:</b> 5775 m²<br/><b>Supervising Officer:</b> Chief Medical Officer (CMO Panipat / SNM Hospital)<br/><b>Capacity:</b> 150-bed emergency triage<br/><p>Central dispensary and emergency health post equipped with ambulances and ICU beds.</p>]]></description>
       <Polygon>
         <extrude>1</extrude>
         <altitudeMode>relativeToGround</altitudeMode>
@@ -684,9 +452,9 @@
     </Placemark>
 
     <Placemark id="FEAT-SD-OFFICE">
-      <name>Sub-Divisional Civil & Police Administration Office (S/D Office)</name>
+      <name>Sub-Divisional Civil &amp; Police Administration Office (S/D Office)</name>
       <styleUrl>#styleBuilding3D</styleUrl>
-      <description><![CDATA[<b>Sub-Divisional Civil & Police Administration Office (S/D Office)</b><br/><b>ID:</b> FEAT-SD-OFFICE<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 85m x 55m<br/><b>Area:</b> 4675 m²<br/><p>Sub-divisional magistrate and police control room fronting Road R-2 90'.</p>]]></description>
+      <description><![CDATA[<b>Sub-Divisional Civil & Police Administration Office (S/D Office)</b><br/><b>ID:</b> FEAT-SD-OFFICE<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 85m x 55m<br/><b>Area:</b> 4675 m²<br/><b>Supervising Officer:</b> SDM Samalkha / DSP HQ<br/><p>Sub-divisional magistrate and police control room fronting Road R-2 90'.</p>]]></description>
       <Polygon>
         <extrude>1</extrude>
         <altitudeMode>relativeToGround</altitudeMode>
@@ -703,9 +471,9 @@
     </Placemark>
 
     <Placemark id="FEAT-TOILETS-PANDAL-N">
-      <name>Main Pandal North Permanent Sanitation & Toilet Complex</name>
+      <name>Main Pandal North Permanent Sanitation &amp; Toilet Complex</name>
       <styleUrl>#stylePandal3D</styleUrl>
-      <description><![CDATA[<b>Main Pandal North Permanent Sanitation & Toilet Complex</b><br/><b>ID:</b> FEAT-TOILETS-PANDAL-N<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 330m x 45m<br/><b>Area:</b> 14850 m²<br/><p>Four continuous modular permanent toilet and ablution blocks north of the Main Pandal.</p>]]></description>
+      <description><![CDATA[<b>Main Pandal North Permanent Sanitation & Toilet Complex</b><br/><b>ID:</b> FEAT-TOILETS-PANDAL-N<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 330m x 45m<br/><b>Area:</b> 14850 m²<br/><b>Supervising Officer:</b> Sanitation Incharge / Duty Magistrate<br/><b>Capacity:</b> 450 cubicles with running water<br/><p>Four continuous modular permanent toilet and ablution blocks north of the Main Pandal.</p>]]></description>
       <Polygon>
         <extrude>1</extrude>
         <altitudeMode>relativeToGround</altitudeMode>
@@ -722,9 +490,9 @@
     </Placemark>
 
     <Placemark id="FEAT-TOILETS-PANDAL-S">
-      <name>Main Pandal South Permanent Sanitation & Toilet Complex</name>
+      <name>Main Pandal South Permanent Sanitation &amp; Toilet Complex</name>
       <styleUrl>#stylePandal3D</styleUrl>
-      <description><![CDATA[<b>Main Pandal South Permanent Sanitation & Toilet Complex</b><br/><b>ID:</b> FEAT-TOILETS-PANDAL-S<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 330m x 45m<br/><b>Area:</b> 14850 m²<br/><p>Four continuous modular permanent toilet and ablution blocks south of the Main Pandal.</p>]]></description>
+      <description><![CDATA[<b>Main Pandal South Permanent Sanitation & Toilet Complex</b><br/><b>ID:</b> FEAT-TOILETS-PANDAL-S<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 330m x 45m<br/><b>Area:</b> 14850 m²<br/><b>Supervising Officer:</b> Sanitation Incharge / Duty Magistrate<br/><b>Capacity:</b> 450 cubicles with running water<br/><p>Four continuous modular permanent toilet and ablution blocks south of the Main Pandal.</p>]]></description>
       <Polygon>
         <extrude>1</extrude>
         <altitudeMode>relativeToGround</altitudeMode>
@@ -741,38 +509,38 @@
     </Placemark>
 
     <Placemark id="FEAT-TOILETS-P2">
-      <name>Parking P2 Commuter Sanitation & Rest Block</name>
+      <name>Parking P2 Commuter Sanitation &amp; Rest Block</name>
       <styleUrl>#styleBuilding3D</styleUrl>
-      <description><![CDATA[<b>Parking P2 Commuter Sanitation & Rest Block</b><br/><b>ID:</b> FEAT-TOILETS-P2<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 95m x 55m<br/><b>Area:</b> 5225 m²<br/><p>Sanitation and drinking water facility for commuters at Parking P2.</p>]]></description>
+      <description><![CDATA[<b>Parking P2 Commuter Sanitation & Rest Block</b><br/><b>ID:</b> FEAT-TOILETS-P2<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 95m x 55m<br/><b>Area:</b> 5225 m²<br/><b>Supervising Officer:</b> Sanitation Supervisor Parking P2<br/><b>Capacity:</b> 80 cubicles<br/><p>Sanitation and drinking water facility for commuters at Parking P2.</p>]]></description>
       <Polygon>
         <extrude>1</extrude>
         <altitudeMode>relativeToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.027,29.1853,4.0
-77.028,29.1853,4.0
-77.028,29.1848,4.0
-77.027,29.1848,4.0
-77.027,29.1853,4.0</coordinates>
+            <coordinates>77.026,29.1755,4.0
+77.027,29.1755,4.0
+77.027,29.175,4.0
+77.026,29.175,4.0
+77.026,29.1755,4.0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
     </Placemark>
 
     <Placemark id="FEAT-ALIGHTING-STN">
-      <name>Railway Station & ISBT Passenger Alighting Terminal</name>
+      <name>Railway Station &amp; ISBT Passenger Alighting Terminal</name>
       <styleUrl>#styleBuilding3D</styleUrl>
-      <description><![CDATA[<b>Railway Station & ISBT Passenger Alighting Terminal</b><br/><b>ID:</b> FEAT-ALIGHTING-STN<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 145m x 90m<br/><b>Area:</b> 13050 m²<br/><p>Dedicated passenger alighting shelter connecting Bhodwal Majri station to Ground D.</p>]]></description>
+      <description><![CDATA[<b>Railway Station & ISBT Passenger Alighting Terminal</b><br/><b>ID:</b> FEAT-ALIGHTING-STN<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 145m x 90m<br/><b>Area:</b> 13050 m²<br/><b>Supervising Officer:</b> DSP GRP / Inspector Traffic Station Gate<br/><p>Dedicated passenger alighting shelter connecting Bhodwal Majri station to Ground D.</p>]]></description>
       <Polygon>
         <extrude>1</extrude>
         <altitudeMode>relativeToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.009,29.1856,5.5
-77.0105,29.1856,5.5
-77.0105,29.1848,5.5
-77.009,29.1848,5.5
-77.009,29.1856,5.5</coordinates>
+            <coordinates>77.009,29.1854,5.5
+77.0105,29.1854,5.5
+77.0105,29.1846,5.5
+77.009,29.1846,5.5
+77.009,29.1854,5.5</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -787,18 +555,18 @@
         <altitudeMode>relativeToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.023,29.1806,10.0
-77.0268,29.1806,10.0
-77.0268,29.1826,10.0
-77.023,29.1826,10.0
-77.023,29.1806,10.0</coordinates>
+            <coordinates>77.023,29.1806,8.0
+77.0268,29.1806,8.0
+77.0268,29.1826,8.0
+77.023,29.1826,8.0
+77.023,29.1806,8.0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
     </Placemark>
 
     <Placemark id="FEAT-OFFICES-CENTRAL">
-      <name>Central Administration & Mission Operations Offices</name>
+      <name>Central Administration &amp; Mission Operations Offices</name>
       <styleUrl>#styleBuilding3D</styleUrl>
       <description><![CDATA[<b>Central Administration & Mission Operations Offices</b><br/><b>ID:</b> FEAT-OFFICES-CENTRAL<br/><b>Category:</b> EVENT_STRUCTURE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Dimensions:</b> 155.0m x 45.0m<br/><b>Area:</b> 6975 m²<br/><p>Central operations headquarters housing Central Accounts Office, volunteer coordination, protocol office, lost and found, and media liaison. Fronting Gate No. 2.</p>]]></description>
       <Polygon>
@@ -806,11 +574,11 @@
         <altitudeMode>relativeToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.0269,29.1802,10.0
-77.0285,29.1802,10.0
-77.0285,29.1814,10.0
-77.0269,29.1814,10.0
-77.0269,29.1802,10.0</coordinates>
+            <coordinates>77.0269,29.1802,8.0
+77.0285,29.1802,8.0
+77.0285,29.1814,8.0
+77.0269,29.1814,8.0
+77.0269,29.1802,8.0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -826,7 +594,7 @@
     </Placemark>
 
     <Placemark id="FEAT-TOILETS-R2">
-      <name>Public Sanitation & Toilets Complex (Road R-2 90)</name>
+      <name>Public Sanitation &amp; Toilets Complex (Road R-2 90)</name>
       <description><![CDATA[<b>Public Sanitation & Toilets Complex (Road R-2 90)</b><br/><b>ID:</b> FEAT-TOILETS-R2<br/><b>Category:</b> EVENT_STRUCTURE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Major sanitation block providing drinking water tankers, mobile toilet clusters, and washing facilities along the Road R-2 90 cross-artery.</p>]]></description>
       <Point>
         <altitudeMode>clampToGround</altitudeMode>
@@ -836,7 +604,7 @@
   </Folder>
 
   <Folder>
-    <name>Internal Avenues & Lanes (8)</name>
+    <name>Internal Avenues &amp; Lanes (8)</name>
     <open>1</open>
 
     <Placemark id="ROAD-INT-AXIS-EW">
@@ -863,10 +631,10 @@
       <LineString>
         <tessellate>1</tessellate>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0295,29.186271,0
-77.023762,29.186271,0
-77.021027,29.186271,0
-77.015,29.186271,0</coordinates>
+        <coordinates>77.0295,29.1868,0
+77.023762,29.1868,0
+77.021027,29.1868,0
+77.015,29.1868,0</coordinates>
       </LineString>
     </Placemark>
 
@@ -887,12 +655,11 @@
     <Placemark id="ROAD-INT-NS-PANDAL-W">
       <name>Pandal West Flank Avenue (North-South)</name>
       <styleUrl>#styleInternalRoad</styleUrl>
-      <description><![CDATA[<b>Pandal West Flank Avenue (North-South)</b><br/><b>ID:</b> ROAD-INT-NS-PANDAL-W<br/><b>Category:</b> INTERNAL_ROAD<br/><b>Status:</b> VERIFIED<br/><p>North-South avenue flanking the western edge of the Main Pandal and Dais, connecting North Campus avenue to South avenue.</p>]]></description>
+      <description><![CDATA[<b>Pandal West Flank Avenue (North-South)</b><br/><b>ID:</b> ROAD-INT-NS-PANDAL-W<br/><b>Category:</b> INTERNAL_ROAD<br/><b>Status:</b> VERIFIED<br/><p>North-South avenue flanking the western edge of the Main Pandal and Dais, connecting Central Axis avenue to South avenue.</p>]]></description>
       <LineString>
         <tessellate>1</tessellate>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.022314,29.186271,0
-77.022314,29.182477,0
+        <coordinates>77.022314,29.182477,0
 77.022314,29.177934,0
 77.022314,29.173,0</coordinates>
       </LineString>
@@ -938,23 +705,22 @@
     </Placemark>
 
     <Placemark id="FEAT-ROAD-04">
-      <name>Road 4 (Railway Station & Parking P3 Arterial Spine)</name>
+      <name>Road 4 (Railway Station &amp; Parking P3 Arterial Spine)</name>
       <styleUrl>#styleInternalRoad</styleUrl>
       <description><![CDATA[<b>Road 4 (Railway Station & Parking P3 Arterial Spine)</b><br/><b>ID:</b> FEAT-ROAD-04<br/><b>Category:</b> INTERNAL_ROAD<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Major internal transit artery linking the central compound to Bhodwal Majri Railway Station, Passenger Alighting Point, and Parking P3.</p>]]></description>
       <LineString>
         <tessellate>1</tessellate>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0223,29.178,0
-77.0223,29.183,0
-77.0185,29.184,0
-77.011,29.1855,0
-77.009,29.1855,0</coordinates>
+        <coordinates>77.018237,29.182477,0
+77.018237,29.1858,0
+77.011,29.1858,0
+77.00842,29.1858,0</coordinates>
       </LineString>
     </Placemark>
   </Folder>
 
   <Folder>
-    <name>External Roads & Highways (69)</name>
+    <name>External Roads &amp; Highways (58)</name>
     <open>1</open>
 
     <Placemark id="OSM-ROAD-228423351">
@@ -1016,42 +782,6 @@
 77.0131241,29.1709458,0
 77.0132013,29.1704833,0
 77.01365,29.168701,0</coordinates>
-      </LineString>
-    </Placemark>
-
-    <Placemark id="OSM-ROAD-260851370">
-      <name>Road-unclassified-260851370</name>
-      <styleUrl>#styleExternalRoad</styleUrl>
-      <description><![CDATA[<b>Road-unclassified-260851370</b><br/><b>ID:</b> OSM-ROAD-260851370<br/><b>Category:</b> EXTERNAL_ROAD<br/><b>Status:</b> VERIFIED<br/>]]></description>
-      <LineString>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0142118,29.1939247,0
-77.0146072,29.193411,0
-77.0149654,29.1929481,0
-77.0149819,29.1929284,0
-77.0155048,29.1923049,0
-77.0163031,29.1913164,0
-77.0163696,29.191235,0
-77.0176321,29.1897174,0
-77.0181191,29.1891119,0
-77.0185874,29.1885544,0
-77.0191026,29.1879197,0
-77.0196458,29.1873094,0
-77.0200471,29.1868566,0
-77.0202182,29.1866602,0
-77.0204662,29.1863673,0
-77.0205411,29.1863099,0
-77.0205994,29.1862795,0
-77.0206698,29.186257,0
-77.0207954,29.1862517,0
-77.02108,29.1862482,0
-77.0232448,29.1862212,0
-77.0254478,29.1861891,0
-77.0259532,29.1861944,0
-77.0266409,29.1861775,0
-77.0272104,29.1861635,0
-77.0276928,29.1862002,0</coordinates>
       </LineString>
     </Placemark>
 
@@ -1188,68 +918,6 @@
 77.0300802,29.1845062,0
 77.0301355,29.1845021,0
 77.0313531,29.1845086,0</coordinates>
-      </LineString>
-    </Placemark>
-
-    <Placemark id="OSM-ROAD-1096524592">
-      <name>Road-tertiary-1096524592</name>
-      <styleUrl>#styleExternalRoad</styleUrl>
-      <description><![CDATA[<b>Road-tertiary-1096524592</b><br/><b>ID:</b> OSM-ROAD-1096524592<br/><b>Category:</b> EXTERNAL_ROAD<br/><b>Status:</b> VERIFIED<br/>]]></description>
-      <LineString>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0270171,29.1895424,0
-77.027249,29.1883411,0
-77.0275451,29.1869129,0
-77.0276928,29.1862002,0
-77.0278642,29.185408,0
-77.0280658,29.1845022,0
-77.0282856,29.1835834,0
-77.028375,29.1832591,0
-77.0285243,29.1827177,0
-77.0285608,29.1825779,0
-77.0287069,29.1821732,0
-77.0287444,29.1820358,0
-77.0287928,29.1818482,0
-77.0290142,29.1809123,0
-77.0293752,29.1795905,0
-77.029664,29.178542,0
-77.0298413,29.1778756,0
-77.0302356,29.1763703,0
-77.0305138,29.1752734,0
-77.0307492,29.1742672,0
-77.0309291,29.1733334,0
-77.0311052,29.1725658,0
-77.0312696,29.171785,0
-77.0314069,29.1711646,0
-77.0314804,29.1708323,0
-77.0316588,29.1699868,0
-77.0317724,29.1694243,0
-77.0318285,29.1691363,0
-77.0318905,29.1688419,0
-77.0319762,29.1685041,0
-77.0320803,29.1681177,0
-77.0321566,29.1678444,0
-77.0322749,29.1674202,0
-77.0323953,29.1670092,0
-77.0328317,29.1656545,0
-77.0330645,29.1649762,0
-77.0331963,29.1645392,0
-77.0334571,29.163691,0
-77.0335788,29.1632566,0
-77.03367,29.1629312,0
-77.0338988,29.1621806,0
-77.0341862,29.1612604,0
-77.0344975,29.1602775,0
-77.0348781,29.1590412,0
-77.0351601,29.1581721,0
-77.0354395,29.1572914,0
-77.0358547,29.1559505,0
-77.0362432,29.1547189,0
-77.0366131,29.15345,0
-77.0369084,29.1525158,0
-77.0371532,29.1517164,0
-77.0374563,29.1506745,0</coordinates>
       </LineString>
     </Placemark>
 
@@ -1405,77 +1073,6 @@
       </LineString>
     </Placemark>
 
-    <Placemark id="OSM-ROAD-1096958339">
-      <name>Road-unclassified-1096958339</name>
-      <styleUrl>#styleExternalRoad</styleUrl>
-      <description><![CDATA[<b>Road-unclassified-1096958339</b><br/><b>ID:</b> OSM-ROAD-1096958339<br/><b>Category:</b> EXTERNAL_ROAD<br/><b>Status:</b> VERIFIED<br/>]]></description>
-      <LineString>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0076249,29.1951962,0
-77.0076238,29.1951084,0
-77.0076175,29.1950862,0
-77.0076009,29.1950717,0
-77.0074835,29.1950182,0
-77.0074656,29.1950015,0
-77.0074516,29.1949781,0
-77.0074439,29.1949469,0
-77.0074414,29.1949046,0
-77.0074822,29.1944279,0
-77.0075333,29.1939111,0
-77.0075715,29.1934444,0
-77.0076417,29.1927472,0
-77.0077004,29.1921256,0
-77.0077744,29.1913448,0
-77.0078293,29.1907077,0
-77.0079109,29.1898924,0
-77.0079275,29.1898322,0
-77.0079517,29.1897888,0
-77.0080321,29.1896551,0
-77.0080366,29.1896391,0
-77.0080436,29.1896139,0
-77.0080474,29.1895716,0
-77.0080781,29.1888365,0
-77.0081061,29.1886159,0
-77.008161,29.1882907,0
-77.0082095,29.1881347,0
-77.0082847,29.1877359,0
-77.0082988,29.1876335,0
-77.0083511,29.1871835,0
-77.0084072,29.1868081,0
-77.008443,29.1866466,0
-77.0084493,29.1865942,0
-77.0084532,29.1865396,0
-77.0084608,29.1860083,0
-77.0084697,29.1857376,0
-77.0084761,29.185692,0
-77.0084953,29.1856619,0
-77.0085297,29.1856363,0
-77.0085782,29.1856262,0
-77.0089508,29.1856062,0
-77.0101654,29.1855705,0
-77.0105055,29.1855562,0
-77.011195,29.1855271,0
-77.011255,29.1855316,0
-77.0112869,29.185546,0
-77.0113226,29.1855806,0
-77.0113443,29.1856296,0
-77.0113532,29.1857042,0
-77.0113367,29.1865853,0
-77.0113469,29.1874062,0
-77.0113673,29.18801,0
-77.0113762,29.1887997,0
-77.0113928,29.1896485,0
-77.0114145,29.1908536,0
-77.0114374,29.191943,0
-77.0114617,29.1931526,0
-77.0114824,29.1939716,0
-77.0114834,29.1940125,0
-77.0114869,29.194551,0
-77.0114893,29.1949162,0</coordinates>
-      </LineString>
-    </Placemark>
-
     <Placemark id="OSM-ROAD-1096961060">
       <name>Road-track-1096961060</name>
       <styleUrl>#styleExternalRoad</styleUrl>
@@ -1530,31 +1127,6 @@
       </LineString>
     </Placemark>
 
-    <Placemark id="OSM-ROAD-1098220620">
-      <name>Road-service-1098220620</name>
-      <styleUrl>#styleExternalRoad</styleUrl>
-      <description><![CDATA[<b>Road-service-1098220620</b><br/><b>ID:</b> OSM-ROAD-1098220620<br/><b>Category:</b> EXTERNAL_ROAD<br/><b>Status:</b> VERIFIED<br/>]]></description>
-      <LineString>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0259532,29.1861944,0
-77.0259484,29.1858168,0
-77.0259313,29.1844564,0
-77.0259187,29.1834603,0
-77.0259059,29.1824497,0
-77.0258766,29.1823204,0
-77.0258165,29.1822679,0
-77.025662,29.1822379,0
-77.0248423,29.1822529,0
-77.024551,29.1822608,0
-77.0222501,29.1823232,0
-77.0209778,29.1823577,0
-77.0209995,29.1833099,0
-77.0210073,29.1846562,0
-77.02108,29.1862482,0</coordinates>
-      </LineString>
-    </Placemark>
-
     <Placemark id="OSM-ROAD-1098220621">
       <name>Road-residential-1098220621</name>
       <styleUrl>#styleExternalRoad</styleUrl>
@@ -1564,22 +1136,6 @@
         <altitudeMode>clampToGround</altitudeMode>
         <coordinates>77.0209778,29.1823577,0
 77.0183394,29.1823819,0</coordinates>
-      </LineString>
-    </Placemark>
-
-    <Placemark id="OSM-ROAD-1098220622">
-      <name>Road-residential-1098220622</name>
-      <styleUrl>#styleExternalRoad</styleUrl>
-      <description><![CDATA[<b>Road-residential-1098220622</b><br/><b>ID:</b> OSM-ROAD-1098220622<br/><b>Category:</b> EXTERNAL_ROAD<br/><b>Status:</b> VERIFIED<br/>]]></description>
-      <LineString>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0210073,29.1846562,0
-77.0185232,29.1847099,0
-77.0183148,29.1846931,0
-77.0181335,29.1846784,0
-77.0170821,29.1846428,0
-77.0106852,29.1847618,0</coordinates>
       </LineString>
     </Placemark>
 
@@ -1607,35 +1163,6 @@
         <altitudeMode>clampToGround</altitudeMode>
         <coordinates>77.0183301,29.1832615,0
 77.0159075,29.1832811,0</coordinates>
-      </LineString>
-    </Placemark>
-
-    <Placemark id="OSM-ROAD-1098220625">
-      <name>Road-service-1098220625</name>
-      <styleUrl>#styleExternalRoad</styleUrl>
-      <description><![CDATA[<b>Road-service-1098220625</b><br/><b>ID:</b> OSM-ROAD-1098220625<br/><b>Category:</b> EXTERNAL_ROAD<br/><b>Status:</b> VERIFIED<br/>]]></description>
-      <LineString>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0210073,29.1846562,0
-77.0225031,29.1846179,0
-77.0230433,29.1846285,0
-77.0231404,29.1846736,0
-77.0232102,29.1847583,0
-77.0232375,29.1848431,0
-77.0232466,29.1851716,0</coordinates>
-      </LineString>
-    </Placemark>
-
-    <Placemark id="OSM-ROAD-1098220626">
-      <name>Road-service-1098220626</name>
-      <styleUrl>#styleExternalRoad</styleUrl>
-      <description><![CDATA[<b>Road-service-1098220626</b><br/><b>ID:</b> OSM-ROAD-1098220626<br/><b>Category:</b> EXTERNAL_ROAD<br/><b>Status:</b> VERIFIED<br/>]]></description>
-      <LineString>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0259313,29.1844564,0
-77.0239197,29.1845016,0</coordinates>
       </LineString>
     </Placemark>
 
@@ -1867,41 +1394,6 @@
       </LineString>
     </Placemark>
 
-    <Placemark id="OSM-ROAD-1099986106">
-      <name>Road-tertiary-1099986106</name>
-      <styleUrl>#styleExternalRoad</styleUrl>
-      <description><![CDATA[<b>Road-tertiary-1099986106</b><br/><b>ID:</b> OSM-ROAD-1099986106<br/><b>Category:</b> EXTERNAL_ROAD<br/><b>Status:</b> VERIFIED<br/>]]></description>
-      <LineString>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0281312,29.1824593,0
-77.0280218,29.1828615,0
-77.0279035,29.1832545,0
-77.0278287,29.1835032,0
-77.0275015,29.1848169,0
-77.0272932,29.1857213,0
-77.0272735,29.185829,0
-77.0272104,29.1861635,0
-77.0269221,29.187552,0
-77.0265385,29.1894089,0
-77.0265166,29.1895144,0
-77.0264009,29.1900708,0
-77.0262489,29.1908021,0
-77.0260665,29.1915608,0
-77.0260262,29.1917596,0
-77.0259672,29.1920502,0
-77.0257419,29.192961,0
-77.0254227,29.1939187,0
-77.0252243,29.1946446,0
-77.0248461,29.1957895,0
-77.024484,29.1969462,0
-77.0240334,29.1983206,0
-77.023733,29.1993415,0
-77.023682,29.1995124,0
-77.0233998,29.2004129,0</coordinates>
-      </LineString>
-    </Placemark>
-
     <Placemark id="OSM-ROAD-1281065443">
       <name>Road-trunk_link-1281065443</name>
       <styleUrl>#styleExternalRoad</styleUrl>
@@ -2077,20 +1569,6 @@
       </LineString>
     </Placemark>
 
-    <Placemark id="OSM-ROAD-1361568765">
-      <name>Road-residential-1361568765</name>
-      <styleUrl>#styleExternalRoad</styleUrl>
-      <description><![CDATA[<b>Road-residential-1361568765</b><br/><b>ID:</b> OSM-ROAD-1361568765<br/><b>Category:</b> EXTERNAL_ROAD<br/><b>Status:</b> VERIFIED<br/>]]></description>
-      <LineString>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0258165,29.1822679,0
-77.02695,29.1822802,0
-77.0269217,29.1810071,0
-77.0222229,29.1811065,0</coordinates>
-      </LineString>
-    </Placemark>
-
     <Placemark id="OSM-ROAD-1361568766">
       <name>Road-residential-1361568766</name>
       <styleUrl>#styleExternalRoad</styleUrl>
@@ -2114,31 +1592,6 @@
         <altitudeMode>clampToGround</altitudeMode>
         <coordinates>77.0182864,29.1809573,0
 77.022217,29.1808468,0</coordinates>
-      </LineString>
-    </Placemark>
-
-    <Placemark id="OSM-ROAD-1361898555">
-      <name>Road-residential-1361898555</name>
-      <styleUrl>#styleExternalRoad</styleUrl>
-      <description><![CDATA[<b>Road-residential-1361898555</b><br/><b>ID:</b> OSM-ROAD-1361898555<br/><b>Category:</b> EXTERNAL_ROAD<br/><b>Status:</b> VERIFIED<br/>]]></description>
-      <LineString>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0293644,29.1778103,0
-77.0221509,29.177895,0</coordinates>
-      </LineString>
-    </Placemark>
-
-    <Placemark id="OSM-ROAD-1361898556">
-      <name>Road-residential-1361898556</name>
-      <styleUrl>#styleExternalRoad</styleUrl>
-      <description><![CDATA[<b>Road-residential-1361898556</b><br/><b>ID:</b> OSM-ROAD-1361898556<br/><b>Category:</b> EXTERNAL_ROAD<br/><b>Status:</b> VERIFIED<br/>]]></description>
-      <LineString>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0182262,29.1768478,0
-77.0221008,29.1768904,0
-77.0296379,29.1767948,0</coordinates>
       </LineString>
     </Placemark>
 
@@ -2247,163 +1700,6 @@
         <coordinates>77.0145,29.169,0
 77.01,29.165,0</coordinates>
       </LineString>
-    </Placemark>
-  </Folder>
-
-  <Folder>
-    <name>Civil Infrastructure & Surroundings (11)</name>
-    <open>1</open>
-
-    <Placemark id="FEAT-PETROL-PUMP">
-      <name>NH-44 Commercial Fuel & Service Station</name>
-      <styleUrl>#styleBuilding3D</styleUrl>
-      <description><![CDATA[<b>NH-44 Commercial Fuel & Service Station</b><br/><b>ID:</b> FEAT-PETROL-PUMP<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 85m x 80m<br/><b>Area:</b> 6800 m²<br/><p>Commercial fuel station fronting NH-44 Grand Trunk Road between Gate 2 and Gate 3.</p>]]></description>
-      <Polygon>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <outerBoundaryIs>
-          <LinearRing>
-            <coordinates>77.0285,29.1832,0
-77.0294,29.1832,0
-77.0294,29.1825,0
-77.0285,29.1825,0
-77.0285,29.1832,0</coordinates>
-          </LinearRing>
-        </outerBoundaryIs>
-      </Polygon>
-    </Placemark>
-
-    <Placemark id="FEAT-WATER-RESERVOIR-01">
-      <name>South Overhead Drinking Water Reservoir & Pump Compound</name>
-      <styleUrl>#styleBuilding3D</styleUrl>
-      <description><![CDATA[<b>South Overhead Drinking Water Reservoir & Pump Compound</b><br/><b>ID:</b> FEAT-WATER-RESERVOIR-01<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 68m x 68m<br/><b>Area:</b> 4624 m²<br/><p>Elevated water storage tank and booster pump station supplying potable water to Grounds A and B.</p>]]></description>
-      <Polygon>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <outerBoundaryIs>
-          <LinearRing>
-            <coordinates>77.0205,29.1768,0
-77.0212,29.1768,0
-77.0212,29.1762,0
-77.0205,29.1762,0
-77.0205,29.1768,0</coordinates>
-          </LinearRing>
-        </outerBoundaryIs>
-      </Polygon>
-    </Placemark>
-
-    <Placemark id="FEAT-WATER-RESERVOIR-02">
-      <name>North Overhead Drinking Water Reservoir & Pump Compound</name>
-      <styleUrl>#styleBuilding3D</styleUrl>
-      <description><![CDATA[<b>North Overhead Drinking Water Reservoir & Pump Compound</b><br/><b>ID:</b> FEAT-WATER-RESERVOIR-02<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 68m x 68m<br/><b>Area:</b> 4624 m²<br/><p>Elevated water storage tank and booster pump station supplying potable water to Grounds C and D.</p>]]></description>
-      <Polygon>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <outerBoundaryIs>
-          <LinearRing>
-            <coordinates>77.0205,29.1864,0
-77.0212,29.1864,0
-77.0212,29.1858,0
-77.0205,29.1858,0
-77.0205,29.1864,0</coordinates>
-          </LinearRing>
-        </outerBoundaryIs>
-      </Polygon>
-    </Placemark>
-
-    <Placemark id="FEAT-UNDERPASS-SOUTH">
-      <name>NH-44 Vehicular Underpass (South — Panchi Gujran Approach)</name>
-      <description><![CDATA[<b>NH-44 Vehicular Underpass (South — Panchi Gujran Approach)</b><br/><b>ID:</b> FEAT-UNDERPASS-SOUTH<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Highway underpass allowing vehicles from Delhi side and Village Panchi Gujran to loop under NH-44 into Parking P1 without crossing active highway lanes.</p>]]></description>
-      <Point>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0288,29.1695,0</coordinates>
-      </Point>
-    </Placemark>
-
-    <Placemark id="FEAT-FLYOVER-NORTH">
-      <name>NH-44 Elevated Flyover (North — Patti Kalyana Section)</name>
-      <styleUrl>#styleHighwayNH44</styleUrl>
-      <description><![CDATA[<b>NH-44 Elevated Flyover (North — Patti Kalyana Section)</b><br/><b>ID:</b> FEAT-FLYOVER-NORTH<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Elevated highway flyover section carrying through-traffic on NH-44 above local Samalkha / Patti Kalyana interchange.</p>]]></description>
-      <LineString>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0298,29.184,0
-77.0294,29.188,0</coordinates>
-      </LineString>
-    </Placemark>
-
-    <Placemark id="FEAT-UNDERPASS-NORTH">
-      <name>NH-44 Vehicular Underpass (North — Patti Kalyana & Gate 3)</name>
-      <description><![CDATA[<b>NH-44 Vehicular Underpass (North — Patti Kalyana & Gate 3)</b><br/><b>ID:</b> FEAT-UNDERPASS-NORTH<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Highway underpass below the northern flyover allowing cross-highway U-turns and access between Village Patti Kalyana, Gov. Road, Gate 3, and Parking P4.</p>]]></description>
-      <Point>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0295,29.186,0</coordinates>
-      </Point>
-    </Placemark>
-
-    <Placemark id="FEAT-VILLAGE-PANCHI">
-      <name>Village Panchi Gujran (Southern Flank Settlement)</name>
-      <description><![CDATA[<b>Village Panchi Gujran (Southern Flank Settlement)</b><br/><b>ID:</b> FEAT-VILLAGE-PANCHI<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Rural settlement bounding the southern venue perimeter. Adjoins Parking P1 and road to Ganaur.</p>]]></description>
-      <Point>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.012,29.171,0</coordinates>
-      </Point>
-    </Placemark>
-
-    <Placemark id="FEAT-VILLAGE-BHODWAL">
-      <name>Village Bhodwal Majri (Northwestern Settlement)</name>
-      <description><![CDATA[<b>Village Bhodwal Majri (Northwestern Settlement)</b><br/><b>ID:</b> FEAT-VILLAGE-BHODWAL<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Settlement situated northwest of the venue adjoining the railway line, station, and Gov. Road connection.</p>]]></description>
-      <Point>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.008,29.192,0</coordinates>
-      </Point>
-    </Placemark>
-
-    <Placemark id="FEAT-VILLAGE-PATTI">
-      <name>Village Patti Kalyana (Northeastern Settlement)</name>
-      <description><![CDATA[<b>Village Patti Kalyana (Northeastern Settlement)</b><br/><b>ID:</b> FEAT-VILLAGE-PATTI<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Settlement located northeast of the venue near Karishna Polymer, the northern flyover, and Gov. Road link.</p>]]></description>
-      <Point>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.031,29.188,0</coordinates>
-      </Point>
-    </Placemark>
-
-    <Placemark id="FEAT-IND-KARISHNA">
-      <name>Karishna Polymer (Industrial Facility — North Boundary)</name>
-      <styleUrl>#styleBuilding3D</styleUrl>
-      <description><![CDATA[<b>Karishna Polymer (Industrial Facility — North Boundary)</b><br/><b>ID:</b> FEAT-IND-KARISHNA<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Industrial landmark located directly on the northern boundary wall between Gate No. 3 and Parking P4.</p>]]></description>
-      <Polygon>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <outerBoundaryIs>
-          <LinearRing>
-            <coordinates>77.0265,29.1865,0
-77.0285,29.1865,0
-77.0285,29.188,0
-77.0265,29.188,0
-77.0265,29.1865,0</coordinates>
-          </LinearRing>
-        </outerBoundaryIs>
-      </Polygon>
-    </Placemark>
-
-    <Placemark id="FEAT-INST-SNCE">
-      <name>S.N.C.E. Nursery & Institutional Grounds</name>
-      <styleUrl>#styleBuilding3D</styleUrl>
-      <description><![CDATA[<b>S.N.C.E. Nursery & Institutional Grounds</b><br/><b>ID:</b> FEAT-INST-SNCE<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Educational / horticultural nursery facility on the northern perimeter wall adjoining Village Patti Kalyana.</p>]]></description>
-      <Polygon>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <outerBoundaryIs>
-          <LinearRing>
-            <coordinates>77.025,29.1878,0
-77.0265,29.1878,0
-77.0265,29.1892,0
-77.025,29.1892,0
-77.025,29.1878,0</coordinates>
-          </LinearRing>
-        </outerBoundaryIs>
-      </Polygon>
     </Placemark>
   </Folder>
 
@@ -2641,7 +1937,7 @@
     </Placemark>
 
     <Placemark id="FEAT-ALIGHT-ISBT">
-      <name>Passenger Alighting Point (Railway & ISBT Vehicles — Parking P2)</name>
+      <name>Passenger Alighting Point (Railway &amp; ISBT Vehicles — Parking P2)</name>
       <description><![CDATA[<b>Passenger Alighting Point (Railway & ISBT Vehicles — Parking P2)</b><br/><b>ID:</b> FEAT-ALIGHT-ISBT<br/><b>Category:</b> TRANSPORT_HUB<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Dedicated disembarkation curb in Parking P2 for special shuttle buses arriving from Delhi ISBT, Panipat ISBT, and railway stations.</p>]]></description>
       <Point>
         <altitudeMode>clampToGround</altitudeMode>
@@ -2659,7 +1955,7 @@
     </Placemark>
 
     <Placemark id="FEAT-ALIGHT-P3">
-      <name>Passenger Alighting Point (Railway Station & Parking P3)</name>
+      <name>Passenger Alighting Point (Railway Station &amp; Parking P3)</name>
       <description><![CDATA[<b>Passenger Alighting Point (Railway Station & Parking P3)</b><br/><b>ID:</b> FEAT-ALIGHT-P3<br/><b>Category:</b> TRANSPORT_HUB<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Dedicated passenger drop-off plaza adjoining Bhodwal Majri railway station entrance and Parking P3.</p>]]></description>
       <Point>
         <altitudeMode>clampToGround</altitudeMode>
@@ -2668,7 +1964,7 @@
     </Placemark>
 
     <Placemark id="FEAT-BUS-STOP-LOCAL">
-      <name>Local Bus Stop (East NH-44 Service Road & Parking P5)</name>
+      <name>Local Bus Stop (East NH-44 Service Road &amp; Parking P5)</name>
       <description><![CDATA[<b>Local Bus Stop (East NH-44 Service Road & Parking P5)</b><br/><b>ID:</b> FEAT-BUS-STOP-LOCAL<br/><b>Category:</b> TRANSPORT_HUB<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Official public transit stop on the eastern service lane of NH-44. Passengers disembark here and cross via the pedestrian overbridge to Gates 1 and 2.</p>]]></description>
       <Point>
         <altitudeMode>clampToGround</altitudeMode>
@@ -2678,30 +1974,415 @@
   </Folder>
 
   <Folder>
-    <name>Hydrographic Features (1)</name>
+    <name>Dedicated Event Parking (11)</name>
     <open>1</open>
 
-    <Placemark id="FEAT-CANAL-SW">
-      <name>Southwestern Irrigation Channel / Perimeter Drain</name>
-      <styleUrl>#styleCanal</styleUrl>
-      <description><![CDATA[<b>Southwestern Irrigation Channel / Perimeter Drain</b><br/><b>ID:</b> FEAT-CANAL-SW<br/><b>Category:</b> HYDROGRAPHIC<br/><b>Status:</b> OBSERVED<br/><p>Tree-lined water channel / drainage corridor forming the physical southwestern boundary of Ground B and railway tracks.</p>]]></description>
-      <LineString>
+    <Placemark id="FEAT-PARKING-01">
+      <name>Parking 1 — Overall South Hub (Village Panchi Gujran Flank)</name>
+      <styleUrl>#styleParking</styleUrl>
+      <description><![CDATA[<b>Parking 1 — Overall South Hub (Village Panchi Gujran Flank)</b><br/><b>ID:</b> FEAT-PARKING-01<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Area:</b> 474053 m²<br/><b>Supervising Officer:</b> ACP Rishikant, HPS (ACP Ganaur | 7419410509)<br/><b>Capacity:</b> 9,291 Light Vehicles (Cars/Jeeps) + 1,244 Buses/Heavy Vehicles<br/><p>Outstation vehicles from Delhi side. Contains segregated Light Vehicle / Car and Heavy Vehicle / Bus parking sub-grounds adjoining Village Panchi Gujran. Connected via South Underpass and Road to Gannour.</p>]]></description>
+      <Polygon>
         <tessellate>1</tessellate>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0182,29.18,0
-77.015,29.176,0
-77.0115,29.172,0
-77.0085,29.167,0</coordinates>
-      </LineString>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0145,29.1685,0
+77.0225,29.1685,0
+77.0225,29.174,0
+77.0145,29.174,0
+77.0145,29.1685,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-PARKING-P1-LIGHT">
+      <name>Parking P1 (Light Vehicles / Cars — Delhi Side)</name>
+      <styleUrl>#styleParking</styleUrl>
+      <description><![CDATA[<b>Parking P1 (Light Vehicles / Cars — Delhi Side)</b><br/><b>ID:</b> FEAT-PARKING-P1-LIGHT<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Area:</b> 177770 m²<br/><b>Supervising Officer:</b> ACP Rishikant, HPS (ACP Ganaur | 7419410509)<br/><b>Capacity:</b> 4,977 Light Vehicles (Cars / Jeeps / Taxis)<br/><p>Designated inner sector of Parking P1 reserved exclusively for private cars, taxis, and light vehicles from Delhi side.</p>]]></description>
+      <Polygon>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.017,29.171,0
+77.0225,29.171,0
+77.0225,29.174,0
+77.017,29.174,0
+77.017,29.171,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-PARKING-P1-HEAVY">
+      <name>Parking P1 (Heavy Vehicles &amp; Buses — Delhi Side)</name>
+      <styleUrl>#styleParking</styleUrl>
+      <description><![CDATA[<b>Parking P1 (Heavy Vehicles & Buses — Delhi Side)</b><br/><b>ID:</b> FEAT-PARKING-P1-HEAVY<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Area:</b> 193931 m²<br/><b>Supervising Officer:</b> ACP Rishikant, HPS (ACP Ganaur | 7419410509)<br/><b>Capacity:</b> 3,801 Light Vehicles (Cars/Jeeps) + 509 Buses/Heavy Vehicles<br/><p>Designated outer sector of Parking P1 reserved for chartered buses, trucks, and heavy transport vehicles from Delhi side along Road to Gannour.</p>]]></description>
+      <Polygon>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0145,29.1685,0
+77.0205,29.1685,0
+77.0205,29.1715,0
+77.0145,29.1715,0
+77.0145,29.1685,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-PARKING-02">
+      <name>Parking 2 — Daily Commuters, Buses &amp; Cars (Ground B / Gate 1)</name>
+      <styleUrl>#styleParking</styleUrl>
+      <description><![CDATA[<b>Parking 2 — Daily Commuters, Buses & Cars (Ground B / Gate 1)</b><br/><b>ID:</b> FEAT-PARKING-02<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Area:</b> 249955 m²<br/><b>Supervising Officer:</b> Satish Gautam, HPS (DSP Indri, Karnal | 9729990704) & Mohinder Singh, HPS (DSP Hathin | 8930202024)<br/><b>Capacity:</b> 4,899 Light Vehicles (Cars/Jeeps) + 656 Buses/Heavy Vehicles<br/><p>Major transit hub inside Gate No. 1 in Ground B. Accommodates daily commuters from Delhi side (charted buses & private cars), railway/ISBT shuttle alighting point, Sub-Divisional (S/D) Seva Dal office, and Road R-2 90 toilets.</p>]]></description>
+      <Polygon>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.023,29.1738,0
+77.0288,29.1738,0
+77.0288,29.1778,0
+77.023,29.1778,0
+77.023,29.1738,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-PARKING-P2-2W">
+      <name>Parking P2 (2-Wheelers Dedicated Holding Bay)</name>
+      <styleUrl>#styleParking</styleUrl>
+      <description><![CDATA[<b>Parking P2 (2-Wheelers Dedicated Holding Bay)</b><br/><b>ID:</b> FEAT-PARKING-P2-2W<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Area:</b> 29090 m²<br/><b>Supervising Officer:</b> Satish Gautam, HPS (DSP Indri, Karnal | 9729990704)<br/><b>Capacity:</b> 6,787 Two-Wheelers (Motorcycles & Scooters)<br/><p>Dedicated segregated enclosure inside Gate 1 for motorcycles, scooters, and 2-wheelers with anti-theft tagging and quick-exit lanes.</p>]]></description>
+      <Polygon>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.027,29.174,0
+77.0288,29.174,0
+77.0288,29.1755,0
+77.027,29.1755,0
+77.027,29.174,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-PARKING-03">
+      <name>Parking 3 — Bhodwal Majri Railway Station &amp; Ground D Holding</name>
+      <styleUrl>#styleParking</styleUrl>
+      <description><![CDATA[<b>Parking 3 — Bhodwal Majri Railway Station & Ground D Holding</b><br/><b>ID:</b> FEAT-PARKING-03<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Area:</b> 193931 m²<br/><b>Supervising Officer:</b> Day: Sushil Parkash, HPS (DSP Crime, Kaithal | 9053052105) | Night: Sandeep Kumar, HPS (DSP HQ, Karnal | 9729990995)<br/><b>Capacity:</b> 4,615 Light Vehicles (Cars/Jeeps) + 254 Buses/Shuttles<br/><p>Directly adjoining Bhodwal Majri Railway Station. Handles outstation vehicles from Ambala side (arriving via Gov. Road) and daily commuter shuttles. Contains Passenger Alighting Point.</p>]]></description>
+      <Polygon>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0085,29.184,0
+77.0125,29.184,0
+77.0125,29.1885,0
+77.0085,29.1885,0
+77.0085,29.184,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-PARKING-04">
+      <name>Parking 4 — Gate 3 / Karishna Polymer Flank (Ambala &amp; Abroad)</name>
+      <styleUrl>#styleParking</styleUrl>
+      <description><![CDATA[<b>Parking 4 — Gate 3 / Karishna Polymer Flank (Ambala & Abroad)</b><br/><b>ID:</b> FEAT-PARKING-04<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Area:</b> 171413 m²<br/><b>Supervising Officer:</b> Day: Suresh Kumar, HPS (DSP Traffic, Panipat | 7056000501) | Night: Satyapal, HPS (ACP Highway & HQ, Gurugram | 9999981809)<br/><b>Capacity:</b> 4,079 Light Vehicles (Cars/Jeeps) + 224 Buses/Shuttles<br/><p>Accessed via Gate No. 3 near Karishna Polymer and Patti Kalyana underpass. Primary parking for Sewadars on duty in daily up & down commuters from Ambala side, and dedicated sector for Saints from Abroad.</p>]]></description>
+      <Polygon>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0245,29.1835,0
+77.0288,29.1835,0
+77.0288,29.1872,0
+77.0245,29.1872,0
+77.0245,29.1835,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-PARKING-05">
+      <name>Parking 5 — East of NH-44 / Local Bus Stop &amp; Pedestrian Hub</name>
+      <styleUrl>#styleParking</styleUrl>
+      <description><![CDATA[<b>Parking 5 — East of NH-44 / Local Bus Stop & Pedestrian Hub</b><br/><b>ID:</b> FEAT-PARKING-05<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Area:</b> 237026 m²<br/><b>Supervising Officer:</b> Day: Suresh Kumar, HPS (DSP Traffic, Panipat | 7056000501) | Night: Satyapal, HPS (ACP Highway & HQ, Gurugram | 9999981809)<br/><b>Capacity:</b> 1,244 Inter-State Buses + 53,093 Staged Pedestrian Holding Capacity<br/><p>Located east of NH-44 opposite the main complex. Houses the Local Bus Stop and holds excess pedestrians before sending them across the footbridge in pulsed batches.</p>]]></description>
+      <Polygon>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0315,29.177,0
+77.0355,29.177,0
+77.0355,29.1825,0
+77.0315,29.1825,0
+77.0315,29.177,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-PARKING-SC">
+      <name>S.C. Parking (Special Committee Member Vehicles — Gate 2)</name>
+      <styleUrl>#styleParking</styleUrl>
+      <description><![CDATA[<b>S.C. Parking (Special Committee Member Vehicles — Gate 2)</b><br/><b>ID:</b> FEAT-PARKING-SC<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Area:</b> 32968 m²<br/><b>Supervising Officer:</b> Satish Gautam, HPS (DSP Indri, Karnal | 9729990704)<br/><b>Capacity:</b> 659 VIP Motorcade Bays + 98 Armed Escort / Pilot Slots<br/><p>Designated parking court inside Gate No. 2 directly adjoining Central Mission Offices for Special Committee (S.C.) vehicles on authorized pass list.</p>]]></description>
+      <Polygon>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.027,29.1798,0
+77.0288,29.1798,0
+77.0288,29.1815,0
+77.027,29.1815,0
+77.027,29.1798,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-PARKING-VIP">
+      <name>V.I.P. &amp; Invited Guests Parking (Stage Dais Flank — Gate 2)</name>
+      <styleUrl>#styleParking</styleUrl>
+      <description><![CDATA[<b>V.I.P. & Invited Guests Parking (Stage Dais Flank — Gate 2)</b><br/><b>ID:</b> FEAT-PARKING-VIP<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Area:</b> 25211 m²<br/><b>Supervising Officer:</b> Satish Gautam, HPS (DSP Indri, Karnal | 9729990704) & Mohinder Singh, HPS (DSP Hathin | 8930202024)<br/><b>Capacity:</b> 504 VIP Motorcade Bays + 75 Armed Escort / Pilot Slots<br/><p>Sterile high-security parking enclosure for Invited Guests, State Dignitaries, and Z+ motorcade escorts for Satguru Mata Sudiksha Ji Maharaj.</p>]]></description>
+      <Polygon>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.027,29.1785,0
+77.0288,29.1785,0
+77.0288,29.1798,0
+77.027,29.1798,0
+77.027,29.1785,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-PARKING-D">
+      <name>D-Parking (Dais Logistics &amp; Service Fleet)</name>
+      <styleUrl>#styleParking</styleUrl>
+      <description><![CDATA[<b>D-Parking (Dais Logistics & Service Fleet)</b><br/><b>ID:</b> FEAT-PARKING-D<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Area:</b> 18316 m²<br/><b>Supervising Officer:</b> Mohinder Singh, HPS (DSP Hathin | 8930202024)<br/><b>Capacity:</b> 435 Light Vehicles (Cars/Jeeps) + 24 Buses/Shuttles<br/><p>Operations and logistics fleet staging zone for stage equipment, broadcasting OB vans, and sound engineering logistics.</p>]]></description>
+      <Polygon>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0268,29.1815,0
+77.0285,29.1815,0
+77.0285,29.1825,0
+77.0268,29.1825,0
+77.0268,29.1815,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
     </Placemark>
   </Folder>
 
   <Folder>
-    <name>Police & Emergency Deployments (18)</name>
+    <name>Civil Infrastructure &amp; Surroundings (11)</name>
+    <open>1</open>
+
+    <Placemark id="FEAT-PETROL-PUMP">
+      <name>NH-44 Commercial Fuel &amp; Service Station</name>
+      <styleUrl>#styleBuilding3D</styleUrl>
+      <description><![CDATA[<b>NH-44 Commercial Fuel & Service Station</b><br/><b>ID:</b> FEAT-PETROL-PUMP<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 85m x 80m<br/><b>Area:</b> 6800 m²<br/><b>Supervising Officer:</b> Traffic Police Incharge / Fire Safety Officer<br/><p>Commercial fuel station fronting NH-44 Grand Trunk Road between Gate 2 and Gate 3.</p>]]></description>
+      <Polygon>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0295,29.1837,0
+77.0303,29.1837,0
+77.0303,29.183,0
+77.0295,29.183,0
+77.0295,29.1837,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-WATER-RESERVOIR-01">
+      <name>South Overhead Drinking Water Reservoir &amp; Pump Compound</name>
+      <styleUrl>#styleBuilding3D</styleUrl>
+      <description><![CDATA[<b>South Overhead Drinking Water Reservoir & Pump Compound</b><br/><b>ID:</b> FEAT-WATER-RESERVOIR-01<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 68m x 68m<br/><b>Area:</b> 4624 m²<br/><b>Supervising Officer:</b> Public Health Engineering Officer<br/><b>Capacity:</b> 2.5 Million Litres Overhead Storage<br/><p>Elevated water storage tank and booster pump station supplying potable water to Grounds A and B.</p>]]></description>
+      <Polygon>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0205,29.1768,0
+77.0212,29.1768,0
+77.0212,29.1762,0
+77.0205,29.1762,0
+77.0205,29.1768,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-WATER-RESERVOIR-02">
+      <name>North Overhead Drinking Water Reservoir &amp; Pump Compound</name>
+      <styleUrl>#styleBuilding3D</styleUrl>
+      <description><![CDATA[<b>North Overhead Drinking Water Reservoir & Pump Compound</b><br/><b>ID:</b> FEAT-WATER-RESERVOIR-02<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 68m x 68m<br/><b>Area:</b> 4624 m²<br/><b>Supervising Officer:</b> Public Health Engineering Officer<br/><b>Capacity:</b> 2.5 Million Litres Overhead Storage<br/><p>Elevated water storage tank and booster pump station supplying potable water to Grounds C and D.</p>]]></description>
+      <Polygon>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0205,29.1864,0
+77.0212,29.1864,0
+77.0212,29.1858,0
+77.0205,29.1858,0
+77.0205,29.1864,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-UNDERPASS-SOUTH">
+      <name>NH-44 Vehicular Underpass (South — Panchi Gujran Approach)</name>
+      <description><![CDATA[<b>NH-44 Vehicular Underpass (South — Panchi Gujran Approach)</b><br/><b>ID:</b> FEAT-UNDERPASS-SOUTH<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Highway underpass allowing vehicles from Delhi side and Village Panchi Gujran to loop under NH-44 into Parking P1 without crossing active highway lanes.</p>]]></description>
+      <Point>
+        <altitudeMode>clampToGround</altitudeMode>
+        <coordinates>77.0288,29.1695,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark id="FEAT-FLYOVER-NORTH">
+      <name>NH-44 Elevated Flyover (North — Patti Kalyana Section)</name>
+      <styleUrl>#styleHighwayNH44</styleUrl>
+      <description><![CDATA[<b>NH-44 Elevated Flyover (North — Patti Kalyana Section)</b><br/><b>ID:</b> FEAT-FLYOVER-NORTH<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Elevated highway flyover section carrying through-traffic on NH-44 above local Samalkha / Patti Kalyana interchange.</p>]]></description>
+      <LineString>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <coordinates>77.0298,29.184,0
+77.0294,29.188,0</coordinates>
+      </LineString>
+    </Placemark>
+
+    <Placemark id="FEAT-UNDERPASS-NORTH">
+      <name>NH-44 Vehicular Underpass (North — Patti Kalyana &amp; Gate 3)</name>
+      <description><![CDATA[<b>NH-44 Vehicular Underpass (North — Patti Kalyana & Gate 3)</b><br/><b>ID:</b> FEAT-UNDERPASS-NORTH<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Highway underpass below the northern flyover allowing cross-highway U-turns and access between Village Patti Kalyana, Gov. Road, Gate 3, and Parking P4.</p>]]></description>
+      <Point>
+        <altitudeMode>clampToGround</altitudeMode>
+        <coordinates>77.0295,29.186,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark id="FEAT-VILLAGE-PANCHI">
+      <name>Village Panchi Gujran (Southern Flank Settlement)</name>
+      <description><![CDATA[<b>Village Panchi Gujran (Southern Flank Settlement)</b><br/><b>ID:</b> FEAT-VILLAGE-PANCHI<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Rural settlement bounding the southern venue perimeter. Adjoins Parking P1 and road to Ganaur.</p>]]></description>
+      <Point>
+        <altitudeMode>clampToGround</altitudeMode>
+        <coordinates>77.012,29.171,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark id="FEAT-VILLAGE-BHODWAL">
+      <name>Village Bhodwal Majri (Northwestern Settlement)</name>
+      <description><![CDATA[<b>Village Bhodwal Majri (Northwestern Settlement)</b><br/><b>ID:</b> FEAT-VILLAGE-BHODWAL<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Settlement situated northwest of the venue adjoining the railway line, station, and Gov. Road connection.</p>]]></description>
+      <Point>
+        <altitudeMode>clampToGround</altitudeMode>
+        <coordinates>77.008,29.192,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark id="FEAT-VILLAGE-PATTI">
+      <name>Village Patti Kalyana (Northeastern Settlement)</name>
+      <description><![CDATA[<b>Village Patti Kalyana (Northeastern Settlement)</b><br/><b>ID:</b> FEAT-VILLAGE-PATTI<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Settlement located northeast of the venue near Karishna Polymer, the northern flyover, and Gov. Road link.</p>]]></description>
+      <Point>
+        <altitudeMode>clampToGround</altitudeMode>
+        <coordinates>77.031,29.188,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark id="FEAT-IND-KARISHNA">
+      <name>Karishna Polymer (Industrial Facility — North Boundary)</name>
+      <styleUrl>#styleBuilding3D</styleUrl>
+      <description><![CDATA[<b>Karishna Polymer (Industrial Facility — North Boundary)</b><br/><b>ID:</b> FEAT-IND-KARISHNA<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Industrial landmark located directly on the northern boundary wall between Gate No. 3 and Parking P4.</p>]]></description>
+      <Polygon>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0265,29.1865,0
+77.0285,29.1865,0
+77.0285,29.188,0
+77.0265,29.188,0
+77.0265,29.1865,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-INST-SNCE">
+      <name>S.N.C.E. Nursery &amp; Institutional Grounds</name>
+      <styleUrl>#styleBuilding3D</styleUrl>
+      <description><![CDATA[<b>S.N.C.E. Nursery & Institutional Grounds</b><br/><b>ID:</b> FEAT-INST-SNCE<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Educational / horticultural nursery facility on the northern perimeter wall adjoining Village Patti Kalyana.</p>]]></description>
+      <Polygon>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.025,29.1878,0
+77.0265,29.1878,0
+77.0265,29.1892,0
+77.025,29.1892,0
+77.025,29.1878,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+  </Folder>
+
+  <Folder>
+    <name>Police Facilities &amp; Reserve Posts (2)</name>
+    <open>1</open>
+
+    <Placemark id="FEAT-POLICE-POST-G2">
+      <name>Gate 2 Integrated Police Post &amp; Security Control Centre</name>
+      <styleUrl>#styleBuilding3D</styleUrl>
+      <description><![CDATA[<b>Gate 2 Integrated Police Post & Security Control Centre</b><br/><b>ID:</b> FEAT-POLICE-POST-G2<br/><b>Category:</b> POLICE_FACILITY<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 75m x 75m<br/><b>Area:</b> 5625 m²<br/><b>Supervising Officer:</b> DSP HQ Karnal / SHO Samalkha<br/><p>Primary police post, CCTV monitoring bunker, and VIP pass verification counter at Gate 2.</p>]]></description>
+      <Polygon>
+        <extrude>1</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0288,29.1798,5.0
+77.0296,29.1798,5.0
+77.0296,29.1791,5.0
+77.0288,29.1791,5.0
+77.0288,29.1798,5.0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="TAC-HALDANA-POST">
+      <name>Haldana Police Post &amp; Tactical Reserve Staging Ground</name>
+      <description><![CDATA[<b>Haldana Police Post & Tactical Reserve Staging Ground</b><br/><b>ID:</b> TAC-HALDANA-POST<br/><b>Category:</b> POLICE_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Supervising Officer:</b> Law & Order: DSP Mohinder Singh (8930202024) / DSP Sandeep Singh (8814011504); Contingency: DSP Rajbir Singh (7056000104)<br/><p>Central staging base for Panipat police contingency and riot-control reserves. Maintains shift-wise duty register, equipment distribution, and relief change log.</p>]]></description>
+      <Point>
+        <altitudeMode>clampToGround</altitudeMode>
+        <coordinates>77.0298,29.1945,0</coordinates>
+      </Point>
+    </Placemark>
+  </Folder>
+
+  <Folder>
+    <name>Police &amp; Emergency Deployments (18)</name>
     <open>1</open>
 
     <Placemark id="FEAT-GATE-01">
-      <name>Gate No. 1 (South Gateway — Daily Commuters & Parking P2)</name>
+      <name>Gate No. 1 (South Gateway — Daily Commuters &amp; Parking P2)</name>
       <description><![CDATA[<b>Gate No. 1 (South Gateway — Daily Commuters & Parking P2)</b><br/><b>ID:</b> FEAT-GATE-01<br/><b>Category:</b> ACCESS_CONTROL<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Dimensions:</b> 42.0m (W) x 14.0m (H) x 6.0m (D)<br/><p>Main southern vehicular and pedestrian entrance from Grand Trunk Road (NH-44). Designated primary ingress for Delhi-side daily commuters, charted buses, 2-wheelers, and Parking P2.</p>]]></description>
       <Point>
         <altitudeMode>clampToGround</altitudeMode>
@@ -2710,7 +2391,7 @@
     </Placemark>
 
     <Placemark id="FEAT-GATE-02">
-      <name>Gate No. 2 (Central Ceremonial Gateway — VIP, S.C. & Pandal Access)</name>
+      <name>Gate No. 2 (Central Ceremonial Gateway — VIP, S.C. &amp; Pandal Access)</name>
       <description><![CDATA[<b>Gate No. 2 (Central Ceremonial Gateway — VIP, S.C. & Pandal Access)</b><br/><b>ID:</b> FEAT-GATE-02<br/><b>Category:</b> ACCESS_CONTROL<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Dimensions:</b> 45.0m (W) x 15.0m (H) x 8.0m (D)<br/><p>Monumental tri-arch ceremonial portal facing NH-44 directly aligned with the central processional axis, Main Satsang Pandal, VIP Dais, S.C. Parking, and Central Mission Offices.</p>]]></description>
       <Point>
         <altitudeMode>clampToGround</altitudeMode>
@@ -2719,7 +2400,7 @@
     </Placemark>
 
     <Placemark id="FEAT-GATE-03">
-      <name>Gate No. 3 (North Gateway — Ambala Side, Saints from Abroad & Parking P4)</name>
+      <name>Gate No. 3 (North Gateway — Ambala Side, Saints from Abroad &amp; Parking P4)</name>
       <description><![CDATA[<b>Gate No. 3 (North Gateway — Ambala Side, Saints from Abroad & Parking P4)</b><br/><b>ID:</b> FEAT-GATE-03<br/><b>Category:</b> ACCESS_CONTROL<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Dimensions:</b> 38.0m (W) x 12.0m (H) x 6.0m (D)<br/><p>Northern access portal from NH-44 near Karishna Polymer and Patti Kalyana underpass. Primary ingress for Ambala-side daily commuters, Saints from Abroad, and Parking P4.</p>]]></description>
       <Point>
         <altitudeMode>clampToGround</altitudeMode>
@@ -2728,7 +2409,7 @@
     </Placemark>
 
     <Placemark id="FEAT-GATE-STATION">
-      <name>Railway Station Gate (Bhodwal Majri Station & Parking P3 Access)</name>
+      <name>Railway Station Gate (Bhodwal Majri Station &amp; Parking P3 Access)</name>
       <description><![CDATA[<b>Railway Station Gate (Bhodwal Majri Station & Parking P3 Access)</b><br/><b>ID:</b> FEAT-GATE-STATION<br/><b>Category:</b> ACCESS_CONTROL<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Controlled access portal between Bhodwal Majri Railway Station platforms, Passenger Alighting Point, and Ground D / Parking P3.</p>]]></description>
       <Point>
         <altitudeMode>clampToGround</altitudeMode>
@@ -2791,7 +2472,7 @@
     </Placemark>
 
     <Placemark id="TAC-HOSP-01">
-      <name>100-Bed Field Hospital & ICU Base (Ground A)</name>
+      <name>100-Bed Field Hospital &amp; ICU Base (Ground A)</name>
       <description><![CDATA[<b>100-Bed Field Hospital & ICU Base (Ground A)</b><br/><b>ID:</b> TAC-HOSP-01<br/><b>Category:</b> BANDOBAST_TACTICAL<br/><b>Status:</b> VERIFIED<br/><b>Force Strength:</b> 12 Medical Officers, 24 Nurses, 5 ALS Ambulances<br/><p>Official 100-bed Allopathic field hospital with 10-bed ICU and round-the-clock emergency triage.</p>]]></description>
       <Point>
         <altitudeMode>clampToGround</altitudeMode>
@@ -2810,7 +2491,7 @@
 
     <Placemark id="TAC-QRT-01">
       <name>Quick Reaction Team 1 (QRT 1 — Outer Cordon North/GT Road)</name>
-      <description><![CDATA[<b>Quick Reaction Team 1 (QRT 1 — Outer Cordon North/GT Road)</b><br/><b>ID:</b> TAC-QRT-01<br/><b>Category:</b> BANDOBAST_TACTICAL<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Force Strength:</b> Armed SWAT Unit + Bullet-Proof Tactical Vehicle<br/><p>24-hour armed strike cover at outer northern perimeter; monitor dhabas, rice mills, factories, and report suspicious activity.</p>]]></description>
+      <description><![CDATA[<b>Quick Reaction Team 1 (QRT 1 — Outer Cordon North/GT Road)</b><br/><b>ID:</b> TAC-QRT-01<br/><b>Category:</b> BANDOBAST_TACTICAL<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Force Strength:</b> Armed SWAT Unit + Bullet-Proof Tactical Vehicle<br/><b>Supervising Officer:</b> Day: ACP Anil Kumar (7056667210) | Night: DSP Ramesh Kumar (7419301130)<br/><p>24-hour armed strike cover at outer northern perimeter; monitor dhabas, rice mills, factories, and report suspicious activity.</p>]]></description>
       <Point>
         <altitudeMode>clampToGround</altitudeMode>
         <coordinates>77.0295,29.187,0</coordinates>
@@ -2819,7 +2500,7 @@
 
     <Placemark id="TAC-QRT-02">
       <name>Quick Reaction Team 2 (QRT 2 — Outer Cordon South/Industrial Flank)</name>
-      <description><![CDATA[<b>Quick Reaction Team 2 (QRT 2 — Outer Cordon South/Industrial Flank)</b><br/><b>ID:</b> TAC-QRT-02<br/><b>Category:</b> BANDOBAST_TACTICAL<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Force Strength:</b> Armed Strike Unit + Bullet-Proof Tactical Vehicle<br/><p>Outer southern boundary cover around Bhakti Niwas; prevent unauthorized perimeter penetration.</p>]]></description>
+      <description><![CDATA[<b>Quick Reaction Team 2 (QRT 2 — Outer Cordon South/Industrial Flank)</b><br/><b>ID:</b> TAC-QRT-02<br/><b>Category:</b> BANDOBAST_TACTICAL<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Force Strength:</b> Armed Strike Unit + Bullet-Proof Tactical Vehicle<br/><b>Supervising Officer:</b> Day: ACP Anil Kumar (7056667210) | Night: DSP Ramesh Kumar (7419301130)<br/><p>Outer southern boundary cover around Bhakti Niwas; prevent unauthorized perimeter penetration.</p>]]></description>
       <Point>
         <altitudeMode>clampToGround</altitudeMode>
         <coordinates>77.018,29.172,0</coordinates>
@@ -2828,7 +2509,7 @@
 
     <Placemark id="TAC-QRT-03">
       <name>Quick Reaction Team 3 (QRT 3 — Bhodwal Majri Railway Station Gate)</name>
-      <description><![CDATA[<b>Quick Reaction Team 3 (QRT 3 — Bhodwal Majri Railway Station Gate)</b><br/><b>ID:</b> TAC-QRT-03<br/><b>Category:</b> BANDOBAST_TACTICAL<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Force Strength:</b> Armed QRT Section (2 Sections ORs armed and ready)<br/><p>Positioned at railway-side gate; armed and ready for station passenger surges and track security coordination.</p>]]></description>
+      <description><![CDATA[<b>Quick Reaction Team 3 (QRT 3 — Bhodwal Majri Railway Station Gate)</b><br/><b>ID:</b> TAC-QRT-03<br/><b>Category:</b> BANDOBAST_TACTICAL<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Force Strength:</b> Armed QRT Section (2 Sections ORs armed and ready)<br/><b>Supervising Officer:</b> Day: DSP Sushil Parkash (9053052105) | Night: DSP Sandeep Kumar (9729990995)<br/><p>Positioned at railway-side gate; armed and ready for station passenger surges and track security coordination.</p>]]></description>
       <Point>
         <altitudeMode>clampToGround</altitudeMode>
         <coordinates>77.009,29.18523,0</coordinates>
@@ -2837,7 +2518,7 @@
 
     <Placemark id="TAC-QRT-04">
       <name>Quick Reaction Team 4 (QRT 4 — Central Venue Node / Grounds A-B-C Junction)</name>
-      <description><![CDATA[<b>Quick Reaction Team 4 (QRT 4 — Central Venue Node / Grounds A-B-C Junction)</b><br/><b>ID:</b> TAC-QRT-04<br/><b>Category:</b> BANDOBAST_TACTICAL<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Force Strength:</b> Armed Tactical Intervention Section<br/><p>Stationed at designated central venue point; rapid intervention for Grounds A, B, C, D internal corridors.</p>]]></description>
+      <description><![CDATA[<b>Quick Reaction Team 4 (QRT 4 — Central Venue Node / Grounds A-B-C Junction)</b><br/><b>ID:</b> TAC-QRT-04<br/><b>Category:</b> BANDOBAST_TACTICAL<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Force Strength:</b> Armed Tactical Intervention Section<br/><b>Supervising Officer:</b> Day: DSP Sushil Parkash (9053052105) | Night: DSP Sandeep Kumar (9729990995)<br/><p>Stationed at designated central venue point; rapid intervention for Grounds A, B, C, D internal corridors.</p>]]></description>
       <Point>
         <altitudeMode>clampToGround</altitudeMode>
         <coordinates>77.0185,29.182477,0</coordinates>
@@ -2845,8 +2526,8 @@
     </Placemark>
 
     <Placemark id="TAC-DRONE-01">
-      <name>CID Drone Surveillance Unit 1 (NH-44 & Footbridge)</name>
-      <description><![CDATA[<b>CID Drone Surveillance Unit 1 (NH-44 & Footbridge)</b><br/><b>ID:</b> TAC-DRONE-01<br/><b>Category:</b> BANDOBAST_TACTICAL<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Force Strength:</b> CID Drone Operator Team + Real-Time Base Downlink<br/><p>Monitors NH-44 highway traffic flow, pedestrian footbridge crowd density, and unauthorized roadside parking.</p>]]></description>
+      <name>CID Drone Surveillance Unit 1 (NH-44 &amp; Footbridge)</name>
+      <description><![CDATA[<b>CID Drone Surveillance Unit 1 (NH-44 & Footbridge)</b><br/><b>ID:</b> TAC-DRONE-01<br/><b>Category:</b> BANDOBAST_TACTICAL<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Force Strength:</b> CID Drone Operator Team + Real-Time Base Downlink<br/><b>Supervising Officer:</b> DSP Suresh Kumar / ACP Satyapal (Panipat Traffic)<br/><p>Monitors NH-44 highway traffic flow, pedestrian footbridge crowd density, and unauthorized roadside parking.</p>]]></description>
       <Point>
         <altitudeMode>clampToGround</altitudeMode>
         <coordinates>77.0305,29.1805,0</coordinates>
@@ -2854,8 +2535,8 @@
     </Placemark>
 
     <Placemark id="TAC-DRONE-02">
-      <name>CID Drone Surveillance Unit 2 (Railway & Western Sector)</name>
-      <description><![CDATA[<b>CID Drone Surveillance Unit 2 (Railway & Western Sector)</b><br/><b>ID:</b> TAC-DRONE-02<br/><b>Category:</b> BANDOBAST_TACTICAL<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Force Strength:</b> CID Drone Operator Team + Wireless Liaison<br/><p>Monitors Bhodwal Majri station platforms, railway corridor perimeter, and Parking 3 vehicle arrival patterns.</p>]]></description>
+      <name>CID Drone Surveillance Unit 2 (Railway &amp; Western Sector)</name>
+      <description><![CDATA[<b>CID Drone Surveillance Unit 2 (Railway & Western Sector)</b><br/><b>ID:</b> TAC-DRONE-02<br/><b>Category:</b> BANDOBAST_TACTICAL<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Force Strength:</b> CID Drone Operator Team + Wireless Liaison<br/><b>Supervising Officer:</b> DSP Sushil Parkash / DSP Sandeep Kumar<br/><p>Monitors Bhodwal Majri station platforms, railway corridor perimeter, and Parking 3 vehicle arrival patterns.</p>]]></description>
       <Point>
         <altitudeMode>clampToGround</altitudeMode>
         <coordinates>77.0098,29.1858,0</coordinates>
@@ -2864,40 +2545,7 @@
   </Folder>
 
   <Folder>
-    <name>Police Facilities & Reserve Posts (2)</name>
-    <open>1</open>
-
-    <Placemark id="FEAT-POLICE-POST-G2">
-      <name>Gate 2 Integrated Police Post & Security Control Centre</name>
-      <styleUrl>#styleBuilding3D</styleUrl>
-      <description><![CDATA[<b>Gate 2 Integrated Police Post & Security Control Centre</b><br/><b>ID:</b> FEAT-POLICE-POST-G2<br/><b>Category:</b> POLICE_FACILITY<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 75m x 75m<br/><b>Area:</b> 5625 m²<br/><p>Primary police post, CCTV monitoring bunker, and VIP pass verification counter at Gate 2.</p>]]></description>
-      <Polygon>
-        <extrude>1</extrude>
-        <altitudeMode>relativeToGround</altitudeMode>
-        <outerBoundaryIs>
-          <LinearRing>
-            <coordinates>77.0288,29.1798,5.0
-77.0296,29.1798,5.0
-77.0296,29.1791,5.0
-77.0288,29.1791,5.0
-77.0288,29.1798,5.0</coordinates>
-          </LinearRing>
-        </outerBoundaryIs>
-      </Polygon>
-    </Placemark>
-
-    <Placemark id="TAC-HALDANA-POST">
-      <name>Haldana Police Post & Tactical Reserve Staging Ground</name>
-      <description><![CDATA[<b>Haldana Police Post & Tactical Reserve Staging Ground</b><br/><b>ID:</b> TAC-HALDANA-POST<br/><b>Category:</b> POLICE_FACILITY<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Central staging base for Panipat police contingency and riot-control reserves. Maintains shift-wise duty register, equipment distribution, and relief change log.</p>]]></description>
-      <Point>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0298,29.1945,0</coordinates>
-      </Point>
-    </Placemark>
-  </Folder>
-
-  <Folder>
-    <name>VIP Convoy & Evacuation Corridors (10)</name>
+    <name>VIP Convoy &amp; Evacuation Corridors (10)</name>
     <open>1</open>
 
     <Placemark id="ROUTE-DELHI-P1">
@@ -2915,7 +2563,7 @@
     </Placemark>
 
     <Placemark id="ROUTE-DELHI-P2">
-      <name>Route 2: Daily Commuters & Charted Buses from Delhi Side (to Parking P2 via Gate 1)</name>
+      <name>Route 2: Daily Commuters &amp; Charted Buses from Delhi Side (to Parking P2 via Gate 1)</name>
       <styleUrl>#styleEvacRoute</styleUrl>
       <description><![CDATA[<b>Route 2: Daily Commuters & Charted Buses from Delhi Side (to Parking P2 via Gate 1)</b><br/><b>ID:</b> ROUTE-DELHI-P2<br/><b>Category:</b> OPERATIONAL_ROUTE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Delhi side charted buses, daily commuters, and 2-wheelers enter via Gate No. 1 into Parking P2 (with dedicated Alighting Point, S/D Office, and Toilets).</p>]]></description>
       <LineString>
@@ -2944,7 +2592,7 @@
     </Placemark>
 
     <Placemark id="ROUTE-AMBALA-P4">
-      <name>Route 4: Daily Up & Down Commuters from Ambala Side (to Parking P4 via Gate 3)</name>
+      <name>Route 4: Daily Up &amp; Down Commuters from Ambala Side (to Parking P4 via Gate 3)</name>
       <styleUrl>#styleEvacRoute</styleUrl>
       <description><![CDATA[<b>Route 4: Daily Up & Down Commuters from Ambala Side (to Parking P4 via Gate 3)</b><br/><b>ID:</b> ROUTE-AMBALA-P4<br/><b>Category:</b> OPERATIONAL_ROUTE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Ambala side daily commuters and duty sewadars proceed down NH-44 service lane and enter Gate No. 3 directly into Parking P4 near Karishna Polymer.</p>]]></description>
       <LineString>
@@ -2986,7 +2634,7 @@
     </Placemark>
 
     <Placemark id="ROUTE-VIP-PARKING">
-      <name>Route 7: Invited Guests & V.I.P. Parking (via Gate 2)</name>
+      <name>Route 7: Invited Guests &amp; V.I.P. Parking (via Gate 2)</name>
       <styleUrl>#styleVIPRoute</styleUrl>
       <description><![CDATA[<b>Route 7: Invited Guests & V.I.P. Parking (via Gate 2)</b><br/><b>ID:</b> ROUTE-VIP-PARKING<br/><b>Category:</b> OPERATIONAL_ROUTE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Invited dignitaries and VIP motorcades enter via Gate No. 2 into the high-security V.I.P. Parking bay directly behind the stage dais.</p>]]></description>
       <LineString>
@@ -3001,7 +2649,7 @@
     </Placemark>
 
     <Placemark id="ROUTE-PED-FOOTBRIDGE">
-      <name>Route 8: Bus Commuters & Pedestrian Pulsed Corridor (Parking P5 across Footbridge)</name>
+      <name>Route 8: Bus Commuters &amp; Pedestrian Pulsed Corridor (Parking P5 across Footbridge)</name>
       <styleUrl>#styleEvacRoute</styleUrl>
       <description><![CDATA[<b>Route 8: Bus Commuters & Pedestrian Pulsed Corridor (Parking P5 across Footbridge)</b><br/><b>ID:</b> ROUTE-PED-FOOTBRIDGE<br/><b>Category:</b> OPERATIONAL_ROUTE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Public commuters disembarking at Local Bus Stop / Parking P5 are held in staging bays and released in batches across the footbridge to avoid road crossing hazards.</p>]]></description>
       <LineString>
@@ -3043,6 +2691,44 @@
 77.0145,29.182477,0
 77.009,29.184,0
 77.00842,29.18523,0</coordinates>
+      </LineString>
+    </Placemark>
+  </Folder>
+
+  <Folder>
+    <name>Pedestrian Infrastructure &amp; Footbridge (1)</name>
+    <open>1</open>
+
+    <Placemark id="FEAT-FOOTBRIDGE-01">
+      <name>NH-44 Pedestrian Overbridge (Parking 5 to Venue Frontage)</name>
+      <styleUrl>#styleFootbridge</styleUrl>
+      <description><![CDATA[<b>NH-44 Pedestrian Overbridge (Parking 5 to Venue Frontage)</b><br/><b>ID:</b> FEAT-FOOTBRIDGE-01<br/><b>Category:</b> PEDESTRIAN_INFRASTRUCTURE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Supervising Officer:</b> DSP Suresh Kumar (DSP Traffic, Panipat | 7056000501)<br/><p>Controls pedestrian crossing capacity from Parking 5 temporary bus stand across NH-44 to Ceremonial Gate 1 frontage plaza. Excess pedestrians held at Parking 5 and sent across in pulsed batches; standing/stopping on bridge strictly prohibited.</p>]]></description>
+      <LineString>
+        <extrude>1</extrude>
+        <tessellate>1</tessellate>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>77.0322,29.18025,6.5
+77.031,29.18025,6.5
+77.0298,29.18025,6.5</coordinates>
+      </LineString>
+    </Placemark>
+  </Folder>
+
+  <Folder>
+    <name>Hydrographic Features (1)</name>
+    <open>1</open>
+
+    <Placemark id="FEAT-CANAL-SW">
+      <name>Southwestern Irrigation Channel / Perimeter Drain</name>
+      <styleUrl>#styleCanal</styleUrl>
+      <description><![CDATA[<b>Southwestern Irrigation Channel / Perimeter Drain</b><br/><b>ID:</b> FEAT-CANAL-SW<br/><b>Category:</b> HYDROGRAPHIC<br/><b>Status:</b> OBSERVED<br/><p>Tree-lined water channel / drainage corridor forming the physical southwestern boundary of Ground B and railway tracks.</p>]]></description>
+      <LineString>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <coordinates>77.0182,29.18,0
+77.015,29.176,0
+77.0115,29.172,0
+77.0085,29.167,0</coordinates>
       </LineString>
     </Placemark>
   </Folder>

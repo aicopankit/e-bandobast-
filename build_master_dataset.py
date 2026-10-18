@@ -384,7 +384,7 @@ additional_ground_structures = [
         "notes": "Transit langar pavilion catering to pilgrims arriving via Bhodwal Majri railway station.",
         "supervising_officer": "Inspector Railway / Langar Sub-Incharge",
         "capacity": "18,000 devotees/hr",
-        "coords": [[77.0140, 29.1853], [77.0155, 29.1853], [77.0155, 29.1845], [77.0140, 29.1845], [77.0140, 29.1853]]
+        "coords": [[77.0140, 29.1852], [77.0155, 29.1852], [77.0155, 29.1844], [77.0140, 29.1844], [77.0140, 29.1852]]
     },
     {
         "id": "FEAT-DISPENSARY-01",
@@ -458,7 +458,7 @@ additional_ground_structures = [
         "notes": "Sanitation and drinking water facility for commuters at Parking P2.",
         "supervising_officer": "Sanitation Supervisor Parking P2",
         "capacity": "80 cubicles",
-        "coords": [[77.0270, 29.1853], [77.0280, 29.1853], [77.0280, 29.1848], [77.0270, 29.1848], [77.0270, 29.1853]]
+        "coords": [[77.0260, 29.1755], [77.0270, 29.1755], [77.0270, 29.1750], [77.0260, 29.1750], [77.0260, 29.1755]]
     },
     {
         "id": "FEAT-PETROL-PUMP",
@@ -472,7 +472,7 @@ additional_ground_structures = [
         "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
         "notes": "Commercial fuel station fronting NH-44 Grand Trunk Road between Gate 2 and Gate 3.",
         "supervising_officer": "Traffic Police Incharge / Fire Safety Officer",
-        "coords": [[77.0285, 29.1832], [77.0294, 29.1832], [77.0294, 29.1825], [77.0285, 29.1825], [77.0285, 29.1832]]
+        "coords": [[77.0295, 29.1837], [77.0303, 29.1837], [77.0303, 29.1830], [77.0295, 29.1830], [77.0295, 29.1837]]
     },
     {
         "id": "FEAT-POLICE-POST-G2",
@@ -501,7 +501,7 @@ additional_ground_structures = [
         "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
         "notes": "Dedicated passenger alighting shelter connecting Bhodwal Majri station to Ground D.",
         "supervising_officer": "DSP GRP / Inspector Traffic Station Gate",
-        "coords": [[77.0090, 29.1856], [77.0105, 29.1856], [77.0105, 29.1848], [77.0090, 29.1848], [77.0090, 29.1856]]
+        "coords": [[77.0090, 29.1854], [77.0105, 29.1854], [77.0105, 29.1846], [77.0090, 29.1846], [77.0090, 29.1854]]
     },
     {
         "id": "FEAT-WATER-RESERVOIR-01",
@@ -598,10 +598,10 @@ internal_roads = [
         "source_id": "SRC-ESRI-Z17",
         "notes": "East-West avenue running north of the permanent campus, connecting GT Road to Bhodwal Majri village road.",
         "coords": [
-            [77.029500, 29.186271],
-            [77.023762, 29.186271],
-            [77.021027, 29.186271],
-            [77.015000, 29.186271]
+            [77.029500, 29.186800],
+            [77.023762, 29.186800],
+            [77.021027, 29.186800],
+            [77.015000, 29.186800]
         ]
     },
     {
@@ -630,9 +630,8 @@ internal_roads = [
         "evidence_status": "VERIFIED",
         "permanence": "PERMANENT_RIGHT_OF_WAY",
         "source_id": "SRC-ESRI-Z17",
-        "notes": "North-South avenue flanking the western edge of the Main Pandal and Dais, connecting North Campus avenue to South avenue.",
+        "notes": "North-South avenue flanking the western edge of the Main Pandal and Dais, connecting Central Axis avenue to South avenue.",
         "coords": [
-            [77.022314, 29.186271],
             [77.022314, 29.182477],
             [77.022314, 29.177934],
             [77.022314, 29.173000]
@@ -698,8 +697,17 @@ for r in internal_roads:
 with open("osm_extracted_roads_rails.json", "r", encoding="utf-8") as f:
     osm_data = json.load(f)
 
+# Obsolete / superseded pre-construction agrarian tracks that were replaced by the modern institutional campus and avenues:
+obsolete_farm_tracks = {
+    'OSM-ROAD-260851370', 'OSM-ROAD-1096524592', 'OSM-ROAD-1096958339',
+    'OSM-ROAD-1098220620', 'OSM-ROAD-1098220622', 'OSM-ROAD-1098220625',
+    'OSM-ROAD-1098220626', 'OSM-ROAD-1099986106', 'OSM-ROAD-1361568765',
+    'OSM-ROAD-1361898555', 'OSM-ROAD-1361898556'
+}
+
 for r in osm_data["roads"]:
-    features.append(r)
+    if r["id"] not in obsolete_farm_tracks:
+        features.append(r)
 
 for rw in osm_data["rails"]:
     features.append(rw)
@@ -1687,7 +1695,12 @@ official_named_roads = [
         "width_m": 16.0,
         "surface": "Asphalt Arterial",
         "notes": "Major internal transit artery linking the central compound to Bhodwal Majri Railway Station, Passenger Alighting Point, and Parking P3.",
-        "coords": [[77.022300, 29.178000], [77.022300, 29.183000], [77.018500, 29.184000], [77.011000, 29.185500], [77.009000, 29.185500]]
+        "coords": [
+            [77.018237, 29.182477],
+            [77.018237, 29.185800],
+            [77.011000, 29.185800],
+            [77.008420, 29.185800]
+        ]
     },
     {
         "id": "FEAT-ROAD-GOV-NORTH",

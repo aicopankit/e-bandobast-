@@ -485,7 +485,7 @@
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-ESRI-Z17",
-    "notes": "North-South avenue flanking the western edge of the Main Pandal and Dais, connecting North Campus avenue to South avenue."
+    "notes": "North-South avenue flanking the western edge of the Main Pandal and Dais, connecting Central Axis avenue to South avenue."
   },
   {
     "feature_id": "ROAD-INT-NS-CENTRAL",
@@ -550,21 +550,6 @@
   {
     "feature_id": "OSM-ROAD-260851360",
     "name": "Road-unclassified-260851360",
-    "category": "EXTERNAL_ROAD",
-    "evidence_status": "VERIFIED",
-    "permanence": "PERMANENT",
-    "geometry_type": "LineString",
-    "dimensions": "N/A",
-    "area_sqm": "N/A",
-    "area_acres": "N/A",
-    "elevation_m": 228,
-    "confidence": "HIGH",
-    "source_id": "SRC-OSM-DATASET",
-    "notes": ""
-  },
-  {
-    "feature_id": "OSM-ROAD-260851370",
-    "name": "Road-unclassified-260851370",
     "category": "EXTERNAL_ROAD",
     "evidence_status": "VERIFIED",
     "permanence": "PERMANENT",
@@ -698,21 +683,6 @@
     "notes": ""
   },
   {
-    "feature_id": "OSM-ROAD-1096524592",
-    "name": "Road-tertiary-1096524592",
-    "category": "EXTERNAL_ROAD",
-    "evidence_status": "VERIFIED",
-    "permanence": "PERMANENT",
-    "geometry_type": "LineString",
-    "dimensions": "N/A",
-    "area_sqm": "N/A",
-    "area_acres": "N/A",
-    "elevation_m": 228,
-    "confidence": "HIGH",
-    "source_id": "SRC-OSM-DATASET",
-    "notes": ""
-  },
-  {
     "feature_id": "OSM-ROAD-1096524593",
     "name": "Road-tertiary-1096524593",
     "category": "EXTERNAL_ROAD",
@@ -760,21 +730,6 @@
   {
     "feature_id": "OSM-ROAD-1096956596",
     "name": "Road-unclassified-1096956596",
-    "category": "EXTERNAL_ROAD",
-    "evidence_status": "VERIFIED",
-    "permanence": "PERMANENT",
-    "geometry_type": "LineString",
-    "dimensions": "N/A",
-    "area_sqm": "N/A",
-    "area_acres": "N/A",
-    "elevation_m": 228,
-    "confidence": "HIGH",
-    "source_id": "SRC-OSM-DATASET",
-    "notes": ""
-  },
-  {
-    "feature_id": "OSM-ROAD-1096958339",
-    "name": "Road-unclassified-1096958339",
     "category": "EXTERNAL_ROAD",
     "evidence_status": "VERIFIED",
     "permanence": "PERMANENT",
@@ -848,38 +803,8 @@
     "notes": ""
   },
   {
-    "feature_id": "OSM-ROAD-1098220620",
-    "name": "Road-service-1098220620",
-    "category": "EXTERNAL_ROAD",
-    "evidence_status": "VERIFIED",
-    "permanence": "PERMANENT",
-    "geometry_type": "LineString",
-    "dimensions": "N/A",
-    "area_sqm": "N/A",
-    "area_acres": "N/A",
-    "elevation_m": 228,
-    "confidence": "HIGH",
-    "source_id": "SRC-OSM-DATASET",
-    "notes": ""
-  },
-  {
     "feature_id": "OSM-ROAD-1098220621",
     "name": "Road-residential-1098220621",
-    "category": "EXTERNAL_ROAD",
-    "evidence_status": "VERIFIED",
-    "permanence": "PERMANENT",
-    "geometry_type": "LineString",
-    "dimensions": "N/A",
-    "area_sqm": "N/A",
-    "area_acres": "N/A",
-    "elevation_m": 228,
-    "confidence": "HIGH",
-    "source_id": "SRC-OSM-DATASET",
-    "notes": ""
-  },
-  {
-    "feature_id": "OSM-ROAD-1098220622",
-    "name": "Road-residential-1098220622",
     "category": "EXTERNAL_ROAD",
     "evidence_status": "VERIFIED",
     "permanence": "PERMANENT",
@@ -910,36 +835,6 @@
   {
     "feature_id": "OSM-ROAD-1098220624",
     "name": "Road-service-1098220624",
-    "category": "EXTERNAL_ROAD",
-    "evidence_status": "VERIFIED",
-    "permanence": "PERMANENT",
-    "geometry_type": "LineString",
-    "dimensions": "N/A",
-    "area_sqm": "N/A",
-    "area_acres": "N/A",
-    "elevation_m": 228,
-    "confidence": "HIGH",
-    "source_id": "SRC-OSM-DATASET",
-    "notes": ""
-  },
-  {
-    "feature_id": "OSM-ROAD-1098220625",
-    "name": "Road-service-1098220625",
-    "category": "EXTERNAL_ROAD",
-    "evidence_status": "VERIFIED",
-    "permanence": "PERMANENT",
-    "geometry_type": "LineString",
-    "dimensions": "N/A",
-    "area_sqm": "N/A",
-    "area_acres": "N/A",
-    "elevation_m": 228,
-    "confidence": "HIGH",
-    "source_id": "SRC-OSM-DATASET",
-    "notes": ""
-  },
-  {
-    "feature_id": "OSM-ROAD-1098220626",
-    "name": "Road-service-1098220626",
     "category": "EXTERNAL_ROAD",
     "evidence_status": "VERIFIED",
     "permanence": "PERMANENT",
@@ -1163,21 +1058,6 @@
     "notes": ""
   },
   {
-    "feature_id": "OSM-ROAD-1099986106",
-    "name": "Road-tertiary-1099986106",
-    "category": "EXTERNAL_ROAD",
-    "evidence_status": "VERIFIED",
-    "permanence": "PERMANENT",
-    "geometry_type": "LineString",
-    "dimensions": "N/A",
-    "area_sqm": "N/A",
-    "area_acres": "N/A",
-    "elevation_m": 228,
-    "confidence": "HIGH",
-    "source_id": "SRC-OSM-DATASET",
-    "notes": ""
-  },
-  {
     "feature_id": "OSM-ROAD-1281065443",
     "name": "Road-trunk_link-1281065443",
     "category": "EXTERNAL_ROAD",
@@ -1358,21 +1238,6 @@
     "notes": ""
   },
   {
-    "feature_id": "OSM-ROAD-1361568765",
-    "name": "Road-residential-1361568765",
-    "category": "EXTERNAL_ROAD",
-    "evidence_status": "VERIFIED",
-    "permanence": "PERMANENT",
-    "geometry_type": "LineString",
-    "dimensions": "N/A",
-    "area_sqm": "N/A",
-    "area_acres": "N/A",
-    "elevation_m": 228,
-    "confidence": "HIGH",
-    "source_id": "SRC-OSM-DATASET",
-    "notes": ""
-  },
-  {
     "feature_id": "OSM-ROAD-1361568766",
     "name": "Road-residential-1361568766",
     "category": "EXTERNAL_ROAD",
@@ -1390,36 +1255,6 @@
   {
     "feature_id": "OSM-ROAD-1361898554",
     "name": "Road-residential-1361898554",
-    "category": "EXTERNAL_ROAD",
-    "evidence_status": "VERIFIED",
-    "permanence": "PERMANENT",
-    "geometry_type": "LineString",
-    "dimensions": "N/A",
-    "area_sqm": "N/A",
-    "area_acres": "N/A",
-    "elevation_m": 228,
-    "confidence": "HIGH",
-    "source_id": "SRC-OSM-DATASET",
-    "notes": ""
-  },
-  {
-    "feature_id": "OSM-ROAD-1361898555",
-    "name": "Road-residential-1361898555",
-    "category": "EXTERNAL_ROAD",
-    "evidence_status": "VERIFIED",
-    "permanence": "PERMANENT",
-    "geometry_type": "LineString",
-    "dimensions": "N/A",
-    "area_sqm": "N/A",
-    "area_acres": "N/A",
-    "elevation_m": 228,
-    "confidence": "HIGH",
-    "source_id": "SRC-OSM-DATASET",
-    "notes": ""
-  },
-  {
-    "feature_id": "OSM-ROAD-1361898556",
-    "name": "Road-residential-1361898556",
     "category": "EXTERNAL_ROAD",
     "evidence_status": "VERIFIED",
     "permanence": "PERMANENT",

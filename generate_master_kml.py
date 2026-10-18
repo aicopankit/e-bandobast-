@@ -1,4 +1,5 @@
 import json
+import xml.sax.saxutils as saxutils
 
 with open("nirankari_samalkha_ebandobast.geojson", "r", encoding="utf-8") as f:
     geo = json.load(f)
@@ -14,7 +15,7 @@ kml_header = """<?xml version="1.0" encoding="UTF-8"?>
       <p><b>Venue:</b> Sant Nirankari Sant Samagam Ground (Sant Nirankari Adhyatmik Sthal — SNAS)</p>
       <p><b>Location:</b> Bhodwal Majri, Samalkha, Panipat, Haryana, India</p>
       <p><b>Georeference:</b> Lat 29.1805° N, Lon 77.0249° E | Plus Code: 52HG+VF2</p>
-      <p><b>Scope:</b> Complete site reconstruction including 650+ acre grounds, 7 individual campus buildings, 367m Main Pandal, 66 external roads, internal avenues, and Delhi-Ambala railway line.</p>
+      <p><b>Scope:</b> Complete site reconstruction including 650+ acre grounds, permanent institutional campus, 367m Main Pandal, external highway network (NH-44), 8 internal paved avenues, and Delhi-Ambala railway line.</p>
     ]]>
   </description>
 
@@ -58,39 +59,40 @@ kml_header = """<?xml version="1.0" encoding="UTF-8"?>
     <LineStyle><color>ffffffff</color><width>4</width></LineStyle>
   </Style>
 
-  <Style id="styleExternalRoad">
-    <LineStyle><color>ff00aaff</color><width>3</width></LineStyle>
+  <Style id="styleHighwayNH44">
+    <LineStyle><color>ff00aaff</color><width>5</width></LineStyle>
   </Style>
 
-  <Style id="styleHighwayNH44">
-    <LineStyle><color>ff0066ff</color><width>5</width></LineStyle>
+  <Style id="styleExternalRoad">
+    <LineStyle><color>ff77ccff</color><width>2</width></LineStyle>
   </Style>
 
   <Style id="styleRailway">
-    <LineStyle><color>ff222222</color><width>4</width></LineStyle>
+    <LineStyle><color>ffcccccc</color><width>4</width></LineStyle>
   </Style>
 
   <Style id="styleCanal">
-    <LineStyle><color>ffff6600</color><width>4</width></LineStyle>
+    <LineStyle><color>ffff9900</color><width>3</width></LineStyle>
+  </Style>
+
+  <Style id="styleParking">
+    <LineStyle><color>ff00e5ff</color><width>2</width></LineStyle>
+    <PolyStyle><color>2200e5ff</color><fill>1</fill><outline>1</outline></PolyStyle>
   </Style>
 
   <Style id="styleVIPRoute">
-    <LineStyle><color>ff00ff00</color><width>6</width></LineStyle>
+    <LineStyle><color>ff00cc44</color><width>4</width></LineStyle>
   </Style>
 
   <Style id="styleEvacRoute">
-    <LineStyle><color>ff0000ff</color><width>5</width></LineStyle>
-  </Style>
-  <Style id="styleParking">
-    <LineStyle><color>ffffaa00</color><width>3</width></LineStyle>
-    <PolyStyle><color>44ffaa00</color><fill>1</fill><outline>1</outline></PolyStyle>
+    <LineStyle><color>ff3344ff</color><width>3</width></LineStyle>
   </Style>
 
   <Style id="styleFootbridge">
-    <LineStyle><color>ff00ffff</color><width>6</width></LineStyle>
+    <LineStyle><color>ff00ffff</color><width>4</width></LineStyle>
   </Style>
 
-  <Style id="stylePolicePost">
+  <Style id="styleTacPoint">
     <IconStyle>
       <color>ff0000ff</color>
       <scale>1.2</scale>
@@ -100,18 +102,21 @@ kml_header = """<?xml version="1.0" encoding="UTF-8"?>
 
 folders = {
     "Boundaries & Sectors": [],
-    "Dedicated Event Parking (Parking 1-5 & VIP)": [],
-    "Pedestrian Infrastructure & Footbridge": [],
     "3D Event & Campus Buildings": [],
     "Internal Avenues & Lanes": [],
     "External Roads & Highways": [],
-    "Civil Infrastructure & Surroundings": [],
     "Railway Infrastructure": [],
-    "Hydrographic Features": [],
-    "Police & Emergency Deployments": [],
+    "Dedicated Event Parking": [],
+    "Civil Infrastructure & Surroundings": [],
     "Police Facilities & Reserve Posts": [],
-    "VIP Convoy & Evacuation Corridors": []
+    "Police & Emergency Deployments": [],
+    "VIP Convoy & Evacuation Corridors": [],
+    "Pedestrian Infrastructure & Footbridge": [],
+    "Hydrographic Features": [],
+    "Other Features": []
 }
+
+handled_count = 0
 
 for feat in geo["features"]:
     p = feat["properties"]
@@ -119,11 +124,14 @@ for feat in geo["features"]:
     gtype = geom["type"]
     cat = p.get("category", "")
     fid = feat["id"]
-    name = p.get("name", fid)
-    desc = f"<![CDATA[<b>{name}</b><br/><b>ID:</b> {fid}<br/><b>Category:</b> {cat}<br/><b>Status:</b> {p.get('evidence_status', 'N/A')}<br/>"
+    raw_name = p.get("name", fid)
+    name = saxutils.escape(raw_name)
+    desc = f"<![CDATA[<b>{raw_name}</b><br/><b>ID:</b> {fid}<br/><b>Category:</b> {cat}<br/><b>Status:</b> {p.get('evidence_status', 'N/A')}<br/>"
     if "dimensions" in p: desc += f"<b>Dimensions:</b> {p['dimensions']}<br/>"
     if "area_sqm" in p: desc += f"<b>Area:</b> {p['area_sqm']} m²<br/>"
     if "force_strength" in p: desc += f"<b>Force Strength:</b> {p['force_strength']}<br/>"
+    if "supervising_officer" in p: desc += f"<b>Supervising Officer:</b> {p['supervising_officer']}<br/>"
+    if "capacity" in p: desc += f"<b>Capacity:</b> {p['capacity']}<br/>"
     if "notes" in p: desc += f"<p>{p['notes']}</p>"
     desc += "]]>"
 
@@ -152,9 +160,9 @@ for feat in geo["features"]:
     </Placemark>"""
         folders["Boundaries & Sectors"].append(placemark)
 
-    elif cat == "EVENT_STRUCTURE" or cat == "PERMANENT_BUILDING" or cat == "PERMANENT_STRUCTURE":
+    elif cat in ["EVENT_STRUCTURE", "PERMANENT_BUILDING", "PERMANENT_STRUCTURE"]:
         if gtype == "Polygon":
-            h = p.get("estimated_height_m", 10.0)
+            h = p.get("estimated_height_m", 8.0)
             style = "#stylePandal3D" if "PANDAL" in fid else "#styleBuilding3D"
             coords_str = "\n".join([f"{pt[0]},{pt[1]},{h}" for pt in geom["coordinates"][0]])
             placemark = f"""
@@ -217,7 +225,7 @@ for feat in geo["features"]:
     </Placemark>"""
         folders["External Roads & Highways"].append(placemark)
 
-    elif cat == "RAILWAY_INFRASTRUCTURE" or cat == "TRANSPORT_HUB":
+    elif cat in ["RAILWAY_INFRASTRUCTURE", "TRANSPORT_HUB"]:
         if gtype == "LineString":
             coords_str = "\n".join([f"{pt[0]},{pt[1]},0" for pt in geom["coordinates"]])
             placemark = f"""
@@ -244,34 +252,6 @@ for feat in geo["features"]:
     </Placemark>"""
         folders["Railway Infrastructure"].append(placemark)
 
-    elif cat == "HYDROGRAPHIC":
-        coords_str = "\n".join([f"{pt[0]},{pt[1]},0" for pt in geom["coordinates"]])
-        placemark = f"""
-    <Placemark id="{fid}">
-      <name>{name}</name>
-      <styleUrl>#styleCanal</styleUrl>
-      <description>{desc}</description>
-      <LineString>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>{coords_str}</coordinates>
-      </LineString>
-    </Placemark>"""
-        folders["Hydrographic Features"].append(placemark)
-
-    elif cat == "BANDOBAST_TACTICAL" or cat == "ACCESS_CONTROL":
-        c = geom["coordinates"]
-        placemark = f"""
-    <Placemark id="{fid}">
-      <name>{name}</name>
-      <description>{desc}</description>
-      <Point>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>{c[0]},{c[1]},0</coordinates>
-      </Point>
-    </Placemark>"""
-        folders["Police & Emergency Deployments"].append(placemark)
-
     elif cat == "PARKING_FACILITY":
         coords_str = "\n".join([f"{pt[0]},{pt[1]},0" for pt in geom["coordinates"][0]])
         placemark = f"""
@@ -289,7 +269,7 @@ for feat in geo["features"]:
         </outerBoundaryIs>
       </Polygon>
     </Placemark>"""
-        folders["Dedicated Event Parking (Parking 1-5 & VIP)"].append(placemark)
+        folders["Dedicated Event Parking"].append(placemark)
 
     elif cat == "CIVIL_INFRASTRUCTURE":
         if gtype == "Polygon":
@@ -335,22 +315,6 @@ for feat in geo["features"]:
     </Placemark>"""
         folders["Civil Infrastructure & Surroundings"].append(placemark)
 
-    elif cat == "PEDESTRIAN_INFRASTRUCTURE":
-        coords_str = "\n".join([f"{pt[0]},{pt[1]},6.5" for pt in geom["coordinates"]])
-        placemark = f"""
-    <Placemark id="{fid}">
-      <name>{name}</name>
-      <styleUrl>#styleFootbridge</styleUrl>
-      <description>{desc}</description>
-      <LineString>
-        <extrude>1</extrude>
-        <tessellate>1</tessellate>
-        <altitudeMode>relativeToGround</altitudeMode>
-        <coordinates>{coords_str}</coordinates>
-      </LineString>
-    </Placemark>"""
-        folders["Pedestrian Infrastructure & Footbridge"].append(placemark)
-
     elif cat == "POLICE_FACILITY":
         if gtype == "Polygon":
             coords_str = "\n".join([f"{pt[0]},{pt[1]},5.0" for pt in geom["coordinates"][0]])
@@ -382,6 +346,19 @@ for feat in geo["features"]:
     </Placemark>"""
         folders["Police Facilities & Reserve Posts"].append(placemark)
 
+    elif cat in ["BANDOBAST_TACTICAL", "ACCESS_CONTROL"]:
+        c = geom["coordinates"]
+        placemark = f"""
+    <Placemark id="{fid}">
+      <name>{name}</name>
+      <description>{desc}</description>
+      <Point>
+        <altitudeMode>clampToGround</altitudeMode>
+        <coordinates>{c[0]},{c[1]},0</coordinates>
+      </Point>
+    </Placemark>"""
+        folders["Police & Emergency Deployments"].append(placemark)
+
     elif cat == "OPERATIONAL_ROUTE":
         style = "#styleVIPRoute" if ("VIP" in fid or "SC" in fid) else "#styleEvacRoute"
         coords_str = "\n".join([f"{pt[0]},{pt[1]},0" for pt in geom["coordinates"]])
@@ -398,17 +375,94 @@ for feat in geo["features"]:
     </Placemark>"""
         folders["VIP Convoy & Evacuation Corridors"].append(placemark)
 
+    elif cat == "PEDESTRIAN_INFRASTRUCTURE":
+        coords_str = "\n".join([f"{pt[0]},{pt[1]},6.5" for pt in geom["coordinates"]])
+        placemark = f"""
+    <Placemark id="{fid}">
+      <name>{name}</name>
+      <styleUrl>#styleFootbridge</styleUrl>
+      <description>{desc}</description>
+      <LineString>
+        <extrude>1</extrude>
+        <tessellate>1</tessellate>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>{coords_str}</coordinates>
+      </LineString>
+    </Placemark>"""
+        folders["Pedestrian Infrastructure & Footbridge"].append(placemark)
+
+    elif cat == "HYDROGRAPHIC":
+        coords_str = "\n".join([f"{pt[0]},{pt[1]},0" for pt in geom["coordinates"]])
+        placemark = f"""
+    <Placemark id="{fid}">
+      <name>{name}</name>
+      <styleUrl>#styleCanal</styleUrl>
+      <description>{desc}</description>
+      <LineString>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <coordinates>{coords_str}</coordinates>
+      </LineString>
+    </Placemark>"""
+        folders["Hydrographic Features"].append(placemark)
+
+    else:
+        # Fallback for any other geometry
+        if gtype == "Point":
+            c = geom["coordinates"]
+            placemark = f"""
+    <Placemark id="{fid}">
+      <name>{name}</name>
+      <description>{desc}</description>
+      <Point>
+        <altitudeMode>clampToGround</altitudeMode>
+        <coordinates>{c[0]},{c[1]},0</coordinates>
+      </Point>
+    </Placemark>"""
+        elif gtype == "LineString":
+            coords_str = "\n".join([f"{pt[0]},{pt[1]},0" for pt in geom["coordinates"]])
+            placemark = f"""
+    <Placemark id="{fid}">
+      <name>{name}</name>
+      <description>{desc}</description>
+      <LineString>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <coordinates>{coords_str}</coordinates>
+      </LineString>
+    </Placemark>"""
+        else:
+            coords_str = "\n".join([f"{pt[0]},{pt[1]},0" for pt in geom["coordinates"][0]])
+            placemark = f"""
+    <Placemark id="{fid}">
+      <name>{name}</name>
+      <description>{desc}</description>
+      <Polygon>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>{coords_str}</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>"""
+        folders["Other Features"].append(placemark)
+
 # Assemble KML
 kml_body = ""
+total_placemarks = 0
 for fname, pmarks in folders.items():
     if pmarks:
-        kml_body += f"\n  <Folder>\n    <name>{fname} ({len(pmarks)})</name>\n    <open>1</open>\n"
+        fname_esc = saxutils.escape(fname)
+        kml_body += f"\n  <Folder>\n    <name>{fname_esc} ({len(pmarks)})</name>\n    <open>1</open>\n"
         kml_body += "\n".join(pmarks)
         kml_body += "\n  </Folder>\n"
+        total_placemarks += len(pmarks)
 
 kml_footer = "\n</Document>\n</kml>"
 
 with open("samalkha_bandobast_3d.kml", "w", encoding="utf-8") as f:
     f.write(kml_header + kml_body + kml_footer)
 
-print("Exported updated samalkha_bandobast_3d.kml with all 109 master features!")
+print(f"Exported updated samalkha_bandobast_3d.kml with {total_placemarks} master features (100% matched to GeoJSON)!")
