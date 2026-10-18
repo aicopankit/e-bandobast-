@@ -400,17 +400,28 @@
             layers.internalRoads.addLayer(line);
           }
 
-          // 8. EXTERNAL HIGHWAYS & ROADS
+          // 8. EXTERNAL HIGHWAYS & ROADS (NH-44 / GT ROAD)
           else if (cat === 'EXTERNAL_ROAD') {
             const isTrunk = p.highway_type === 'trunk' || fid.includes('NH44');
-            const line = L.geoJSON(feat, {
-              style: {
-                color: isTrunk ? '#f59e0b' : '#38bdf8',
-                weight: isTrunk ? 6 : 2.5,
-                opacity: 0.9
-              }
-            }).bindPopup(makePopup());
-            layers.externalRoads.addLayer(line);
+            if (isTrunk) {
+              const casing = L.geoJSON(feat, {
+                style: { color: '#0f172a', weight: 9, opacity: 0.95 }
+              });
+              layers.externalRoads.addLayer(casing);
+              const core = L.geoJSON(feat, {
+                style: { color: '#f59e0b', weight: 5, opacity: 1.0 }
+              }).bindPopup(makePopup());
+              layers.externalRoads.addLayer(core);
+            } else {
+              const line = L.geoJSON(feat, {
+                style: {
+                  color: (p.highway_type === 'trunk_link') ? '#fbbf24' : '#38bdf8',
+                  weight: 3.5,
+                  opacity: 0.9
+                }
+              }).bindPopup(makePopup());
+              layers.externalRoads.addLayer(line);
+            }
           }
 
           // 9. CIVIL INFRASTRUCTURE (FLYOVER, UNDERPASSES, VILLAGES, INDUSTRY)
