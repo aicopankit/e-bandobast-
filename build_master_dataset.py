@@ -339,6 +339,232 @@ for b in permanent_buildings:
         }
     })
 
+# --- 4B. SATELLITE & BLUEPRINT-VERIFIED GROUND INFRASTRUCTURE ---
+additional_ground_structures = [
+    {
+        "id": "FEAT-LANGAR-01",
+        "name": "Ground B Mega Langar Hall & Community Kitchen (South)",
+        "category": "PERMANENT_STRUCTURE",
+        "dimensions": "165m x 70m",
+        "area_sqm": 11550,
+        "estimated_height_m": 7.5,
+        "evidence_status": "VERIFIED",
+        "permanence": "PERMANENT",
+        "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
+        "notes": "Major community dining and langar hall in Ground B, serving 24/7 free meals to devotees.",
+        "supervising_officer": "DSP Crime Panipat / Langar Committee Incharge",
+        "capacity": "35,000 devotees/hr",
+        "coords": [[77.0225, 29.1775], [77.0242, 29.1775], [77.0242, 29.1768], [77.0225, 29.1768], [77.0225, 29.1775]]
+    },
+    {
+        "id": "FEAT-LANGAR-02",
+        "name": "Ground C Mega Langar Hall & Community Kitchen (North)",
+        "category": "PERMANENT_STRUCTURE",
+        "dimensions": "145m x 90m",
+        "area_sqm": 13050,
+        "estimated_height_m": 7.5,
+        "evidence_status": "VERIFIED",
+        "permanence": "PERMANENT",
+        "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
+        "notes": "Major community dining and langar hall in Ground C, located north of Avenue R-2 90'.",
+        "supervising_officer": "DSP HQ Karnal / Langar Committee Incharge",
+        "capacity": "30,000 devotees/hr",
+        "coords": [[77.0215, 29.1842], [77.0230, 29.1842], [77.0230, 29.1834], [77.0215, 29.1834], [77.0215, 29.1842]]
+    },
+    {
+        "id": "FEAT-LANGAR-03",
+        "name": "Ground D Transit Langar Hall (Railway Flank)",
+        "category": "PERMANENT_STRUCTURE",
+        "dimensions": "145m x 90m",
+        "area_sqm": 13050,
+        "estimated_height_m": 6.5,
+        "evidence_status": "VERIFIED",
+        "permanence": "PERMANENT",
+        "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
+        "notes": "Transit langar pavilion catering to pilgrims arriving via Bhodwal Majri railway station.",
+        "supervising_officer": "Inspector Railway / Langar Sub-Incharge",
+        "capacity": "18,000 devotees/hr",
+        "coords": [[77.0140, 29.1853], [77.0155, 29.1853], [77.0155, 29.1845], [77.0140, 29.1845], [77.0140, 29.1853]]
+    },
+    {
+        "id": "FEAT-DISPENSARY-01",
+        "name": "Central Medical Dispensary & Emergency Health Post",
+        "category": "PERMANENT_STRUCTURE",
+        "dimensions": "105m x 55m",
+        "area_sqm": 5775,
+        "estimated_height_m": 6.0,
+        "evidence_status": "VERIFIED",
+        "permanence": "PERMANENT",
+        "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
+        "notes": "Central dispensary and emergency health post equipped with ambulances and ICU beds.",
+        "supervising_officer": "Chief Medical Officer (CMO Panipat / SNM Hospital)",
+        "capacity": "150-bed emergency triage",
+        "coords": [[77.0252, 29.1842], [77.0263, 29.1842], [77.0263, 29.1837], [77.0252, 29.1837], [77.0252, 29.1842]]
+    },
+    {
+        "id": "FEAT-SD-OFFICE",
+        "name": "Sub-Divisional Civil & Police Administration Office (S/D Office)",
+        "category": "PERMANENT_STRUCTURE",
+        "dimensions": "85m x 55m",
+        "area_sqm": 4675,
+        "estimated_height_m": 6.0,
+        "evidence_status": "VERIFIED",
+        "permanence": "PERMANENT",
+        "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
+        "notes": "Sub-divisional magistrate and police control room fronting Road R-2 90'.",
+        "supervising_officer": "SDM Samalkha / DSP HQ",
+        "coords": [[77.0236, 29.1846], [77.0245, 29.1846], [77.0245, 29.1841], [77.0236, 29.1841], [77.0236, 29.1846]]
+    },
+    {
+        "id": "FEAT-TOILETS-PANDAL-N",
+        "name": "Main Pandal North Permanent Sanitation & Toilet Complex",
+        "category": "PERMANENT_STRUCTURE",
+        "dimensions": "330m x 45m",
+        "area_sqm": 14850,
+        "estimated_height_m": 4.5,
+        "evidence_status": "VERIFIED",
+        "permanence": "PERMANENT",
+        "source_id": "SRC-ESRI-Z16",
+        "notes": "Four continuous modular permanent toilet and ablution blocks north of the Main Pandal.",
+        "supervising_officer": "Sanitation Incharge / Duty Magistrate",
+        "capacity": "450 cubicles with running water",
+        "coords": [[77.0232, 29.1812], [77.0266, 29.1812], [77.0266, 29.1808], [77.0232, 29.1808], [77.0232, 29.1812]]
+    },
+    {
+        "id": "FEAT-TOILETS-PANDAL-S",
+        "name": "Main Pandal South Permanent Sanitation & Toilet Complex",
+        "category": "PERMANENT_STRUCTURE",
+        "dimensions": "330m x 45m",
+        "area_sqm": 14850,
+        "estimated_height_m": 4.5,
+        "evidence_status": "VERIFIED",
+        "permanence": "PERMANENT",
+        "source_id": "SRC-ESRI-Z16",
+        "notes": "Four continuous modular permanent toilet and ablution blocks south of the Main Pandal.",
+        "supervising_officer": "Sanitation Incharge / Duty Magistrate",
+        "capacity": "450 cubicles with running water",
+        "coords": [[77.0232, 29.1779], [77.0266, 29.1779], [77.0266, 29.1775], [77.0232, 29.1775], [77.0232, 29.1779]]
+    },
+    {
+        "id": "FEAT-TOILETS-P2",
+        "name": "Parking P2 Commuter Sanitation & Rest Block",
+        "category": "PERMANENT_STRUCTURE",
+        "dimensions": "95m x 55m",
+        "area_sqm": 5225,
+        "estimated_height_m": 4.0,
+        "evidence_status": "VERIFIED",
+        "permanence": "PERMANENT",
+        "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
+        "notes": "Sanitation and drinking water facility for commuters at Parking P2.",
+        "supervising_officer": "Sanitation Supervisor Parking P2",
+        "capacity": "80 cubicles",
+        "coords": [[77.0270, 29.1853], [77.0280, 29.1853], [77.0280, 29.1848], [77.0270, 29.1848], [77.0270, 29.1853]]
+    },
+    {
+        "id": "FEAT-PETROL-PUMP",
+        "name": "NH-44 Commercial Fuel & Service Station",
+        "category": "CIVIL_INFRASTRUCTURE",
+        "dimensions": "85m x 80m",
+        "area_sqm": 6800,
+        "estimated_height_m": 6.5,
+        "evidence_status": "VERIFIED",
+        "permanence": "PERMANENT",
+        "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
+        "notes": "Commercial fuel station fronting NH-44 Grand Trunk Road between Gate 2 and Gate 3.",
+        "supervising_officer": "Traffic Police Incharge / Fire Safety Officer",
+        "coords": [[77.0285, 29.1832], [77.0294, 29.1832], [77.0294, 29.1825], [77.0285, 29.1825], [77.0285, 29.1832]]
+    },
+    {
+        "id": "FEAT-POLICE-POST-G2",
+        "name": "Gate 2 Integrated Police Post & Security Control Centre",
+        "category": "POLICE_FACILITY",
+        "dimensions": "75m x 75m",
+        "area_sqm": 5625,
+        "estimated_height_m": 5.0,
+        "evidence_status": "VERIFIED",
+        "permanence": "PERMANENT",
+        "source_id": "SRC-POLICE-DUTY-2025",
+        "notes": "Primary police post, CCTV monitoring bunker, and VIP pass verification counter at Gate 2.",
+        "supervising_officer": "DSP HQ Karnal / SHO Samalkha",
+        "allocated_force": "1 Insp, 2 SIs, 4 ASIs, 24 Head Constables",
+        "coords": [[77.0288, 29.1798], [77.0296, 29.1798], [77.0296, 29.1791], [77.0288, 29.1791], [77.0288, 29.1798]]
+    },
+    {
+        "id": "FEAT-ALIGHTING-STN",
+        "name": "Railway Station & ISBT Passenger Alighting Terminal",
+        "category": "PERMANENT_STRUCTURE",
+        "dimensions": "145m x 90m",
+        "area_sqm": 13050,
+        "estimated_height_m": 5.5,
+        "evidence_status": "VERIFIED",
+        "permanence": "PERMANENT",
+        "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
+        "notes": "Dedicated passenger alighting shelter connecting Bhodwal Majri station to Ground D.",
+        "supervising_officer": "DSP GRP / Inspector Traffic Station Gate",
+        "coords": [[77.0090, 29.1856], [77.0105, 29.1856], [77.0105, 29.1848], [77.0090, 29.1848], [77.0090, 29.1856]]
+    },
+    {
+        "id": "FEAT-WATER-RESERVOIR-01",
+        "name": "South Overhead Drinking Water Reservoir & Pump Compound",
+        "category": "CIVIL_INFRASTRUCTURE",
+        "dimensions": "68m x 68m",
+        "area_sqm": 4624,
+        "estimated_height_m": 14.0,
+        "evidence_status": "VERIFIED",
+        "permanence": "PERMANENT",
+        "source_id": "SRC-ESRI-Z16",
+        "notes": "Elevated water storage tank and booster pump station supplying potable water to Grounds A and B.",
+        "supervising_officer": "Public Health Engineering Officer",
+        "capacity": "2.5 Million Litres Overhead Storage",
+        "coords": [[77.0205, 29.1768], [77.0212, 29.1768], [77.0212, 29.1762], [77.0205, 29.1762], [77.0205, 29.1768]]
+    },
+    {
+        "id": "FEAT-WATER-RESERVOIR-02",
+        "name": "North Overhead Drinking Water Reservoir & Pump Compound",
+        "category": "CIVIL_INFRASTRUCTURE",
+        "dimensions": "68m x 68m",
+        "area_sqm": 4624,
+        "estimated_height_m": 14.0,
+        "evidence_status": "VERIFIED",
+        "permanence": "PERMANENT",
+        "source_id": "SRC-ESRI-Z16",
+        "notes": "Elevated water storage tank and booster pump station supplying potable water to Grounds C and D.",
+        "supervising_officer": "Public Health Engineering Officer",
+        "capacity": "2.5 Million Litres Overhead Storage",
+        "coords": [[77.0205, 29.1864], [77.0212, 29.1864], [77.0212, 29.1858], [77.0205, 29.1858], [77.0205, 29.1864]]
+    }
+]
+
+for b in additional_ground_structures:
+    props = {
+        "name": b["name"],
+        "category": b["category"],
+        "dimensions": b["dimensions"],
+        "area_sqm": b["area_sqm"],
+        "estimated_height_m": b["estimated_height_m"],
+        "elevation_m": 228,
+        "evidence_status": b["evidence_status"],
+        "permanence": b["permanence"],
+        "source_id": b["source_id"],
+        "confidence": "HIGH",
+        "notes": b["notes"]
+    }
+    if "supervising_officer" in b:
+        props["supervising_officer"] = b["supervising_officer"]
+    if "capacity" in b:
+        props["capacity"] = b["capacity"]
+    if "allocated_force" in b:
+        props["allocated_force"] = b["allocated_force"]
+    features.append({
+        "type": "Feature",
+        "id": b["id"],
+        "properties": props,
+        "geometry": {
+            "type": "Polygon",
+            "coordinates": [b["coords"]]
+        }
+    })
+
 # --- 5. INTERNAL ROAD & AVENUE NETWORK ---
 internal_roads = [
     {

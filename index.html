@@ -1010,7 +1010,7 @@
             const polyWorld = geom.coordinates[0].map(pt => geoToWorld(pt[1], pt[0]));
             if (['FEAT-ZONE-GROUND-B', 'FEAT-ZONE-GROUND-C', 'FEAT-ZONE-GROUND-D'].includes(fid)) {
               pcgSectorPolygons[fid] = polyWorld;
-            } else if (['EVENT_STRUCTURE', 'PERMANENT_BUILDING', 'PARKING_FACILITY', 'CIVIL_INFRASTRUCTURE'].includes(cat)) {
+            } else if (['EVENT_STRUCTURE', 'PERMANENT_BUILDING', 'PERMANENT_STRUCTURE', 'PARKING_FACILITY', 'CIVIL_INFRASTRUCTURE', 'POLICE_FACILITY'].includes(cat)) {
               pcgExclusionPolygons.push(polyWorld);
             }
           }
@@ -1114,8 +1114,13 @@
               const roofMat = new THREE.MeshStandardMaterial({
                 color: 0x3d5a80, metalness: 0.65, roughness: 0.35, side: THREE.DoubleSide
               });
+              let cX = 0, cZ = 0;
+              const coords = geom.coordinates[0];
+              coords.forEach(pt => { const w = geoToWorld(pt[1], pt[0]); cX += w.x; cZ += w.z; });
+              cX /= coords.length; cZ /= coords.length;
+
               const pandalMesh = new THREE.Mesh(roofGeo, roofMat);
-              pandalMesh.position.set(-34.15, pH/2 + 4, -26.27);
+              pandalMesh.position.set(cX, pH/2 + 4, cZ);
               pandalMesh.castShadow = true;
               pandalMesh.userData = { ...p, feature_id: fid };
               interactiveObjects.push(pandalMesh);
@@ -1127,7 +1132,7 @@
               for (let x = -pW/2 + 8; x <= pW/2 - 8; x += 32) {
                 [-pL/2 + 2, pL/2 - 2].forEach(z => {
                   const col = new THREE.Mesh(colGeo, colMat);
-                  col.position.set(-34.15 + x, pH/2, -26.27 + z);
+                  col.position.set(cX + x, pH/2, cZ + z);
                   layerGroups.pandal.add(col);
                 });
               }
@@ -1137,7 +1142,7 @@
               const carpetMat = new THREE.MeshStandardMaterial({ color: 0xc1121f, roughness: 0.8 });
               const carpet = new THREE.Mesh(carpetGeo, carpetMat);
               carpet.rotation.x = -Math.PI / 2;
-              carpet.position.set(-34.15 + 20, 0.45, -26.27);
+              carpet.position.set(cX + 20, 0.45, cZ);
               layerGroups.pandal.add(carpet);
 
               // Pandal Floating Landmark Badge
@@ -1148,14 +1153,19 @@
                 fontSize: 26,
                 scaleFactor: 0.20
               });
-              pandalLabel.position.set(-34.15, pH + 12, -26.27);
+              pandalLabel.position.set(cX, pH + 12, cZ);
               layerGroups.labels.add(pandalLabel);
             }
             else if (fid === 'FEAT-STAGE-DAIS') {
+              let cX = 0, cZ = 0;
+              const coords = geom.coordinates[0];
+              coords.forEach(pt => { const w = geoToWorld(pt[1], pt[0]); cX += w.x; cZ += w.z; });
+              cX /= coords.length; cZ /= coords.length;
+
               const stageGeo = new THREE.BoxGeometry(45, 3.5, 30);
               const stageMat = new THREE.MeshStandardMaterial({ color: 0xe63946, roughness: 0.4 });
               const stageMesh = new THREE.Mesh(stageGeo, stageMat);
-              stageMesh.position.set(-34.15 - 145, 1.75, -26.27);
+              stageMesh.position.set(cX, 1.75, cZ);
               stageMesh.castShadow = true;
               stageMesh.userData = { ...p, feature_id: fid };
               interactiveObjects.push(stageMesh);
@@ -1166,7 +1176,7 @@
                 new THREE.BoxGeometry(3, 12, 28),
                 new THREE.MeshStandardMaterial({ color: 0xffd166, metalness: 0.3 })
               );
-              backdrop.position.set(-34.15 - 162, 6, -26.27);
+              backdrop.position.set(cX - 18, 6, cZ);
               layerGroups.pandal.add(backdrop);
             }
             else if (fid === 'FEAT-EXHIBITION') {
@@ -1238,20 +1248,32 @@
             }
           }
 
-          // 3. INDIVIDUAL PERMANENT BUILDINGS (SNAS CAMPUS)
-          else if (cat === 'PERMANENT_BUILDING') {
+          // 3. INDIVIDUAL PERMANENT BUILDINGS & GROUND STRUCTURES
+          else if (cat === 'PERMANENT_BUILDING' || cat === 'PERMANENT_STRUCTURE') {
             const coords = geom.coordinates[0];
             const shape = new THREE.Shape();
+            let cX = 0, cZ = 0;
             coords.forEach((pt, idx) => {
               const w = geoToWorld(pt[1], pt[0]);
+              cX += w.x; cZ += w.z;
               if (idx === 0) shape.moveTo(w.x, -w.z);
               else shape.lineTo(w.x, -w.z);
             });
+            cX /= coords.length; cZ /= coords.length;
 
-            const h = p.estimated_height_m || 10.0;
+            const h = p.estimated_height_m || 8.0;
             const bldgGeo = new THREE.ExtrudeGeometry(shape, { depth: h, bevelEnabled: false });
+
+            // Contextual facility color
+            let bColor = 0x2a6f97;
+            if (fid.includes('LANGAR')) bColor = 0xc2410c; // Warm terracotta / amber for Langar kitchens
+            else if (fid.includes('DISPENSARY')) bColor = 0x0284c7; // Hospital cyan
+            else if (fid.includes('SD-OFFICE')) bColor = 0x0f766e; // Executive green
+            else if (fid.includes('TOILETS')) bColor = 0x475569; // Slate sanitary grey
+            else if (fid.includes('RESERVOIR')) bColor = 0x334155; // Industrial water reservoir
+
             const bldgMat = new THREE.MeshStandardMaterial({
-              color: 0x2a6f97, roughness: 0.5, metalness: 0.2
+              color: bColor, roughness: 0.5, metalness: 0.2
             });
             const bldgMesh = new THREE.Mesh(bldgGeo, bldgMat);
             bldgMesh.rotation.x = -Math.PI / 2;
@@ -1262,6 +1284,21 @@
             bldgMesh.userData = { ...p, feature_id: fid };
             interactiveObjects.push(bldgMesh);
             layerGroups.campus.add(bldgMesh);
+
+            // Add landmark badge for major facilities
+            if (fid.includes('LANGAR-01')) {
+              const lBadge = makeTextSprite("🍲 GROUND B MEGA LANGAR (35k/hr)", {
+                borderColor: '#f97316', backgroundColor: 'rgba(124, 45, 18, 0.94)', textColor: '#ffedd5', fontSize: 22
+              });
+              lBadge.position.set(cX, h + 12, cZ);
+              layerGroups.labels.add(lBadge);
+            } else if (fid.includes('DISPENSARY')) {
+              const dBadge = makeTextSprite("🏥 CENTRAL MEDICAL DISPENSARY & ICU", {
+                borderColor: '#38bdf8', backgroundColor: 'rgba(12, 74, 110, 0.94)', textColor: '#e0f2fe', fontSize: 22
+              });
+              dBadge.position.set(cX, h + 12, cZ);
+              layerGroups.labels.add(dBadge);
+            }
           }
 
           // 4. INTERNAL ROAD NETWORK
@@ -1853,21 +1890,40 @@
       }
 
       function isLocationClearOfRoadsAndStructures(px, pz, secPoly) {
-        // 1. Must be strictly inside sector polygon boundary
-        if (!pointInPolygon(px, pz, secPoly)) return false;
+        // Enforce bounding envelope of tent: tentW=24, tentD=16
+        // Half extents with safety buffer:
+        const rx = tentW / 2 + 4.0; // 16m
+        const rz = tentD / 2 + 4.0; // 12m
 
-        // 2. Strict road clearance: 24m corridor for internal roads, 32m for railway, 20m for highways
+        // Check center AND all 4 envelope corners are inside sector polygon boundary
+        const corners = [
+          { x: px, z: pz },
+          { x: px - rx, z: pz - rz },
+          { x: px + rx, z: pz - rz },
+          { x: px + rx, z: pz + rz },
+          { x: px - rx, z: pz + rz }
+        ];
+
+        for (let c = 0; c < corners.length; c++) {
+          if (!pointInPolygon(corners[c].x, corners[c].z, secPoly)) return false;
+        }
+
+        // Strict road clearance: check distance from center to all road segments
         for (let i = 0; i < pcgRoadSegments.length; i++) {
           const seg = pcgRoadSegments[i];
-          if (distToSegment(px, pz, seg.p1.x, seg.p1.z, seg.p2.x, seg.p2.z) < seg.clr) {
+          if (distToSegment(px, pz, seg.p1.x, seg.p1.z, seg.p2.x, seg.p2.z) < (seg.clr + 8.0)) {
             return false;
           }
         }
 
-        // 3. Strict permanent building, pandal, and parking clearance
+        // Strict permanent building, pandal, and parking clearance
         for (let i = 0; i < pcgExclusionPolygons.length; i++) {
           const ep = pcgExclusionPolygons[i];
-          if (pointInPolygon(px, pz, ep)) return false;
+          // If any corner is inside exclusion polygon, reject!
+          for (let c = 0; c < corners.length; c++) {
+            if (pointInPolygon(corners[c].x, corners[c].z, ep)) return false;
+          }
+          // Distance from center to any polygon segment must exceed 20m
           for (let j = 0; j < ep.length - 1; j++) {
             if (distToSegment(px, pz, ep[j].x, ep[j].z, ep[j+1].x, ep[j+1].z) < 20.0) {
               return false;

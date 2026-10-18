@@ -152,7 +152,7 @@ for feat in geo["features"]:
     </Placemark>"""
         folders["Boundaries & Sectors"].append(placemark)
 
-    elif cat == "EVENT_STRUCTURE" or cat == "PERMANENT_BUILDING":
+    elif cat == "EVENT_STRUCTURE" or cat == "PERMANENT_BUILDING" or cat == "PERMANENT_STRUCTURE":
         if gtype == "Polygon":
             h = p.get("estimated_height_m", 10.0)
             style = "#stylePandal3D" if "PANDAL" in fid else "#styleBuilding3D"
@@ -352,8 +352,26 @@ for feat in geo["features"]:
         folders["Pedestrian Infrastructure & Footbridge"].append(placemark)
 
     elif cat == "POLICE_FACILITY":
-        c = geom["coordinates"]
-        placemark = f"""
+        if gtype == "Polygon":
+            coords_str = "\n".join([f"{pt[0]},{pt[1]},5.0" for pt in geom["coordinates"][0]])
+            placemark = f"""
+    <Placemark id="{fid}">
+      <name>{name}</name>
+      <styleUrl>#styleBuilding3D</styleUrl>
+      <description>{desc}</description>
+      <Polygon>
+        <extrude>1</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>{coords_str}</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>"""
+        else:
+            c = geom["coordinates"]
+            placemark = f"""
     <Placemark id="{fid}">
       <name>{name}</name>
       <description>{desc}</description>

@@ -433,7 +433,7 @@
   </Folder>
 
   <Folder>
-    <name>3D Event & Campus Buildings (13)</name>
+    <name>3D Event & Campus Buildings (22)</name>
     <open>1</open>
 
     <Placemark id="FEAT-PANDAL-01">
@@ -602,6 +602,177 @@
 77.022314,29.183134,8.0
 77.021027,29.183134,8.0
 77.021027,29.183601,8.0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-LANGAR-01">
+      <name>Ground B Mega Langar Hall & Community Kitchen (South)</name>
+      <styleUrl>#styleBuilding3D</styleUrl>
+      <description><![CDATA[<b>Ground B Mega Langar Hall & Community Kitchen (South)</b><br/><b>ID:</b> FEAT-LANGAR-01<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 165m x 70m<br/><b>Area:</b> 11550 m²<br/><p>Major community dining and langar hall in Ground B, serving 24/7 free meals to devotees.</p>]]></description>
+      <Polygon>
+        <extrude>1</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0225,29.1775,7.5
+77.0242,29.1775,7.5
+77.0242,29.1768,7.5
+77.0225,29.1768,7.5
+77.0225,29.1775,7.5</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-LANGAR-02">
+      <name>Ground C Mega Langar Hall & Community Kitchen (North)</name>
+      <styleUrl>#styleBuilding3D</styleUrl>
+      <description><![CDATA[<b>Ground C Mega Langar Hall & Community Kitchen (North)</b><br/><b>ID:</b> FEAT-LANGAR-02<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 145m x 90m<br/><b>Area:</b> 13050 m²<br/><p>Major community dining and langar hall in Ground C, located north of Avenue R-2 90'.</p>]]></description>
+      <Polygon>
+        <extrude>1</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0215,29.1842,7.5
+77.023,29.1842,7.5
+77.023,29.1834,7.5
+77.0215,29.1834,7.5
+77.0215,29.1842,7.5</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-LANGAR-03">
+      <name>Ground D Transit Langar Hall (Railway Flank)</name>
+      <styleUrl>#styleBuilding3D</styleUrl>
+      <description><![CDATA[<b>Ground D Transit Langar Hall (Railway Flank)</b><br/><b>ID:</b> FEAT-LANGAR-03<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 145m x 90m<br/><b>Area:</b> 13050 m²<br/><p>Transit langar pavilion catering to pilgrims arriving via Bhodwal Majri railway station.</p>]]></description>
+      <Polygon>
+        <extrude>1</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.014,29.1853,6.5
+77.0155,29.1853,6.5
+77.0155,29.1845,6.5
+77.014,29.1845,6.5
+77.014,29.1853,6.5</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-DISPENSARY-01">
+      <name>Central Medical Dispensary & Emergency Health Post</name>
+      <styleUrl>#styleBuilding3D</styleUrl>
+      <description><![CDATA[<b>Central Medical Dispensary & Emergency Health Post</b><br/><b>ID:</b> FEAT-DISPENSARY-01<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 105m x 55m<br/><b>Area:</b> 5775 m²<br/><p>Central dispensary and emergency health post equipped with ambulances and ICU beds.</p>]]></description>
+      <Polygon>
+        <extrude>1</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0252,29.1842,6.0
+77.0263,29.1842,6.0
+77.0263,29.1837,6.0
+77.0252,29.1837,6.0
+77.0252,29.1842,6.0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-SD-OFFICE">
+      <name>Sub-Divisional Civil & Police Administration Office (S/D Office)</name>
+      <styleUrl>#styleBuilding3D</styleUrl>
+      <description><![CDATA[<b>Sub-Divisional Civil & Police Administration Office (S/D Office)</b><br/><b>ID:</b> FEAT-SD-OFFICE<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 85m x 55m<br/><b>Area:</b> 4675 m²<br/><p>Sub-divisional magistrate and police control room fronting Road R-2 90'.</p>]]></description>
+      <Polygon>
+        <extrude>1</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0236,29.1846,6.0
+77.0245,29.1846,6.0
+77.0245,29.1841,6.0
+77.0236,29.1841,6.0
+77.0236,29.1846,6.0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-TOILETS-PANDAL-N">
+      <name>Main Pandal North Permanent Sanitation & Toilet Complex</name>
+      <styleUrl>#stylePandal3D</styleUrl>
+      <description><![CDATA[<b>Main Pandal North Permanent Sanitation & Toilet Complex</b><br/><b>ID:</b> FEAT-TOILETS-PANDAL-N<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 330m x 45m<br/><b>Area:</b> 14850 m²<br/><p>Four continuous modular permanent toilet and ablution blocks north of the Main Pandal.</p>]]></description>
+      <Polygon>
+        <extrude>1</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0232,29.1812,4.5
+77.0266,29.1812,4.5
+77.0266,29.1808,4.5
+77.0232,29.1808,4.5
+77.0232,29.1812,4.5</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-TOILETS-PANDAL-S">
+      <name>Main Pandal South Permanent Sanitation & Toilet Complex</name>
+      <styleUrl>#stylePandal3D</styleUrl>
+      <description><![CDATA[<b>Main Pandal South Permanent Sanitation & Toilet Complex</b><br/><b>ID:</b> FEAT-TOILETS-PANDAL-S<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 330m x 45m<br/><b>Area:</b> 14850 m²<br/><p>Four continuous modular permanent toilet and ablution blocks south of the Main Pandal.</p>]]></description>
+      <Polygon>
+        <extrude>1</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0232,29.1779,4.5
+77.0266,29.1779,4.5
+77.0266,29.1775,4.5
+77.0232,29.1775,4.5
+77.0232,29.1779,4.5</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-TOILETS-P2">
+      <name>Parking P2 Commuter Sanitation & Rest Block</name>
+      <styleUrl>#styleBuilding3D</styleUrl>
+      <description><![CDATA[<b>Parking P2 Commuter Sanitation & Rest Block</b><br/><b>ID:</b> FEAT-TOILETS-P2<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 95m x 55m<br/><b>Area:</b> 5225 m²<br/><p>Sanitation and drinking water facility for commuters at Parking P2.</p>]]></description>
+      <Polygon>
+        <extrude>1</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.027,29.1853,4.0
+77.028,29.1853,4.0
+77.028,29.1848,4.0
+77.027,29.1848,4.0
+77.027,29.1853,4.0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-ALIGHTING-STN">
+      <name>Railway Station & ISBT Passenger Alighting Terminal</name>
+      <styleUrl>#styleBuilding3D</styleUrl>
+      <description><![CDATA[<b>Railway Station & ISBT Passenger Alighting Terminal</b><br/><b>ID:</b> FEAT-ALIGHTING-STN<br/><b>Category:</b> PERMANENT_STRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 145m x 90m<br/><b>Area:</b> 13050 m²<br/><p>Dedicated passenger alighting shelter connecting Bhodwal Majri station to Ground D.</p>]]></description>
+      <Polygon>
+        <extrude>1</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.009,29.1856,5.5
+77.0105,29.1856,5.5
+77.0105,29.1848,5.5
+77.009,29.1848,5.5
+77.009,29.1856,5.5</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -2080,8 +2251,65 @@
   </Folder>
 
   <Folder>
-    <name>Civil Infrastructure & Surroundings (8)</name>
+    <name>Civil Infrastructure & Surroundings (11)</name>
     <open>1</open>
+
+    <Placemark id="FEAT-PETROL-PUMP">
+      <name>NH-44 Commercial Fuel & Service Station</name>
+      <styleUrl>#styleBuilding3D</styleUrl>
+      <description><![CDATA[<b>NH-44 Commercial Fuel & Service Station</b><br/><b>ID:</b> FEAT-PETROL-PUMP<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 85m x 80m<br/><b>Area:</b> 6800 m²<br/><p>Commercial fuel station fronting NH-44 Grand Trunk Road between Gate 2 and Gate 3.</p>]]></description>
+      <Polygon>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0285,29.1832,0
+77.0294,29.1832,0
+77.0294,29.1825,0
+77.0285,29.1825,0
+77.0285,29.1832,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-WATER-RESERVOIR-01">
+      <name>South Overhead Drinking Water Reservoir & Pump Compound</name>
+      <styleUrl>#styleBuilding3D</styleUrl>
+      <description><![CDATA[<b>South Overhead Drinking Water Reservoir & Pump Compound</b><br/><b>ID:</b> FEAT-WATER-RESERVOIR-01<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 68m x 68m<br/><b>Area:</b> 4624 m²<br/><p>Elevated water storage tank and booster pump station supplying potable water to Grounds A and B.</p>]]></description>
+      <Polygon>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0205,29.1768,0
+77.0212,29.1768,0
+77.0212,29.1762,0
+77.0205,29.1762,0
+77.0205,29.1768,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-WATER-RESERVOIR-02">
+      <name>North Overhead Drinking Water Reservoir & Pump Compound</name>
+      <styleUrl>#styleBuilding3D</styleUrl>
+      <description><![CDATA[<b>North Overhead Drinking Water Reservoir & Pump Compound</b><br/><b>ID:</b> FEAT-WATER-RESERVOIR-02<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 68m x 68m<br/><b>Area:</b> 4624 m²<br/><p>Elevated water storage tank and booster pump station supplying potable water to Grounds C and D.</p>]]></description>
+      <Polygon>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0205,29.1864,0
+77.0212,29.1864,0
+77.0212,29.1858,0
+77.0205,29.1858,0
+77.0205,29.1864,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
 
     <Placemark id="FEAT-UNDERPASS-SOUTH">
       <name>NH-44 Vehicular Underpass (South — Panchi Gujran Approach)</name>
@@ -2636,8 +2864,27 @@
   </Folder>
 
   <Folder>
-    <name>Police Facilities & Reserve Posts (1)</name>
+    <name>Police Facilities & Reserve Posts (2)</name>
     <open>1</open>
+
+    <Placemark id="FEAT-POLICE-POST-G2">
+      <name>Gate 2 Integrated Police Post & Security Control Centre</name>
+      <styleUrl>#styleBuilding3D</styleUrl>
+      <description><![CDATA[<b>Gate 2 Integrated Police Post & Security Control Centre</b><br/><b>ID:</b> FEAT-POLICE-POST-G2<br/><b>Category:</b> POLICE_FACILITY<br/><b>Status:</b> VERIFIED<br/><b>Dimensions:</b> 75m x 75m<br/><b>Area:</b> 5625 m²<br/><p>Primary police post, CCTV monitoring bunker, and VIP pass verification counter at Gate 2.</p>]]></description>
+      <Polygon>
+        <extrude>1</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0288,29.1798,5.0
+77.0296,29.1798,5.0
+77.0296,29.1791,5.0
+77.0288,29.1791,5.0
+77.0288,29.1798,5.0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
 
     <Placemark id="TAC-HALDANA-POST">
       <name>Haldana Police Post & Tactical Reserve Staging Ground</name>

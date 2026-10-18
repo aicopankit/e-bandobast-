@@ -345,7 +345,7 @@
           }
 
           // 5. EVENT STRUCTURES & CAMPUS BUILDINGS
-          else if (cat === 'EVENT_STRUCTURE' || cat === 'PERMANENT_BUILDING') {
+          else if (cat === 'EVENT_STRUCTURE' || cat === 'PERMANENT_BUILDING' || cat === 'PERMANENT_STRUCTURE') {
             if (geom.type === 'Polygon') {
               const isPandal = fid === 'FEAT-PANDAL-01';
               const isExhibition = fid === 'FEAT-EXHIBITION';
@@ -355,6 +355,9 @@
               if (isPandal) { col = '#3d5a80'; borderCol = '#00d2ff'; }
               else if (isExhibition) { col = '#1e3a8a'; borderCol = '#60a5fa'; }
               else if (isOffice) { col = '#065f46'; borderCol = '#34d399'; }
+              else if (fid.includes('LANGAR')) { col = '#c2410c'; borderCol = '#fb923c'; }
+              else if (fid.includes('DISPENSARY')) { col = '#0284c7'; borderCol = '#38bdf8'; }
+              else if (fid.includes('TOILETS')) { col = '#475569'; borderCol = '#94a3b8'; }
 
               const poly = L.geoJSON(feat, {
                 style: { color: borderCol, weight: 2, fillColor: col, fillOpacity: 0.8 }
@@ -460,16 +463,23 @@
 
           // 12. POLICE TACTICAL & EMERGENCY
           else if (cat === 'BANDOBAST_TACTICAL' || cat === 'POLICE_FACILITY') {
-            const isMed = p.tactical_type === 'MEDICAL_FACILITY' || p.tactical_type === 'FIRE_STATION';
-            const isPost = cat === 'POLICE_FACILITY';
-            const marker = L.circleMarker([geom.coordinates[1], geom.coordinates[0]], {
-              radius: isPost ? 10 : (isMed ? 9 : 7),
-              fillColor: isPost ? '#1d4ed8' : (isMed ? '#ef4444' : '#06b6d4'),
-              color: '#ffffff',
-              weight: 2,
-              fillOpacity: 1
-            }).bindPopup(makePopup());
-            layers.tactical.addLayer(marker);
+            if (geom.type === 'Polygon') {
+              const poly = L.geoJSON(feat, {
+                style: { color: '#38bdf8', weight: 2.5, fillColor: '#1d4ed8', fillOpacity: 0.7 }
+              }).bindPopup(makePopup());
+              layers.tactical.addLayer(poly);
+            } else {
+              const isMed = p.tactical_type === 'MEDICAL_FACILITY' || p.tactical_type === 'FIRE_STATION';
+              const isPost = cat === 'POLICE_FACILITY';
+              const marker = L.circleMarker([geom.coordinates[1], geom.coordinates[0]], {
+                radius: isPost ? 10 : (isMed ? 9 : 7),
+                fillColor: isPost ? '#1d4ed8' : (isMed ? '#ef4444' : '#06b6d4'),
+                color: '#ffffff',
+                weight: 2,
+                fillOpacity: 1
+              }).bindPopup(makePopup());
+              layers.tactical.addLayer(marker);
+            }
           }
         });
       });
