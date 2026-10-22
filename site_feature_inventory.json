@@ -7,7 +7,6 @@
     "permanence": "PERMANENT_PROPERTY",
     "geometry_type": "Polygon",
     "dimensions": "N/A",
-    "area_sqm": 2583900,
     "area_acres": 638.5,
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -22,7 +21,6 @@
     "permanence": "PERMANENT_BOUNDARY",
     "geometry_type": "Polygon",
     "dimensions": "N/A",
-    "area_sqm": 277200,
     "area_acres": 68.5,
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -37,7 +35,6 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Polygon",
     "dimensions": "N/A",
-    "area_sqm": 615100,
     "area_acres": 152.0,
     "elevation_m": 227,
     "confidence": "HIGH",
@@ -52,7 +49,6 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Polygon",
     "dimensions": "N/A",
-    "area_sqm": 534200,
     "area_acres": 132.0,
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -67,7 +63,6 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Polygon",
     "dimensions": "N/A",
-    "area_sqm": 639400,
     "area_acres": 158.0,
     "elevation_m": 227,
     "confidence": "HIGH",
@@ -82,7 +77,6 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Polygon",
     "dimensions": "367.1m (East-West) x 255.4m (North-South)",
-    "area_sqm": 93783,
     "area_acres": 23.17,
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -97,7 +91,6 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Polygon",
     "dimensions": "45.0m (W) x 30.0m (D) x 3.5m (H)",
-    "area_sqm": 1350,
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -112,7 +105,6 @@
     "permanence": "PERMANENT",
     "geometry_type": "Polygon",
     "dimensions": "125.1m x 62.3m",
-    "area_sqm": 7793,
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -127,7 +119,6 @@
     "permanence": "PERMANENT",
     "geometry_type": "Polygon",
     "dimensions": "125.2m x 41.5m",
-    "area_sqm": 5190,
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -142,7 +133,6 @@
     "permanence": "PERMANENT",
     "geometry_type": "Polygon",
     "dimensions": "109.5m x 109.0m",
-    "area_sqm": 11936,
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -157,7 +147,6 @@
     "permanence": "PERMANENT",
     "geometry_type": "Polygon",
     "dimensions": "52.1m x 93.4m",
-    "area_sqm": 4868,
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -172,7 +161,6 @@
     "permanence": "PERMANENT",
     "geometry_type": "Polygon",
     "dimensions": "57.3m x 57.1m",
-    "area_sqm": 3274,
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -187,7 +175,6 @@
     "permanence": "PERMANENT",
     "geometry_type": "Polygon",
     "dimensions": "36.5m x 62.3m",
-    "area_sqm": 2277,
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -202,7 +189,6 @@
     "permanence": "PERMANENT",
     "geometry_type": "Polygon",
     "dimensions": "125.1m x 51.9m",
-    "area_sqm": 6489,
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -217,14 +203,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "Polygon",
     "dimensions": "165m x 70m",
-    "area_sqm": 11550,
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
-    "notes": "Major community dining and langar hall in Ground B, serving 24/7 free meals to devotees.",
-    "supervising_officer": "DSP Crime Panipat / Langar Committee Incharge",
-    "capacity": "35,000 devotees/hr"
+    "notes": "Major community dining and langar hall in Ground B, serving 24/7 free meals to devotees."
   },
   {
     "feature_id": "FEAT-LANGAR-02",
@@ -234,14 +217,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "Polygon",
     "dimensions": "145m x 90m",
-    "area_sqm": 13050,
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
-    "notes": "Major community dining and langar hall in Ground C, located north of Avenue R-2 90'.",
-    "supervising_officer": "DSP HQ Karnal / Langar Committee Incharge",
-    "capacity": "30,000 devotees/hr"
+    "notes": "Major community dining and langar hall in Ground C, located north of Avenue R-2 90'."
   },
   {
     "feature_id": "FEAT-LANGAR-03",
@@ -251,14 +231,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "Polygon",
     "dimensions": "145m x 90m",
-    "area_sqm": 13050,
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
-    "notes": "Transit langar pavilion catering to pilgrims arriving via Bhodwal Majri railway station.",
-    "supervising_officer": "Inspector Railway / Langar Sub-Incharge",
-    "capacity": "18,000 devotees/hr"
+    "notes": "Transit langar pavilion catering to pilgrims arriving via Bhodwal Majri railway station."
   },
   {
     "feature_id": "FEAT-DISPENSARY-01",
@@ -268,14 +245,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "Polygon",
     "dimensions": "105m x 55m",
-    "area_sqm": 5775,
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
-    "notes": "Central dispensary and emergency health post equipped with ambulances and ICU beds.",
-    "supervising_officer": "Chief Medical Officer (CMO Panipat / SNM Hospital)",
-    "capacity": "150-bed emergency triage"
+    "notes": "Central dispensary and emergency health post equipped with ambulances and ICU beds."
   },
   {
     "feature_id": "FEAT-SD-OFFICE",
@@ -285,13 +259,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "Polygon",
     "dimensions": "85m x 55m",
-    "area_sqm": 4675,
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
-    "notes": "Sub-divisional magistrate and police control room fronting Road R-2 90'.",
-    "supervising_officer": "SDM Samalkha / DSP HQ"
+    "notes": "Sub-divisional magistrate and police control room fronting Road R-2 90'."
   },
   {
     "feature_id": "FEAT-TOILETS-PANDAL-N",
@@ -301,14 +273,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "Polygon",
     "dimensions": "330m x 45m",
-    "area_sqm": 14850,
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-ESRI-Z16",
-    "notes": "Four continuous modular permanent toilet and ablution blocks north of the Main Pandal.",
-    "supervising_officer": "Sanitation Incharge / Duty Magistrate",
-    "capacity": "450 cubicles with running water"
+    "notes": "Four continuous modular permanent toilet and ablution blocks north of the Main Pandal."
   },
   {
     "feature_id": "FEAT-TOILETS-PANDAL-S",
@@ -318,14 +287,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "Polygon",
     "dimensions": "330m x 45m",
-    "area_sqm": 14850,
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-ESRI-Z16",
-    "notes": "Four continuous modular permanent toilet and ablution blocks south of the Main Pandal.",
-    "supervising_officer": "Sanitation Incharge / Duty Magistrate",
-    "capacity": "450 cubicles with running water"
+    "notes": "Four continuous modular permanent toilet and ablution blocks south of the Main Pandal."
   },
   {
     "feature_id": "FEAT-TOILETS-P2",
@@ -335,14 +301,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "Polygon",
     "dimensions": "95m x 55m",
-    "area_sqm": 5225,
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
-    "notes": "Sanitation and drinking water facility for commuters at Parking P2.",
-    "supervising_officer": "Sanitation Supervisor Parking P2",
-    "capacity": "80 cubicles"
+    "notes": "Sanitation and drinking water facility for commuters at Parking P2."
   },
   {
     "feature_id": "FEAT-PETROL-PUMP",
@@ -352,13 +315,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "Polygon",
     "dimensions": "85m x 80m",
-    "area_sqm": 6800,
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
-    "notes": "Commercial fuel station fronting NH-44 Grand Trunk Road between Gate 2 and Gate 3.",
-    "supervising_officer": "Traffic Police Incharge / Fire Safety Officer"
+    "notes": "Commercial fuel station fronting NH-44 Grand Trunk Road between Gate 2 and Gate 3."
   },
   {
     "feature_id": "FEAT-POLICE-POST-G2",
@@ -368,14 +329,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "Polygon",
     "dimensions": "75m x 75m",
-    "area_sqm": 5625,
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-POLICE-DUTY-2025",
-    "notes": "Primary police post, CCTV monitoring bunker, and VIP pass verification counter at Gate 2.",
-    "supervising_officer": "DSP HQ Karnal / SHO Samalkha",
-    "allocated_force": "1 Insp, 2 SIs, 4 ASIs, 24 Head Constables"
+    "notes": "Primary police post, CCTV monitoring bunker, and VIP pass verification counter at Gate 2."
   },
   {
     "feature_id": "FEAT-ALIGHTING-STN",
@@ -385,13 +343,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "Polygon",
     "dimensions": "145m x 90m",
-    "area_sqm": 13050,
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
-    "notes": "Dedicated passenger alighting shelter connecting Bhodwal Majri station to Ground D.",
-    "supervising_officer": "DSP GRP / Inspector Traffic Station Gate"
+    "notes": "Dedicated passenger alighting shelter connecting Bhodwal Majri station to Ground D."
   },
   {
     "feature_id": "FEAT-WATER-RESERVOIR-01",
@@ -401,14 +357,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "Polygon",
     "dimensions": "68m x 68m",
-    "area_sqm": 4624,
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-ESRI-Z16",
-    "notes": "Elevated water storage tank and booster pump station supplying potable water to Grounds A and B.",
-    "supervising_officer": "Public Health Engineering Officer",
-    "capacity": "2.5 Million Litres Overhead Storage"
+    "notes": "Elevated water storage tank and booster pump station supplying potable water to Grounds A and B."
   },
   {
     "feature_id": "FEAT-WATER-RESERVOIR-02",
@@ -418,14 +371,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "Polygon",
     "dimensions": "68m x 68m",
-    "area_sqm": 4624,
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-ESRI-Z16",
-    "notes": "Elevated water storage tank and booster pump station supplying potable water to Grounds C and D.",
-    "supervising_officer": "Public Health Engineering Officer",
-    "capacity": "2.5 Million Litres Overhead Storage"
+    "notes": "Elevated water storage tank and booster pump station supplying potable water to Grounds C and D."
   },
   {
     "feature_id": "ROAD-INT-AXIS-EW",
@@ -435,7 +385,6 @@
     "permanence": "PERMANENT_RIGHT_OF_WAY",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -450,7 +399,6 @@
     "permanence": "PERMANENT_RIGHT_OF_WAY",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -465,7 +413,6 @@
     "permanence": "PERMANENT_RIGHT_OF_WAY",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -480,7 +427,6 @@
     "permanence": "PERMANENT_RIGHT_OF_WAY",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -495,7 +441,6 @@
     "permanence": "PERMANENT_RIGHT_OF_WAY",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -510,7 +455,6 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -525,12 +469,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-260851359",
@@ -540,12 +483,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-260851360",
@@ -555,12 +497,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-260851485",
@@ -570,12 +511,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-267829128",
@@ -585,12 +525,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-625322187",
@@ -600,12 +539,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-625322188",
@@ -615,12 +553,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-625322189",
@@ -630,12 +567,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-625322190",
@@ -645,12 +581,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1096488875",
@@ -660,12 +595,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1096492077",
@@ -675,12 +609,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1096524593",
@@ -690,12 +623,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1096602940",
@@ -705,12 +637,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1096956595",
@@ -720,12 +651,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1096956596",
@@ -735,12 +665,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1096961060",
@@ -750,12 +679,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1098172441",
@@ -765,12 +693,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1098189465",
@@ -780,12 +707,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1098189466",
@@ -795,12 +721,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1098220621",
@@ -810,27 +735,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
-  },
-  {
-    "feature_id": "OSM-ROAD-1098220623",
-    "name": "Road-residential-1098220623",
-    "category": "EXTERNAL_ROAD",
-    "evidence_status": "VERIFIED",
-    "permanence": "PERMANENT",
-    "geometry_type": "LineString",
-    "dimensions": "N/A",
-    "area_sqm": "N/A",
-    "area_acres": "N/A",
-    "elevation_m": 228,
-    "confidence": "HIGH",
-    "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1098220624",
@@ -840,12 +749,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1098220627",
@@ -855,42 +763,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
-  },
-  {
-    "feature_id": "OSM-ROAD-1098220628",
-    "name": "Road-service-1098220628",
-    "category": "EXTERNAL_ROAD",
-    "evidence_status": "VERIFIED",
-    "permanence": "PERMANENT",
-    "geometry_type": "LineString",
-    "dimensions": "N/A",
-    "area_sqm": "N/A",
-    "area_acres": "N/A",
-    "elevation_m": 228,
-    "confidence": "HIGH",
-    "source_id": "SRC-OSM-DATASET",
-    "notes": ""
-  },
-  {
-    "feature_id": "OSM-ROAD-1098220629",
-    "name": "Road-service-1098220629",
-    "category": "EXTERNAL_ROAD",
-    "evidence_status": "VERIFIED",
-    "permanence": "PERMANENT",
-    "geometry_type": "LineString",
-    "dimensions": "N/A",
-    "area_sqm": "N/A",
-    "area_acres": "N/A",
-    "elevation_m": 228,
-    "confidence": "HIGH",
-    "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1098220630",
@@ -900,12 +777,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1098220631",
@@ -915,12 +791,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1098220632",
@@ -930,12 +805,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1098220633",
@@ -945,12 +819,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1098222166",
@@ -960,12 +833,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1098222169",
@@ -975,12 +847,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1098227099",
@@ -990,12 +861,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1099986102",
@@ -1005,12 +875,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1099986103",
@@ -1020,12 +889,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1099986104",
@@ -1035,12 +903,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1099986105",
@@ -1050,12 +917,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1281065443",
@@ -1065,12 +931,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1281074111",
@@ -1080,12 +945,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1281074112",
@@ -1095,12 +959,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1285619441",
@@ -1110,12 +973,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1285619442",
@@ -1125,12 +987,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1285625801",
@@ -1140,12 +1001,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1285625802",
@@ -1155,12 +1015,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1285625803",
@@ -1170,12 +1029,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1285625804",
@@ -1185,12 +1043,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1285625805",
@@ -1200,12 +1057,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1285625806",
@@ -1215,42 +1071,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
-  },
-  {
-    "feature_id": "OSM-ROAD-1361568764",
-    "name": "Road-residential-1361568764",
-    "category": "EXTERNAL_ROAD",
-    "evidence_status": "VERIFIED",
-    "permanence": "PERMANENT",
-    "geometry_type": "LineString",
-    "dimensions": "N/A",
-    "area_sqm": "N/A",
-    "area_acres": "N/A",
-    "elevation_m": 228,
-    "confidence": "HIGH",
-    "source_id": "SRC-OSM-DATASET",
-    "notes": ""
-  },
-  {
-    "feature_id": "OSM-ROAD-1361568766",
-    "name": "Road-residential-1361568766",
-    "category": "EXTERNAL_ROAD",
-    "evidence_status": "VERIFIED",
-    "permanence": "PERMANENT",
-    "geometry_type": "LineString",
-    "dimensions": "N/A",
-    "area_sqm": "N/A",
-    "area_acres": "N/A",
-    "elevation_m": 228,
-    "confidence": "HIGH",
-    "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1361898554",
@@ -1260,12 +1085,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1460002634",
@@ -1275,12 +1099,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1460002635",
@@ -1290,12 +1113,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1460002636",
@@ -1305,12 +1127,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-ROAD-1460002637",
@@ -1320,27 +1141,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
-  },
-  {
-    "feature_id": "OSM-ROAD-1547633463",
-    "name": "Road-residential-1547633463",
-    "category": "EXTERNAL_ROAD",
-    "evidence_status": "VERIFIED",
-    "permanence": "PERMANENT",
-    "geometry_type": "LineString",
-    "dimensions": "N/A",
-    "area_sqm": "N/A",
-    "area_acres": "N/A",
-    "elevation_m": 228,
-    "confidence": "HIGH",
-    "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-RAIL-228605085",
@@ -1350,12 +1155,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-RAIL-260851298",
@@ -1365,12 +1169,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-RAIL-260851299",
@@ -1380,12 +1183,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-RAIL-268290225",
@@ -1395,12 +1197,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-RAIL-677480491",
@@ -1410,12 +1211,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-RAIL-677480492",
@@ -1425,12 +1225,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-RAIL-677480493",
@@ -1440,12 +1239,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-RAIL-677480494",
@@ -1455,12 +1253,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "OSM-RAIL-677480495",
@@ -1470,12 +1267,11 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-OSM-DATASET",
-    "notes": ""
+    "notes": null
   },
   {
     "feature_id": "FEAT-STATION-BDMJ",
@@ -1485,7 +1281,6 @@
     "permanence": "PERMANENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 227,
     "confidence": "HIGH",
@@ -1500,7 +1295,6 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Point",
     "dimensions": "42.0m (W) x 14.0m (H) x 6.0m (D)",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1515,7 +1309,6 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Point",
     "dimensions": "45.0m (W) x 15.0m (H) x 8.0m (D)",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1530,7 +1323,6 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Point",
     "dimensions": "38.0m (W) x 12.0m (H) x 6.0m (D)",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1545,7 +1337,6 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 227,
     "confidence": "HIGH",
@@ -1560,7 +1351,6 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Polygon",
     "dimensions": "367.0m x 75.0m",
-    "area_sqm": 27525,
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1575,7 +1365,6 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Polygon",
     "dimensions": "155.0m x 45.0m",
-    "area_sqm": 6975,
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1590,7 +1379,6 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1605,7 +1393,6 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1620,7 +1407,6 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1635,7 +1421,6 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1650,7 +1435,6 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 227,
     "confidence": "HIGH",
@@ -1665,7 +1449,6 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1680,7 +1463,6 @@
     "permanence": "PERMANENT_INFRASTRUCTURE",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1695,7 +1477,6 @@
     "permanence": "PERMANENT_INFRASTRUCTURE",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1710,7 +1491,6 @@
     "permanence": "PERMANENT_INFRASTRUCTURE",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1725,7 +1505,6 @@
     "permanence": "PERMANENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1740,7 +1519,6 @@
     "permanence": "PERMANENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1755,7 +1533,6 @@
     "permanence": "PERMANENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1770,7 +1547,6 @@
     "permanence": "PERMANENT",
     "geometry_type": "Polygon",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1785,7 +1561,6 @@
     "permanence": "PERMANENT",
     "geometry_type": "Polygon",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1800,7 +1575,6 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1815,7 +1589,6 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1830,7 +1603,6 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1845,7 +1617,6 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1860,7 +1631,6 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1875,7 +1645,6 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1890,7 +1659,6 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1905,7 +1673,6 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1920,7 +1687,6 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -1935,14 +1701,11 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-POLICE-DUTY-2025",
-    "notes": "24-hour armed strike cover at outer northern perimeter; monitor dhabas, rice mills, factories, and report suspicious activity.",
-    "supervising_officer": "Day: ACP Anil Kumar (7056667210) | Night: DSP Ramesh Kumar (7419301130)",
-    "shift_timings": "Day: 08:00-20:00 | Night: 20:00-08:00"
+    "notes": "24-hour armed strike cover at outer northern perimeter; monitor dhabas, rice mills, factories, and report suspicious activity."
   },
   {
     "feature_id": "TAC-QRT-02",
@@ -1952,14 +1715,11 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-POLICE-DUTY-2025",
-    "notes": "Outer southern boundary cover around Bhakti Niwas; prevent unauthorized perimeter penetration.",
-    "supervising_officer": "Day: ACP Anil Kumar (7056667210) | Night: DSP Ramesh Kumar (7419301130)",
-    "shift_timings": "Day: 08:00-20:00 | Night: 20:00-08:00"
+    "notes": "Outer southern boundary cover around Bhakti Niwas; prevent unauthorized perimeter penetration."
   },
   {
     "feature_id": "TAC-QRT-03",
@@ -1969,14 +1729,11 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-POLICE-DUTY-2025",
-    "notes": "Positioned at railway-side gate; armed and ready for station passenger surges and track security coordination.",
-    "supervising_officer": "Day: DSP Sushil Parkash (9053052105) | Night: DSP Sandeep Kumar (9729990995)",
-    "shift_timings": "Day: 08:00-20:00 | Night: 20:00-08:00"
+    "notes": "Positioned at railway-side gate; armed and ready for station passenger surges and track security coordination."
   },
   {
     "feature_id": "TAC-QRT-04",
@@ -1986,14 +1743,11 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-POLICE-DUTY-2025",
-    "notes": "Stationed at designated central venue point; rapid intervention for Grounds A, B, C, D internal corridors.",
-    "supervising_officer": "Day: DSP Sushil Parkash (9053052105) | Night: DSP Sandeep Kumar (9729990995)",
-    "shift_timings": "Day: 08:00-20:00 | Night: 20:00-08:00"
+    "notes": "Stationed at designated central venue point; rapid intervention for Grounds A, B, C, D internal corridors."
   },
   {
     "feature_id": "TAC-DRONE-01",
@@ -2003,14 +1757,11 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-POLICE-DUTY-2025",
-    "notes": "Monitors NH-44 highway traffic flow, pedestrian footbridge crowd density, and unauthorized roadside parking.",
-    "supervising_officer": "DSP Suresh Kumar / ACP Satyapal (Panipat Traffic)",
-    "shift_timings": "24 Hours (Rotational Flights)"
+    "notes": "Monitors NH-44 highway traffic flow, pedestrian footbridge crowd density, and unauthorized roadside parking."
   },
   {
     "feature_id": "TAC-DRONE-02",
@@ -2020,14 +1771,11 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-POLICE-DUTY-2025",
-    "notes": "Monitors Bhodwal Majri station platforms, railway corridor perimeter, and Parking 3 vehicle arrival patterns.",
-    "supervising_officer": "DSP Sushil Parkash / DSP Sandeep Kumar",
-    "shift_timings": "24 Hours (Rotational Flights)"
+    "notes": "Monitors Bhodwal Majri station platforms, railway corridor perimeter, and Parking 3 vehicle arrival patterns."
   },
   {
     "feature_id": "ROUTE-DELHI-P1",
@@ -2037,7 +1785,6 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -2052,7 +1799,6 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -2067,7 +1813,6 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -2082,7 +1827,6 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -2097,7 +1841,6 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -2112,7 +1855,6 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -2127,7 +1869,6 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -2142,7 +1883,6 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -2157,7 +1897,6 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -2172,7 +1911,6 @@
     "permanence": "OPERATIONAL_DEPLOYMENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -2187,7 +1925,6 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -2202,7 +1939,6 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -2217,7 +1953,6 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -2232,7 +1967,6 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -2247,7 +1981,6 @@
     "permanence": "PERMANENT",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
@@ -2262,16 +1995,11 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Polygon",
     "dimensions": "N/A",
-    "area_sqm": 474053,
     "area_acres": 117.1,
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
-    "notes": "Outstation vehicles from Delhi side. Contains segregated Light Vehicle / Car and Heavy Vehicle / Bus parking sub-grounds adjoining Village Panchi Gujran. Connected via South Underpass and Road to Gannour.",
-    "supervising_officer": "ACP Rishikant, HPS (ACP Ganaur | 7419410509)",
-    "shift_timings": "Day & Night: 24 Hours",
-    "allocated_force": "2 Sections ORs + 1 Police Officer at Crane (Day & Night) + 1 Fire Tender",
-    "capacity": "9,291 Light Vehicles (Cars/Jeeps) + 1,244 Buses/Heavy Vehicles"
+    "notes": "Outstation vehicles from Delhi side. Contains segregated Light Vehicle / Car and Heavy Vehicle / Bus parking sub-grounds adjoining Village Panchi Gujran. Connected via South Underpass and Road to Gannour."
   },
   {
     "feature_id": "FEAT-PARKING-P1-LIGHT",
@@ -2281,16 +2009,11 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Polygon",
     "dimensions": "N/A",
-    "area_sqm": 177770,
     "area_acres": 43.9,
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
-    "notes": "Designated inner sector of Parking P1 reserved exclusively for private cars, taxis, and light vehicles from Delhi side.",
-    "supervising_officer": "ACP Rishikant, HPS (ACP Ganaur | 7419410509)",
-    "shift_timings": "Day & Night: 24 Hours",
-    "allocated_force": "1 Section ORs + Traffic Patrol",
-    "capacity": "4,977 Light Vehicles (Cars / Jeeps / Taxis)"
+    "notes": "Designated inner sector of Parking P1 reserved exclusively for private cars, taxis, and light vehicles from Delhi side."
   },
   {
     "feature_id": "FEAT-PARKING-P1-HEAVY",
@@ -2300,16 +2023,11 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Polygon",
     "dimensions": "N/A",
-    "area_sqm": 193931,
     "area_acres": 47.9,
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
-    "notes": "Designated outer sector of Parking P1 reserved for chartered buses, trucks, and heavy transport vehicles from Delhi side along Road to Gannour.",
-    "supervising_officer": "ACP Rishikant, HPS (ACP Ganaur | 7419410509)",
-    "shift_timings": "Day & Night: 24 Hours",
-    "allocated_force": "1 Section ORs + 1 Crane + 1 Fire Tender",
-    "capacity": "3,801 Light Vehicles (Cars/Jeeps) + 509 Buses/Heavy Vehicles"
+    "notes": "Designated outer sector of Parking P1 reserved for chartered buses, trucks, and heavy transport vehicles from Delhi side along Road to Gannour."
   },
   {
     "feature_id": "FEAT-PARKING-02",
@@ -2319,16 +2037,11 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Polygon",
     "dimensions": "N/A",
-    "area_sqm": 249955,
     "area_acres": 61.8,
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
-    "notes": "Major transit hub inside Gate No. 1 in Ground B. Accommodates daily commuters from Delhi side (charted buses & private cars), railway/ISBT shuttle alighting point, Sub-Divisional (S/D) Seva Dal office, and Road R-2 90 toilets.",
-    "supervising_officer": "Satish Gautam, HPS (DSP Indri, Karnal | 9729990704) & Mohinder Singh, HPS (DSP Hathin | 8930202024)",
-    "shift_timings": "Day & Night: 24 Hours",
-    "allocated_force": "1 1/2 Sections ORs (Armed) + 2 ORs Crane; Traffic & Alighting Management",
-    "capacity": "4,899 Light Vehicles (Cars/Jeeps) + 656 Buses/Heavy Vehicles"
+    "notes": "Major transit hub inside Gate No. 1 in Ground B. Accommodates daily commuters from Delhi side (charted buses & private cars), railway/ISBT shuttle alighting point, Sub-Divisional (S/D) Seva Dal office, and Road R-2 90 toilets."
   },
   {
     "feature_id": "FEAT-PARKING-P2-2W",
@@ -2338,16 +2051,11 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Polygon",
     "dimensions": "N/A",
-    "area_sqm": 29090,
     "area_acres": 7.2,
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
-    "notes": "Dedicated segregated enclosure inside Gate 1 for motorcycles, scooters, and 2-wheelers with anti-theft tagging and quick-exit lanes.",
-    "supervising_officer": "Satish Gautam, HPS (DSP Indri, Karnal | 9729990704)",
-    "shift_timings": "Day & Night: 24 Hours",
-    "allocated_force": "1 Section Traffic Sevadars + Police Checkpost",
-    "capacity": "6,787 Two-Wheelers (Motorcycles & Scooters)"
+    "notes": "Dedicated segregated enclosure inside Gate 1 for motorcycles, scooters, and 2-wheelers with anti-theft tagging and quick-exit lanes."
   },
   {
     "feature_id": "FEAT-PARKING-03",
@@ -2357,16 +2065,11 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Polygon",
     "dimensions": "N/A",
-    "area_sqm": 193931,
     "area_acres": 47.9,
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
-    "notes": "Directly adjoining Bhodwal Majri Railway Station. Handles outstation vehicles from Ambala side (arriving via Gov. Road) and daily commuter shuttles. Contains Passenger Alighting Point.",
-    "supervising_officer": "Day: Sushil Parkash, HPS (DSP Crime, Kaithal | 9053052105) | Night: Sandeep Kumar, HPS (DSP HQ, Karnal | 9729990995)",
-    "shift_timings": "Day: 08:00-20:00 | Night: 20:00-08:00",
-    "allocated_force": "2 Sections ORs + CID Drone Unit with Operator",
-    "capacity": "4,615 Light Vehicles (Cars/Jeeps) + 254 Buses/Shuttles"
+    "notes": "Directly adjoining Bhodwal Majri Railway Station. Handles outstation vehicles from Ambala side (arriving via Gov. Road) and daily commuter shuttles. Contains Passenger Alighting Point."
   },
   {
     "feature_id": "FEAT-PARKING-04",
@@ -2376,16 +2079,11 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Polygon",
     "dimensions": "N/A",
-    "area_sqm": 171413,
     "area_acres": 42.4,
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
-    "notes": "Accessed via Gate No. 3 near Karishna Polymer and Patti Kalyana underpass. Primary parking for Sewadars on duty in daily up & down commuters from Ambala side, and dedicated sector for Saints from Abroad.",
-    "supervising_officer": "Day: Suresh Kumar, HPS (DSP Traffic, Panipat | 7056000501) | Night: Satyapal, HPS (ACP Highway & HQ, Gurugram | 9999981809)",
-    "shift_timings": "Day: 08:00-20:00 | Night: 20:00-08:00",
-    "allocated_force": "Part of 2 Platoons + 1 Section ORs; 1 Crane + 1 Fire Tender",
-    "capacity": "4,079 Light Vehicles (Cars/Jeeps) + 224 Buses/Shuttles"
+    "notes": "Accessed via Gate No. 3 near Karishna Polymer and Patti Kalyana underpass. Primary parking for Sewadars on duty in daily up & down commuters from Ambala side, and dedicated sector for Saints from Abroad."
   },
   {
     "feature_id": "FEAT-PARKING-05",
@@ -2395,16 +2093,11 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Polygon",
     "dimensions": "N/A",
-    "area_sqm": 237026,
     "area_acres": 58.6,
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
-    "notes": "Located east of NH-44 opposite the main complex. Houses the Local Bus Stop and holds excess pedestrians before sending them across the footbridge in pulsed batches.",
-    "supervising_officer": "Day: Suresh Kumar, HPS (DSP Traffic, Panipat | 7056000501) | Night: Satyapal, HPS (ACP Highway & HQ, Gurugram | 9999981809)",
-    "shift_timings": "Day: 08:00-20:00 | Night: 20:00-08:00",
-    "allocated_force": "Dedicated Pedestrian Holding & Batch-Release Detail; 1 Crane + 1 Fire Tender",
-    "capacity": "1,244 Inter-State Buses + 53,093 Staged Pedestrian Holding Capacity"
+    "notes": "Located east of NH-44 opposite the main complex. Houses the Local Bus Stop and holds excess pedestrians before sending them across the footbridge in pulsed batches."
   },
   {
     "feature_id": "FEAT-PARKING-SC",
@@ -2414,16 +2107,11 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Polygon",
     "dimensions": "N/A",
-    "area_sqm": 32968,
     "area_acres": 8.1,
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
-    "notes": "Designated parking court inside Gate No. 2 directly adjoining Central Mission Offices for Special Committee (S.C.) vehicles on authorized pass list.",
-    "supervising_officer": "Satish Gautam, HPS (DSP Indri, Karnal | 9729990704)",
-    "shift_timings": "Day & Night: 24 Hours",
-    "allocated_force": "Dedicated Security Detail & Access Control Gate 2",
-    "capacity": "659 VIP Motorcade Bays + 98 Armed Escort / Pilot Slots"
+    "notes": "Designated parking court inside Gate No. 2 directly adjoining Central Mission Offices for Special Committee (S.C.) vehicles on authorized pass list."
   },
   {
     "feature_id": "FEAT-PARKING-VIP",
@@ -2433,16 +2121,11 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Polygon",
     "dimensions": "N/A",
-    "area_sqm": 25211,
     "area_acres": 6.2,
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
-    "notes": "Sterile high-security parking enclosure for Invited Guests, State Dignitaries, and Z+ motorcade escorts for Satguru Mata Sudiksha Ji Maharaj.",
-    "supervising_officer": "Satish Gautam, HPS (DSP Indri, Karnal | 9729990704) & Mohinder Singh, HPS (DSP Hathin | 8930202024)",
-    "shift_timings": "Day & Night: 24 Hours",
-    "allocated_force": "Armed VVIP Parking Cover (1 1/2 Sections ORs Armed)",
-    "capacity": "504 VIP Motorcade Bays + 75 Armed Escort / Pilot Slots"
+    "notes": "Sterile high-security parking enclosure for Invited Guests, State Dignitaries, and Z+ motorcade escorts for Satguru Mata Sudiksha Ji Maharaj."
   },
   {
     "feature_id": "FEAT-PARKING-D",
@@ -2452,16 +2135,11 @@
     "permanence": "TEMPORARY_RECURRENT",
     "geometry_type": "Polygon",
     "dimensions": "N/A",
-    "area_sqm": 18316,
     "area_acres": 4.5,
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
-    "notes": "Operations and logistics fleet staging zone for stage equipment, broadcasting OB vans, and sound engineering logistics.",
-    "supervising_officer": "Mohinder Singh, HPS (DSP Hathin | 8930202024)",
-    "shift_timings": "Day & Night: 24 Hours",
-    "allocated_force": "Logistics & Operational Security Section",
-    "capacity": "435 Light Vehicles (Cars/Jeeps) + 24 Buses/Shuttles"
+    "notes": "Operations and logistics fleet staging zone for stage equipment, broadcasting OB vans, and sound engineering logistics."
   },
   {
     "feature_id": "FEAT-FOOTBRIDGE-01",
@@ -2471,14 +2149,11 @@
     "permanence": "PERMANENT_INFRASTRUCTURE",
     "geometry_type": "LineString",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-POLICE-DUTY-2025",
-    "notes": "Controls pedestrian crossing capacity from Parking 5 temporary bus stand across NH-44 to Ceremonial Gate 1 frontage plaza. Excess pedestrians held at Parking 5 and sent across in pulsed batches; standing/stopping on bridge strictly prohibited.",
-    "supervising_officer": "DSP Suresh Kumar (DSP Traffic, Panipat | 7056000501)",
-    "allocated_force": "4 personnel at East end, 4 personnel at West end, 4 on bridge per shift (12 personnel/shift)"
+    "notes": "Controls pedestrian crossing capacity from Parking 5 temporary bus stand across NH-44 to Ceremonial Gate 1 frontage plaza. Excess pedestrians held at Parking 5 and sent across in pulsed batches; standing/stopping on bridge strictly prohibited."
   },
   {
     "feature_id": "TAC-HALDANA-POST",
@@ -2488,14 +2163,66 @@
     "permanence": "PERMANENT_POLICE_POST",
     "geometry_type": "Point",
     "dimensions": "N/A",
-    "area_sqm": "N/A",
     "area_acres": "N/A",
     "elevation_m": 228,
     "confidence": "HIGH",
     "source_id": "SRC-POLICE-DUTY-2025",
-    "notes": "Central staging base for Panipat police contingency and riot-control reserves. Maintains shift-wise duty register, equipment distribution, and relief change log.",
-    "supervising_officer": "Law & Order: DSP Mohinder Singh (8930202024) / DSP Sandeep Singh (8814011504); Contingency: DSP Rajbir Singh (7056000104)",
-    "shift_timings": "Day: 08:00-20:00 | Night: 20:00-08:00",
-    "allocated_force": "Law & Order Reserve (1 Platoon + 1 Section ORs + 2 Sections L/ORs) + Contingency Reserve (1 Platoon + 1 Section ORs + 2 Sections L/ORs)"
+    "notes": "Central staging base for Panipat police contingency and riot-control reserves. Maintains shift-wise duty register, equipment distribution, and relief change log."
+  },
+  {
+    "feature_id": "FEAT-PARKING-P2-COMMUTERS",
+    "name": "Parking P2 (Buses & Cars Daily Commuters Bay)",
+    "category": "PARKING_FACILITY",
+    "evidence_status": "VERIFIED",
+    "permanence": "TEMPORARY_RECURRENT",
+    "geometry_type": "Polygon",
+    "dimensions": "N/A",
+    "area_acres": "N/A",
+    "elevation_m": 228,
+    "confidence": "HIGH",
+    "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
+    "notes": "Dedicated commuter holding sector adjacent to Delhi Gate No 1."
+  },
+  {
+    "feature_id": "FEAT-PARKING-P4-SOUTH",
+    "name": "Parking 4 South Flank (Gate 3 Entry Holding Bay)",
+    "category": "PARKING_FACILITY",
+    "evidence_status": "VERIFIED",
+    "permanence": "TEMPORARY_RECURRENT",
+    "geometry_type": "Polygon",
+    "dimensions": "N/A",
+    "area_acres": "N/A",
+    "elevation_m": 228,
+    "confidence": "HIGH",
+    "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
+    "notes": "South holding wing of Parking P4 directly accessible from Gate 3."
+  },
+  {
+    "feature_id": "FEAT-WASTE-LAND",
+    "name": "Buffer Open Plot (Waste Land Corner)",
+    "category": "CIVIL_INFRASTRUCTURE",
+    "evidence_status": "VERIFIED",
+    "permanence": "PERMANENT_PROPERTY",
+    "geometry_type": "Polygon",
+    "dimensions": "N/A",
+    "area_acres": "N/A",
+    "elevation_m": 228,
+    "confidence": "HIGH",
+    "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
+    "notes": "Open buffer land parcel between Gate 2 ceremonial plaza and Ground B."
+  },
+  {
+    "feature_id": "ROAD-INT-SOUTH-APPROACH",
+    "name": "Southern Approach Corridor (Underpass to Parking P1 & Panchi Gujran)",
+    "category": "INTERNAL_ROAD",
+    "evidence_status": "GROUND_TRUTH_DOCUMENTED",
+    "permanence": "PERMANENT_RIGHT_OF_WAY",
+    "geometry_type": "LineString",
+    "dimensions": "N/A",
+    "area_acres": "N/A",
+    "elevation_m": 228,
+    "confidence": "HIGH",
+    "source_id": "SRC-SNM-OFFICIAL-2D-MAP-79",
+    "notes": "Dedicated 16m wide asphalt avenue connecting the Panchi Gujran Underpass on NH-44 westward along the southern boundary wall directly to Parking P1 (Heavy & Light Vehicles)."
   }
 ]

@@ -520,6 +520,7 @@
           <button class="view-btn" onclick="setCameraView('gate2')">👑 13. Gate 2 &amp; VIP / S.C.</button>
           <button class="view-btn" onclick="setCameraView('gate3')">🚪 14. Gate 3 &amp; Parking P4</button>
           <button class="view-btn" onclick="setCameraView('exhibition')">🎨 15. Exhibition Pavilion</button>
+          <button class="view-btn" onclick="setCameraView('parking1')">🅿️ 16. Parking A &amp; B / Underpass</button>
         </div>
       </div>
 
@@ -732,6 +733,21 @@
 
   <!-- CANVAS CONTAINER -->
   <div id="webgl-canvas"></div>
+
+  <!-- THREE.JS CORE, CONTROLS & OFFLINE DATASET (LOCAL + CDN FALLBACK) -->
+  <script src="three.min.js"></script>
+  <script>
+    if (typeof THREE === 'undefined') {
+      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');
+    }
+  </script>
+  <script src="OrbitControls.js"></script>
+  <script>
+    if (typeof THREE !== 'undefined' && typeof THREE.OrbitControls === 'undefined') {
+      document.write('<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"><\/script>');
+    }
+  </script>
+  <script src="nirankari_geojson.js"></script>
 
   <!-- THREE.JS TACTICAL APPLICATION LOGIC -->
   <script>
@@ -959,11 +975,6 @@
       fallbackMesh.receiveShadow = true;
       layerGroups.sat.add(fallbackMesh);
     });
-
-    // Ground Tactical Grid
-    const tacticalGrid = new THREE.GridHelper(3600, 72, 0x00d2ff, 0x1e3650);
-    tacticalGrid.position.y = 0.6;
-    scene.add(tacticalGrid);
 
     // --- REAL-WORLD SPATIAL CONSTRAINTS & PCG GEOMETRY STORES ---
     const pcgRoadSegments = [];
@@ -1601,7 +1612,7 @@
       const gantry1 = buildGantryStructure(588, 750, 0, tex1);
       layerGroups.externalRoads.add(gantry1);
 
-      // 2. VIP Ceremonial Approach (At Z = -20m, X = 470m)
+      // 2. VIP Ceremonial Approach (At Z = -20m, X = 417m over NH-44)
       const tex2 = createHighwayGantryTexture(
         1024, 384,
         "🛣️ NH-44 EXPRESSWAY THROUGH",
@@ -1609,10 +1620,10 @@
         "⭐ VIP / CEREMONIAL EXIT",
         ["⭐ GATE 2 (STAGE DAIS / S.C.)", "⚠️ PROTOCOL PASS REQUIRED", "🚫 NO GENERAL ADMISSION"]
       );
-      const gantry2 = buildGantryStructure(470, -20, 0, tex2);
+      const gantry2 = buildGantryStructure(417, -20, 0, tex2);
       layerGroups.externalRoads.add(gantry2);
 
-      // 3. North Approach (Southbound at Z = -650m, X = 280m)
+      // 3. North Approach (Southbound at Z = -650m, X = 266m over NH-44)
       const tex3 = createHighwayGantryTexture(
         1024, 384,
         "🛣️ NH-44 / AH1 SOUTHBOUND THROUGH",
@@ -1620,10 +1631,889 @@
         "↘️ EXIT (SERVICE ROAD)",
         ["🚪 GATE 3 (NORTH GATEWAY)", "🅿️ PARKING P4 / P5", "🍲 MEGA LANGAR GROUND C"]
       );
-      const gantry3 = buildGantryStructure(280, -650, Math.PI, tex3);
+      const gantry3 = buildGantryStructure(266, -650, Math.PI, tex3);
       layerGroups.externalRoads.add(gantry3);
     }
 
+    // =========================================================================
+    // HIGH-FIDELITY ARCHITECTURAL 3D PROCEDURAL BUILDING BUILDERS
+    // =========================================================================
+
+    // 1. OPEN-SPAN INDUSTRIAL STEEL-TRUSS MEGA LANGAR DINING PAVILION
+    function buildLangarPavilion(geom, p, fid, layerGroup) {
+      const coords = geom.coordinates[0];
+      const wCoords = coords.map(pt => geoToWorld(pt[1], pt[0]));
+      let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
+      let cX = 0, cZ = 0;
+      const shape = new THREE.Shape();
+
+      wCoords.forEach((w, idx) => {
+        cX += w.x; cZ += w.z;
+        if (w.x < minX) minX = w.x;
+        if (w.x > maxX) maxX = w.x;
+        if (w.z < minZ) minZ = w.z;
+        if (w.z > maxZ) maxZ = w.z;
+        if (idx === 0) shape.moveTo(w.x, -w.z);
+        else shape.lineTo(w.x, -w.z);
+      });
+      cX /= wCoords.length; cZ /= wCoords.length;
+      const bWidth = maxX - minX;
+      const bDepth = maxZ - minZ;
+      const isEW = bWidth >= bDepth;
+
+      const pavilionG = new THREE.Group();
+
+      // 1. Concrete Raised Dining Plinth (0.6m high)
+      const plinthGeo = new THREE.ExtrudeGeometry(shape, { depth: 0.6, bevelEnabled: false });
+      const plinthMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.88, metalness: 0.1 });
+      const plinthMesh = new THREE.Mesh(plinthGeo, plinthMat);
+      plinthMesh.rotation.x = -Math.PI / 2;
+      plinthMesh.position.y = 0;
+      plinthMesh.receiveShadow = true;
+      plinthMesh.userData = { ...p, feature_id: fid };
+      interactiveObjects.push(plinthMesh);
+      pavilionG.add(plinthMesh);
+
+      // 2. Interior Dining Carpet Runners (Pangat Seating Mats)
+      const pad = 8.0;
+      const runnerMat1 = new THREE.MeshStandardMaterial({ color: 0x9a3412, roughness: 0.8 });
+      const runnerMat2 = new THREE.MeshStandardMaterial({ color: 0xb45309, roughness: 0.8 });
+      if (isEW) {
+        const runLen = bWidth - pad * 2;
+        const rGeo = new THREE.PlaneGeometry(runLen, 1.3);
+        rGeo.rotateX(-Math.PI / 2);
+        let rIdx = 0;
+        for (let z = minZ + pad + 2; z <= maxZ - pad - 2; z += 3.2) {
+          const runner = new THREE.Mesh(rGeo, (rIdx % 2 === 0) ? runnerMat1 : runnerMat2);
+          runner.position.set(cX, 0.62, z);
+          pavilionG.add(runner);
+          rIdx++;
+        }
+      } else {
+        const runLen = bDepth - pad * 2;
+        const rGeo = new THREE.PlaneGeometry(1.3, runLen);
+        rGeo.rotateX(-Math.PI / 2);
+        let rIdx = 0;
+        for (let x = minX + pad + 2; x <= maxX - pad - 2; x += 3.2) {
+          const runner = new THREE.Mesh(rGeo, (rIdx % 2 === 0) ? runnerMat1 : runnerMat2);
+          runner.position.set(x, 0.62, cZ);
+          pavilionG.add(runner);
+          rIdx++;
+        }
+      }
+
+      // 3. Open Perimeter & Interior Structural Steel Columns (6.0m eaves height)
+      const eavesH = 6.6;
+      const colMat = new THREE.MeshStandardMaterial({ color: 0x64748b, metalness: 0.75, roughness: 0.35 });
+      const basePlateMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.8 });
+      const colGeo = new THREE.CylinderGeometry(0.35, 0.38, 6.0, 10);
+      const basePlateGeo = new THREE.BoxGeometry(1.0, 0.2, 1.0);
+
+      function addColumn(x, z) {
+        const col = new THREE.Mesh(colGeo, colMat);
+        col.position.set(x, 3.6, z);
+        col.castShadow = true;
+        pavilionG.add(col);
+
+        const plate = new THREE.Mesh(basePlateGeo, basePlateMat);
+        plate.position.set(x, 0.7, z);
+        pavilionG.add(plate);
+      }
+
+      const colSpacing = 12.0;
+      for (let x = minX + 2; x <= maxX - 2; x += colSpacing) {
+        addColumn(x, minZ + 1.2);
+        addColumn(x, maxZ - 1.2);
+      }
+      for (let z = minZ + 2 + colSpacing; z <= maxZ - 2 - colSpacing; z += colSpacing) {
+        addColumn(minX + 1.2, z);
+        addColumn(maxX - 1.2, z);
+      }
+      if (isEW && bDepth > 45) {
+        [minZ + bDepth * 0.33, minZ + bDepth * 0.67].forEach(internalZ => {
+          for (let x = minX + colSpacing; x <= maxX - colSpacing; x += colSpacing * 1.5) {
+            addColumn(x, internalZ);
+          }
+        });
+      } else if (!isEW && bWidth > 45) {
+        [minX + bWidth * 0.33, minX + bWidth * 0.67].forEach(internalX => {
+          for (let z = minZ + colSpacing; z <= maxZ - colSpacing; z += colSpacing * 1.5) {
+            addColumn(internalX, z);
+          }
+        });
+      }
+
+      // 4. Low Perimeter Dwarf Wall with 8m Wide Open Gateways (Open sides!)
+      const wallMat = new THREE.MeshStandardMaterial({ color: 0xc8b69e, roughness: 0.7 });
+      const wallH = 1.1;
+      function addWallSection(x1, z1, x2, z2) {
+        const dx = x2 - x1, dz = z2 - z1;
+        const len = Math.hypot(dx, dz);
+        if (len < 1.0) return;
+        const wGeo = new THREE.BoxGeometry(len, wallH, 0.4);
+        const wMesh = new THREE.Mesh(wGeo, wallMat);
+        wMesh.position.set((x1 + x2)/2, 0.6 + wallH/2, (z1 + z2)/2);
+        wMesh.rotation.y = Math.atan2(dx, dz) - Math.PI / 2;
+        pavilionG.add(wMesh);
+      }
+
+      if (isEW) {
+        const segW = (bWidth - 32) / 3;
+        [minZ + 0.6, maxZ - 0.6].forEach(wz => {
+          addWallSection(minX + 2, wz, minX + 2 + segW, wz);
+          addWallSection(minX + 18 + segW, wz, minX + 18 + segW * 2, wz);
+          addWallSection(maxX - 2 - segW, wz, maxX - 2, wz);
+        });
+      }
+
+      // 5. Open-Span Double-Pitch Gabled Canopy Roof
+      const ridgeH = 4.8;
+      const roofThickness = 0.3;
+      const overhang = 1.6;
+      const roofMat = new THREE.MeshStandardMaterial({
+        color: 0x475569, metalness: 0.55, roughness: 0.45, side: THREE.DoubleSide
+      });
+
+      const gableShape = new THREE.Shape();
+      if (isEW) {
+        const halfSpan = bDepth / 2 + overhang;
+        gableShape.moveTo(-halfSpan, eavesH);
+        gableShape.lineTo(0, eavesH + ridgeH);
+        gableShape.lineTo(halfSpan, eavesH);
+        gableShape.lineTo(halfSpan, eavesH + roofThickness);
+        gableShape.lineTo(0, eavesH + ridgeH + roofThickness);
+        gableShape.lineTo(-halfSpan, eavesH + roofThickness);
+        gableShape.closePath();
+
+        const roofLen = bWidth + overhang * 2;
+        const roofGeo = new THREE.ExtrudeGeometry(gableShape, { depth: roofLen, bevelEnabled: false });
+        roofGeo.center();
+        const roofMesh = new THREE.Mesh(roofGeo, roofMat);
+        roofMesh.rotation.y = Math.PI / 2;
+        roofMesh.position.set(cX, eavesH + ridgeH / 2, cZ);
+        roofMesh.castShadow = true;
+        roofMesh.userData = { ...p, feature_id: fid };
+        interactiveObjects.push(roofMesh);
+        pavilionG.add(roofMesh);
+
+        // Continuous Ridge Ventilation Monitor (Clerestory)
+        const monW = 4.8;
+        const monH = 1.8;
+        const monLen = roofLen * 0.85;
+        const louverMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.8 });
+        const monSideL = new THREE.Mesh(new THREE.BoxGeometry(monLen, monH, 0.3), louverMat);
+        monSideL.position.set(cX, eavesH + ridgeH + monH/2, cZ - monW/2);
+        pavilionG.add(monSideL);
+        const monSideR = new THREE.Mesh(new THREE.BoxGeometry(monLen, monH, 0.3), louverMat);
+        monSideR.position.set(cX, eavesH + ridgeH + monH/2, cZ + monW/2);
+        pavilionG.add(monSideR);
+
+        const capGeo = new THREE.BoxGeometry(monLen + 1.0, 0.25, monW + 1.2);
+        const capMesh = new THREE.Mesh(capGeo, roofMat);
+        capMesh.position.set(cX, eavesH + ridgeH + monH + 0.12, cZ);
+        pavilionG.add(capMesh);
+
+      } else {
+        const halfSpan = bWidth / 2 + overhang;
+        gableShape.moveTo(-halfSpan, eavesH);
+        gableShape.lineTo(0, eavesH + ridgeH);
+        gableShape.lineTo(halfSpan, eavesH);
+        gableShape.lineTo(halfSpan, eavesH + roofThickness);
+        gableShape.lineTo(0, eavesH + ridgeH + roofThickness);
+        gableShape.lineTo(-halfSpan, eavesH + roofThickness);
+        gableShape.closePath();
+
+        const roofLen = bDepth + overhang * 2;
+        const roofGeo = new THREE.ExtrudeGeometry(gableShape, { depth: roofLen, bevelEnabled: false });
+        roofGeo.center();
+        const roofMesh = new THREE.Mesh(roofGeo, roofMat);
+        roofMesh.position.set(cX, eavesH + ridgeH / 2, cZ);
+        roofMesh.castShadow = true;
+        roofMesh.userData = { ...p, feature_id: fid };
+        interactiveObjects.push(roofMesh);
+        pavilionG.add(roofMesh);
+
+        const monW = 4.8;
+        const monH = 1.8;
+        const monLen = roofLen * 0.85;
+        const louverMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.8 });
+        const monSideL = new THREE.Mesh(new THREE.BoxGeometry(0.3, monH, monLen), louverMat);
+        monSideL.position.set(cX - monW/2, eavesH + ridgeH + monH/2, cZ);
+        pavilionG.add(monSideL);
+        const monSideR = new THREE.Mesh(new THREE.BoxGeometry(0.3, monH, monLen), louverMat);
+        monSideR.position.set(cX + monW/2, eavesH + ridgeH + monH/2, cZ);
+        pavilionG.add(monSideR);
+
+        const capGeo = new THREE.BoxGeometry(monW + 1.2, 0.25, monLen + 1.0);
+        const capMesh = new THREE.Mesh(capGeo, roofMat);
+        capMesh.position.set(cX, eavesH + ridgeH + monH + 0.12, cZ);
+        pavilionG.add(capMesh);
+      }
+
+      // 6. Kitchen Service Annex Cauldrons & Exhaust Chimneys (at one end)
+      const chimMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.8, roughness: 0.3 });
+      const chimGeo = new THREE.CylinderGeometry(0.4, 0.45, 4.5, 10);
+      const chimX = isEW ? (minX + 14) : cX;
+      const chimZ = isEW ? cZ : (minZ + 14);
+      [-4, 4].forEach(off => {
+        const chim = new THREE.Mesh(chimGeo, chimMat);
+        chim.position.set(isEW ? chimX : chimX + off, eavesH + ridgeH + 1.5, isEW ? chimZ + off : chimZ);
+        pavilionG.add(chim);
+      });
+
+      // 7. Floating 3D Badge
+      let badgeTitle = "🍲 MEGA LANGAR COMMUNITY DINING (35k/hr)";
+      let badgeCol = "#f97316";
+      if (fid.includes('LANGAR-01')) { badgeTitle = "🍲 GROUND B MEGA LANGAR (35k/hr)"; }
+      else if (fid.includes('LANGAR-02')) { badgeTitle = "🍲 GROUND C MEGA LANGAR (30k/hr)"; }
+      else if (fid.includes('LANGAR-03')) { badgeTitle = "🍲 GROUND D TRANSIT LANGAR (18k/hr)"; }
+      else if (fid.includes('DINING')) { badgeTitle = "🍲 SNAS PERMANENT LANGAR BHAVAN"; badgeCol = "#38bdf8"; }
+
+      const lBadge = makeTextSprite(badgeTitle, {
+        borderColor: badgeCol, backgroundColor: 'rgba(124, 45, 18, 0.94)', textColor: '#ffedd5', fontSize: 22
+      });
+      lBadge.position.set(cX, eavesH + ridgeH + 6.0, cZ);
+      layerGroups.labels.add(lBadge);
+
+      layerGroup.add(pavilionG);
+    }
+
+    // 2. MODULAR HYGIENIC SANITATION & TOILET COMPLEXES
+    function buildSanitationComplex(geom, p, fid, layerGroup) {
+      const coords = geom.coordinates[0];
+      const wCoords = coords.map(pt => geoToWorld(pt[1], pt[0]));
+      let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
+      let cX = 0, cZ = 0;
+      const shape = new THREE.Shape();
+
+      wCoords.forEach((w, idx) => {
+        cX += w.x; cZ += w.z;
+        if (w.x < minX) minX = w.x;
+        if (w.x > maxX) maxX = w.x;
+        if (w.z < minZ) minZ = w.z;
+        if (w.z > maxZ) maxZ = w.z;
+        if (idx === 0) shape.moveTo(w.x, -w.z);
+        else shape.lineTo(w.x, -w.z);
+      });
+      cX /= wCoords.length; cZ /= wCoords.length;
+      const bWidth = maxX - minX;
+      const bDepth = maxZ - minZ;
+
+      const complexG = new THREE.Group();
+
+      // Foundation Plinth (0.6m high)
+      const plinthGeo = new THREE.ExtrudeGeometry(shape, { depth: 0.6, bevelEnabled: false });
+      const plinthMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.9 });
+      const plinthMesh = new THREE.Mesh(plinthGeo, plinthMat);
+      plinthMesh.rotation.x = -Math.PI / 2;
+      plinthMesh.position.y = 0;
+      plinthMesh.receiveShadow = true;
+      plinthMesh.userData = { ...p, feature_id: fid };
+      interactiveObjects.push(plinthMesh);
+      complexG.add(plinthMesh);
+
+      // Modular Sanitary Pavilions
+      const numMods = bWidth > 150 ? 6 : (bWidth > 80 ? 3 : 1);
+      const modW = (bWidth - (numMods - 1) * 8.0 - 12.0) / numMods;
+      const modD = Math.max(12, bDepth - 8.0);
+
+      const dadoMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.5 });
+      const upperMat = new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.4 });
+      const louverMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.8 });
+      const roofSlabMat = new THREE.MeshStandardMaterial({ color: 0x64748b, roughness: 0.7 });
+      const parapetMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, roughness: 0.5 });
+      const tankMat = new THREE.MeshStandardMaterial({ color: 0x0284c7, roughness: 0.3, metalness: 0.2 });
+      const tankLidMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.6 });
+      const tankStagingMat = new THREE.MeshStandardMaterial({ color: 0x475569, roughness: 0.8 });
+      const troughMat = new THREE.MeshStandardMaterial({ color: 0xcfd8dc, metalness: 0.9, roughness: 0.2 });
+
+      for (let m = 0; m < numMods; m++) {
+        const modCenterX = minX + 6.0 + modW / 2 + m * (modW + 8.0);
+        const modCenterZ = cZ;
+
+        // Dado (Tile)
+        const dado = new THREE.Mesh(new THREE.BoxGeometry(modW, 1.6, modD), dadoMat);
+        dado.position.set(modCenterX, 0.6 + 0.8, modCenterZ);
+        dado.castShadow = true;
+        dado.userData = { ...p, feature_id: fid };
+        interactiveObjects.push(dado);
+        complexG.add(dado);
+
+        // Upper Wall (Plaster)
+        const upper = new THREE.Mesh(new THREE.BoxGeometry(modW, 2.0, modD), upperMat);
+        upper.position.set(modCenterX, 2.2 + 1.0, modCenterZ);
+        upper.castShadow = true;
+        complexG.add(upper);
+
+        // Clerestory Louvers
+        const louver = new THREE.Mesh(new THREE.BoxGeometry(modW - 0.4, 0.7, modD - 0.4), louverMat);
+        louver.position.set(modCenterX, 4.2 + 0.35, modCenterZ);
+        complexG.add(louver);
+
+        // Flat Roof Slab & Parapet
+        const slab = new THREE.Mesh(new THREE.BoxGeometry(modW + 0.8, 0.25, modD + 0.8), roofSlabMat);
+        slab.position.set(modCenterX, 4.9 + 0.125, modCenterZ);
+        complexG.add(slab);
+
+        const parapet = new THREE.Mesh(new THREE.BoxGeometry(modW + 0.8, 0.5, modD + 0.8), parapetMat);
+        parapet.position.set(modCenterX, 5.15 + 0.25, modCenterZ);
+        complexG.add(parapet);
+
+        // Rooftop Battery of Sintex Tanks
+        const tankGeo = new THREE.CylinderGeometry(1.1, 1.1, 2.0, 12);
+        const lidGeo = new THREE.CylinderGeometry(0.5, 0.5, 0.2, 12);
+        const stagingGeo = new THREE.BoxGeometry(3.0, 0.4, 6.0);
+
+        const staging = new THREE.Mesh(stagingGeo, tankStagingMat);
+        staging.position.set(modCenterX, 5.4 + 0.2, modCenterZ);
+        complexG.add(staging);
+
+        [-1.8, 1.8].forEach(tz => {
+          [-0.8, 0.8].forEach(tx => {
+            const tank = new THREE.Mesh(tankGeo, tankMat);
+            tank.position.set(modCenterX + tx, 5.6 + 1.0, modCenterZ + tz);
+            tank.castShadow = true;
+            complexG.add(tank);
+
+            const lid = new THREE.Mesh(lidGeo, tankLidMat);
+            lid.position.set(modCenterX + tx, 5.6 + 2.0 + 0.1, modCenterZ + tz);
+            complexG.add(lid);
+          });
+        });
+
+        // Entrance Baffle Screens
+        const screenMat = new THREE.MeshStandardMaterial({ color: 0x475569, roughness: 0.6 });
+        const screenL = new THREE.Mesh(new THREE.BoxGeometry(3.5, 3.0, 0.3), screenMat);
+        screenL.position.set(modCenterX - modW * 0.25, 0.6 + 1.5, modCenterZ + modD / 2 + 1.2);
+        complexG.add(screenL);
+
+        const screenR = new THREE.Mesh(new THREE.BoxGeometry(3.5, 3.0, 0.3), screenMat);
+        screenR.position.set(modCenterX + modW * 0.25, 0.6 + 1.5, modCenterZ + modD / 2 + 1.2);
+        complexG.add(screenR);
+
+        // Signage Plaques
+        const signMen = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.5, 0.05), new THREE.MeshStandardMaterial({ color: 0x0284c7 }));
+        signMen.position.set(modCenterX - modW * 0.25, 3.2, modCenterZ + modD / 2 + 1.38);
+        complexG.add(signMen);
+
+        const signWomen = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.5, 0.05), new THREE.MeshStandardMaterial({ color: 0xec4899 }));
+        signWomen.position.set(modCenterX + modW * 0.25, 3.2, modCenterZ + modD / 2 + 1.38);
+        complexG.add(signWomen);
+
+        // External Handwash Troughs
+        const trough = new THREE.Mesh(new THREE.BoxGeometry(Math.min(10, modW * 0.35), 0.5, 0.6), troughMat);
+        trough.position.set(modCenterX, 0.6 + 0.85, modCenterZ + modD / 2 + 0.4);
+        complexG.add(trough);
+      }
+
+      // 3D Floating Landmark Badge
+      let badgeTitle = "🚻 MODERN SANITATION COMPLEX";
+      if (fid.includes('PANDAL-N')) badgeTitle = "🚻 NORTH SANITATION COMPLEX (1200 FIXTURES)";
+      else if (fid.includes('PANDAL-S')) badgeTitle = "🚻 SOUTH SANITATION COMPLEX (1200 FIXTURES)";
+      else if (fid.includes('P2')) badgeTitle = "🚻 COMMUTER REST & SANITATION BLOCK (P2)";
+
+      const tBadge = makeTextSprite(badgeTitle, {
+        borderColor: '#38bdf8', backgroundColor: 'rgba(15, 23, 42, 0.94)', textColor: '#e0f2fe', fontSize: 20
+      });
+      tBadge.position.set(cX, 12.0, cZ);
+      layerGroups.labels.add(tBadge);
+
+      layerGroup.add(complexG);
+    }
+
+    // 3. MULTI-STORY INSTITUTIONAL CAMPUS BHAVANS & MEDICAL CENTERS
+    function buildCampusBhavan(geom, p, fid, layerGroup) {
+      const coords = geom.coordinates[0];
+      const wCoords = coords.map(pt => geoToWorld(pt[1], pt[0]));
+      let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
+      let cX = 0, cZ = 0;
+      const shape = new THREE.Shape();
+
+      wCoords.forEach((w, idx) => {
+        cX += w.x; cZ += w.z;
+        if (w.x < minX) minX = w.x;
+        if (w.x > maxX) maxX = w.x;
+        if (w.z < minZ) minZ = w.z;
+        if (w.z > maxZ) maxZ = w.z;
+        if (idx === 0) shape.moveTo(w.x, -w.z);
+        else shape.lineTo(w.x, -w.z);
+      });
+      cX /= wCoords.length; cZ /= wCoords.length;
+      const bWidth = maxX - minX;
+      const bDepth = maxZ - minZ;
+
+      const h = p.estimated_height_m || (fid.includes('ADMIN') ? 16.0 : (fid.includes('RES') ? 14.0 : 10.0));
+      const bldgG = new THREE.Group();
+
+      // Granite Plinth (0.8m)
+      const plinthGeo = new THREE.ExtrudeGeometry(shape, { depth: 0.8, bevelEnabled: false });
+      const plinthMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.9 });
+      const plinthMesh = new THREE.Mesh(plinthGeo, plinthMat);
+      plinthMesh.rotation.x = -Math.PI / 2;
+      plinthMesh.position.y = 0;
+      plinthMesh.receiveShadow = true;
+      plinthMesh.userData = { ...p, feature_id: fid };
+      interactiveObjects.push(plinthMesh);
+      bldgG.add(plinthMesh);
+
+      // Sandstone Superstructure Wall
+      const wallH = Math.max(2.0, h - 0.8);
+      const wallGeo = new THREE.ExtrudeGeometry(shape, { depth: wallH, bevelEnabled: false });
+      const wallMat = new THREE.MeshStandardMaterial({ color: 0xded9cf, roughness: 0.65, metalness: 0.1 });
+      const wallMesh = new THREE.Mesh(wallGeo, wallMat);
+      wallMesh.rotation.x = -Math.PI / 2;
+      wallMesh.position.y = 0.8;
+      wallMesh.castShadow = true;
+      wallMesh.receiveShadow = true;
+      wallMesh.userData = { ...p, feature_id: fid };
+      interactiveObjects.push(wallMesh);
+      bldgG.add(wallMesh);
+
+      // Multi-Story Horizontal Floor Bands & Window Fenestration
+      const numFloors = Math.max(2, Math.round(wallH / 3.5));
+      const floorH = wallH / numFloors;
+      const corniceMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.5 });
+      const windowMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.1, metalness: 0.85 });
+
+      for (let f = 1; f < numFloors; f++) {
+        const bandY = 0.8 + f * floorH;
+        const bandGeo = new THREE.BoxGeometry(bWidth + 0.6, 0.35, bDepth + 0.6);
+        const band = new THREE.Mesh(bandGeo, corniceMat);
+        band.position.set(cX, bandY, cZ);
+        bldgG.add(band);
+
+        const winGeo = new THREE.BoxGeometry(bWidth + 0.3, floorH * 0.45, bDepth + 0.3);
+        const winMesh = new THREE.Mesh(winGeo, windowMat);
+        winMesh.position.set(cX, bandY - floorH * 0.4, cZ);
+        bldgG.add(winMesh);
+      }
+
+      // Rooftop Parapet
+      const parapetGeo = new THREE.BoxGeometry(bWidth + 0.4, 1.1, bDepth + 0.4);
+      const parapetMat = new THREE.MeshStandardMaterial({ color: 0xf1f5f9, roughness: 0.5 });
+      const parapet = new THREE.Mesh(parapetGeo, parapetMat);
+      parapet.position.set(cX, h + 0.55, cZ);
+      bldgG.add(parapet);
+
+      // Rooftop Penthouse & HVAC
+      const stairW = Math.min(22, bWidth * 0.28);
+      const stairD = Math.min(16, bDepth * 0.28);
+      const stairGeo = new THREE.BoxGeometry(stairW, 3.2, stairD);
+      const stairMat = new THREE.MeshStandardMaterial({ color: 0x475569, roughness: 0.6 });
+      const stair = new THREE.Mesh(stairGeo, stairMat);
+      stair.position.set(cX, h + 1.6, cZ);
+      stair.castShadow = true;
+      bldgG.add(stair);
+
+      const hvacMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.7, roughness: 0.3 });
+      [-1, 1].forEach(side => {
+        const hvac = new THREE.Mesh(new THREE.BoxGeometry(4.5, 1.8, 2.5), hvacMat);
+        hvac.position.set(cX + side * (stairW * 0.8), h + 0.9, cZ);
+        bldgG.add(hvac);
+      });
+
+      // Ceremonial Portico for Admin & Hospital
+      if (fid.includes('ADMIN') || fid.includes('HOSP') || fid.includes('DISPENSARY')) {
+        const isHosp = fid.includes('HOSP') || fid.includes('DISPENSARY');
+        const porticoW = Math.min(28, bWidth * 0.35);
+        const porticoD = 10.0;
+        const porticoH = 5.5;
+
+        const canGeo = new THREE.BoxGeometry(porticoW, 0.7, porticoD);
+        const canMat = new THREE.MeshStandardMaterial({ color: isHosp ? 0x0284c7 : 0x1e3a8a, roughness: 0.3 });
+        const canMesh = new THREE.Mesh(canGeo, canMat);
+        canMesh.position.set(cX, porticoH, cZ + bDepth/2 + porticoD/2);
+        canMesh.castShadow = true;
+        bldgG.add(canMesh);
+
+        const pColMat = new THREE.MeshStandardMaterial({ color: 0xf1f5f9, roughness: 0.4 });
+        const pColGeo = new THREE.BoxGeometry(1.2, porticoH, 1.2);
+        [-porticoW/2 + 1.2, porticoW/2 - 1.2].forEach(px => {
+          const pCol = new THREE.Mesh(pColGeo, pColMat);
+          pCol.position.set(cX + px, porticoH/2, cZ + bDepth/2 + porticoD - 1.2);
+          bldgG.add(pCol);
+        });
+
+        if (isHosp) {
+          const crossMat = new THREE.MeshStandardMaterial({ color: 0xef4444, emissive: 0xef4444, emissiveIntensity: 0.8 });
+          const crossV = new THREE.Mesh(new THREE.BoxGeometry(0.5, 2.2, 0.1), crossMat);
+          crossV.position.set(cX, porticoH + 1.8, cZ + bDepth/2 + porticoD/2 + 0.4);
+          bldgG.add(crossV);
+          const crossH = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.5, 0.1), crossMat);
+          crossH.position.set(cX, porticoH + 1.8, cZ + bDepth/2 + porticoD/2 + 0.4);
+          bldgG.add(crossH);
+        }
+      }
+
+      // 3D Landmark Badge
+      let badgeTitle = "🏛️ SNAS BHAVAN";
+      let badgeBorder = "#38bdf8";
+      let badgeBg = "rgba(30, 58, 138, 0.94)";
+      if (fid.includes('ADMIN')) {
+        badgeTitle = "🏛️ SNAS CENTRAL ADMINISTRATIVE BHAVAN";
+        badgeBorder = "#38bdf8";
+      } else if (fid.includes('HOSP') || fid.includes('DISPENSARY')) {
+        badgeTitle = "🏥 PERMANENT MEDICAL HOSPITAL & ICU";
+        badgeBorder = "#ef4444";
+        badgeBg = "rgba(127, 29, 29, 0.94)";
+      } else if (fid.includes('RES-N')) {
+        badgeTitle = "🏢 NORTH RESIDENTIAL BHAVAN & GUEST WING";
+      } else if (fid.includes('RES-W')) {
+        badgeTitle = "🏢 WEST MULTI-TIER RESIDENTIAL COMPLEX";
+      } else if (fid.includes('SVC-S')) {
+        badgeTitle = "⚙️ LOGISTIC & MAINTENANCE SERVICES WING";
+      } else if (fid.includes('UTIL')) {
+        badgeTitle = "⚡ WATER TREATMENT & SUBSTATION COMPOUND";
+      } else if (fid.includes('SD-OFFICE')) {
+        badgeTitle = "🏢 SUB-DIVISIONAL CIVIL & SEVA DAL OFFICE";
+        badgeBorder = "#34d399";
+        badgeBg = "rgba(6, 95, 70, 0.94)";
+      }
+
+      const bBadge = makeTextSprite(badgeTitle, {
+        borderColor: badgeBorder, backgroundColor: badgeBg, textColor: '#ffffff', fontSize: 22
+      });
+      bBadge.position.set(cX, h + 12.0, cZ);
+      layerGroups.labels.add(bBadge);
+
+      layerGroup.add(bldgG);
+    }
+
+    // 4. ELEVATED INTZE DRINKING WATER RESERVOIR TOWER
+    function buildWaterReservoirTower(geom, p, fid, layerGroup) {
+      const coords = geom.coordinates[0];
+      const wCoords = coords.map(pt => geoToWorld(pt[1], pt[0]));
+      let cX = 0, cZ = 0;
+      wCoords.forEach(w => { cX += w.x; cZ += w.z; });
+      cX /= wCoords.length; cZ /= wCoords.length;
+
+      const towerG = new THREE.Group();
+
+      const slabMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.9 });
+      const slab = new THREE.Mesh(new THREE.BoxGeometry(45, 0.4, 45), slabMat);
+      slab.position.set(cX, 0.2, cZ);
+      slab.receiveShadow = true;
+      slab.userData = { ...p, feature_id: fid };
+      interactiveObjects.push(slab);
+      towerG.add(slab);
+
+      const pumpMat = new THREE.MeshStandardMaterial({ color: 0x475569, roughness: 0.6 });
+      const pumpHouse = new THREE.Mesh(new THREE.BoxGeometry(14, 4.2, 9), pumpMat);
+      pumpHouse.position.set(cX - 14, 2.1, cZ);
+      pumpHouse.castShadow = true;
+      towerG.add(pumpHouse);
+
+      const towerH = 18.0;
+      const tankRadius = 8.0;
+      const tankH = 7.5;
+      const colRadius = 0.6;
+      const ringRadius = 6.8;
+
+      const concreteMat = new THREE.MeshStandardMaterial({ color: 0x64748b, roughness: 0.7 });
+      const tankMat = new THREE.MeshStandardMaterial({ color: 0x0284c7, metalness: 0.4, roughness: 0.3 });
+
+      const shaftGeo = new THREE.CylinderGeometry(1.6, 1.6, towerH, 16);
+      const shaft = new THREE.Mesh(shaftGeo, concreteMat);
+      shaft.position.set(cX, towerH / 2, cZ);
+      shaft.castShadow = true;
+      towerG.add(shaft);
+
+      const colGeo = new THREE.CylinderGeometry(colRadius, colRadius, towerH, 10);
+      for (let a = 0; a < Math.PI * 2; a += Math.PI / 4) {
+        const col = new THREE.Mesh(colGeo, concreteMat);
+        col.position.set(cX + Math.cos(a) * ringRadius, towerH / 2, cZ + Math.sin(a) * ringRadius);
+        col.castShadow = true;
+        towerG.add(col);
+      }
+
+      [towerH * 0.35, towerH * 0.7].forEach(tieY => {
+        const ringGeo = new THREE.TorusGeometry(ringRadius, 0.35, 8, 24);
+        ringGeo.rotateX(Math.PI / 2);
+        const ring = new THREE.Mesh(ringGeo, concreteMat);
+        ring.position.set(cX, tieY, cZ);
+        towerG.add(ring);
+      });
+
+      const coneGeo = new THREE.CylinderGeometry(tankRadius, 3.0, 3.5, 24);
+      const coneMesh = new THREE.Mesh(coneGeo, tankMat);
+      coneMesh.position.set(cX, towerH + 1.75, cZ);
+      coneMesh.castShadow = true;
+      towerG.add(coneMesh);
+
+      const bowlGeo = new THREE.CylinderGeometry(tankRadius, tankRadius, tankH, 24);
+      const bowlMesh = new THREE.Mesh(bowlGeo, tankMat);
+      bowlMesh.position.set(cX, towerH + 3.5 + tankH / 2, cZ);
+      bowlMesh.castShadow = true;
+      bowlMesh.userData = { ...p, feature_id: fid };
+      interactiveObjects.push(bowlMesh);
+      towerG.add(bowlMesh);
+
+      const domeGeo = new THREE.SphereGeometry(tankRadius * 1.02, 24, 12, 0, Math.PI * 2, 0, Math.PI / 4);
+      const domeMat = new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.5 });
+      const domeMesh = new THREE.Mesh(domeGeo, domeMat);
+      domeMesh.position.set(cX, towerH + 3.5 + tankH - 1.0, cZ);
+      towerG.add(domeMesh);
+
+      const cupolaGeo = new THREE.CylinderGeometry(1.2, 1.2, 1.5, 12);
+      const cupola = new THREE.Mesh(cupolaGeo, domeMat);
+      cupola.position.set(cX, towerH + 3.5 + tankH + 2.2, cZ);
+      towerG.add(cupola);
+
+      const resBadge = makeTextSprite("💧 OVERHEAD DRINKING WATER RESERVOIR (2.5 ML)", {
+        borderColor: '#38bdf8', backgroundColor: 'rgba(2, 132, 199, 0.94)', textColor: '#ffffff', fontSize: 22
+      });
+      resBadge.position.set(cX, towerH + tankH + 9.0, cZ);
+      layerGroups.labels.add(resBadge);
+
+      layerGroup.add(towerG);
+    }
+
+    // 5. GRAND SPIRITUAL EXHIBITION PAVILION (367m)
+    function buildExhibitionPavilion(geom, p, fid, layerGroup) {
+      const coords = geom.coordinates[0];
+      const wCoords = coords.map(pt => geoToWorld(pt[1], pt[0]));
+      let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
+      let cX = 0, cZ = 0;
+      const shape = new THREE.Shape();
+
+      wCoords.forEach((w, idx) => {
+        cX += w.x; cZ += w.z;
+        if (w.x < minX) minX = w.x;
+        if (w.x > maxX) maxX = w.x;
+        if (w.z < minZ) minZ = w.z;
+        if (w.z > maxZ) maxZ = w.z;
+        if (idx === 0) shape.moveTo(w.x, -w.z);
+        else shape.lineTo(w.x, -w.z);
+      });
+      cX /= wCoords.length; cZ /= wCoords.length;
+      const bWidth = maxX - minX;
+      const bDepth = maxZ - minZ;
+
+      const exhG = new THREE.Group();
+
+      const plinthGeo = new THREE.ExtrudeGeometry(shape, { depth: 0.8, bevelEnabled: false });
+      const plinthMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.9 });
+      const plinthMesh = new THREE.Mesh(plinthGeo, plinthMat);
+      plinthMesh.rotation.x = -Math.PI / 2;
+      plinthMesh.position.y = 0;
+      plinthMesh.receiveShadow = true;
+      plinthMesh.userData = { ...p, feature_id: fid };
+      interactiveObjects.push(plinthMesh);
+      exhG.add(plinthMesh);
+
+      const wallH = 9.0;
+      const wallMat = new THREE.MeshStandardMaterial({ color: 0x1e3a8a, metalness: 0.4, roughness: 0.35 });
+      const wallGeo = new THREE.ExtrudeGeometry(shape, { depth: wallH, bevelEnabled: false });
+      const wallMesh = new THREE.Mesh(wallGeo, wallMat);
+      wallMesh.rotation.x = -Math.PI / 2;
+      wallMesh.position.y = 0.8;
+      wallMesh.castShadow = true;
+      wallMesh.userData = { ...p, feature_id: fid };
+      interactiveObjects.push(wallMesh);
+      exhG.add(wallMesh);
+
+      const archW = bWidth / 3;
+      const archH = 5.5;
+      const roofCurve = new THREE.CubicBezierCurve3(
+        new THREE.Vector3(-archW/2, 0, 0),
+        new THREE.Vector3(-archW/4, archH * 1.3, 0),
+        new THREE.Vector3(archW/4, archH * 1.3, 0),
+        new THREE.Vector3(archW/2, 0, 0)
+      );
+      const pts = roofCurve.getPoints(16);
+      const roofShape = new THREE.Shape();
+      roofShape.moveTo(pts[0].x, pts[0].y);
+      for (let i = 1; i < pts.length; i++) roofShape.lineTo(pts[i].x, pts[i].y);
+      roofShape.lineTo(pts[pts.length-1].x, pts[pts.length-1].y - 0.4);
+      for (let i = pts.length - 2; i >= 0; i--) roofShape.lineTo(pts[i].x, pts[i].y - 0.4);
+      roofShape.closePath();
+
+      const vaultGeo = new THREE.ExtrudeGeometry(roofShape, { depth: bDepth + 2.0, bevelEnabled: false });
+      vaultGeo.center();
+      const vaultMat = new THREE.MeshStandardMaterial({ color: 0x2563eb, metalness: 0.65, roughness: 0.3, side: THREE.DoubleSide });
+
+      [-archW, 0, archW].forEach(offX => {
+        const vault = new THREE.Mesh(vaultGeo, vaultMat);
+        vault.position.set(cX + offX, wallH + 0.8 + archH/2, cZ);
+        vault.castShadow = true;
+        exhG.add(vault);
+      });
+
+      const skyMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.65, roughness: 0.2 });
+      const skylight = new THREE.Mesh(new THREE.BoxGeometry(6.0, 1.2, bDepth), skyMat);
+      skylight.position.set(cX, wallH + archH + 1.2, cZ);
+      exhG.add(skylight);
+
+      const marqueeMat = new THREE.MeshStandardMaterial({ color: 0x0284c7, metalness: 0.7, roughness: 0.2 });
+      const marquee = new THREE.Mesh(new THREE.BoxGeometry(45, 1.2, 12), marqueeMat);
+      marquee.position.set(cX, 6.5, maxZ + 4);
+      marquee.castShadow = true;
+      exhG.add(marquee);
+
+      const glassMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.1, metalness: 0.85 });
+      const glassVest = new THREE.Mesh(new THREE.BoxGeometry(40, 5.5, 2), glassMat);
+      glassVest.position.set(cX, 3.5, maxZ);
+      exhG.add(glassVest);
+
+      const exhBadge = makeTextSprite("🖼️ SPIRITUAL EXHIBITION PAVILION (R-2 - 367m)", {
+        borderColor: '#38bdf8', backgroundColor: 'rgba(30, 58, 138, 0.94)', textColor: '#ffffff', fontSize: 24, scaleFactor: 0.18
+      });
+      exhBadge.position.set(cX, wallH + archH + 10.0, cZ);
+      layerGroups.labels.add(exhBadge);
+
+      layerGroup.add(exhG);
+    }
+
+    // 6. CENTRAL MISSION ADMINISTRATION OFFICES (GATE 2)
+    function buildCentralOffices(geom, p, fid, layerGroup) {
+      const coords = geom.coordinates[0];
+      const wCoords = coords.map(pt => geoToWorld(pt[1], pt[0]));
+      let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
+      let cX = 0, cZ = 0;
+      const shape = new THREE.Shape();
+
+      wCoords.forEach((w, idx) => {
+        cX += w.x; cZ += w.z;
+        if (w.x < minX) minX = w.x;
+        if (w.x > maxX) maxX = w.x;
+        if (w.z < minZ) minZ = w.z;
+        if (w.z > maxZ) maxZ = w.z;
+        if (idx === 0) shape.moveTo(w.x, -w.z);
+        else shape.lineTo(w.x, -w.z);
+      });
+      cX /= wCoords.length; cZ /= wCoords.length;
+      const bWidth = maxX - minX;
+      const bDepth = maxZ - minZ;
+
+      const offG = new THREE.Group();
+
+      const plinthGeo = new THREE.ExtrudeGeometry(shape, { depth: 0.8, bevelEnabled: false });
+      const plinthMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.9 });
+      const plinthMesh = new THREE.Mesh(plinthGeo, plinthMat);
+      plinthMesh.rotation.x = -Math.PI / 2;
+      plinthMesh.position.y = 0;
+      plinthMesh.receiveShadow = true;
+      plinthMesh.userData = { ...p, feature_id: fid };
+      interactiveObjects.push(plinthMesh);
+      offG.add(plinthMesh);
+
+      const h = 11.0;
+      const wallGeo = new THREE.ExtrudeGeometry(shape, { depth: h - 0.8, bevelEnabled: false });
+      const wallMat = new THREE.MeshStandardMaterial({ color: 0x065f46, roughness: 0.5 });
+      const wallMesh = new THREE.Mesh(wallGeo, wallMat);
+      wallMesh.rotation.x = -Math.PI / 2;
+      wallMesh.position.y = 0.8;
+      wallMesh.castShadow = true;
+      wallMesh.userData = { ...p, feature_id: fid };
+      interactiveObjects.push(wallMesh);
+      offG.add(wallMesh);
+
+      const corniceMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.4 });
+      const glassMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.1, metalness: 0.85 });
+
+      for (let f = 1; f <= 2; f++) {
+        const fY = 0.8 + f * 3.4;
+        const band = new THREE.Mesh(new THREE.BoxGeometry(bWidth + 0.6, 0.35, bDepth + 0.6), corniceMat);
+        band.position.set(cX, fY, cZ);
+        offG.add(band);
+
+        const win = new THREE.Mesh(new THREE.BoxGeometry(1.2, 1.8, bDepth - 6), glassMat);
+        win.position.set(maxX + 0.3, fY - 1.2, cZ);
+        offG.add(win);
+      }
+
+      const parapet = new THREE.Mesh(new THREE.BoxGeometry(bWidth + 0.4, 0.9, bDepth + 0.4), corniceMat);
+      parapet.position.set(cX, h + 0.45, cZ);
+      offG.add(parapet);
+
+      const stair = new THREE.Mesh(new THREE.BoxGeometry(12, 3.0, 14), new THREE.MeshStandardMaterial({ color: 0x334155 }));
+      stair.position.set(cX, h + 1.5, cZ);
+      offG.add(stair);
+
+      const can = new THREE.Mesh(new THREE.BoxGeometry(8, 0.5, 18), new THREE.MeshStandardMaterial({ color: 0x34d399, metalness: 0.6 }));
+      can.position.set(maxX + 4, 4.2, cZ);
+      can.castShadow = true;
+      offG.add(can);
+
+      const poleMat = new THREE.MeshStandardMaterial({ color: 0xcfd8dc, metalness: 0.9 });
+      const flagMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.8 });
+      [-6, 0, 6].forEach(offZ => {
+        const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.1, 9.0, 8), poleMat);
+        pole.position.set(maxX + 7, 4.5, cZ + offZ);
+        offG.add(pole);
+
+        const flag = new THREE.Mesh(new THREE.PlaneGeometry(1.6, 1.0), flagMat);
+        flag.position.set(maxX + 7.8, 8.2, cZ + offZ);
+        offG.add(flag);
+      });
+
+      const offLabel = makeTextSprite("🏛️ MISSION CENTRAL OFFICES & PROTOCOL CONTROL (GATE 2)", {
+        borderColor: '#34d399', backgroundColor: 'rgba(6, 95, 70, 0.94)', textColor: '#ffffff', fontSize: 22
+      });
+      offLabel.position.set(cX, h + 12.0, cZ);
+      layerGroups.labels.add(offLabel);
+
+      layerGroup.add(offG);
+    }
+
+    // 7. PASSENGER ALIGHTING & ISBT TRANSIT TERMINAL
+    function buildAlightingTerminal(geom, p, fid, layerGroup) {
+      const coords = geom.coordinates[0];
+      const wCoords = coords.map(pt => geoToWorld(pt[1], pt[0]));
+      let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
+      let cX = 0, cZ = 0;
+      const shape = new THREE.Shape();
+
+      wCoords.forEach((w, idx) => {
+        cX += w.x; cZ += w.z;
+        if (w.x < minX) minX = w.x;
+        if (w.x > maxX) maxX = w.x;
+        if (w.z < minZ) minZ = w.z;
+        if (w.z > maxZ) maxZ = w.z;
+        if (idx === 0) shape.moveTo(w.x, -w.z);
+        else shape.lineTo(w.x, -w.z);
+      });
+      cX /= wCoords.length; cZ /= wCoords.length;
+      const bWidth = maxX - minX;
+      const bDepth = maxZ - minZ;
+
+      const termG = new THREE.Group();
+
+      const apronGeo = new THREE.ExtrudeGeometry(shape, { depth: 0.4, bevelEnabled: false });
+      const apronMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.9 });
+      const apronMesh = new THREE.Mesh(apronGeo, apronMat);
+      apronMesh.rotation.x = -Math.PI / 2;
+      apronMesh.position.y = 0;
+      apronMesh.receiveShadow = true;
+      apronMesh.userData = { ...p, feature_id: fid };
+      interactiveObjects.push(apronMesh);
+      termG.add(apronMesh);
+
+      const canopyMat = new THREE.MeshStandardMaterial({ color: 0x0284c7, metalness: 0.7, roughness: 0.3 });
+      const postMat = new THREE.MeshStandardMaterial({ color: 0x64748b, metalness: 0.8 });
+      const canLen = bWidth - 20;
+
+      [-bDepth * 0.28, 0, bDepth * 0.28].forEach(offZ => {
+        const canRoof = new THREE.Mesh(new THREE.BoxGeometry(canLen, 0.3, 8.0), canopyMat);
+        canRoof.position.set(cX, 4.8, cZ + offZ);
+        canRoof.castShadow = true;
+        termG.add(canRoof);
+
+        for (let px = -canLen/2 + 10; px <= canLen/2 - 10; px += 20) {
+          const post = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 4.8, 8), postMat);
+          post.position.set(cX + px, 2.4, cZ + offZ);
+          termG.add(post);
+        }
+      });
+
+      const termBadge = makeTextSprite("🚏 PASSENGER ALIGHTING TERMINAL & ISBT FEEDER (BDMJ STATION)", {
+        borderColor: '#38bdf8', backgroundColor: 'rgba(15, 23, 42, 0.94)', textColor: '#ffffff', fontSize: 22, scaleFactor: 0.16
+      });
+      termBadge.position.set(cX, 12.0, cZ);
+      layerGroups.labels.add(termBadge);
+
+      layerGroup.add(termG);
+    }
 
     // --- DYNAMIC DATA-DRIVEN RECONSTRUCTION FROM SINGLE MASTER GEOJSON ---
     function loadMasterGeoJSON() {
@@ -1682,12 +2572,12 @@
 
             let color = 0xffffff;
             let targetGroup = layerGroups.boundary;
-            let opacity = 0.10;
+            let opacity = 0.05;
 
-            if (fid.includes('GROUND-A')) { color = 0xff3344; targetGroup = layerGroups.groundA; opacity = 0.18; }
-            else if (fid.includes('GROUND-B')) { color = 0xffb700; targetGroup = layerGroups.groundB; opacity = 0.16; }
-            else if (fid.includes('GROUND-C')) { color = 0x00ff88; targetGroup = layerGroups.groundC; opacity = 0.16; }
-            else if (fid.includes('GROUND-D')) { color = 0x00d2ff; targetGroup = layerGroups.groundD; opacity = 0.16; }
+            if (fid.includes('GROUND-A')) { color = 0xff3344; targetGroup = layerGroups.groundA; opacity = 0.06; }
+            else if (fid.includes('GROUND-B')) { color = 0xffb700; targetGroup = layerGroups.groundB; opacity = 0.05; }
+            else if (fid.includes('GROUND-C')) { color = 0x00ff88; targetGroup = layerGroups.groundC; opacity = 0.05; }
+            else if (fid.includes('GROUND-D')) { color = 0x00d2ff; targetGroup = layerGroups.groundD; opacity = 0.05; }
 
             const polyGeo = new THREE.ShapeGeometry(shape);
             const polyMat = new THREE.MeshBasicMaterial({
@@ -1699,16 +2589,17 @@
             });
             const polyMesh = new THREE.Mesh(polyGeo, polyMat);
             polyMesh.rotation.x = -Math.PI / 2;
-            polyMesh.position.y = 0.45;
+            polyMesh.position.y = 0.08;
 
-            // Border line
+            // Subtle dashed boundary border line
             const borderPts = coords.map(pt => {
               const w = geoToWorld(pt[1], pt[0]);
-              return new THREE.Vector3(w.x, 0.9, w.z);
+              return new THREE.Vector3(w.x, 0.45, w.z);
             });
             const borderGeo = new THREE.BufferGeometry().setFromPoints(borderPts);
-            const borderMat = new THREE.LineBasicMaterial({ color: color, linewidth: 3 });
+            const borderMat = new THREE.LineDashedMaterial({ color: color, dashSize: 16, gapSize: 8, linewidth: 2, transparent: true, opacity: 0.85 });
             const borderLine = new THREE.Line(borderGeo, borderMat);
+            borderLine.computeLineDistances();
 
             polyMesh.userData = { ...p, feature_id: fid };
             interactiveObjects.push(polyMesh);
@@ -1835,278 +2726,96 @@
               layerGroups.pandal.add(backdrop);
             }
             else if (fid === 'FEAT-EXHIBITION') {
-              // Nirankari Spiritual Exhibition Pavilion (Road R-2 90)
-              const coords = geom.coordinates[0];
-              const shape = new THREE.Shape();
-              coords.forEach((pt, idx) => {
-                const w = geoToWorld(pt[1], pt[0]);
-                if (idx === 0) shape.moveTo(w.x, -w.z);
-                else shape.lineTo(w.x, -w.z);
-              });
-              const exhGeo = new THREE.ExtrudeGeometry(shape, { depth: 9.0, bevelEnabled: false });
-              const exhMat = new THREE.MeshStandardMaterial({ color: 0x1e3a8a, metalness: 0.5, roughness: 0.4 });
-              const exhMesh = new THREE.Mesh(exhGeo, exhMat);
-              exhMesh.rotation.x = -Math.PI / 2;
-              exhMesh.position.y = 0;
-              exhMesh.castShadow = true;
-              exhMesh.userData = { ...p, feature_id: fid };
-              interactiveObjects.push(exhMesh);
-              layerGroups.pandal.add(exhMesh);
-
-              // 3D Exhibition Badge
-              const exhLabel = makeTextSprite("🖼️ SPIRITUAL EXHIBITION PAVILION (R-2)", {
-                borderColor: '#38bdf8',
-                backgroundColor: 'rgba(30, 58, 138, 0.94)',
-                textColor: '#ffffff'
-              });
-              exhLabel.position.set(0, 16, -240);
-              layerGroups.labels.add(exhLabel);
+              buildExhibitionPavilion(geom, p, fid, layerGroups.pandal);
             }
             else if (fid === 'FEAT-OFFICES-CENTRAL') {
-              // Central Mission Administration Offices (Fronting Gate 2)
-              const coords = geom.coordinates[0];
-              const shape = new THREE.Shape();
-              coords.forEach((pt, idx) => {
-                const w = geoToWorld(pt[1], pt[0]);
-                if (idx === 0) shape.moveTo(w.x, -w.z);
-                else shape.lineTo(w.x, -w.z);
-              });
-              const offGeo = new THREE.ExtrudeGeometry(shape, { depth: 8.0, bevelEnabled: false });
-              const offMat = new THREE.MeshStandardMaterial({ color: 0x065f46, roughness: 0.4 });
-              const offMesh = new THREE.Mesh(offGeo, offMat);
-              offMesh.rotation.x = -Math.PI / 2;
-              offMesh.position.y = 0;
-              offMesh.castShadow = true;
-              offMesh.userData = { ...p, feature_id: fid };
-              interactiveObjects.push(offMesh);
-              layerGroups.campus.add(offMesh);
-
-              // 3D Mission HQ Badge
-              const offLabel = makeTextSprite("🏛️ MISSION CENTRAL OFFICES (GATE 2)", {
-                borderColor: '#34d399',
-                backgroundColor: 'rgba(6, 95, 70, 0.94)',
-                textColor: '#ffffff'
-              });
-              offLabel.position.set(220, 16, -20);
-              layerGroups.labels.add(offLabel);
+              buildCentralOffices(geom, p, fid, layerGroups.campus);
             }
             else if (geom.type === 'Point') {
               const w = geoToWorld(geom.coordinates[1], geom.coordinates[0]);
-              const blockGeo = new THREE.BoxGeometry(16, 5, 12);
-              const blockMat = new THREE.MeshStandardMaterial({ color: fid.includes('TOILETS') ? 0x0284c7 : 0x0f766e });
-              const blockMesh = new THREE.Mesh(blockGeo, blockMat);
-              blockMesh.position.set(w.x, 2.5, w.z);
-              blockMesh.castShadow = true;
-              blockMesh.userData = { ...p, feature_id: fid };
-              interactiveObjects.push(blockMesh);
-              layerGroups.campus.add(blockMesh);
+              if (fid.includes('TOILETS')) {
+                const tG = new THREE.Group();
+                const bMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.6 });
+                const blockMesh = new THREE.Mesh(new THREE.BoxGeometry(16, 4.5, 12), bMat);
+                blockMesh.position.set(0, 2.25, 0);
+                blockMesh.castShadow = true;
+                tG.add(blockMesh);
+
+                const tankGeo = new THREE.CylinderGeometry(1.2, 1.2, 2.0, 12);
+                const tankMat = new THREE.MeshStandardMaterial({ color: 0x0284c7, roughness: 0.3 });
+                const tank = new THREE.Mesh(tankGeo, tankMat);
+                tank.position.set(0, 5.5, 0);
+                tG.add(tank);
+
+                tG.position.set(w.x, 0, w.z);
+                blockMesh.userData = { ...p, feature_id: fid };
+                interactiveObjects.push(blockMesh);
+                layerGroups.campus.add(tG);
+              } else {
+                const blockGeo = new THREE.BoxGeometry(16, 5, 12);
+                const blockMat = new THREE.MeshStandardMaterial({ color: 0x0f766e, roughness: 0.5 });
+                const blockMesh = new THREE.Mesh(blockGeo, blockMat);
+                blockMesh.position.set(w.x, 2.5, w.z);
+                blockMesh.castShadow = true;
+                blockMesh.userData = { ...p, feature_id: fid };
+                interactiveObjects.push(blockMesh);
+                layerGroups.campus.add(blockMesh);
+              }
             }
           }
 
           // 3. INDIVIDUAL PERMANENT BUILDINGS & GROUND STRUCTURES
           else if (cat === 'PERMANENT_BUILDING' || cat === 'PERMANENT_STRUCTURE') {
-            const coords = geom.coordinates[0];
-            const shape = new THREE.Shape();
-            let cX = 0, cZ = 0;
-            let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
-            coords.forEach((pt, idx) => {
-              const w = geoToWorld(pt[1], pt[0]);
-              cX += w.x; cZ += w.z;
-              if (w.x < minX) minX = w.x;
-              if (w.x > maxX) maxX = w.x;
-              if (w.z < minZ) minZ = w.z;
-              if (w.z > maxZ) maxZ = w.z;
-              if (idx === 0) shape.moveTo(w.x, -w.z);
-              else shape.lineTo(w.x, -w.z);
-            });
-            cX /= coords.length; cZ /= coords.length;
-            const bWidth = Math.max(10, maxX - minX);
-            const bDepth = Math.max(10, maxZ - minZ);
-
-            const h = p.estimated_height_m || 8.0;
-
-            // 1. Base / Foundation Plinth (0.8m)
-            const baseGeo = new THREE.ExtrudeGeometry(shape, { depth: 0.8, bevelEnabled: false });
-            const baseMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.9 });
-            const baseMesh = new THREE.Mesh(baseGeo, baseMat);
-            baseMesh.rotation.x = -Math.PI / 2;
-            baseMesh.position.y = 0;
-            layerGroups.campus.add(baseMesh);
-
-            // 2. Main Building Superstructure
-            const wallGeo = new THREE.ExtrudeGeometry(shape, { depth: Math.max(1.0, h - 0.8), bevelEnabled: false });
-            let bColor = 0x334155;
-            if (fid.includes('LANGAR')) bColor = 0xb45309; // Warm terracotta / amber for Langar kitchens
-            else if (fid.includes('DISPENSARY') || fid.includes('HOSP')) bColor = 0x0284c7; // Hospital cyan
-            else if (fid.includes('ADMIN')) bColor = 0x1e3a8a; // Navy executive
-            else if (fid.includes('RES')) bColor = 0x3b82f6; // Residential blue
-            else if (fid.includes('SD-OFFICE')) bColor = 0x0f766e; // Executive green
-            else if (fid.includes('TOILETS')) bColor = 0x475569; // Slate sanitary grey
-            else if (fid.includes('RESERVOIR')) bColor = 0x1e293b;
-
-            const wallMat = new THREE.MeshStandardMaterial({
-              color: bColor, roughness: 0.5, metalness: 0.2
-            });
-            const bldgMesh = new THREE.Mesh(wallGeo, wallMat);
-            bldgMesh.rotation.x = -Math.PI / 2;
-            bldgMesh.position.y = 0.8;
-            bldgMesh.castShadow = true;
-            bldgMesh.receiveShadow = true;
-
-            bldgMesh.userData = { ...p, feature_id: fid };
-            interactiveObjects.push(bldgMesh);
-            layerGroups.campus.add(bldgMesh);
-
-            // 3. ARCHITECTURAL ROOF DETAIL
-            if (fid.includes('LANGAR')) {
-              // Dual-pitch / Gable industrial roof with ridge line
-              const isEW = (bWidth >= bDepth);
-              const roofMat = new THREE.MeshStandardMaterial({
-                color: 0xd97706, roughness: 0.4, metalness: 0.35, side: THREE.DoubleSide
-              });
-              const ridgeH = 4.5;
-              const gableShape = new THREE.Shape();
-              if (isEW) {
-                gableShape.moveTo(-bDepth/2 - 1.2, 0);
-                gableShape.lineTo(0, ridgeH);
-                gableShape.lineTo(bDepth/2 + 1.2, 0);
-                gableShape.closePath();
-                const gGeo = new THREE.ExtrudeGeometry(gableShape, { depth: bWidth + 2.4, bevelEnabled: false });
-                gGeo.center();
-                const gMesh = new THREE.Mesh(gGeo, roofMat);
-                gMesh.rotation.y = Math.PI / 2;
-                gMesh.position.set(cX, h + ridgeH / 2, cZ);
-                gMesh.castShadow = true;
-                layerGroups.campus.add(gMesh);
-              } else {
-                gableShape.moveTo(-bWidth/2 - 1.2, 0);
-                gableShape.lineTo(0, ridgeH);
-                gableShape.lineTo(bWidth/2 + 1.2, 0);
-                gableShape.closePath();
-                const gGeo = new THREE.ExtrudeGeometry(gableShape, { depth: bDepth + 2.4, bevelEnabled: false });
-                gGeo.center();
-                const gMesh = new THREE.Mesh(gGeo, roofMat);
-                gMesh.position.set(cX, h + ridgeH / 2, cZ);
-                gMesh.castShadow = true;
-                layerGroups.campus.add(gMesh);
-              }
+            if (fid.includes('LANGAR') || fid.includes('DINING')) {
+              buildLangarPavilion(geom, p, fid, layerGroups.campus);
+            } else if (fid.includes('TOILETS')) {
+              buildSanitationComplex(geom, p, fid, layerGroups.campus);
+            } else if (fid.includes('ALIGHTING-STN')) {
+              buildAlightingTerminal(geom, p, fid, layerGroups.campus);
             } else if (fid.includes('RESERVOIR')) {
-              // Elevated water reservoir cistern on staging
-              const tankRadius = Math.min(bWidth, bDepth) * 0.35;
-              const tankHeight = 6.5;
-              const tankGeo = new THREE.CylinderGeometry(tankRadius, tankRadius, tankHeight, 20);
-              const tankMat = new THREE.MeshStandardMaterial({ color: 0x0284c7, metalness: 0.6, roughness: 0.3 });
-              const tank = new THREE.Mesh(tankGeo, tankMat);
-              tank.position.set(cX, h + tankHeight/2, cZ);
-              tank.castShadow = true;
-              layerGroups.campus.add(tank);
-
-              // 6 structural staging columns
-              const colGeo = new THREE.CylinderGeometry(0.7, 0.7, h, 8);
-              const colMat = new THREE.MeshStandardMaterial({ color: 0x64748b, roughness: 0.7 });
-              for (let a = 0; a < Math.PI * 2; a += Math.PI / 3) {
-                const col = new THREE.Mesh(colGeo, colMat);
-                col.position.set(cX + Math.cos(a) * (tankRadius * 0.8), h / 2, cZ + Math.sin(a) * (tankRadius * 0.8));
-                layerGroups.campus.add(col);
-              }
-            } else if (fid.startsWith('BLDG-SNAS-ADMIN') || fid.startsWith('BLDG-SNAS-RES') || fid.includes('HOSP') || fid.includes('DISPENSARY')) {
-              // Parapet wall on roof edge
-              const parapetGeo = new THREE.BoxGeometry(bWidth, 0.9, bDepth);
-              const parapetMat = new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.5 });
-              const parapet = new THREE.Mesh(parapetGeo, parapetMat);
-              parapet.position.set(cX, h + 0.45, cZ);
-              layerGroups.campus.add(parapet);
-
-              // Rooftop elevator penthouse / stairwell
-              const stairGeo = new THREE.BoxGeometry(Math.min(18, bWidth * 0.25), 3.0, Math.min(14, bDepth * 0.25));
-              const stairMat = new THREE.MeshStandardMaterial({ color: 0x475569, roughness: 0.6 });
-              const stair = new THREE.Mesh(stairGeo, stairMat);
-              stair.position.set(cX, h + 2.4, cZ);
-              stair.castShadow = true;
-              layerGroups.campus.add(stair);
-
-              // Entrance portico for Dispensary / Admin
-              if (fid.includes('DISPENSARY') || fid.includes('ADMIN')) {
-                const porticoGeo = new THREE.BoxGeometry(14, 0.6, 8);
-                const porticoMat = new THREE.MeshStandardMaterial({ color: 0x0284c7, roughness: 0.4 });
-                const portico = new THREE.Mesh(porticoGeo, porticoMat);
-                portico.position.set(cX, 4.0, cZ + bDepth/2 + 4);
-                layerGroups.campus.add(portico);
-              }
-            }
-
-            // Add landmark badge for major facilities
-            if (fid.includes('LANGAR-01')) {
-              const lBadge = makeTextSprite("🍲 GROUND B MEGA LANGAR (35k/hr)", {
-                borderColor: '#f97316', backgroundColor: 'rgba(124, 45, 18, 0.94)', textColor: '#ffedd5', fontSize: 22
-              });
-              lBadge.position.set(cX, h + 14, cZ);
-              layerGroups.labels.add(lBadge);
-            } else if (fid.includes('LANGAR-02')) {
-              const l2Badge = makeTextSprite("🍲 GROUND C MEGA LANGAR (30k/hr)", {
-                borderColor: '#f97316', backgroundColor: 'rgba(124, 45, 18, 0.94)', textColor: '#ffedd5', fontSize: 22
-              });
-              l2Badge.position.set(cX, h + 14, cZ);
-              layerGroups.labels.add(l2Badge);
-            } else if (fid.includes('LANGAR-03')) {
-              const l3Badge = makeTextSprite("🍲 GROUND D TRANSIT LANGAR (18k/hr)", {
-                borderColor: '#f97316', backgroundColor: 'rgba(124, 45, 18, 0.94)', textColor: '#ffedd5', fontSize: 22
-              });
-              l3Badge.position.set(cX, h + 14, cZ);
-              layerGroups.labels.add(l3Badge);
-            } else if (fid.includes('DISPENSARY')) {
-              const dBadge = makeTextSprite("🏥 CENTRAL MEDICAL DISPENSARY & ICU", {
-                borderColor: '#38bdf8', backgroundColor: 'rgba(12, 74, 110, 0.94)', textColor: '#e0f2fe', fontSize: 22
-              });
-              dBadge.position.set(cX, h + 12, cZ);
-              layerGroups.labels.add(dBadge);
-            } else if (fid.includes('ADMIN')) {
-              const aBadge = makeTextSprite("🏛️ SNAS CENTRAL ADMINISTRATIVE BHAVAN", {
-                borderColor: '#38bdf8', backgroundColor: 'rgba(30, 58, 138, 0.94)', textColor: '#ffffff', fontSize: 22
-              });
-              aBadge.position.set(cX, h + 14, cZ);
-              layerGroups.labels.add(aBadge);
+              buildWaterReservoirTower(geom, p, fid, layerGroups.campus);
+            } else {
+              buildCampusBhavan(geom, p, fid, layerGroups.campus);
             }
           }
 
-          // 4. INTERNAL ROAD NETWORK
+          // 4. INTERNAL ROAD NETWORK (OPTION A: UNIFIED REALISTIC ASPHALT SYSTEM)
           else if (cat === 'INTERNAL_ROAD') {
             const coords = geom.coordinates;
             const pts = coords.map(c => {
               const w = geoToWorld(c[1], c[0]);
-              return new THREE.Vector3(w.x, 1.2, w.z);
+              return new THREE.Vector3(w.x, 0.85, w.z);
             });
 
-            // Create flat ribbon road mesh
             const w = p.width_m || 18.0;
-            for (let i = 0; i < pts.length - 1; i++) {
-              const p1 = pts[i];
-              const p2 = pts[i+1];
-              const dir = new THREE.Vector3().subVectors(p2, p1).normalize();
-              const normal = new THREE.Vector3(-dir.z, 0, dir.x).multiplyScalar(w / 2);
+            const roadMesh = buildRoadRibbonMesh(pts, w, 0.85, {
+              color: 0x1a202c,
+              roughness: 0.85,
+              metalness: 0.08
+            });
+            if (roadMesh) {
+              roadMesh.userData = { ...p, feature_id: fid };
+              interactiveObjects.push(roadMesh);
+              layerGroups.internalRoads.add(roadMesh);
 
-              const segGeo = new THREE.BufferGeometry();
-              const vertices = new Float32Array([
-                p1.x + normal.x, 1.0, p1.z + normal.z,
-                p1.x - normal.x, 1.0, p1.z - normal.z,
-                p2.x + normal.x, 1.0, p2.z + normal.z,
+              // Solid outer white edge lines
+              const leftWhitePts = getRibbonOffsetPoints(pts, w, 0.03, 0.85, 0.03);
+              const leftWhiteLine = buildRoadRibbonMesh(leftWhitePts, 0.35, 0.88, { color: 0xffffff, roughness: 0.5 });
+              if (leftWhiteLine) layerGroups.internalRoads.add(leftWhiteLine);
 
-                p2.x + normal.x, 1.0, p2.z + normal.z,
-                p1.x - normal.x, 1.0, p1.z - normal.z,
-                p2.x - normal.x, 1.0, p2.z - normal.z,
-              ]);
-              segGeo.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
-              const segMat = new THREE.MeshBasicMaterial({ color: 0x2b384e, side: THREE.DoubleSide });
-              const segMesh = new THREE.Mesh(segGeo, segMat);
-              layerGroups.internalRoads.add(segMesh);
+              const rightWhitePts = getRibbonOffsetPoints(pts, w, 0.97, 0.85, 0.03);
+              const rightWhiteLine = buildRoadRibbonMesh(rightWhitePts, 0.35, 0.88, { color: 0xffffff, roughness: 0.5 });
+              if (rightWhiteLine) layerGroups.internalRoads.add(rightWhiteLine);
+
+              // Center divider: dashed white line for wide avenues (width >= 12m)
+              if (w >= 12.0) {
+                const lineGeo = new THREE.BufferGeometry().setFromPoints(pts.map(p => new THREE.Vector3(p.x, 0.88, p.z)));
+                const lineMat = new THREE.LineDashedMaterial({ color: 0xffffff, dashSize: 6, gapSize: 4, linewidth: 2 });
+                const line = new THREE.Line(lineGeo, lineMat);
+                line.computeLineDistances();
+                layerGroups.internalRoads.add(line);
+              }
             }
-
-            // Road centerline
-            const lineGeo = new THREE.BufferGeometry().setFromPoints(pts);
-            const lineMat = new THREE.LineDashedMaterial({ color: 0xffffff, dashSize: 6, gapSize: 4, linewidth: 2 });
-            const line = new THREE.Line(lineGeo, lineMat);
-            line.computeLineDistances();
-            layerGroups.internalRoads.add(line);
           }
 
           // 5. EXTERNAL ROADS & HIGHWAYS (NH-44 / GRAND TRUNK ROAD)
@@ -2144,8 +2853,8 @@
 
               // Asphalt deck ribbon
               const asphaltMesh = buildRoadRibbonMesh(pts, roadWidth, (z) => getHighwayElevation(z, isBridge), {
-                color: 0x1f242d,
-                roughness: 0.88,
+                color: 0x1a202c,
+                roughness: 0.85,
                 metalness: 0.08
               });
               asphaltMesh.userData = { ...p, feature_id: fid };
@@ -2247,7 +2956,7 @@
                 });
 
                 const sbMesh = buildRoadRibbonMesh(sbPts, roadWidth, (z) => getHighwayElevation(z, isBridge), {
-                  color: 0x1f242d, roughness: 0.88, metalness: 0.08
+                  color: 0x1a202c, roughness: 0.85, metalness: 0.08
                 });
                 sbMesh.userData = { ...p, feature_id: fid + "-SB", name: "Grand Trunk Road (Southbound Carriageway)" };
                 interactiveObjects.push(sbMesh);
@@ -2268,31 +2977,41 @@
             } else if (isTrunkLink) {
               // 7.5m Paved slip ramp connector
               const rampMesh = buildRoadRibbonMesh(pts, 7.5, (z) => getHighwayElevation(z, false), {
-                color: 0x1f242d, roughness: 0.85
+                color: 0x1a202c, roughness: 0.85, metalness: 0.08
               });
               rampMesh.userData = { ...p, feature_id: fid };
               interactiveObjects.push(rampMesh);
               layerGroups.externalRoads.add(rampMesh);
 
               const edgeWhitePts = getRibbonOffsetPoints(pts, 7.5, 0.05, (z) => getHighwayElevation(z, false), 0.03);
-              const edgeWhiteLine = buildRoadRibbonMesh(edgeWhitePts, 0.3, (z) => getHighwayElevation(z, false) + 0.03, { color: 0xffffff });
-              layerGroups.externalRoads.add(edgeWhiteLine);
+              const edgeWhiteLine = buildRoadRibbonMesh(edgeWhitePts, 0.3, (z) => getHighwayElevation(z, false) + 0.03, { color: 0xffffff, roughness: 0.5 });
+              if (edgeWhiteLine) layerGroups.externalRoads.add(edgeWhiteLine);
 
             } else {
-              // 7.5m Paved service roads, tertiary roads, and village connectors
-              const servMesh = buildRoadRibbonMesh(pts, 7.5, 1.1, {
-                color: 0x2b323d, roughness: 0.9
+              // 7.5m Paved service roads, tertiary roads, and village connectors (Option A: unified asphalt)
+              const servMesh = buildRoadRibbonMesh(pts, 7.5, 0.85, {
+                color: 0x1a202c, roughness: 0.85, metalness: 0.08
               });
-              servMesh.userData = { ...p, feature_id: fid };
-              interactiveObjects.push(servMesh);
-              layerGroups.externalRoads.add(servMesh);
+              if (servMesh) {
+                servMesh.userData = { ...p, feature_id: fid };
+                interactiveObjects.push(servMesh);
+                layerGroups.externalRoads.add(servMesh);
 
-              // Dashed center divider
-              const cGeo = new THREE.BufferGeometry().setFromPoints(pts);
-              const cMat = new THREE.LineDashedMaterial({ color: 0xffffff, dashSize: 4, gapSize: 4, linewidth: 2 });
-              const cLine = new THREE.Line(cGeo, cMat);
-              cLine.computeLineDistances();
-              layerGroups.externalRoads.add(cLine);
+                const leftEdgePts = getRibbonOffsetPoints(pts, 7.5, 0.05, 0.85, 0.03);
+                const leftEdgeLine = buildRoadRibbonMesh(leftEdgePts, 0.25, 0.88, { color: 0xffffff, roughness: 0.5 });
+                if (leftEdgeLine) layerGroups.externalRoads.add(leftEdgeLine);
+
+                const rightEdgePts = getRibbonOffsetPoints(pts, 7.5, 0.95, 0.85, 0.03);
+                const rightEdgeLine = buildRoadRibbonMesh(rightEdgePts, 0.25, 0.88, { color: 0xffffff, roughness: 0.5 });
+                if (rightEdgeLine) layerGroups.externalRoads.add(rightEdgeLine);
+
+                // Dashed center divider
+                const cGeo = new THREE.BufferGeometry().setFromPoints(pts.map(p => new THREE.Vector3(p.x, 0.88, p.z)));
+                const cMat = new THREE.LineDashedMaterial({ color: 0xffffff, dashSize: 4, gapSize: 4, linewidth: 2 });
+                const cLine = new THREE.Line(cGeo, cMat);
+                cLine.computeLineDistances();
+                layerGroups.externalRoads.add(cLine);
+              }
             }
           }
 
@@ -2528,49 +3247,83 @@
               else shape.lineTo(w.x, -w.z);
             });
             const polyGeo = new THREE.ShapeGeometry(shape);
+            const isParentP1 = (fid === 'FEAT-PARKING-01');
             const polyMat = new THREE.MeshStandardMaterial({
-              color: 0x182232,
+              color: isParentP1 ? 0x0f172a : 0x182232,
               roughness: 0.95,
+              transparent: isParentP1,
+              opacity: isParentP1 ? 0.35 : 1.0,
               side: THREE.DoubleSide
             });
             const parkMesh = new THREE.Mesh(polyGeo, polyMat);
             parkMesh.rotation.x = -Math.PI / 2;
-            parkMesh.position.y = 0.6;
+            parkMesh.position.y = isParentP1 ? 0.45 : 0.6;
             parkMesh.userData = { ...p, feature_id: fid };
             interactiveObjects.push(parkMesh);
             layerGroups.parking.add(parkMesh);
 
-            // Amber hazard border line
+            // Amber / cyan hazard border line conforming to real polygon perimeter
             const borderPts = coords.map(pt => {
               const w = geoToWorld(pt[1], pt[0]);
-              return new THREE.Vector3(w.x, 0.9, w.z);
+              return new THREE.Vector3(w.x, isParentP1 ? 0.75 : 0.9, w.z);
             });
             const borderGeo = new THREE.BufferGeometry().setFromPoints(borderPts);
-            const borderMat = new THREE.LineBasicMaterial({ color: 0xf59e0b, linewidth: 3 });
+            const borderMat = new THREE.LineBasicMaterial({
+              color: isParentP1 ? 0xf59e0b : (fid.includes('VIP') ? 0xfbbf24 : 0x38bdf8),
+              linewidth: isParentP1 ? 4 : 2
+            });
             const borderLine = new THREE.Line(borderGeo, borderMat);
             layerGroups.parking.add(borderLine);
 
-            // Procedural PCG Parking Striping
+            // Procedural PCG Parking Striping - Scanline clipped to exact non-rectangular polygon boundary
+            const polyVerts = coords.map(pt => geoToWorld(pt[1], pt[0]));
             let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
-            coords.forEach(pt => {
-              const w = geoToWorld(pt[1], pt[0]);
+            polyVerts.forEach(w => {
               if (w.x < minX) minX = w.x;
               if (w.x > maxX) maxX = w.x;
               if (w.z < minZ) minZ = w.z;
               if (w.z > maxZ) maxZ = w.z;
             });
-            const pLines = [];
-            const spacing = 18.0;
-            for (let z = minZ + 15; z < maxZ - 15; z += spacing) {
-              pLines.push(new THREE.Vector3(minX + 10, 1.05, z));
-              pLines.push(new THREE.Vector3(maxX - 10, 1.05, z));
-            }
-            if (pLines.length > 0) {
-              const gridGeo = new THREE.BufferGeometry().setFromPoints(pLines);
-              const gridMat = new THREE.LineDashedMaterial({ color: 0xfbbf24, dashSize: 4, gapSize: 3, transparent: true, opacity: 0.65 });
-              const gridLine = new THREE.LineSegments(gridGeo, gridMat);
-              gridLine.computeLineDistances();
-              layerGroups.parking.add(gridLine);
+
+            if (!isParentP1) {
+              const pLines = [];
+              const isHeavy = fid.includes('HEAVY') || fid.includes('BUS');
+              const spacing = isHeavy ? 22.0 : 16.0;
+              const nV = polyVerts.length;
+
+              for (let z = minZ + 10; z < maxZ - 10; z += spacing) {
+                const xIntersects = [];
+                for (let i = 0; i < nV - 1; i++) {
+                  const pA = polyVerts[i], pB = polyVerts[i + 1];
+                  if ((pA.z < z && pB.z >= z) || (pB.z < z && pA.z >= z)) {
+                    const t = (z - pA.z) / (pB.z - pA.z);
+                    xIntersects.push(pA.x + t * (pB.x - pA.x));
+                  }
+                }
+                xIntersects.sort((a, b) => a - b);
+                for (let k = 0; k < xIntersects.length - 1; k += 2) {
+                  const x1 = xIntersects[k] + 6.0;
+                  const x2 = xIntersects[k + 1] - 6.0;
+                  if (x2 > x1 + 10.0) {
+                    pLines.push(new THREE.Vector3(x1, 1.05, z));
+                    pLines.push(new THREE.Vector3(x2, 1.05, z));
+                  }
+                }
+              }
+
+              if (pLines.length > 0) {
+                const gridGeo = new THREE.BufferGeometry().setFromPoints(pLines);
+                const gridMat = new THREE.LineDashedMaterial({
+                  color: isHeavy ? 0xf97316 : 0xfbbf24,
+                  dashSize: isHeavy ? 6 : 4,
+                  gapSize: 3,
+                  transparent: true,
+                  opacity: 0.75
+                });
+                const gridLine = new THREE.LineSegments(gridGeo, gridMat);
+                gridLine.computeLineDistances();
+                layerGroups.parking.add(gridLine);
+              }
             }
 
             // 3D Parking Totem Marker & Floating Badge
@@ -2584,21 +3337,23 @@
             layerGroups.parking.add(totemPillar);
 
             let parkLabelText = p.name || fid;
-            if (fid === 'FEAT-PARKING-01') parkLabelText = "🅿️ PARKING P1 (SOUTH / DELHI HEAVY BUSES)";
-            else if (fid === 'FEAT-PARKING-02') parkLabelText = "🅿️ PARKING P2 (GROUND B / COMMUTERS)";
-            else if (fid === 'FEAT-PARKING-03') parkLabelText = "🅿️ PARKING P3 (STATION / NORTH-WEST)";
-            else if (fid === 'FEAT-PARKING-04') parkLabelText = "🅿️ PARKING P4 (AMBALA & ABROAD SAINTS)";
-            else if (fid === 'FEAT-PARKING-05') parkLabelText = "🅿️ PARKING P5 (EAST OF NH-44)";
+            if (fid === 'FEAT-PARKING-01') parkLabelText = "🅿️ PARKING P1 - OVERALL SOUTH HUB (PANCHI GUJRAN)";
+            else if (fid === 'FEAT-PARKING-P1-LIGHT') parkLabelText = "🅿️ PARKING A (LIGHT VEHICLES / CARS - DELHI SIDE)";
+            else if (fid === 'FEAT-PARKING-P1-HEAVY') parkLabelText = "🅿️ PARKING B (HEAVY VEHICLES & BUSES - 1,200 CAPACITY)";
+            else if (fid === 'FEAT-PARKING-02') parkLabelText = "🅿️ PARKING P2 (GROUND B / COMMUTERS & BUSES)";
+            else if (fid === 'FEAT-PARKING-03') parkLabelText = "🅿️ PARKING P3 (BHODWAL MAJRI STATION & OUTSTATION HUB)";
+            else if (fid === 'FEAT-PARKING-04') parkLabelText = "🅿️ PARKING P4 (AMBALA & SAINTS FROM ABROAD)";
+            else if (fid === 'FEAT-PARKING-05') parkLabelText = "🅿️ PARKING P5 (EAST OF NH-44 / LOCAL BUS STOP)";
             else if (fid.includes('VIP')) parkLabelText = "⭐ VIP & S.C. PARKING (GATE 2)";
 
             const parkBadge = makeTextSprite(parkLabelText, {
-              borderColor: fid.includes('VIP') ? '#ffd700' : '#38bdf8',
+              borderColor: fid.includes('VIP') ? '#ffd700' : (isParentP1 ? '#f59e0b' : '#38bdf8'),
               backgroundColor: fid.includes('VIP') ? 'rgba(120, 53, 15, 0.94)' : 'rgba(15, 23, 42, 0.92)',
-              textColor: fid.includes('VIP') ? '#fef08a' : '#e0f2fe',
+              textColor: fid.includes('VIP') ? '#fef08a' : (isParentP1 ? '#fef08a' : '#e0f2fe'),
               fontSize: 24,
               scaleFactor: 0.16
             });
-            parkBadge.position.set(centerX, 18, centerZ);
+            parkBadge.position.set(centerX, isParentP1 ? 22 : 18, centerZ);
             layerGroups.labels.add(parkBadge);
           }
 
@@ -2654,28 +3409,61 @@
             canopy.position.set(bridgeMid.x, 9.4, bridgeMid.z);
             layerGroups.footbridge.add(canopy);
 
-            // Heavy structural bridge piers
+            // Heavy structural bridge piers (Engineered positions in median and verges)
             const pierMat = new THREE.MeshStandardMaterial({ color: 0x64748b, roughness: 0.6 });
             [p1.x, p1.x + (p2.x - p1.x) * 0.35, bridgeMid.x, p1.x + (p2.x - p1.x) * 0.75, p2.x].forEach(px => {
               const pier = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.7, 7.0, 12), pierMat);
               pier.position.set(px, 3.5, bridgeMid.z);
               layerGroups.footbridge.add(pier);
+
+              const cap = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.6, 5.2), pierMat);
+              cap.position.set(px, 6.7, bridgeMid.z);
+              layerGroups.footbridge.add(cap);
             });
 
-            // Terminal stair towers & switchback ramps
-            [p1, p2].forEach(pt => {
-              const tower = new THREE.Mesh(
-                new THREE.BoxGeometry(9, 8.0, 9),
-                new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.5 })
-              );
+            // Terminal stair towers & pedestrian switchback ramps at East (P5) and West (Gate 1/2)
+            const towerMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.5 });
+            const rampMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.7 });
+            const stairRailingMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, metalness: 0.8 });
+
+            [
+              { pt: p1, dirZ: 1, name: "East Bus Staging Ramps (Parking 5)" },
+              { pt: p2, dirZ: -1, name: "West Ceremonial Plaza Ramps (Gates 1 & 2)" }
+            ].forEach(term => {
+              const pt = term.pt;
+              // Central support tower
+              const tower = new THREE.Mesh(new THREE.BoxGeometry(7, 8.0, 7), towerMat);
               tower.position.set(pt.x, 4.0, pt.z);
-              tower.userData = { ...p, feature_id: fid };
+              tower.userData = { ...p, feature_id: fid + "-TOWER" };
               interactiveObjects.push(tower);
               layerGroups.footbridge.add(tower);
+
+              // 24m Accessible Switchback Ramp descending from Y=7m to Y=0.5m
+              const rampLen = 22.0;
+              const rampGeo = new THREE.BoxGeometry(3.6, 0.4, rampLen);
+              const rampMesh = new THREE.Mesh(rampGeo, rampMat);
+              rampMesh.position.set(pt.x + (term.dirZ * 4.5), 3.75, pt.z + (term.dirZ * rampLen * 0.5));
+              rampMesh.rotation.x = term.dirZ * Math.atan2(6.5, rampLen);
+              layerGroups.footbridge.add(rampMesh);
+
+              // Ramp safety railings
+              [-1.8, 1.8].forEach(rx => {
+                const rail = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.9, rampLen), stairRailingMat);
+                rail.position.set(pt.x + (term.dirZ * 4.5) + rx, 4.3, pt.z + (term.dirZ * rampLen * 0.5));
+                rail.rotation.x = term.dirZ * Math.atan2(6.5, rampLen);
+                layerGroups.footbridge.add(rail);
+              });
+
+              // Broad ground-level pedestrian gathering plaza
+              const plazaGeo = new THREE.BoxGeometry(16, 0.2, 28);
+              const plazaMat = new THREE.MeshStandardMaterial({ color: 0x223046, roughness: 0.9 });
+              const plaza = new THREE.Mesh(plazaGeo, plazaMat);
+              plaza.position.set(pt.x + (term.dirZ * 4.5), 0.1, pt.z + (term.dirZ * 12.0));
+              layerGroups.footbridge.add(plaza);
             });
 
-            // 3D Footbridge Badge
-            const bridgeBadge = makeTextSprite("🚶 PEDESTRIAN OVERPASS SKYWALK (NH-44 / PARKING 5 ⇄ GATE 1)", {
+            // 3D Footbridge Landmark Badge
+            const bridgeBadge = makeTextSprite("🚶 NH-44 ELEVATED PEDESTRIAN SKYWALK (PARKING 5 ⇄ GATES 1 & 2)", {
               borderColor: '#00ff88',
               backgroundColor: 'rgba(6, 78, 59, 0.94)',
               textColor: '#ffffff',
@@ -2760,6 +3548,141 @@
                 });
                 ppBadge.position.set(cX, 14, cZ);
                 layerGroups.labels.add(ppBadge);
+              } else if (fid.includes('RESERVOIR')) {
+                buildWaterReservoirTower(geom, p, fid, layerGroups.campus);
+              } else if (fid === 'FEAT-IND-KARISHNA') {
+                // Karishna Polymer Industrial Factory Facility
+                const coords = geom.coordinates[0];
+                const shape = new THREE.Shape();
+                let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
+                let cX = 0, cZ = 0;
+                coords.forEach((pt, idx) => {
+                  const w = geoToWorld(pt[1], pt[0]);
+                  cX += w.x; cZ += w.z;
+                  if (w.x < minX) minX = w.x;
+                  if (w.x > maxX) maxX = w.x;
+                  if (w.z < minZ) minZ = w.z;
+                  if (w.z > maxZ) maxZ = w.z;
+                  if (idx === 0) shape.moveTo(w.x, -w.z);
+                  else shape.lineTo(w.x, -w.z);
+                });
+                cX /= coords.length; cZ /= coords.length;
+                const bW = maxX - minX;
+                const bD = maxZ - minZ;
+
+                const indG = new THREE.Group();
+                const factPlinth = new THREE.Mesh(
+                  new THREE.ExtrudeGeometry(shape, { depth: 0.6, bevelEnabled: false }),
+                  new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.9 })
+                );
+                factPlinth.rotation.x = -Math.PI / 2;
+                factPlinth.position.y = 0;
+                indG.add(factPlinth);
+
+                const factH = 7.5;
+                const factWall = new THREE.Mesh(
+                  new THREE.ExtrudeGeometry(shape, { depth: factH, bevelEnabled: false }),
+                  new THREE.MeshStandardMaterial({ color: 0x475569, metalness: 0.3, roughness: 0.6 })
+                );
+                factWall.rotation.x = -Math.PI / 2;
+                factWall.position.y = 0.6;
+                factWall.castShadow = true;
+                factWall.userData = { ...p, feature_id: fid };
+                interactiveObjects.push(factWall);
+                indG.add(factWall);
+
+                // Gabled corrugated metal roof
+                const ridgeH = 3.5;
+                const rShape = new THREE.Shape();
+                rShape.moveTo(-bD/2 - 1.0, 0);
+                rShape.lineTo(0, ridgeH);
+                rShape.lineTo(bD/2 + 1.0, 0);
+                rShape.closePath();
+                const rGeo = new THREE.ExtrudeGeometry(rShape, { depth: bW + 2.0, bevelEnabled: false });
+                rGeo.center();
+                const rMesh = new THREE.Mesh(rGeo, new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.6, roughness: 0.4 }));
+                rMesh.rotation.y = Math.PI / 2;
+                rMesh.position.set(cX, factH + 0.6 + ridgeH / 2, cZ);
+                rMesh.castShadow = true;
+                indG.add(rMesh);
+
+                // Industrial Signage Badge
+                const indBadge = makeTextSprite("🏭 KARISHNA POLYMER (INDUSTRIAL FACILITY)", {
+                  borderColor: '#94a3b8', backgroundColor: 'rgba(30, 41, 59, 0.94)', textColor: '#f8fafc', fontSize: 20
+                });
+                indBadge.position.set(cX, factH + 10.0, cZ);
+                layerGroups.labels.add(indBadge);
+
+                layerGroups.campus.add(indG);
+
+              } else if (fid === 'FEAT-INST-SNCE') {
+                // SNCE Nursery & Institutional Grounds (Landscaped green nursery plot with polyhouse greenhouse)
+                const coords = geom.coordinates[0];
+                const shape = new THREE.Shape();
+                let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
+                let cX = 0, cZ = 0;
+                coords.forEach((pt, idx) => {
+                  const w = geoToWorld(pt[1], pt[0]);
+                  cX += w.x; cZ += w.z;
+                  if (w.x < minX) minX = w.x;
+                  if (w.x > maxX) maxX = w.x;
+                  if (w.z < minZ) minZ = w.z;
+                  if (w.z > maxZ) maxZ = w.z;
+                  if (idx === 0) shape.moveTo(w.x, -w.z);
+                  else shape.lineTo(w.x, -w.z);
+                });
+                cX /= coords.length; cZ /= coords.length;
+
+                const nurseryG = new THREE.Group();
+                const lawn = new THREE.Mesh(
+                  new THREE.ExtrudeGeometry(shape, { depth: 0.3, bevelEnabled: false }),
+                  new THREE.MeshStandardMaterial({ color: 0x166534, roughness: 0.9 })
+                );
+                lawn.rotation.x = -Math.PI / 2;
+                lawn.position.y = 0;
+                lawn.receiveShadow = true;
+                lawn.userData = { ...p, feature_id: fid };
+                interactiveObjects.push(lawn);
+                nurseryG.add(lawn);
+
+                // Horticultural greenhouse / polyhouse tunnel canopy
+                const ghGeo = new THREE.CylinderGeometry(8.0, 8.0, 48.0, 16, 1, false, 0, Math.PI);
+                ghGeo.rotateZ(Math.PI / 2);
+                const ghMat = new THREE.MeshStandardMaterial({
+                  color: 0xa7f3d0, transparent: true, opacity: 0.65, roughness: 0.3, side: THREE.DoubleSide
+                });
+                const greenhouse = new THREE.Mesh(ghGeo, ghMat);
+                greenhouse.position.set(cX, 4.0, cZ);
+                nurseryG.add(greenhouse);
+
+                const snceBadge = makeTextSprite("🌱 S.N.C.E. NURSERY & INSTITUTIONAL GROUNDS", {
+                  borderColor: '#4ade80', backgroundColor: 'rgba(6, 78, 59, 0.94)', textColor: '#f0fdf4', fontSize: 20
+                });
+                snceBadge.position.set(cX, 12.0, cZ);
+                layerGroups.labels.add(snceBadge);
+
+                layerGroups.campus.add(nurseryG);
+
+              } else if (fid === 'FEAT-WASTE-LAND') {
+                // Buffer Open Plot (Waste Land Corner) - Demarcated ground surface with low boundary wire
+                const coords = geom.coordinates[0];
+                const shape = new THREE.Shape();
+                coords.forEach((pt, idx) => {
+                  const w = geoToWorld(pt[1], pt[0]);
+                  if (idx === 0) shape.moveTo(w.x, -w.z);
+                  else shape.lineTo(w.x, -w.z);
+                });
+                const wasteMesh = new THREE.Mesh(
+                  new THREE.ExtrudeGeometry(shape, { depth: 0.15, bevelEnabled: false }),
+                  new THREE.MeshStandardMaterial({ color: 0x38322a, roughness: 0.98 })
+                );
+                wasteMesh.rotation.x = -Math.PI / 2;
+                wasteMesh.position.y = 0;
+                wasteMesh.receiveShadow = true;
+                wasteMesh.userData = { ...p, feature_id: fid };
+                interactiveObjects.push(wasteMesh);
+                layerGroups.campus.add(wasteMesh);
+
               } else {
                 const coords = geom.coordinates[0];
                 const shape = new THREE.Shape();
@@ -2768,8 +3691,8 @@
                   if (idx === 0) shape.moveTo(w.x, -w.z);
                   else shape.lineTo(w.x, -w.z);
                 });
-                const polyGeo = new THREE.ExtrudeGeometry(shape, { depth: 7.0, bevelEnabled: false });
-                const polyMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.6 });
+                const polyGeo = new THREE.ExtrudeGeometry(shape, { depth: 4.5, bevelEnabled: false });
+                const polyMat = new THREE.MeshStandardMaterial({ color: 0x475569, roughness: 0.6 });
                 const polyMesh = new THREE.Mesh(polyGeo, polyMat);
                 polyMesh.rotation.x = -Math.PI / 2;
                 polyMesh.position.y = 0;
@@ -2801,45 +3724,58 @@
               const w = geoToWorld(geom.coordinates[1], geom.coordinates[0]);
 
               if (fid === 'FEAT-UNDERPASS-SOUTH' || fid === 'FEAT-UNDERPASS-NORTH') {
-                // 3D Concrete Vehicular Subway Tunnel Portal
+                // 3D Concrete Vehicular Subway Tunnel Portal spanning beneath NH-44
                 const portalG = new THREE.Group();
+                portalG.rotation.y = Math.PI / 2; // East-West crossing under North-South NH-44
                 const portalMat = new THREE.MeshStandardMaterial({ color: 0x64748b, roughness: 0.7 });
                 const hazardMat = new THREE.MeshStandardMaterial({ color: 0xfacc15, emissive: 0x854d0e, emissiveIntensity: 0.5 });
                 const darkMat = new THREE.MeshBasicMaterial({ color: 0x090d16 });
 
-                // Outer portal box (16m wide, 5.6m high, 28m deep)
-                const wallL = new THREE.Mesh(new THREE.BoxGeometry(2.0, 5.6, 28.0), portalMat);
+                // Outer portal box (16m clear width, 5.6m high, 44m length across highway)
+                const wallL = new THREE.Mesh(new THREE.BoxGeometry(2.0, 5.6, 44.0), portalMat);
                 wallL.position.set(-8.0, 2.8, 0);
                 portalG.add(wallL);
 
-                const wallR = new THREE.Mesh(new THREE.BoxGeometry(2.0, 5.6, 28.0), portalMat);
+                const wallR = new THREE.Mesh(new THREE.BoxGeometry(2.0, 5.6, 44.0), portalMat);
                 wallR.position.set(8.0, 2.8, 0);
                 portalG.add(wallR);
 
-                const roof = new THREE.Mesh(new THREE.BoxGeometry(18.0, 1.2, 28.0), portalMat);
+                const roof = new THREE.Mesh(new THREE.BoxGeometry(18.0, 1.2, 44.0), portalMat);
                 roof.position.set(0, 5.6, 0);
                 portalG.add(roof);
 
-                // Flared concrete wingwalls (30 degree splay)
+                // Overhead Highway Deck Carriageway Slab
+                const overpassDeck = new THREE.Mesh(
+                  new THREE.BoxGeometry(26.0, 0.4, 44.0),
+                  new THREE.MeshStandardMaterial({ color: 0x1a202c, roughness: 0.85 })
+                );
+                overpassDeck.position.set(0, 6.4, 0);
+                portalG.add(overpassDeck);
+
+                // Flared concrete wingwalls on BOTH East & West portals
                 [-1, 1].forEach(side => {
-                  const wing = new THREE.Mesh(new THREE.BoxGeometry(1.2, 5.6, 12.0), portalMat);
-                  wing.rotation.y = side * (Math.PI / 6);
-                  wing.position.set(side * 12.0, 2.8, -18.0);
-                  portalG.add(wing);
+                  [-1, 1].forEach(end => {
+                    const wing = new THREE.Mesh(new THREE.BoxGeometry(1.2, 5.6, 12.0), portalMat);
+                    wing.rotation.y = side * (Math.PI / 6) * end;
+                    wing.position.set(side * 12.0, 2.8, end * 26.0);
+                    portalG.add(wing);
+                  });
                 });
 
-                // Clearance bar with warning sign
-                const clearBar = new THREE.Mesh(new THREE.BoxGeometry(14.5, 0.6, 0.5), hazardMat);
-                clearBar.position.set(0, 4.6, -14.2);
-                portalG.add(clearBar);
+                // Clearance bars at BOTH entrances
+                [-1, 1].forEach(end => {
+                  const clearBar = new THREE.Mesh(new THREE.BoxGeometry(14.5, 0.6, 0.5), hazardMat);
+                  clearBar.position.set(0, 4.6, end * 22.2);
+                  portalG.add(clearBar);
+                });
 
-                // Tunnel dark interior
-                const tunnelVoid = new THREE.Mesh(new THREE.BoxGeometry(14.0, 4.6, 26.0), darkMat);
+                // Tunnel dark interior void
+                const tunnelVoid = new THREE.Mesh(new THREE.BoxGeometry(14.0, 4.6, 42.0), darkMat);
                 tunnelVoid.position.set(0, 2.3, 0);
                 portalG.add(tunnelVoid);
 
-                // Concrete roadway through underpass
-                const subRoad = new THREE.Mesh(new THREE.BoxGeometry(14.0, 0.4, 48.0), new THREE.MeshStandardMaterial({ color: 0x1f242d }));
+                // Concrete roadway through underpass connecting East to West
+                const subRoad = new THREE.Mesh(new THREE.BoxGeometry(14.0, 0.4, 60.0), new THREE.MeshStandardMaterial({ color: 0x1f242d }));
                 subRoad.position.set(0, 0.2, 0);
                 portalG.add(subRoad);
 
@@ -2879,17 +3815,24 @@
           else if (cat === 'OPERATIONAL_ROUTE') {
             const isDashed = fid.includes('PED') || fid.includes('EVAC');
             const routeHex = p.color ? parseInt(p.color.replace('#', '0x'), 16) : (fid.includes('VIP') ? 0x00ff88 : 0xff3344);
+            const underpassW = geoToWorld(29.16950, 77.03135);
             const pts = geom.coordinates.map(c => {
               const w = geoToWorld(c[1], c[0]);
-              return new THREE.Vector3(w.x, 2.2, w.z);
+              let yElev = 2.0;
+              if (fid === 'ROUTE-DELHI-P1') {
+                const dUnder = Math.hypot(w.x - underpassW.x, w.z - underpassW.z);
+                if (dUnder < 35.0) yElev = 0.6; // dip cleanly through underpass subway
+                else yElev = 1.6;
+              }
+              return new THREE.Vector3(w.x, yElev, w.z);
             });
             const curve = new THREE.CatmullRomCurve3(pts);
-            const tubeGeo = new THREE.TubeGeometry(curve, 64, 2.5, 8, false);
+            const tubeGeo = new THREE.TubeGeometry(curve, 128, 1.8, 8, false);
             const tubeMat = new THREE.MeshBasicMaterial({
               color: routeHex,
               wireframe: isDashed,
               transparent: true,
-              opacity: 0.85
+              opacity: 0.88
             });
             const tubeMesh = new THREE.Mesh(tubeGeo, tubeMat);
             tubeMesh.userData = { ...p, feature_id: fid };
@@ -2919,6 +3862,16 @@
           console.error("Warning initializing highway traffic & gantries:", trafficErr);
         }
 
+        // Ensure entire SNAS permanent campus boundary quadrangle is an exclusion zone for tents
+        const campusEnvelop = [
+          geoToWorld(29.1866, 77.0208),
+          geoToWorld(29.1866, 77.0238),
+          geoToWorld(29.1828, 77.0238),
+          geoToWorld(29.1828, 77.0208),
+          geoToWorld(29.1866, 77.0208)
+        ];
+        pcgExclusionPolygons.push(campusEnvelop);
+
         // Generate 550 PCG Residential Tents City (Police Deployment Order Ground Truth)
         try {
           generateProceduralTentCity();
@@ -2941,17 +3894,18 @@
       topdown:       { pos: [-450, 2400, 10],   target: [-450, 0, 0] },     // 2. North-up top-down view
       pandal:        { pos: [140, 120, 260],    target: [0, 10, 0] },       // 3. Main pandal close-up
       campus:        { pos: [-240, 160, -320],  target: [-270, 10, -560] }, // 4. Permanent campus close-up
-      externalRoads: { pos: [650, 450, 400],    target: [400, 0, 0] },      // 5. External roads (NH-44)
+      externalRoads: { pos: [680, 400, 250],    target: [410, 0, 0] },      // 5. External roads (NH-44)
       internalRoads: { pos: [-300, 400, 500],   target: [-400, 0, 0] },     // 6. Internal roads and lanes
       sectors:       { pos: [-450, 1200, 1100], target: [-450, 0, 0] },    // 7. Ground A–D overview
       station:       { pos: [-1350, 200, -300], target: [-1600, 10, -650] },// 8. Railway-side overview
-      footbridge:    { pos: [750, 80, -30],     target: [590, 7, -104] },   // 9. NH-44 Footbridge
+      footbridge:    { pos: [550, 80, -40],     target: [395, 7, -104] },   // 9. NH-44 Footbridge
       parking:       { pos: [1200, 350, 100],   target: [870, 0, -50] },    // 10. Parking 5 & East Hub
       tents:         { pos: [-350, 480, 820],   target: [-400, 10, 450] },  // 11. 550 Residential Tents City
-      gate1:         { pos: [520, 140, 420],    target: [407, 7, 311] },    // 12. Gate 1 & Parking P2
-      gate2:         { pos: [560, 120, 20],     target: [460, 7, -21] },    // 13. Gate 2 & VIP / S.C.
-      gate3:         { pos: [540, 140, -480],   target: [436, 7, -576] },   // 14. Gate 3 & Parking P4
-      exhibition:    { pos: [140, 160, -280],   target: [0, 8, -240] }      // 15. Exhibition Pavilion
+      gate1:         { pos: [540, 140, 420],    target: [427, 7, 311] },    // 12. Gate 1 & Parking P2
+      gate2:         { pos: [460, 120, -30],    target: [334, 7, -104] },   // 13. Gate 2 & VIP / S.C.
+      gate3:         { pos: [320, 120, -650],   target: [211, 7, -717] },   // 14. Gate 3 & Parking P4
+      exhibition:    { pos: [140, 160, -280],   target: [0, 8, -240] },     // 15. Exhibition Pavilion
+      parking1:      { pos: [550, 260, 1350],   target: [400, 10, 1100] }  // 16. Parking A & B / Underpass
     };
 
     // --- PROCEDURAL CONTENT GENERATION (PCG): 550 RESIDENTIAL COMMUNITY MARQUEES ---

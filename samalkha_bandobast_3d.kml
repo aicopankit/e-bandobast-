@@ -106,17 +106,19 @@
         <altitudeMode>clampToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.0298,29.183,0
-77.0285,29.1895,0
+            <coordinates>77.02815,29.183,0
+77.02715,29.186,0
+77.0267,29.1895,0
 77.015,29.1895,0
 77.008,29.189,0
 77.008,29.1852,0
 77.0095,29.178,0
 77.0145,29.176,0
 77.017,29.171,0
-77.0275,29.169,0
-77.0291,29.176,0
-77.0298,29.183,0</coordinates>
+77.025,29.171,0
+77.0292,29.176,0
+77.02835,29.18025,0
+77.02815,29.183,0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -134,7 +136,9 @@
             <coordinates>77.022314,29.182477,0
 77.0298,29.182477,0
 77.0291,29.176,0
-77.022314,29.176,0
+77.0265,29.176,0
+77.0245,29.1768,0
+77.022314,29.1768,0
 77.022314,29.182477,0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
@@ -150,11 +154,13 @@
         <altitudeMode>clampToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.0145,29.176,0
-77.0291,29.176,0
-77.0275,29.169,0
-77.017,29.171,0
-77.0145,29.176,0</coordinates>
+            <coordinates>77.018237,29.177934,0
+77.0291,29.177934,0
+77.0285,29.1702,0
+77.022,29.1698,0
+77.022,29.1755,0
+77.018237,29.1755,0
+77.018237,29.177934,0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -169,11 +175,13 @@
         <altitudeMode>clampToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.015,29.1895,0
+            <coordinates>77.015,29.182477,0
+77.022314,29.182477,0
+77.022314,29.1868,0
+77.025,29.1868,0
 77.0285,29.1895,0
-77.0298,29.182477,0
-77.015,29.182477,0
-77.015,29.1895,0</coordinates>
+77.015,29.1895,0
+77.015,29.182477,0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -188,12 +196,13 @@
         <altitudeMode>clampToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.008,29.189,0
-77.015,29.189,0
-77.015,29.176,0
+            <coordinates>77.008,29.1852,0
 77.0095,29.178,0
-77.008,29.1852,0
-77.008,29.189,0</coordinates>
+77.015,29.178,0
+77.015,29.189,0
+77.0125,29.189,0
+77.008,29.1885,0
+77.008,29.1852,0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -213,11 +222,11 @@
         <altitudeMode>relativeToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.023065,29.180491,18.0
-77.026842,29.180435,18.0
-77.026799,29.178131,18.0
-77.023022,29.178187,18.0
-77.023065,29.180491,18.0</coordinates>
+            <coordinates>77.02306,29.18045,18.0
+77.02684,29.18045,18.0
+77.02684,29.17815,18.0
+77.02306,29.17815,18.0
+77.02306,29.18045,18.0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -384,11 +393,11 @@
         <altitudeMode>relativeToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.0225,29.1775,7.5
-77.0242,29.1775,7.5
-77.0242,29.1768,7.5
-77.0225,29.1768,7.5
-77.0225,29.1775,7.5</coordinates>
+            <coordinates>77.0207,29.1775,7.5
+77.0221,29.1775,7.5
+77.0221,29.1765,7.5
+77.0207,29.1765,7.5
+77.0207,29.1775,7.5</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -403,11 +412,11 @@
         <altitudeMode>relativeToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.0215,29.1842,7.5
-77.023,29.1842,7.5
-77.023,29.1834,7.5
-77.0215,29.1834,7.5
-77.0215,29.1842,7.5</coordinates>
+            <coordinates>77.0236,29.184,7.5
+77.025,29.184,7.5
+77.025,29.183,7.5
+77.0236,29.183,7.5
+77.0236,29.184,7.5</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -441,11 +450,11 @@
         <altitudeMode>relativeToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.0252,29.1842,6.0
-77.0263,29.1842,6.0
-77.0263,29.1837,6.0
-77.0252,29.1837,6.0
-77.0252,29.1842,6.0</coordinates>
+            <coordinates>77.0255,29.18395,6.0
+77.027,29.18395,6.0
+77.027,29.1835,6.0
+77.0255,29.1835,6.0
+77.0255,29.18395,6.0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -460,11 +469,11 @@
         <altitudeMode>relativeToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.0236,29.1846,6.0
-77.0245,29.1846,6.0
-77.0245,29.1841,6.0
-77.0236,29.1841,6.0
-77.0236,29.1846,6.0</coordinates>
+            <coordinates>77.025,29.1771,6.0
+77.026,29.1771,6.0
+77.026,29.1765,6.0
+77.025,29.1765,6.0
+77.025,29.1771,6.0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -479,11 +488,11 @@
         <altitudeMode>relativeToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.0232,29.1812,4.5
-77.0266,29.1812,4.5
-77.0266,29.1808,4.5
-77.0232,29.1808,4.5
-77.0232,29.1812,4.5</coordinates>
+            <coordinates>77.0232,29.18105,4.5
+77.0266,29.18105,4.5
+77.0266,29.1807,4.5
+77.0232,29.1807,4.5
+77.0232,29.18105,4.5</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -500,8 +509,8 @@
           <LinearRing>
             <coordinates>77.0232,29.1779,4.5
 77.0266,29.1779,4.5
-77.0266,29.1775,4.5
-77.0232,29.1775,4.5
+77.0266,29.17755,4.5
+77.0232,29.17755,4.5
 77.0232,29.1779,4.5</coordinates>
           </LinearRing>
         </outerBoundaryIs>
@@ -517,11 +526,11 @@
         <altitudeMode>relativeToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.026,29.1755,4.0
-77.027,29.1755,4.0
-77.027,29.175,4.0
-77.026,29.175,4.0
-77.026,29.1755,4.0</coordinates>
+            <coordinates>77.0232,29.1771,4.0
+77.0245,29.1771,4.0
+77.0245,29.1765,4.0
+77.0232,29.1765,4.0
+77.0232,29.1771,4.0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -536,11 +545,11 @@
         <altitudeMode>relativeToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.009,29.1854,5.5
-77.0105,29.1854,5.5
-77.0105,29.1846,5.5
-77.009,29.1846,5.5
-77.009,29.1854,5.5</coordinates>
+            <coordinates>77.0084,29.1856,5.5
+77.0102,29.1856,5.5
+77.0102,29.185,5.5
+77.0084,29.185,5.5
+77.0084,29.1856,5.5</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -555,11 +564,11 @@
         <altitudeMode>relativeToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.023,29.1806,8.0
-77.0268,29.1806,8.0
-77.0268,29.1826,8.0
-77.023,29.1826,8.0
-77.023,29.1806,8.0</coordinates>
+            <coordinates>77.02306,29.1824,8.0
+77.02684,29.1824,8.0
+77.02684,29.18125,8.0
+77.02306,29.18125,8.0
+77.02306,29.1824,8.0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -574,11 +583,11 @@
         <altitudeMode>relativeToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.0269,29.1802,8.0
-77.0285,29.1802,8.0
-77.0285,29.1814,8.0
-77.0269,29.1814,8.0
-77.0269,29.1802,8.0</coordinates>
+            <coordinates>77.02695,29.18135,8.0
+77.02745,29.18135,8.0
+77.02745,29.1802,8.0
+77.02695,29.1802,8.0
+77.02695,29.18135,8.0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -604,7 +613,7 @@
   </Folder>
 
   <Folder>
-    <name>Internal Avenues &amp; Lanes (8)</name>
+    <name>Internal Avenues &amp; Lanes (9)</name>
     <open>1</open>
 
     <Placemark id="ROAD-INT-AXIS-EW">
@@ -614,13 +623,13 @@
       <LineString>
         <tessellate>1</tessellate>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0298,29.182477,0
+        <coordinates>77.02815,29.182477,0
 77.026842,29.182477,0
 77.022314,29.182477,0
 77.018237,29.182477,0
 77.0145,29.182477,0
 77.009,29.184,0
-77.00842,29.18523,0</coordinates>
+77.00842,29.18495,0</coordinates>
       </LineString>
     </Placemark>
 
@@ -631,7 +640,7 @@
       <LineString>
         <tessellate>1</tessellate>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0295,29.1868,0
+        <coordinates>77.02715,29.1868,0
 77.023762,29.1868,0
 77.021027,29.1868,0
 77.015,29.1868,0</coordinates>
@@ -686,8 +695,8 @@
       <LineString>
         <tessellate>1</tessellate>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0298,29.18025,0
-77.02865,29.18025,0
+        <coordinates>77.02835,29.18025,0
+77.0275,29.18025,0
 77.026842,29.18025,0</coordinates>
       </LineString>
     </Placemark>
@@ -717,10 +726,25 @@
 77.00842,29.1858,0</coordinates>
       </LineString>
     </Placemark>
+
+    <Placemark id="ROAD-INT-SOUTH-APPROACH">
+      <name>Southern Approach Corridor (Underpass to Parking P1 &amp; Panchi Gujran)</name>
+      <styleUrl>#styleInternalRoad</styleUrl>
+      <description><![CDATA[<b>Southern Approach Corridor (Underpass to Parking P1 & Panchi Gujran)</b><br/><b>ID:</b> ROAD-INT-SOUTH-APPROACH<br/><b>Category:</b> INTERNAL_ROAD<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Dedicated 16m wide asphalt avenue connecting the Panchi Gujran Underpass on NH-44 westward along the southern boundary wall directly to Parking P1 (Heavy & Light Vehicles).</p>]]></description>
+      <LineString>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <coordinates>77.03135,29.1695,0
+77.0308,29.1695,0
+77.0298,29.1696,0
+77.0278,29.1697,0
+77.025,29.1697,0</coordinates>
+      </LineString>
+    </Placemark>
   </Folder>
 
   <Folder>
-    <name>External Roads &amp; Highways (58)</name>
+    <name>External Roads &amp; Highways (52)</name>
     <open>1</open>
 
     <Placemark id="OSM-ROAD-228423351">
@@ -1139,21 +1163,6 @@
       </LineString>
     </Placemark>
 
-    <Placemark id="OSM-ROAD-1098220623">
-      <name>Road-residential-1098220623</name>
-      <styleUrl>#styleExternalRoad</styleUrl>
-      <description><![CDATA[<b>Road-residential-1098220623</b><br/><b>ID:</b> OSM-ROAD-1098220623<br/><b>Category:</b> EXTERNAL_ROAD<br/><b>Status:</b> VERIFIED<br/>]]></description>
-      <LineString>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0183148,29.1846931,0
-77.0183301,29.1832615,0
-77.0183394,29.1823819,0
-77.0182864,29.1809573,0
-77.0181919,29.1784192,0</coordinates>
-      </LineString>
-    </Placemark>
-
     <Placemark id="OSM-ROAD-1098220624">
       <name>Road-service-1098220624</name>
       <styleUrl>#styleExternalRoad</styleUrl>
@@ -1193,31 +1202,6 @@
 77.0217584,29.1885838,0
 77.0217404,29.1886657,0
 77.0217548,29.1891635,0</coordinates>
-      </LineString>
-    </Placemark>
-
-    <Placemark id="OSM-ROAD-1098220628">
-      <name>Road-service-1098220628</name>
-      <styleUrl>#styleExternalRoad</styleUrl>
-      <description><![CDATA[<b>Road-service-1098220628</b><br/><b>ID:</b> OSM-ROAD-1098220628<br/><b>Category:</b> EXTERNAL_ROAD<br/><b>Status:</b> VERIFIED<br/>]]></description>
-      <LineString>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0259187,29.1834603,0
-77.0245153,29.1834753,0
-77.0238264,29.1834826,0</coordinates>
-      </LineString>
-    </Placemark>
-
-    <Placemark id="OSM-ROAD-1098220629">
-      <name>Road-service-1098220629</name>
-      <styleUrl>#styleExternalRoad</styleUrl>
-      <description><![CDATA[<b>Road-service-1098220629</b><br/><b>ID:</b> OSM-ROAD-1098220629<br/><b>Category:</b> EXTERNAL_ROAD<br/><b>Status:</b> VERIFIED<br/>]]></description>
-      <LineString>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0245153,29.1834753,0
-77.024551,29.1822608,0</coordinates>
       </LineString>
     </Placemark>
 
@@ -1555,34 +1539,6 @@
       </LineString>
     </Placemark>
 
-    <Placemark id="OSM-ROAD-1361568764">
-      <name>Road-residential-1361568764</name>
-      <styleUrl>#styleExternalRoad</styleUrl>
-      <description><![CDATA[<b>Road-residential-1361568764</b><br/><b>ID:</b> OSM-ROAD-1361568764<br/><b>Category:</b> EXTERNAL_ROAD<br/><b>Status:</b> VERIFIED<br/>]]></description>
-      <LineString>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0182337,29.1779605,0
-77.0182262,29.1768478,0
-77.0181311,29.173875,0
-77.0181303,29.1737515,0</coordinates>
-      </LineString>
-    </Placemark>
-
-    <Placemark id="OSM-ROAD-1361568766">
-      <name>Road-residential-1361568766</name>
-      <styleUrl>#styleExternalRoad</styleUrl>
-      <description><![CDATA[<b>Road-residential-1361568766</b><br/><b>ID:</b> OSM-ROAD-1361568766<br/><b>Category:</b> EXTERNAL_ROAD<br/><b>Status:</b> VERIFIED<br/>]]></description>
-      <LineString>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0221509,29.177895,0
-77.0221008,29.1768904,0
-77.0220093,29.1737762,0
-77.0181311,29.173875,0</coordinates>
-      </LineString>
-    </Placemark>
-
     <Placemark id="OSM-ROAD-1361898554">
       <name>Road-residential-1361898554</name>
       <styleUrl>#styleExternalRoad</styleUrl>
@@ -1646,22 +1602,6 @@
         <altitudeMode>clampToGround</altitudeMode>
         <coordinates>77.0264785,29.1857991,0
 77.0259484,29.1858168,0</coordinates>
-      </LineString>
-    </Placemark>
-
-    <Placemark id="OSM-ROAD-1547633463">
-      <name>Road-residential-1547633463</name>
-      <styleUrl>#styleExternalRoad</styleUrl>
-      <description><![CDATA[<b>Road-residential-1547633463</b><br/><b>ID:</b> OSM-ROAD-1547633463<br/><b>Category:</b> EXTERNAL_ROAD<br/><b>Status:</b> VERIFIED<br/>]]></description>
-      <LineString>
-        <tessellate>1</tessellate>
-        <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0181919,29.1784192,0
-77.0182337,29.1779605,0
-77.0221509,29.177895,0
-77.022217,29.1808468,0
-77.0222229,29.1811065,0
-77.0222501,29.1823232,0</coordinates>
       </LineString>
     </Placemark>
 
@@ -1968,13 +1908,13 @@
       <description><![CDATA[<b>Local Bus Stop (East NH-44 Service Road & Parking P5)</b><br/><b>ID:</b> FEAT-BUS-STOP-LOCAL<br/><b>Category:</b> TRANSPORT_HUB<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Official public transit stop on the eastern service lane of NH-44. Passengers disembark here and cross via the pedestrian overbridge to Gates 1 and 2.</p>]]></description>
       <Point>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0315,29.18025,0</coordinates>
+        <coordinates>77.0293,29.18025,0</coordinates>
       </Point>
     </Placemark>
   </Folder>
 
   <Folder>
-    <name>Dedicated Event Parking (11)</name>
+    <name>Dedicated Event Parking (13)</name>
     <open>1</open>
 
     <Placemark id="FEAT-PARKING-01">
@@ -1986,11 +1926,12 @@
         <altitudeMode>clampToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.0145,29.1685,0
-77.0225,29.1685,0
-77.0225,29.174,0
-77.0145,29.174,0
-77.0145,29.1685,0</coordinates>
+            <coordinates>77.0278,29.1698,0
+77.03,29.1702,0
+77.03,29.1732,0
+77.0282,29.1732,0
+77.0278,29.1729,0
+77.0278,29.1698,0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -2005,11 +1946,12 @@
         <altitudeMode>clampToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.017,29.171,0
-77.0225,29.171,0
-77.0225,29.174,0
-77.017,29.174,0
-77.017,29.171,0</coordinates>
+            <coordinates>77.0278,29.17195,0
+77.03,29.17195,0
+77.03,29.1732,0
+77.0282,29.1732,0
+77.0278,29.1729,0
+77.0278,29.17195,0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -2024,11 +1966,11 @@
         <altitudeMode>clampToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.0145,29.1685,0
-77.0205,29.1685,0
-77.0205,29.1715,0
-77.0145,29.1715,0
-77.0145,29.1685,0</coordinates>
+            <coordinates>77.0278,29.1698,0
+77.03,29.1702,0
+77.03,29.1718,0
+77.0278,29.1718,0
+77.0278,29.1698,0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -2043,11 +1985,14 @@
         <altitudeMode>clampToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.023,29.1738,0
-77.0288,29.1738,0
-77.0288,29.1778,0
-77.023,29.1778,0
-77.023,29.1738,0</coordinates>
+            <coordinates>77.0248,29.1738,0
+77.0272,29.1738,0
+77.0272,29.1748,0
+77.0258,29.1762,0
+77.0242,29.1762,0
+77.0242,29.1752,0
+77.0248,29.1752,0
+77.0248,29.1738,0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -2062,11 +2007,11 @@
         <altitudeMode>clampToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.027,29.174,0
-77.0288,29.174,0
-77.0288,29.1755,0
-77.027,29.1755,0
-77.027,29.174,0</coordinates>
+            <coordinates>77.0273,29.174,0
+77.0282,29.174,0
+77.0282,29.1752,0
+77.0273,29.1752,0
+77.0273,29.174,0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -2081,11 +2026,12 @@
         <altitudeMode>clampToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.0085,29.184,0
-77.0125,29.184,0
-77.0125,29.1885,0
-77.0085,29.1885,0
-77.0085,29.184,0</coordinates>
+            <coordinates>77.0085,29.1848,0
+77.011,29.1852,0
+77.0115,29.1865,0
+77.0102,29.1872,0
+77.0085,29.1868,0
+77.0085,29.1848,0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -2100,11 +2046,12 @@
         <altitudeMode>clampToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.0245,29.1835,0
-77.0288,29.1835,0
-77.0288,29.1872,0
-77.0245,29.1872,0
-77.0245,29.1835,0</coordinates>
+            <coordinates>77.0255,29.1858,0
+77.0278,29.1858,0
+77.028,29.1872,0
+77.0265,29.1876,0
+77.0252,29.187,0
+77.0255,29.1858,0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -2119,11 +2066,13 @@
         <altitudeMode>clampToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.0315,29.177,0
-77.0355,29.177,0
-77.0355,29.1825,0
-77.0315,29.1825,0
-77.0315,29.177,0</coordinates>
+            <coordinates>77.0315,29.178,0
+77.0332,29.1782,0
+77.0335,29.1812,0
+77.0322,29.1815,0
+77.0312,29.1808,0
+77.0312,29.1785,0
+77.0315,29.178,0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -2138,11 +2087,11 @@
         <altitudeMode>clampToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.027,29.1798,0
-77.0288,29.1798,0
-77.0288,29.1815,0
-77.027,29.1815,0
-77.027,29.1798,0</coordinates>
+            <coordinates>77.02755,29.18135,0
+77.02825,29.18135,0
+77.02825,29.1802,0
+77.02755,29.1802,0
+77.02755,29.18135,0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -2157,11 +2106,11 @@
         <altitudeMode>clampToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.027,29.1785,0
-77.0288,29.1785,0
-77.0288,29.1798,0
-77.027,29.1798,0
-77.027,29.1785,0</coordinates>
+            <coordinates>77.027,29.18005,0
+77.02825,29.18005,0
+77.02825,29.17905,0
+77.027,29.17905,0
+77.027,29.18005,0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -2176,11 +2125,50 @@
         <altitudeMode>clampToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.0268,29.1815,0
-77.0285,29.1815,0
-77.0285,29.1825,0
-77.0268,29.1825,0
-77.0268,29.1815,0</coordinates>
+            <coordinates>77.027,29.1824,0
+77.02815,29.1824,0
+77.02815,29.18145,0
+77.027,29.18145,0
+77.027,29.1824,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-PARKING-P2-COMMUTERS">
+      <name>Parking P2 (Buses &amp; Cars Daily Commuters Bay)</name>
+      <styleUrl>#styleParking</styleUrl>
+      <description><![CDATA[<b>Parking P2 (Buses & Cars Daily Commuters Bay)</b><br/><b>ID:</b> FEAT-PARKING-P2-COMMUTERS<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> VERIFIED<br/><b>Capacity:</b> 3,200 Daily Commuters (Buses & Cars)<br/><p>Dedicated commuter holding sector adjacent to Delhi Gate No 1.</p>]]></description>
+      <Polygon>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0248,29.174,0
+77.027,29.174,0
+77.027,29.1746,0
+77.0258,29.1758,0
+77.0248,29.1758,0
+77.0248,29.174,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-PARKING-P4-SOUTH">
+      <name>Parking 4 South Flank (Gate 3 Entry Holding Bay)</name>
+      <styleUrl>#styleParking</styleUrl>
+      <description><![CDATA[<b>Parking 4 South Flank (Gate 3 Entry Holding Bay)</b><br/><b>ID:</b> FEAT-PARKING-P4-SOUTH<br/><b>Category:</b> PARKING_FACILITY<br/><b>Status:</b> VERIFIED<br/><b>Capacity:</b> 1,800 Holding Bay Vehicles<br/><p>South holding wing of Parking P4 directly accessible from Gate 3.</p>]]></description>
+      <Polygon>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0255,29.1852,0
+77.0278,29.1852,0
+77.0278,29.18575,0
+77.0255,29.18575,0
+77.0255,29.1852,0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -2188,7 +2176,7 @@
   </Folder>
 
   <Folder>
-    <name>Civil Infrastructure &amp; Surroundings (11)</name>
+    <name>Civil Infrastructure &amp; Surroundings (12)</name>
     <open>1</open>
 
     <Placemark id="FEAT-PETROL-PUMP">
@@ -2200,11 +2188,11 @@
         <altitudeMode>clampToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.0295,29.1837,0
-77.0303,29.1837,0
-77.0303,29.183,0
-77.0295,29.183,0
-77.0295,29.1837,0</coordinates>
+            <coordinates>77.0274,29.1828,0
+77.028,29.1828,0
+77.028,29.18245,0
+77.0274,29.18245,0
+77.0274,29.1828,0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -2253,7 +2241,7 @@
       <description><![CDATA[<b>NH-44 Vehicular Underpass (South — Panchi Gujran Approach)</b><br/><b>ID:</b> FEAT-UNDERPASS-SOUTH<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Highway underpass allowing vehicles from Delhi side and Village Panchi Gujran to loop under NH-44 into Parking P1 without crossing active highway lanes.</p>]]></description>
       <Point>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0288,29.1695,0</coordinates>
+        <coordinates>77.03135,29.1695,0</coordinates>
       </Point>
     </Placemark>
 
@@ -2264,8 +2252,10 @@
       <LineString>
         <tessellate>1</tessellate>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0298,29.184,0
-77.0294,29.188,0</coordinates>
+        <coordinates>77.0280354,29.1833095,0
+77.0277473,29.1843485,0
+77.0273535,29.1861225,0
+77.0268686,29.1885806,0</coordinates>
       </LineString>
     </Placemark>
 
@@ -2274,7 +2264,7 @@
       <description><![CDATA[<b>NH-44 Vehicular Underpass (North — Patti Kalyana & Gate 3)</b><br/><b>ID:</b> FEAT-UNDERPASS-NORTH<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><p>Highway underpass below the northern flyover allowing cross-highway U-turns and access between Village Patti Kalyana, Gov. Road, Gate 3, and Parking P4.</p>]]></description>
       <Point>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0295,29.186,0</coordinates>
+        <coordinates>77.02744,29.18618,0</coordinates>
       </Point>
     </Placemark>
 
@@ -2314,11 +2304,11 @@
         <altitudeMode>clampToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.0265,29.1865,0
-77.0285,29.1865,0
-77.0285,29.188,0
-77.0265,29.188,0
-77.0265,29.1865,0</coordinates>
+            <coordinates>77.0245,29.1838,0
+77.0275,29.1838,0
+77.0282,29.1852,0
+77.0245,29.1852,0
+77.0245,29.1838,0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -2333,11 +2323,31 @@
         <altitudeMode>clampToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.025,29.1878,0
-77.0265,29.1878,0
-77.0265,29.1892,0
-77.025,29.1892,0
-77.025,29.1878,0</coordinates>
+            <coordinates>77.0288,29.1878,0
+77.0305,29.1878,0
+77.0312,29.1865,0
+77.0298,29.1855,0
+77.0285,29.1865,0
+77.0288,29.1878,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark id="FEAT-WASTE-LAND">
+      <name>Buffer Open Plot (Waste Land Corner)</name>
+      <styleUrl>#styleBuilding3D</styleUrl>
+      <description><![CDATA[<b>Buffer Open Plot (Waste Land Corner)</b><br/><b>ID:</b> FEAT-WASTE-LAND<br/><b>Category:</b> CIVIL_INFRASTRUCTURE<br/><b>Status:</b> VERIFIED<br/><p>Open buffer land parcel between Gate 2 ceremonial plaza and Ground B.</p>]]></description>
+      <Polygon>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.0285,29.1785,0
+77.0295,29.1785,0
+77.0292,29.1778,0
+77.0285,29.1778,0
+77.0285,29.1785,0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -2357,11 +2367,11 @@
         <altitudeMode>relativeToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
-            <coordinates>77.0288,29.1798,5.0
-77.0296,29.1798,5.0
-77.0296,29.1791,5.0
-77.0288,29.1791,5.0
-77.0288,29.1798,5.0</coordinates>
+            <coordinates>77.0277,29.179,5.0
+77.02825,29.179,5.0
+77.02825,29.17855,5.0
+77.0277,29.17855,5.0
+77.0277,29.179,5.0</coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
@@ -2386,7 +2396,7 @@
       <description><![CDATA[<b>Gate No. 1 (South Gateway — Daily Commuters & Parking P2)</b><br/><b>ID:</b> FEAT-GATE-01<br/><b>Category:</b> ACCESS_CONTROL<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Dimensions:</b> 42.0m (W) x 14.0m (H) x 6.0m (D)<br/><p>Main southern vehicular and pedestrian entrance from Grand Trunk Road (NH-44). Designated primary ingress for Delhi-side daily commuters, charted buses, 2-wheelers, and Parking P2.</p>]]></description>
       <Point>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0291,29.1765,0</coordinates>
+        <coordinates>77.0293,29.1765,0</coordinates>
       </Point>
     </Placemark>
 
@@ -2395,7 +2405,7 @@
       <description><![CDATA[<b>Gate No. 2 (Central Ceremonial Gateway — VIP, S.C. & Pandal Access)</b><br/><b>ID:</b> FEAT-GATE-02<br/><b>Category:</b> ACCESS_CONTROL<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Dimensions:</b> 45.0m (W) x 15.0m (H) x 8.0m (D)<br/><p>Monumental tri-arch ceremonial portal facing NH-44 directly aligned with the central processional axis, Main Satsang Pandal, VIP Dais, S.C. Parking, and Central Mission Offices.</p>]]></description>
       <Point>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.02965,29.1795,0</coordinates>
+        <coordinates>77.02835,29.18025,0</coordinates>
       </Point>
     </Placemark>
 
@@ -2404,7 +2414,7 @@
       <description><![CDATA[<b>Gate No. 3 (North Gateway — Ambala Side, Saints from Abroad & Parking P4)</b><br/><b>ID:</b> FEAT-GATE-03<br/><b>Category:</b> ACCESS_CONTROL<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Dimensions:</b> 38.0m (W) x 12.0m (H) x 6.0m (D)<br/><p>Northern access portal from NH-44 near Karishna Polymer and Patti Kalyana underpass. Primary ingress for Ambala-side daily commuters, Saints from Abroad, and Parking P4.</p>]]></description>
       <Point>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0294,29.1845,0</coordinates>
+        <coordinates>77.02708,29.18578,0</coordinates>
       </Point>
     </Placemark>
 
@@ -2494,7 +2504,7 @@
       <description><![CDATA[<b>Quick Reaction Team 1 (QRT 1 — Outer Cordon North/GT Road)</b><br/><b>ID:</b> TAC-QRT-01<br/><b>Category:</b> BANDOBAST_TACTICAL<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Force Strength:</b> Armed SWAT Unit + Bullet-Proof Tactical Vehicle<br/><b>Supervising Officer:</b> Day: ACP Anil Kumar (7056667210) | Night: DSP Ramesh Kumar (7419301130)<br/><p>24-hour armed strike cover at outer northern perimeter; monitor dhabas, rice mills, factories, and report suspicious activity.</p>]]></description>
       <Point>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0295,29.187,0</coordinates>
+        <coordinates>77.02715,29.18585,0</coordinates>
       </Point>
     </Placemark>
 
@@ -2530,7 +2540,7 @@
       <description><![CDATA[<b>CID Drone Surveillance Unit 1 (NH-44 & Footbridge)</b><br/><b>ID:</b> TAC-DRONE-01<br/><b>Category:</b> BANDOBAST_TACTICAL<br/><b>Status:</b> GROUND_TRUTH_DOCUMENTED<br/><b>Force Strength:</b> CID Drone Operator Team + Real-Time Base Downlink<br/><b>Supervising Officer:</b> DSP Suresh Kumar / ACP Satyapal (Panipat Traffic)<br/><p>Monitors NH-44 highway traffic flow, pedestrian footbridge crowd density, and unauthorized roadside parking.</p>]]></description>
       <Point>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0305,29.1805,0</coordinates>
+        <coordinates>77.02898,29.18025,0</coordinates>
       </Point>
     </Placemark>
 
@@ -2555,10 +2565,16 @@
       <LineString>
         <tessellate>1</tessellate>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0265,29.1645,0
-77.0285,29.1695,0
-77.024,29.17,0
-77.02,29.171,0</coordinates>
+        <coordinates>77.0325,29.165,0
+77.03186,29.16783,0
+77.03166,29.16854,0
+77.03135,29.1695,0
+77.0308,29.1695,0
+77.0298,29.1696,0
+77.0278,29.1697,0
+77.0278,29.1718,0
+77.0278,29.1725,0
+77.0285,29.1725,0</coordinates>
       </LineString>
     </Placemark>
 
@@ -2569,9 +2585,8 @@
       <LineString>
         <tessellate>1</tessellate>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.027,29.168,0
-77.0291,29.1765,0
-77.0275,29.1765,0
+        <coordinates>77.03014,29.17639,0
+77.0293,29.1765,0
 77.0255,29.176,0</coordinates>
       </LineString>
     </Placemark>
@@ -2598,9 +2613,9 @@
       <LineString>
         <tessellate>1</tessellate>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0285,29.192,0
-77.0294,29.1845,0
-77.027,29.1845,0
+        <coordinates>77.02687,29.1895,0
+77.02729,29.1865,0
+77.02708,29.18578,0
 77.026,29.1855,0</coordinates>
       </LineString>
     </Placemark>
@@ -2612,10 +2627,10 @@
       <LineString>
         <tessellate>1</tessellate>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0294,29.186,0
-77.0294,29.1845,0
-77.0275,29.1845,0
-77.027,29.186,0</coordinates>
+        <coordinates>77.02744,29.18618,0
+77.02729,29.18578,0
+77.02708,29.18578,0
+77.026,29.185,0</coordinates>
       </LineString>
     </Placemark>
 
@@ -2626,9 +2641,8 @@
       <LineString>
         <tessellate>1</tessellate>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.02965,29.182,0
-77.02965,29.1795,0
-77.0285,29.1798,0
+        <coordinates>77.02825,29.18247,0
+77.02835,29.18025,0
 77.0278,29.1805,0</coordinates>
       </LineString>
     </Placemark>
@@ -2640,10 +2654,8 @@
       <LineString>
         <tessellate>1</tessellate>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.02965,29.182,0
-77.02965,29.1795,0
-77.0285,29.179,0
-77.0275,29.179,0
+        <coordinates>77.02825,29.18247,0
+77.02835,29.18025,0
 77.0233,29.1793,0</coordinates>
       </LineString>
     </Placemark>
@@ -2655,10 +2667,10 @@
       <LineString>
         <tessellate>1</tessellate>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0335,29.18,0
-77.0322,29.18025,0
-77.0298,29.18025,0
-77.0288,29.18,0</coordinates>
+        <coordinates>77.032,29.18025,0
+77.02955,29.18025,0
+77.02898,29.18025,0
+77.0284,29.18025,0</coordinates>
       </LineString>
     </Placemark>
 
@@ -2669,10 +2681,8 @@
       <LineString>
         <tessellate>1</tessellate>
         <altitudeMode>clampToGround</altitudeMode>
-        <coordinates>77.0298,29.182477,0
-77.026842,29.182477,0
-77.022314,29.182477,0
-77.022314,29.1793,0
+        <coordinates>77.02835,29.18025,0
+77.026842,29.18025,0
 77.02315,29.1793,0</coordinates>
       </LineString>
     </Placemark>
@@ -2707,9 +2717,9 @@
         <extrude>1</extrude>
         <tessellate>1</tessellate>
         <altitudeMode>relativeToGround</altitudeMode>
-        <coordinates>77.0322,29.18025,6.5
-77.031,29.18025,6.5
-77.0298,29.18025,6.5</coordinates>
+        <coordinates>77.02955,29.18025,6.5
+77.02898,29.18025,6.5
+77.0284,29.18025,6.5</coordinates>
       </LineString>
     </Placemark>
   </Folder>

@@ -6,6 +6,7 @@
   <title>79th Nirankari Sant Samagam — Official 2D Traffic Route Plan &amp; Bandobast GIS</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="nirankari_geojson.js"></script>
   <style>
     :root {
       --bg-dark: #0a0e17;
@@ -247,9 +248,15 @@
 
     L.control.layers(baseLayers, overlayLayers, { collapsed: false, position: 'topleft' }).addTo(map);
 
-    // Load Master GeoJSON
-    fetch('nirankari_samalkha_ebandobast.geojson')
-      .then(res => res.json())
+    // Load Master GeoJSON (Window fallback for offline file:// origin)
+    function loadMapData() {
+      if (typeof window !== 'undefined' && window.NIRANKARI_GEOJSON) {
+        return Promise.resolve(window.NIRANKARI_GEOJSON);
+      }
+      return fetch('nirankari_samalkha_ebandobast.geojson').then(res => res.json());
+    }
+
+    loadMapData()
       .then(data => {
         data.features.forEach(feat => {
           const p = feat.properties;
@@ -277,14 +284,20 @@
           // 1. BOUNDARIES & SECTORS
           if (cat === 'VENUE_BOUNDARY' || cat === 'SECURITY_SECTOR') {
             let color = '#ffffff';
-            let fill = 0.08;
-            if (fid.includes('GROUND-A')) { color = '#ff3344'; fill = 0.18; }
-            else if (fid.includes('GROUND-B')) { color = '#ffb700'; fill = 0.16; }
-            else if (fid.includes('GROUND-C')) { color = '#00ff88'; fill = 0.16; }
-            else if (fid.includes('GROUND-D')) { color = '#00d2ff'; fill = 0.16; }
+            let isSector = fid.includes('GROUND-');
+            if (fid.includes('GROUND-A')) color = '#ff4d5a';
+            else if (fid.includes('GROUND-B')) color = '#facc15';
+            else if (fid.includes('GROUND-C')) color = '#4ade80';
+            else if (fid.includes('GROUND-D')) color = '#38bdf8';
 
             const poly = L.geoJSON(feat, {
-              style: { color: color, weight: 2.5, fillColor: color, fillOpacity: fill }
+              style: {
+                color: color,
+                weight: isSector ? 2.0 : 1.5,
+                dashArray: isSector ? '8, 6' : '4, 4',
+                fillColor: color,
+                fillOpacity: isSector ? 0.05 : 0.02
+              }
             }).bindPopup(makePopup());
             layers.boundaries.addLayer(poly);
           }
@@ -292,17 +305,24 @@
           // 2. OFFICIAL PARKING (P1 TO P5, S.C. & VIP)
           else if (cat === 'PARKING_FACILITY') {
             let pColor = '#f59e0b';
-            let fillOp = 0.35;
-            if (fid.includes('VIP')) { pColor = '#ef4444'; fillOp = 0.5; }
-            else if (fid.includes('SC')) { pColor = '#10b981'; fillOp = 0.5; }
+            let fillOp = 0.25;
+            let isParent = (fid === 'FEAT-PARKING-01' || fid === 'FEAT-PARKING-02');
+            if (fid.includes('VIP')) { pColor = '#ef4444'; fillOp = 0.45; }
+            else if (fid.includes('SC')) { pColor = '#10b981'; fillOp = 0.45; }
             else if (fid.includes('P1')) { pColor = '#ec4899'; }
-            else if (fid.includes('02')) { pColor = '#00d2ff'; }
+            else if (fid.includes('02') || fid.includes('P2')) { pColor = '#06b6d4'; }
             else if (fid.includes('03')) { pColor = '#3b82f6'; }
-            else if (fid.includes('04')) { pColor = '#60a5fa'; }
+            else if (fid.includes('04') || fid.includes('P4')) { pColor = '#60a5fa'; }
             else if (fid.includes('05')) { pColor = '#a855f7'; }
 
             const poly = L.geoJSON(feat, {
-              style: { color: pColor, weight: 2.5, fillColor: pColor, fillOpacity: fillOp }
+              style: {
+                color: pColor,
+                weight: isParent ? 1.5 : 2.5,
+                dashArray: isParent ? '5, 5' : null,
+                fillColor: pColor,
+                fillOpacity: isParent ? 0.04 : fillOp
+              }
             }).bindPopup(makePopup());
             layers.parking.addLayer(poly);
           }
